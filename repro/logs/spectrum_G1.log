@@ -1,0 +1,31 @@
+==============================================================================
+[G1]  QUOTIENT GATE   (16,40,12)/Nb36 eps_b=1e-4
+==============================================================================
+  root: alpha = -0.34471229   h_id = -1.0605e-03   ||F||_rms = 5.843e-13   converged=True
+  pencil: N = 7670   rank(E) = 4760 = n_f   n_f = 4760   dim ker(Cg) = 4758
+          N - rank(E) = 2910   (+ m=2 index-2 infinities -> 2912 infinite)
+
+  sigma_min(J)                          = 2.535593e-06   [steady root isolation, 15.0s]
+  sigma_min(L | ker Cg) = 1/||R(0)||     = 3.970084e-03   [||R(0)|| = 2.518838e+02, 43 it]
+  RISE FACTOR                            = x1565.7                 <-- G1 clause 1
+  ||Cg w|| / ||w||,  w = Pi(random)      = 3.9117e-17   [projector removes the gauge directions]
+
+  ||Pi v_g|| / ||v_g||                   = 0.999983       <-- G1 clause 2 AS LITERALLY WRITTEN: NOT < 1e-10
+  ||J v_g||_covariant                    = 2.814e-12    (Euler theorem: 0;  all rows 2.338e-01)
+  |cos(soft mode of J, v_g)|             = 0.6886
+  ||L w1|| / ||w1||,  w1 = Pi v_g / |.|  = 1.207936e+01
+      vs sigma_min(L|ker Cg)             = 3.970084e-03   ratio = 3043
+      -> w1 is NOT a soft direction of the GENERATOR; the grading is a near-null of J,
+         not of L.  Deflating it removes an admissible direction.
+
+  PRICE OF SATISFYING CLAUSE 2 LITERALLY (deflate w1 too):
+                 z      structural only         +w1 deflated   rel change
+       +0.50+0.00i     1.1130303058e+02     8.9543150886e+01    1.955e-01
+       +0.00+1.00i     2.5232276633e+02     2.5220546113e+02    4.649e-04
+
+  VERDICT: G1 as redefined  -> PASS   (sigma_min rises x1566, gauge leak 3.9e-17)
+           G1 clause 2 literal -> REFUSED: forcing it moves ||R(z)|| in the RHP by 19.6%
+
+==============================================================================
+  GATES: G1=PASS
+==============================================================================

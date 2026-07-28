@@ -1,0 +1,7 @@
+        degs  branch alpha    vs a1     ||F||  secs
+(16, 40, 12)   -0.42172919  -1.177%  3.30e-12    19
+(20, 48, 12)  RE-HUNT DRY ||F||=3.50e-03
+(24, 56, 12)   -0.42554621  -2.093%  5.97e-12   684
+(28, 56, 12)  RE-HUNT DRY ||F||=4.14e-03
+done
+WATCHDOG: stalled -- killing

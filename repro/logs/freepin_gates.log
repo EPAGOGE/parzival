@@ -1,0 +1,16 @@
+=== build: FreePinSolver on the ground grid, seeded from npz ===
+grid Nx=71 Nb=36 n2=2556  system 7671 x 7671
+seed residual: ||F||_rms=1.211e-05  gI(seed)=-1.060503e-03  (spec cross-check: -1.0605e-3)
+
+=== G0: FD vs analytic Jacobian (PASS < 1e-5) ===
+  dir 0 [TH-bearing]  rel dev = 4.078e-11   corner/axis row abs dev = 8.674e-19   gI row abs dev = 1.470e-10
+  dir 1 [TH-bearing]  rel dev = 4.169e-11   corner/axis row abs dev = 0.000e+00   gI row abs dev = 2.917e-10
+  dir 2 [TH-bearing]  rel dev = 4.221e-11   corner/axis row abs dev = 0.000e+00   gI row abs dev = 7.390e-11
+  dir 3 [TH-zero   ]  rel dev = 3.996e-11   corner/axis row abs dev = 0.000e+00   gI row abs dev = 9.759e-11
+  G0 worst relative deviation = 4.221e-11  -> PASS (gate 1e-5)
+  pin-mode (TH_target=2.1) rel dev = 5.089e-11  -> PASS
+
+=== G0b: slave-liveness (revert-to-pinned tripwire) ===
+  max |B(0,:) - 0.5*(TH+d)*cos^2 b| = 0.000e+00  -> PASS (machine precision)
+
+ALL GATES: PASS

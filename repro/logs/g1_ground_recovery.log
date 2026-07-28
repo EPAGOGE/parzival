@@ -1,0 +1,44 @@
+grid Nx=71 Nb=36 n2=2556  freed system 7671 x 7671
+seed alpha=-0.34471229  TH0=1.79819132
+seed ||F||_rms = 1.211e-05  gI(seed) = -1.060503e-03
+pass 00: steps=80  ||F||_rms=8.911e-07  cl=3.02919800  alpha=-0.3448412046  THXX'=1.81176808
+pass 01: steps=80  ||F||_rms=7.510e-07  cl=3.08116907  alpha=-0.3448278315  THXX'=1.84285206
+pass 02: steps=80  ||F||_rms=6.980e-07  cl=3.10003031  alpha=-0.3448238489  THXX'=1.85413299
+pass 03: steps=80  ||F||_rms=6.486e-07  cl=3.11731236  alpha=-0.3448205957  THXX'=1.86446942
+pass 04: steps=80  ||F||_rms=6.029e-07  cl=3.13313134  alpha=-0.3448179460  THXX'=1.87393077
+pass 05: steps=80  ||F||_rms=5.294e-07  cl=3.15817868  alpha=-0.3448143815  THXX'=1.88891162
+pass 06: steps=80  ||F||_rms=3.411e-07  cl=3.22204494  alpha=-0.3448086776  THXX'=1.92711014
+pass 07: steps=80  ||F||_rms=1.753e-07  cl=3.27600102  alpha=-0.3448074598  THXX'=1.95938136
+pass 08: steps=80  ||F||_rms=5.963e-08  cl=3.31505104  alpha=-0.3448084898  THXX'=1.98273723
+pass 09: steps=63  ||F||_rms=1.687e-12  cl=3.33445599  alpha=-0.3448095672  THXX'=1.99434336
+pass 10: steps= 1  ||F||_rms=1.205e-12  cl=3.33445597  alpha=-0.3448095672  THXX'=1.99434335
+pass 11: steps= 1  ||F||_rms=1.122e-12  cl=3.33445596  alpha=-0.3448095672  THXX'=1.99434334
+pass 12: steps= 1  ||F||_rms=9.901e-13  cl=3.33445595  alpha=-0.3448095672  THXX'=1.99434334
+pass 13: steps= 1  ||F||_rms=1.830e-12  cl=3.33445595  alpha=-0.3448095672  THXX'=1.99434334
+pass 14: steps= 1  ||F||_rms=1.463e-12  cl=3.33445595  alpha=-0.3448095672  THXX'=1.99434334
+pass 15: steps= 1  ||F||_rms=1.245e-12  cl=3.33445595  alpha=-0.3448095672  THXX'=1.99434334
+pass 16: steps= 1  ||F||_rms=1.393e-12  cl=3.33445595  alpha=-0.3448095672  THXX'=1.99434334
+pass 17: steps= 1  ||F||_rms=1.119e-12  cl=3.33445595  alpha=-0.3448095672  THXX'=1.99434334
+
+================ G1 GROUND RECOVERY REPORT ================
+converged           : True  (passes=18, total newton steps=791)
+||F||_rms           : 1.119e-12
+WX'                 : 1.19620314  (== WX_REF 1.19620314 by normalization, dev 0)
+THXX'               : 1.99434334
+THXX_REF            : 1.79819132
+THXX' - THXX_REF    : +1.961520e-01
+cl                  : 3.33445595   (2*THXX_REF/WX_REF = 3.00649824)
+d_cl (freed gI)     : +0.000e+00
+d_cl (vs REF data)  : +3.280e-01
+alpha               : -0.3448095672
+alpha_pinned        : -0.34471229
+alpha - pinned      : -9.727719e-05
+
+gates:
+  |dTHXX'| <= 1e-4   : FAIL  (1.962e-01)
+  |dTHXX'| <= 6.5e-4 : FAIL
+  |d_cl|   <  1e-6   : PASS  (0.000e+00)
+  |dalpha| <= 1e-5   : FAIL  (9.728e-05)
+  |dalpha| <= 1e-6   : FAIL
+
+G1 VERDICT: FAIL

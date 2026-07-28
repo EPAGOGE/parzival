@@ -1,0 +1,5 @@
+deg24/eps1e-5 at pinned branch root (cl=4.000688):
+sigma_min(J_free) ~ 5.599e-06    sigma_min(J_base) ~ 3.433e-05    ratio base/free = 6.13
+v_free: TH=-0.0253 cl=-0.0424 cw=+0.0158  |A|=0.4959 |B|=0.8389 |P|=0.2181
+  dcl/dTH = +1.6720 (gI line +1.6720)   dcw/dTH = -0.6233 (alpha-preserving -0.7115)
+ground comparison: free 2.982e-8, base 2.536e-6, ratio 85.02

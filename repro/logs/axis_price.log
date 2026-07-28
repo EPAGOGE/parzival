@@ -1,0 +1,6 @@
+pinned axis data: max|Ot|=3.270e-03 (0.067% of field) max|Bt|=4.896e-08 (0.0000% of field)  [true ~ eps, eps^2 = 1e-5, 1e-10]
+ variant         alpha  d(alpha) vs base   vs ref passes  secs
+      x1   -0.33883505           (known)  +1.041%
+      x0   -0.33883502         +2.94e-08  +1.041%     18   428
+      x2   -0.33883508         -3.00e-08  +1.041%     18   428
+done

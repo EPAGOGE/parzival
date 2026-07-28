@@ -1,0 +1,10 @@
+
+--- attempt A (TH0=THXX_REF): TH0=1.79819132 ---
+grid Nx=95 n=10263  seed ||F||_rms=9.814e-03  gI(seed)=+9.941900e-01
+  SEED NEWTON FAILED ||F||=2.35e-03 taken=9 secs=279
+
+--- attempt B (pre-satisfied): TH0=2.39281792 ---
+grid Nx=95 n=10263  seed ||F||_rms=1.172e-02  gI(seed)=+0.000000e+00
+  SEED NEWTON FAILED ||F||=2.17e-03 taken=3 secs=105
+
+BOTH SEEDINGS FAILED -> freed system did not take the branch seed (ghost-verdict flank; report the failure numbers above)

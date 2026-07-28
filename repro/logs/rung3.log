@@ -1,0 +1,11 @@
+seed: deg24 field a=-0.42554621 cl=4.000688 cw=-1.702478
+interpolated to (28,64,18): n=12206
+  a=-0.42554621 h=-0.005357 ||F||=5.7e-12 steps=4 secs=103
+  a=-0.43090280 h=+0.000067 ||F||=9.0e-12 steps=4 secs=101
+  a=-0.43083651 h=+0.000000 ||F||=9.7e-12 steps=2 secs=53
+
+RUNG 3 RESULT: alpha(28,64,18) = -0.43083651   ||F||=9.7e-12
+  step vs deg24: -5.290e-03   (prior step deg16->24 was -3.817e-3)
+  gap to alpha_1: -1.401e-02   gap to alpha_2: +1.314e-02
+  PRE-REGISTERED VERDICT: UNCONTRACTED -> ghost flank strengthens / alpha_2-in-disguise check
+done

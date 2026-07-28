@@ -1,0 +1,15 @@
+SECANT on h(a) along the candidate branch, eps=1e-4, (16,40,12)/Nb36:
+  a=-0.4168236 h=-0.00504 ||F||=4.2e-12
+  a=-0.4218681 h=+0.000129 ||F||=3.1e-12  dh/da so far: -1.026
+  a=-0.4217421 h=+0.000000 ||F||=3.6e-12  dh/da so far: -1.026
+  a=-0.4217421 h=-0.000000 ||F||=3.3e-12  dh/da so far: -1.026
+
+  BRANCH ALPHA at eps=1e-4: -0.42174207  (alpha_1=-0.4168236, gap -4.92e-03)
+
+EPS LADDER on the branch (warm continuation):
+  eps=5e-05: branch alpha = -0.42173756  ||F||=5.5e-12
+  eps=3e-05: branch alpha = -0.42173282  ||F||=5.3e-12
+  eps=1e-05: branch alpha = -0.42172919  ||F||=3.1e-12
+
+  eps->0 (linear, last 3): -0.42172732   alpha_1=-0.4168236   gap -4.90e-03
+done

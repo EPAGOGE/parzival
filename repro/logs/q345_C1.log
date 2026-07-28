@@ -1,0 +1,38 @@
+[C] root  degs=(16, 40, 12) Nb=36 eps_b=5e-05   alpha=-0.34348610  h_id=-8.6640e-04  ||F||_rms=3.235e-10  converged=True
+[C] N=7670  n_f=4760  dim ker(Cg)=4758  rank(E)=4760   [load 2.5s]
+[C] blocked M: (4760, 4760)  [8.4s, prolongation 7.9s]
+[C] CHECK blocked M vs Realization.apply_M: 1.856e-15
+[C] quotient by Householder: ||W[:2,:]|| = 4.481e-14   (exact 0: range(Pi_c M) = ker(Cg))
+[C] field of values, Re range = [-5.573375e+02, +5.465627e+02]   omega(L) = +5.465627e+02   [40s]
+[C] complex Schur n=4758  [116s]
+[C] spectrum: max Re = -3.394762e-01   min Re = -3.766554e+01   max |Im| = 1.1029e+02
+[C] 20 rightmost Schur-diagonal eigenvalues:
+      -3.39476158e-01 +2.16447419e-01i
+      -3.39476158e-01 -2.16447419e-01i
+      -5.34025423e-01 +1.02606041e+00i
+      -5.34025423e-01 -1.02606041e+00i
+      -1.03336150e+00 -7.66407156e-01i
+      -1.03336150e+00 +7.66407156e-01i
+      -1.07733531e+00 -1.39857975e+00i
+      -1.07733531e+00 +1.39857975e+00i
+      -1.28104827e+00 -1.99484730e+00i
+      -1.28104827e+00 +1.99484730e+00i
+      -1.29097419e+00 -5.52663854e+00i
+      -1.29097419e+00 +5.52663854e+00i
+      -1.30162101e+00 -5.50350295e+00i
+      -1.30162101e+00 +5.50350295e+00i
+      -1.30993701e+00 +5.48582839e+00i
+      -1.30993701e+00 -5.48582839e+00i
+      -1.31696817e+00 -5.47114444e+00i
+      -1.31696817e+00 +5.47114444e+00i
+      -1.32312158e+00 -5.45848316e+00i
+      -1.32312158e+00 +5.45848316e+00i
+[C] count Re(lambda) > 0 : 0   of 4758
+
+[C] PRODUCTION ROUTE GATE  (dense Schur sigma_min vs spectrum.py sparse LU)
+      z=+0.00+1.00i   ||R|| dense=2.5502381921e+02   sparse=2.5502400000e+02   rel=7.089e-07  [32 it]
+      z=+0.00+2.00i   ||R|| dense=2.5490042017e+02   sparse=2.5490000000e+02   rel=1.648e-06  [8 it]
+      z=+1.00+0.00i   ||R|| dense=7.8471494680e+01   sparse=7.8471500000e+01   rel=6.779e-08  [13 it]
+      z=+2.00+0.00i   ||R|| dense=4.4996503985e+01   sparse=4.4996500000e+01   rel=8.857e-08  [9 it]
+      worst = 1.648e-06   (bar 1e-6, the sparse power iteration's own tol)  -> FAIL
+DONE

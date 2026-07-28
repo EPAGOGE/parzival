@@ -1,0 +1,22 @@
+GATE A: secant from a bad start must recover the known stable root
+    secant it0: a=-0.34471206 h=-2.264e-07 cl=3.005438
+    secant it1: a=-0.34471229 h=-5.857e-13 cl=3.005438
+  GATE A: recovered a = -0.34471229 (known ~-0.34240009 + eps-bias ~ -0.345 at this config)  cl=3.005438  secs=88
+
+LANDSCAPE WALK: a from the stable root toward alpha_1 = -0.4168
+           a         h(a)        c_l     ||F|| steps
+   -0.344712   -8.216e-13   3.005438  5.84e-13     1
+   -0.352466   +7.755e-03   3.005434  8.22e-12     3
+   -0.360219   +1.551e-02   3.005431  8.34e-12     3
+   -0.367973   +2.327e-02   3.005428  8.51e-12     3
+   -0.375726   +3.102e-02   3.005425  8.63e-12     3
+   -0.383479   +3.878e-02   3.005422  8.83e-12     3
+   -0.391233   +4.653e-02   3.005419  8.92e-12     3
+   -0.398986   +5.429e-02   3.005416  9.03e-12     3
+   -0.406740   +6.204e-02   3.005413  9.27e-12     3
+   -0.414493   +6.980e-02   3.005411  9.49e-12     3
+   -0.422247   +7.755e-02   3.005408  9.80e-12     3
+   -0.430000   +8.531e-02   3.005406  1.16e-12     4
+
+fields saved to hunt_fields/ -- these are the deflation anchors.
+Read the h(a) column: a sign change or local structure away from the stable root is a second branch announcing itself; a smooth monotone h means the n>=1 roots are OFF this field branch and the deflated multistart at a ~ -0.4168 is the next move.

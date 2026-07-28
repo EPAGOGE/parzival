@@ -1,0 +1,11 @@
+[NB28] Nb= 28  converged=True  alpha=-0.34471239  h_id=-1.0605e-03  ||F||=6.368e-13  passes=11  [48s]
+        M-check 1.79e-15  Householder lead 6.78e-14  n=3670  ||L||=9.806094e+02  omega=+4.847734e+02  omega/||L||=0.49436
+        SPECTRAL ABSCISSA = -3.17264272e-01   (rightmost -0.317264-0.213560i)   count Re>0 = 0
+        eps* = 4.47927444e-03   at y = +0.3700   sigma_min(0) = 4.927530e-03   eps*/||L|| = 4.5678e-06
+        n2 = 1988   N = 5966
+[NB44] Nb= 44  converged=True  alpha=-0.34471222  h_id=-1.0605e-03  ||F||=1.271e-12  passes=11  [177s]
+        M-check 2.08e-15  Householder lead 7.56e-14  n=5846  ||L||=1.231170e+03  omega=+6.102957e+02  omega/||L||=0.49570
+        SPECTRAL ABSCISSA = -3.17266753e-01   (rightmost -0.317267+0.213560i)   count Re>0 = 0
+        eps* = 2.38478511e-03   at y = +4.6700   sigma_min(0) = 2.399350e-03   eps*/||L|| = 1.9370e-06
+        n2 = 3124   N = 9374
+DONE

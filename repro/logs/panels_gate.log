@@ -1,0 +1,25 @@
+G0  JACOBIAN FD CHECK (K=2, interfaces live)
+    col    776 [field] rel err 2.137e-12
+    col   1266 [field] rel err 3.218e-12
+    col     72 [field] rel err 1.442e-11
+    col    316 [field] rel err 6.232e-11
+    col    112 [field] rel err 4.889e-11
+    col     81 [field] rel err 1.759e-11
+    col    518 [field] rel err 6.055e-11
+    col    590 [field] rel err 1.338e-11
+    col   1800 [c_l  ] rel err 2.563e-11
+    col   1801 [c_w  ] rel err 1.348e-11
+    worst = 6.232e-11  -> EXACT
+
+G1  K=1 REPRODUCTION vs single-grid N=36/L=15/d1  (known alpha -0.33840790)
+    panels K=1: alpha=-0.33840790  ||F||=4.10e-14  passes=17  conv=True  secs=133
+    known     : alpha=-0.33840790   d(alpha)=4.72e-09  -> PASS
+
+G2  FIRST PANEL RUN  edges [0,2,15] degs (16,48)
+    alpha=+nan (+nan% vs ref)  ||F||=8.90e-03  passes=2  conv=False  secs=60
+    c_l=2.994264  d_cl=-0.41%
+    iface 1 Ot: |C0|=2.00e-15  |C1 jump|=2.31e-04
+    iface 1 Bt: |C0|=9.55e-15  |C1 jump|=1.61e-04
+    iface 1 Pt: |C0|=9.32e-13  |C1 jump|=8.02e-12
+
+  reference alpha = -0.34240009

@@ -1,0 +1,42 @@
+N=28 constraint=d1  reference alpha=-0.34240009
+base d1 root: alpha=-0.33273323 c_l=2.682840 (c_l*=3.006498, off by -10.77%) ||F||=3.00e-14
+
+d2 root for reference: alpha=-0.34187584 c_l=3.280970 ||F||=2.54e-14
+
+root 0: alpha=-0.33273323 c_l=2.682840 [PHYSICAL]
+
+round 1: start = raw seed, deflating 1 root(s)
+  -> alpha=-0.33247546 c_l=2.687102 ||F||=7.426e-04 steps=6 converged=False max|field|=4.148
+     DRY (did not converge)
+
+round 2: start = d2 root, deflating 1 root(s)
+  -> alpha=-0.33291027 c_l=2.703609 ||F||=1.328e-03 steps=6 converged=False max|field|=4.137
+     DRY (did not converge)
+
+round 3: start = seed+1%, deflating 1 root(s)
+  -> alpha=-0.33299141 c_l=2.683619 ||F||=2.633e-03 steps=5 converged=False max|field|=4.075
+     DRY (did not converge)
+
+round 4: start = seed+5%, deflating 1 root(s)
+  -> alpha=-0.33269653 c_l=2.677408 ||F||=8.179e-03 steps=10 converged=False max|field|=4.11
+     DRY (did not converge)
+
+round 5: start = seed+20%, deflating 1 root(s)
+  -> alpha=-0.14306085 c_l=3.419592 ||F||=1.714e+01 steps=9 converged=False max|field|=7357
+     DRY (did not converge)
+
+round 6: start = seed+50%, deflating 1 root(s)
+  -> alpha=-0.11968775 c_l=1.716394 ||F||=2.002e+02 steps=21 converged=False max|field|=6.143e+04
+     DRY (did not converge)
+
+round 7: start = seed x1.5 amplitude, deflating 1 root(s)
+  -> alpha=-0.33312173 c_l=2.688134 ||F||=1.355e-03 steps=8 converged=False max|field|=4.058
+     DRY (did not converge)
+
+==========================================================================
+ROOT ATLAS
+           alpha    vs ref         c_l   c_l vs *      ||F||  kind
+     -0.33273323   +2.823%    2.682840    -10.77%   3.00e-14  PHYSICAL
+
+  reference alpha=-0.34240009   c_l*=3.00649824
+  distinct roots found: 1

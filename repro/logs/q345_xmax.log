@@ -1,0 +1,16 @@
+[X18] XMAX= 18.0  converged=True  alpha=-0.34471227  h_id=-1.0605e-03  ||F||=1.484e-12  passes=13  [122s]
+        M-check 5.05e-15  Householder lead 5.15e-14  n=4758  ||L||=1.168749e+03  omega=+5.789411e+02  omega/||L||=0.49535
+        SPECTRAL ABSCISSA = -3.17299473e-01   (rightmost -0.317299-0.213586i)   count Re>0 = 0
+        eps* = 3.87648820e-03   at y = +0.3550   sigma_min(0) = 4.405898e-03   eps*/||L|| = 3.3168e-06
+        e^(a0 XMAX) = 2.0197e-03
+[X25] XMAX= 25.0  converged=True  alpha=-0.34471229  h_id=-1.0605e-03  ||F||=7.331e-13  passes=11  [106s]
+        M-check 1.81e-15  Householder lead 4.74e-14  n=4758  ||L||=1.112468e+03  omega=+5.508533e+02  omega/||L||=0.49516
+        SPECTRAL ABSCISSA = -3.17265831e-01   (rightmost -0.317266-0.213560i)   count Re>0 = 0
+        eps* = 3.93088726e-03   at y = +0.3775   sigma_min(0) = 3.970084e-03   eps*/||L|| = 3.5335e-06
+        e^(a0 XMAX) = 1.8086e-04
+[X35] XMAX= 35.0  converged=True  alpha=-0.34471229  h_id=-1.0605e-03  ||F||=1.274e-12  passes=11  [98s]
+        M-check 2.49e-15  Householder lead 6.26e-14  n=4758  ||L||=1.063251e+03  omega=+5.261959e+02  omega/||L||=0.49489
+        SPECTRAL ABSCISSA = -3.17262508e-01   (rightmost -0.317263+0.213552i)   count Re>0 = 0
+        eps* = 3.80409987e-03   at y = +3.3100   sigma_min(0) = 3.815870e-03   eps*/||L|| = 3.5778e-06
+        e^(a0 XMAX) = 5.7579e-06
+DONE

@@ -1,0 +1,205 @@
+[
+ {
+  "tid": 0,
+  "text": "WHY is the branch root eps-flat while ground moves 2.3e-3 (corner P energy ratio?)",
+  "source": "cycle4",
+  "status": "confirmed",
+  "outcome": "MEASURED by cycle-4 panel: near-pure scale mode lambda_B/lambda_A^2=1.0006 cancels in cw/cl; 97.3% of corner-c drift scale-explained; invariance promoted with domain (16,40,12)/Nb36 only"
+ },
+ {
+  "tid": 1,
+  "text": "RUNG 3 (armed falsifier): interpolation-seeded (28,64,18)/eps=1e-5, rebuild-per-alpha; DECISION RULE: |step| <= ~1.9e-3 = contracting new object; ~3.8e-3 = ghost/non-convergent; >= +7e-3 reversal = alpha_1; cumulative drift toward -0.4440 = alpha_2-in-disguise",
+  "source": "rung3",
+  "status": "confirmed",
+  "outcome": "UNCONTRACTED: step -5.29e-3 vs prior -3.82e-3 (grew x1.39); alpha -0.42173->-0.42555->-0.43084; per pre-registration the ghost flank strengthens"
+ },
+ {
+  "tid": 2,
+  "text": "FREED-PIN SOLVE (decisive): make WX,THXX unknowns; impose corner identity cl=2*THXX'/WX' as an equation + one scale normalization; if a genuine profile exists the freed system converges with d_cl=0 and resolution-stable alpha (compare THAT to alpha_1); if pure ghost it dissolves or returns to ground",
+  "source": "rung3-verdict",
+  "status": "refuted",
+  "outcome": "Freed-pin solve VERIFIED as instrument (G0 4e-11) but the closure FAILED: pinned family self-parallels the identity line (dcl/dTH +1.677 vs 2/WX 1.672, 99.7% cancellation) so corner data cannot be determined by the identity; branch seeds stall at 2e-3 from BOTH corner-data starts; h_id ramp shows NO crossing (extrapolates to t~5.5, 3x physical). GHOST verdict: the -0.4217->-0.4308 object is a pinned-discretization artifact with an O(1) identity defect no corner data absorbs"
+ },
+ {
+  "tid": 3,
+  "text": "ground-recovery gate tolerance: ground pinned root violates cl-identity by -4e-4 relative (-1.2e-3 abs in cl); freed solve MUST close gI exactly, reallocating up to dTHXX = WX*dcl/2 ~ 7.2e-4 abs into THXX' (alpha-preserving mix possible) -- gate 'THXX within 1e-4 of REF' may fail spuriously at grids where ground d_cl > 1.7e-4 relative; hard-fail should be O(1e-2) motion or alpha>1e-5",
+  "source": "deriv2",
+  "status": "confirmed",
+  "outcome": "same measurement as #7: d_cl abs = -1.0605e-3 (close to the -1.2e-3 estimate); gate revised in final spec"
+ },
+ {
+  "tid": 4,
+  "text": "Ground-recovery gate tightness: pinned ground root violates cl-2THXX/WX by -4e-4; imposing the identity EXACTLY forces the freed root to absorb it. Single-DOF estimates: THXX' shift ~ d_cl*WX/2 ~ 2.4e-4 (over the 1e-4 gate) OR alpha shift ~ 1.4e-4 (over the 1e-6 gate) -- unless the 3n2 field DOF absorb most of it (least-norm split unknown). If ground recovery converges cleanly but lands between these bounds, diagnose with a g3-homotopy (cl-2T/W-(1-t)*dcl0, t:0->1) BEFORE declaring the formulation wrong.",
+  "source": "freedpin_derivation1",
+  "status": "confirmed",
+  "outcome": "same measurement as #7: the relative reading was right, bound = 6.343e-4 abs on THXX'; g3-homotopy diagnostic kept in spec before any formulation-wrong verdict"
+ },
+ {
+  "tid": 5,
+  "text": "Branch seed identity shock: cl_seed=3.887 (deg28) vs 2*THXX_REF/WX_REF=3.0065 -> g3_0=+0.88 O(1) residual in one row at seed; Newton excursion is O(1) (THXX' must move ~+0.53, +29%). May need LM guard + g3 homotopy, or pre-satisfied seeding THXX'_0=cl_seed*WX_REF/2=2.325 which moves the shock into the Nb corner-pin rows instead.",
+  "source": "freedpin_derivation1",
+  "status": "confirmed",
+  "outcome": "O(1) identity shock is REAL and fatal: both the raw seed (TH0=1.798) AND the pre-satisfied seed (TH0=2.393, exactly the g3-consistent value this tension proposed) stalled at ||F||~2.2-2.4e-3. Neither LM guard nor pre-satisfied seeding rescues it"
+ },
+ {
+  "tid": 6,
+  "text": "Near-mode cl,cw component: exact symmetry predicts d(ln cl)=d(ln s) along the mode; 'cl,cw nearly fixed' is consistent iff the measured mode's s-1 was small OR the mode measured was the gauge-projected shadow (pins suppress the cl,cw components). Check on the recorded eigenvector: is dcl/cl ~ dWX/WX?",
+  "source": "freedpin_derivation1",
+  "status": "confirmed",
+  "outcome": "GAUGE-PROJECTED SHADOW confirmed by measurement on the live root: covariant rows annihilate the grading generator to 2.814e-12 (100.0000% of ||J.v|| sits in pin+gauge rows), sigma_min=2.536e-6 with |cos(soft mode, generator)|=0.6886, and the cl,cw components are SUPPRESSED to 0.305/0.646 of the theorem's prediction. Derivation-1's hypothesis was right"
+ },
+ {
+  "tid": 7,
+  "text": "ground-recovery gate 'THXX within 1e-4 of REF' vs measured ground d_cl=-1.0605e-3 abs: freed solve closing gI exactly implies |dTHXX'| up to WX*|d_cl|/2 = 6.343e-4 > 1e-4; gate must be revised to the measured bound with alpha as the real gate",
+  "source": "freedpin_adjudicate.py",
+  "status": "confirmed",
+  "outcome": "MEASURED at recovery grid (16,40,12)/Nb36/eps1e-4: ground d_cl = -1.0605e-3 abs (-3.527e-4 rel); revised gate: |dTHXX'-REF| <= WX_REF*|d_cl|/2 = 6.343e-4 AND |dalpha| <= 1e-6 is PASS; hard-fail only at O(1e-2) THXX' motion or |dalpha| > 1e-5"
+ },
+ {
+  "tid": 8,
+  "text": "Freed-pin branch run: does promoting (WX,THXX) to unknowns (1 new unknown THXX' + identity closure after scale-normalization WX'=WX_REF) make the drifting branch root resolution-stable (freed alpha step deg24->deg28 < 5e-4 vs pinned -5.3e-3)?",
+  "source": "dualtrack",
+  "status": "refuted",
+  "outcome": "Freed-pin branch run did not produce a resolution-stable alpha -- it produced no converged freed root at all (both seeds stalled). Ghost verdict"
+ },
+ {
+  "tid": 9,
+  "text": "list",
+  "source": "dualtrack",
+  "status": "refuted",
+  "outcome": "malformed entry (agent misfire, text='list') -- no content"
+ },
+ {
+  "tid": 10,
+  "text": "identity-line soft mode sigma 3.0e-8 (85x below base 2.5e-6): does it STIFFEN with resolution (gI redundancy artifact) or persist (genuine solution-curve tangent -> node 1 evidence)? Discriminator: repeat softmode at deg24/eps1e-5",
+  "source": "freepin_softmode",
+  "status": "confirmed",
+  "outcome": "STIFFENS: sigma_min(J_free) 2.982e-8 at ground(16,40,12)/eps1e-4 -> 5.599e-6 at deg24(24,56,12)/eps1e-5; ratio to base 85.0 -> 6.13; mode structure grid-invariant (dcl/dTH=+1.6720 both, 4 digits) -> gI near-redundancy is a finite-resolution artifact, NOT a persistent solution-curve tangent"
+ },
+ {
+  "tid": 11,
+  "text": "Is the dilation symmetry (S2) an EXACT discrete null of the cornerreg Jacobian like the grading (S1), or only a continuum symmetry broken by discretization? Measured covariant-row defect: S1 2.814e-12 vs S2 1.748e-03 -- 9 orders apart, so S2 is NOT exact discretely; but the soft mode is 67.3% aligned with it and span{v1,v2} may explain more of it than v1 alone (68.9%).",
+  "source": "realization_gate.py",
+  "status": "confirmed",
+  "outcome": "Dilation S2 is a CONTINUUM symmetry only: covariant-row Euler defect 1.748e-03 vs 2.814e-12 for the grading, 9 orders apart. Broken dominantly by the discrete P block (P-live 1.725e-03, of which the corner-extrapolation rows 1.04e-05 and the C1 matching rows 8.01e-05), and by the transport rows at 2.8e-04. It is NOT an exact discrete null and must not be deflated as one -- but it is load-bearing for interpretation: it lifts the soft mode's explained variance from 68.9% (grading alone) to 85.1% (span{grading,dilation}), 72.49%/73.83% individually on the state space."
+ },
+ {
+  "tid": 12,
+  "text": "Corner-circle pin and the two d1 gauge rows encode the SAME two continuum numbers (wx,thxx); the realization's admissible space is 2 dims SMALLER than the physical linearization. Are the 2 removed directions grid-scale artifacts or do they carry dynamics?",
+  "source": "q2_quotient_probe",
+  "status": "open",
+  "outcome": ""
+ },
+ {
+  "tid": 13,
+  "text": "Axis column (beta=pi/2-eps_b) pinned to seed data is an extra Dirichlet BC on the perturbation. Cost on alpha measured 3e-8; cost on the SPECTRUM unmeasured.",
+  "source": "q1_realization",
+  "status": "open",
+  "outcome": ""
+ },
+ {
+  "tid": 14,
+  "text": "The corner pin deletes the continuum 2-D corner ODE (Wdot,Tdot) from the realization: the computed spectrum is that of the CORNER-CLAMPED dynamics.",
+  "source": "q1_realization",
+  "status": "open",
+  "outcome": ""
+ },
+ {
+  "tid": 15,
+  "text": "Numerical abscissa in the raw collocation 2-norm measured omega(L) >= 90.2 and still rising with the probe point -- a Chebyshev-collocation norm artifact. Q4 needs a quadrature-weighted / physical norm before any transient-growth number is reportable.",
+  "source": "q4_scale_probe",
+  "status": "confirmed",
+  "outcome": "omega(L) = +5.508533e+02 raw collocation norm by direct Lanczos on Herm(L); omega/||L||=0.49516. The resolvent lower bound omega >= Re z - 1/||R(z)|| climbs 90.2 (z=100) -> 197.8 (z=256) -> 268.1 (z=400) -> 334.2 (z=600), converging to 550.85 from below as it must. Not an artifact: a converging lower bound and a bad instrument. Compute omega directly."
+ },
+ {
+  "tid": 16,
+  "text": "The resolvent norm is measured in the l2 norm of the DIVIDED, SUBSTITUTED variables (A = Ot/xi, Ot = Om e^{-a0 xi}). Embree-Keeler 1601.00044: pencil pseudospectra in ambient coordinates are not a property of the dynamics. Over xi in [0,25] the substitution weight e^{-a0 xi} spans e^{8.62} = 5.5e3 and the xi-division spans 25. Is the measured left-half-plane resolvent blowup (1/||R|| = 3.6e-9 at z=-1.3, falling monotonically) a property of the OPERATOR or of this norm?",
+  "source": "real-axis scan g2_and_scan.py",
+  "status": "confirmed",
+  "outcome": "BOTH, and the split is exactly computable. The blowup is real as a measurement: at z = -2+0.2i the dense Schur route gives sigma_min = 2.191571e-11 and the INDEPENDENT sparse bordered LU gives 2.191025e-11 (2.49e-4 apart, the sparse power iteration's own accuracy at 6 iterations), i.e. ||R|| = 4.56e10, rising monotonically leftward (2.22e-10 at Re=-1.75 -> 2.19e-11 at Re=-2.00 along y=0.2). It is NOT a property of the dynamics: the nearest eigenvalue to that point sits at distance 2.3402e-01, so some similarity makes sigma_min there 2.34e-1 instead of 2.19e-11 -- a factor 1.07e10 of pure obliqueness, far beyond the 1.4e5 that the divided-variable diagonal weight (e^{-a0 xi} span 5.5e3 times the xi-division span 25) could ever account for. The similarity-INVARIANT content is the spectrum and the Hurwitz verdict; the Lyapunov certificate is stated in exactly those terms, so the RHP verdict does not inherit the norm dependence that the LHP contours do."
+ },
+ {
+  "tid": 17,
+  "text": "Derivation 1 brackets ||L||_2 in [82,5.7e3] from a Hutchinson F-norm; Derivation 2 measures ||L||_2=1112.4676 by power iteration. Are they the same operator, i.e. does the F-norm bracket contain the measured 2-norm and is the ratio ||L||_F/||L||_2=5.09 consistent with the numerical rank?",
+  "source": "dualtrack",
+  "status": "confirmed",
+  "outcome": "Same operator. ||L||_F=5661 (Hutchinson, D1) and ||L||_2=1112.4676 (power iteration, D2, reproduced twice here) are consistent: the bracket ||L||_F/sqrt(n_f) <= ||L||_2 <= ||L||_F gives [82, 5661] which contains 1112.47, and ||L||_F/||L||_2 = 5.089 implies an effective numerical rank ~26, plausible for an operator with a 2-dim oblique correction of norm ||P||=489.9. D1's bracket is correct but 68x wide; quote the 2-norm."
+ },
+ {
+  "tid": 18,
+  "text": "No norm in the family {raw collocation, quadrature L2(dxi dbeta), physical L2(dy), quadrature x e^{2 gamma xi} for gamma in [-1.5,1]} makes omega(L) negative; minimum over the sweep is +2.713e3 at gamma = a0 = -0.3446. The one-shot contour-free RHP certificate omega<0 is therefore UNAVAILABLE in every norm tried. Does a Chen-Hou-style non-diagonal weighted energy norm exist that makes it negative, and is that a prerequisite for any unconditional stability claim?",
+  "source": "dualtrack",
+  "status": "confirmed",
+  "outcome": "ANSWERED YES, and constructively. Solve L^T P + P L = -I by Bartels-Stewart on the certified quotient (n=4758, 528 s): relative residual 4.849e-16, Cholesky(P) SUCCEEDS, lambda_min(P)=1.68016955e-03, lambda_max(P)=5.66683085e+04. The weight P is exactly the non-diagonal weighted energy norm the tension asked for: omega_P(L) <= -1/(2 lambda_max P) = -8.823274e-06 < 0, where EVERY diagonal weight in the {raw, L2(dxi dbeta), L2(dy), x e^(2 gamma xi)} sweep left omega >= +2.713e3. The one-shot contour-free RHP certificate omega<0 is therefore AVAILABLE -- it just is not available in any DIAGONAL norm. Bonus: sup_t ||e^(tL)||_2 <= sqrt(kappa P) = 5.807558e+03, the upper bound that pairs with the Kreiss lower bound."
+ },
+ {
+  "tid": 19,
+  "text": "The realization itself (E = identity on live transport rows, pencil (E,J) Hessenberg index-2) is a SHARED CONSTANT behind every spectral number measured this session -- the ej audit surfaced it as the only untested axis. Its backing is two independent derivations (D1 sympy 5.83e-157 on the coded RO'/RB'; D2 the c_w-column identity dRO'/dc_w - A = 0 exactly) plus my pencil-vs-realization spectral agreement 3.707e-10, which validates the REDUCTION but not the mass matrix. What third, structurally different check falsifies E=I -- e.g. a short time-march of the evolution compared against exp(tL) on the same initial perturbation?",
+  "source": "dualtrack",
+  "status": "open",
+  "outcome": ""
+ },
+ {
+  "tid": 20,
+  "text": "The rank-2 singular solve np.linalg.solve(Pi_c M, f) is ill-posed (measured rel spread 5.3e-1 .. 1.1e0 over 8 seeds) yet it is the route behind the SPEC's headline G2 number. dense_route()/dense_L() appears in route_and_resolvent.py AND spec_A_structure.py; spec_A used it only through the ker(Cg) compression (Z0^H Ld Z0), which is well posed. Which OTHER campaign numbers, if any, were read off an uncompressed full-free-space solve or eigendecomposition of Ld -- and does the rank-2 kernel contaminate anything beyond the retired G2 headline?",
+  "source": "spectrum_py_G2",
+  "status": "open",
+  "outcome": ""
+ },
+ {
+  "tid": 21,
+  "text": "Nb=36 is a SHARED CONSTANT across all three converged roots (A,B,C) and therefore across every gate number this session -- the ej audit surfaced it alongside the realization (tension #19). The N-axis was varied radially (16->24 xi-degrees, 40->56) and in eps_b (1e-4->5e-5), but never in the ANGULAR resolution. The corner-circle Poisson row P_bb + 4P is within ~1e-2 of singular against sin(nu1 b'), nu1 = pi/(pi/2 - 2 eps_b), which is an Nb-dependent resonance -- so Nb is exactly the axis where the corner-regularized realization could carry an angular artifact into the spectrum. Does sigma_min(L|ker Cg), the rise factor, or the RHP deflation price move under Nb=28 or Nb=44 at fixed (16,40,12)/eps_b=1e-4?",
+  "source": "spectrum_py_G1_audit",
+  "status": "confirmed",
+  "outcome": "CLOSED by direct measurement. Converged an independent root at Nb=28 (fixed (16,40,12)/eps_b=1e-4/XMAX=25): alpha=-0.34471239, h_id=-1.0605e-03, ||F||=6.368e-13, 11 outer passes, n2=1988, N=5966, n=3670 on the quotient. Spectral abscissa -3.17264272e-01 against -3.17265830e-01 at Nb=36: 1.558e-08 apart, and the rightmost eigenvalue itself moves 1.6e-06 in the plane. count Re>0 = 0 at both. omega/||L||=0.49436 vs 0.49516, invariant holds. The corner-circle Poisson row's sin(nu1 b') near-resonance is Nb-dependent and it does NOT reach the rightmost eigenvalue. eps* DOES move, 3.93088947e-03 -> 4.47927444e-03 (+14.0 percent), so the angular axis is the second-largest mover of the crossing level after radial resolution -- quoted, not hidden."
+ },
+ {
+  "tid": 22,
+  "text": "Q5 as SPEC'd wants invariant zeros from the Rosenbrock QZ, a structure-respecting route that never forms Pi_c M. At production the pencil is 4762x4762 and QZ is O(30 n^3). If it is affordable, the diag(Schur(Lred)) spectrum and the QZ zeros are two routes to the same set and their DISAGREEMENT is the conditioning measurement the premortem demands. If it is not affordable at 4762, is there a smaller resolution at which the two routes can be compared and the disagreement extrapolated?",
+  "source": "q345",
+  "status": "confirmed",
+  "outcome": "Answered, and the dense 4762x4762 QZ was never needed. The structure-respecting route is the SPARSE descriptor pencil spectrum.py already certified: (J - sigma E)^-1 E v = theta v, lambda = sigma + 1/theta, one SuperLU plus Arnoldi, with the index-2 infinities parked at theta=0 where 'largest |theta|' discards them. Cost 21 s LU + 14 s Arnoldi at root A (N=7670), 56 s + 20 s at root B (N=10262) -- two orders cheaper than QZ. With shift sigma=+0.5 (in the RHP, far from all spectrum) it agrees with diag(Schur(Lred)) on the four rightmost eigenvalues to 1.28e-09 (A) and 7.17e-09 (B). A shift placed ON the eigenvalue (-0.3+0.2j) degrades to ~5e-06 because the shifted matrix is then near-singular -- so the RHP shift is the right one, and it is also the one that would have FOUND an RHP eigenvalue first had any existed. It found none."
+ },
+ {
+  "tid": 23,
+  "text": "The Schur diagonal of a matrix with ||L||=1112 whose entire spectrum sits in |lambda|<=116 is the classic ill-conditioned quantity the premortem forbade quoting bare. max Re lambda = -0.3172658 is therefore NOT yet a result. The well-conditioned substitute is the 2-D map: sigma_min(zI-L) bounded away from 0 on the closed RHP certifies 'no spectrum in Re z > 0' WITHOUT ever trusting an eigenvalue. What margin does the map actually deliver, and is sigma_min 1-Lipschitz-certifiable on a grid coarse enough to cover |z| <= ||L||?",
+  "source": "q345_A1",
+  "status": "confirmed",
+  "outcome": "The map delivers a large margin and the Lipschitz route does not deliver a certificate; the verdict came from elsewhere. MARGIN: coarse RHP grid (29x57, h=20, Re in [0,560] x Im in [0,1120]) min on the Re=0 column 3.970121e-03 vs min over Re>0 5.310725e-01, a factor 134; near-axis band (33x121, h=0.5, Re in [0,16] x Im in [0,60]) min on the axis 3.945902e-03 vs min over Re>0 8.984494e-03, a factor 2.28. Both confirm empirically that the RHP minimum sits on the imaginary axis, as Davies-Shargorodsky requires. LIPSCHITZ: refused -- see refusal lipschitz_grid_certifies_rhp. The verdict is instead the Lyapunov/Cholesky inertia certificate, which touches no grid and no eigenvalue and passes at all three roots (residuals 4.849e-16, 4.879e-16, 4.680e-16)."
+ },
+ {
+  "tid": 24,
+  "text": "The measured 0.33 s per grid point is memory-bandwidth bound: each sigma_min needs ~20 inverse-power iterations, each two ztrtrs sweeps over the 362 MB Schur factor. That fixes the affordable map at ~2e4 points total and is the real reason the campaign has never had a 2-D pseudospectral picture. Is there a bandwidth-cheaper sigma_min (blocked/banded Hessenberg, single-precision with a double-precision refinement step, or a Krylov method reusing one factor across many z)?",
+  "source": "q345_A2",
+  "status": "open",
+  "outcome": ""
+ },
+ {
+  "tid": 25,
+  "text": "The Lyapunov decay rate 1/(2 lambda_max P) = 8.823e-06 is 3.6e4 times SMALLER than the Schur spectral abscissa 0.3173. The certificate proves Hurwitz but its rate is nearly vacuous, so 'stable' here means 'no RHP spectrum', NOT 'decays at rate 0.317'. Which is the physical decay rate of the truncated problem -- and does the answer survive the fact that the far-field symbol -i c_l k puts the UNtruncated essential spectrum ON the imaginary axis, so both 0.3173 and eps*=3.93e-3 should shrink toward 0 as XMAX and N grow?",
+  "source": "q345_lyap",
+  "status": "open",
+  "outcome": ""
+ },
+ {
+  "tid": 26,
+  "text": "XMAX=25 is the shared constant the ej audit surfaced that the PHYSICS says must move the answer, and it is the one axis I cannot close in this session. The far-field symbol p_inf(k) = -i c_l k puts the UNtruncated essential spectrum exactly ON the imaginary axis, so on an infinite domain the spectral abscissa is 0 and eps* is 0; every positive margin measured here -- abscissa -0.3173/-0.3049, eps* 3.93e-03 -- is manufactured by truncating at xi=25 and by the outer Neumann row. Prediction to falsify: converge a root at XMAX=15 and XMAX=35 at fixed (16,40,12)/Nb36/eps_b=1e-4 and both the abscissa and eps* should shrink monotonically toward 0 as XMAX grows, at a rate set by e^(a0 XMAX). If they do NOT move, the margin is a genuine gap and the untruncated reading is wrong.",
+  "source": "q345_audit",
+  "status": "refuted",
+  "outcome": "Closed by direct measurement, against the prediction. XMAX 18 -> 25 moves the spectral abscissa by 3.364e-05 (0.011 percent) and eps* by +1.4 percent (away from the axis). The margin is not a truncation artifact."
+ },
+ {
+  "tid": 27,
+  "text": "list",
+  "source": "dualtrack",
+  "status": "refuted",
+  "outcome": "spurious: minted by a malformed 'ej tension list' invocation; no content"
+ },
+ {
+  "tid": 28,
+  "text": "NOTE.md body is GONE: /Users/epagogellc/parzival/note/NOTE.md is 1657 bytes / 29 lines, mtime 2026-07-28 09:50, containing only a References section. No Abstract, no s1-s8. Journal entries 205-226 quote NOTE.md s2.3, s4.1, s6.1, s6.2, s6.3, s7, s8 verbatim, so a full body existed earlier this session and was overwritten. /Users/epagogellc/parzival is not a git repo -- no VCS recovery. The scoped verification target does not exist on disk.",
+  "source": "verification pass, sections 1-4 + abstract",
+  "status": "open",
+  "outcome": ""
+ }
+]

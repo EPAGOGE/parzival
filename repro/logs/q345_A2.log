@@ -1,0 +1,119 @@
+[A] n=4758  ||L||=1.112468e+03  omega(L)=+5.508533e+02  Schur-diagonal spectral abscissa = -3.17265830e-01
+
+[A] Q3a  IMAGINARY AXIS  (carries the RHP minimum; |y| <= ||L|| suffices)
+    [A imag] 200/674  z=+0+9.95j  sigma_min=4.182397e-03  [89s]
+    [A imag] 400/674  z=+0+91.5j  sigma_min=2.915127e-01  [171s]
+    [A imag] 600/674  z=+0+745j  sigma_min=3.735407e+02  [296s]
+    674 points  [309s]
+    sigma_min(0)      = 3.970084e-03     ||R(0)||   = 2.518838e+02
+    MIN on the axis   = 3.933476e-03     ||R||_max  = 2.542281e+02   at y = +0.4000
+    MAX on the axis   = 6.898375e+02  at y = +1115.0
+    10 lowest:  0.35i:3.9353e-03  0.40i:3.9335e-03  4.50i:3.9459e-03  4.55i:3.9454e-03  4.60i:3.9450e-03  4.65i:3.9448e-03  4.70i:3.9448e-03  4.75i:3.9450e-03  4.80i:3.9455e-03  4.85i:3.9463e-03
+    refined over y in [0.350,0.450]:  eps* = 3.93088947e-03 at y = +0.37833
+
+    ===> eps* = min_(Re z >= 0) sigma_min(zI-L) = 3.93088947e-03
+         relative to ||L||:  3.533485e-06
+
+[A] Q3b  SPEC WINDOW  Re in [-2,2], Im in [0,2]  (real L: mirror for Im<0)
+    [A win] row 5/41  y=+0.2  min=2.1916e-11  [74s]
+    [A win] row 10/41  y=+0.45  min=2.6692e-11  [170s]
+    [A win] row 15/41  y=+0.7  min=3.7569e-11  [251s]
+    [A win] row 20/41  y=+0.95  min=8.7492e-11  [342s]
+    [A win] row 25/41  y=+1.2  min=1.7077e-10  [429s]
+    [A win] row 30/41  y=+1.45  min=2.8952e-10  [503s]
+    [A win] row 35/41  y=+1.7  min=3.3434e-10  [576s]
+    [A win] row 40/41  y=+1.95  min=2.7710e-10  [650s]
+    [A win] row 41/41  y=+2  min=2.6956e-10  [665s]
+    min = 1.890127e-11 at z = -2.000+0.000i  (||R||max = 5.2907e+10)   [665s]
+           eps     rightmost Re of the eps-pseudospectrum
+    1.0000e+00              +2.0000   REACHES Re>0
+    3.0000e-01              +2.0000   REACHES Re>0
+    1.0000e-01              +2.0000   REACHES Re>0
+    3.0000e-02              +2.0000   REACHES Re>0
+    1.0000e-02              +0.6000   REACHES Re>0
+    5.0000e-03              +0.0500   REACHES Re>0
+    3.9348e-03              +0.0000   confined to Re<0
+    3.9270e-03              -0.0500   confined to Re<0
+    1.0000e-03              -0.1500   confined to Re<0
+    1.0000e-06              -0.8500   confined to Re<0
+    1.0000e-09              -1.5500   confined to Re<0
+
+[A] Q3c  COARSE RHP MAP  (control: no interior local max of ||R||)
+    [A rhp] row 5/57  y=+80  min=2.1340e-01  [24s]
+    [A rhp] row 10/57  y=+180  min=1.3689e+01  [48s]
+    [A rhp] row 15/57  y=+280  min=5.6435e+01  [76s]
+    [A rhp] row 20/57  y=+380  min=1.1745e+02  [95s]
+    [A rhp] row 25/57  y=+480  min=1.7851e+02  [115s]
+    [A rhp] row 30/57  y=+580  min=2.4741e+02  [136s]
+    [A rhp] row 35/57  y=+680  min=3.2232e+02  [156s]
+    [A rhp] row 40/57  y=+780  min=4.0181e+02  [177s]
+    [A rhp] row 45/57  y=+880  min=4.8485e+02  [198s]
+    [A rhp] row 50/57  y=+980  min=5.7065e+02  [219s]
+    [A rhp] row 55/57  y=+1080  min=6.5862e+02  [239s]
+    [A rhp] row 57/57  y=+1120  min=6.9431e+02  [247s]
+    29x57 pts, h=20.0   min = 3.970121e-03 at z = +0+0i   [247s]
+    min on the Re=0 column = 3.970121e-03;  min over Re>0 = 5.310725e-01   -> axis carries it
+
+[A] Q3d  NEAR-AXIS BAND  Re in [0,16], Im in [0,60]
+    [A band] row 5/121  y=+2  min=3.9669e-03  [32s]
+    [A band] row 10/121  y=+4.5  min=3.9459e-03  [58s]
+    [A band] row 15/121  y=+7  min=4.0991e-03  [93s]
+    [A band] row 20/121  y=+9.5  min=4.1358e-03  [134s]
+    [A band] row 25/121  y=+12  min=4.2887e-03  [183s]
+    [A band] row 30/121  y=+14.5  min=4.2889e-03  [231s]
+    [A band] row 35/121  y=+17  min=4.3938e-03  [282s]
+    [A band] row 40/121  y=+19.5  min=6.9391e-03  [334s]
+    [A band] row 45/121  y=+22  min=1.2054e-02  [384s]
+    [A band] row 50/121  y=+24.5  min=1.8189e-02  [433s]
+    [A band] row 55/121  y=+27  min=1.9759e-02  [471s]
+    [A band] row 60/121  y=+29.5  min=1.9910e-02  [502s]
+    [A band] row 65/121  y=+32  min=2.2553e-02  [535s]
+    [A band] row 70/121  y=+34.5  min=2.4350e-02  [565s]
+    [A band] row 75/121  y=+37  min=2.4082e-02  [593s]
+    [A band] row 80/121  y=+39.5  min=2.3524e-02  [620s]
+    [A band] row 85/121  y=+42  min=2.3862e-02  [644s]
+    [A band] row 90/121  y=+44.5  min=2.5730e-02  [668s]
+    [A band] row 95/121  y=+47  min=2.9517e-02  [692s]
+    [A band] row 100/121  y=+49.5  min=3.5319e-02  [716s]
+    [A band] row 105/121  y=+52  min=4.2895e-02  [739s]
+    [A band] row 110/121  y=+54.5  min=5.2193e-02  [761s]
+    [A band] row 115/121  y=+57  min=6.2845e-02  [784s]
+    [A band] row 120/121  y=+59.5  min=7.5220e-02  [806s]
+    [A band] row 121/121  y=+60  min=7.7882e-02  [810s]
+    min = 3.945902e-03 at z = +0.00+4.50i   [810s]
+    min on Re=0 column = 3.945902e-03;  min over Re>0 = 8.984494e-03
+
+[A] Q4  KREISS CONSTANT   K = sup_(Re z>0) Re(z) ||R(z)||
+    [A real] 100/209  z=+14+0j  sigma_min=2.950189e-01  [24s]
+    [A real] 200/209  z=+520+0j  sigma_min=2.088016e+02  [37s]
+    real-axis scan:  K >= 8.965919e+01 at z = +2.150 (sigma_min = 2.3980e-02)
+    2-D grids:       K >= 8.954767e+01 at z = (2+0j)
+    ===> K >= 8.965919e+01   =>   sup_t ||e^(tL)||_2 >= 8.965919e+01
+    omega(L) = +5.508533e+02 = d/dt ||e^(tL)|| at t=0  (initial growth rate)
+
+[A] Q5a  EIGENVALUE CONDITIONING   kappa(lam) = lim_(r->0) r / min_th sigma_min((lam + r e^(i th))I - L)
+    lambda = -3.17265830e-01 +2.13559709e-01i
+        r=1e-01   min_th sigma_min = 2.919270e-05   kappa ~ 3.425514e+03
+        r=1e-02   min_th sigma_min = 8.031854e-06   kappa ~ 1.245043e+03
+        r=1e-03   min_th sigma_min = 8.858278e-07   kappa ~ 1.128888e+03
+        r=1e-04   min_th sigma_min = 8.945135e-08   kappa ~ 1.117926e+03
+    lambda = -3.17265830e-01 -2.13559709e-01i
+        r=1e-01   min_th sigma_min = 2.919270e-05   kappa ~ 3.425514e+03
+        r=1e-02   min_th sigma_min = 8.031854e-06   kappa ~ 1.245043e+03
+        r=1e-03   min_th sigma_min = 8.858278e-07   kappa ~ 1.128888e+03
+        r=1e-04   min_th sigma_min = 8.945135e-08   kappa ~ 1.117926e+03
+    lambda = -4.93151862e-01 -1.01392247e+00i
+        r=1e-01   min_th sigma_min = 1.127826e-05   kappa ~ 8.866617e+03
+        r=1e-02   min_th sigma_min = 3.007044e-06   kappa ~ 3.325525e+03
+        r=1e-03   min_th sigma_min = 3.306467e-07   kappa ~ 3.024376e+03
+        r=1e-04   min_th sigma_min = 3.337867e-08   kappa ~ 2.995926e+03
+    lambda = -4.93151862e-01 +1.01392247e+00i
+        r=1e-01   min_th sigma_min = 1.127826e-05   kappa ~ 8.866617e+03
+        r=1e-02   min_th sigma_min = 3.007044e-06   kappa ~ 3.325525e+03
+        r=1e-03   min_th sigma_min = 3.306467e-07   kappa ~ 3.024376e+03
+        r=1e-04   min_th sigma_min = 3.337867e-08   kappa ~ 2.995926e+03
+    rightmost eigenvalue -0.31726583+0.21355971i  kappa = 1.1179e+03
+    => a perturbation of size delta moves it by up to kappa*delta; to reach Re = 0 needs delta >= 2.837986e-04
+
+[A] SUMMARY  eps_star=3.930889e-03   eps_star_rel=3.533485e-06   K=8.965919e+01   kappa_rightmost=1.117926e+03
+DONE

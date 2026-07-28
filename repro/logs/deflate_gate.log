@@ -1,0 +1,33 @@
+Converging the base root at N=28, constraint=d1 ...
+  alpha=-0.33273323 c_l=2.682840 ||F||=3.00e-14
+
+1. IS THE ROOT SIMPLE?
+   bordered J: sigma_max=1.218e+03 sigma_min=2.305e-05 cond=5.283e+07  -> NONSINGULAR
+   does the amplitude scaling symmetry survive the constraints? (it must NOT, or the root is a curve)
+          s   g1 (Ot constraint)   g2 (Bt constraint)
+       0.98        -2.392406e-02        -3.560419e-02
+       0.99        -1.196203e-02        -1.789200e-02
+       1.00        -6.661338e-16         5.551115e-16
+       1.01         1.196203e-02         1.807182e-02
+       1.02         2.392406e-02         3.632346e-02
+   -> nonzero off s=1 means the orbit is NOT a solution curve: root isolated.
+
+2. IS G' = m J + F grad_m^T EXACT?
+   relative error on 6 random columns: max=3.767e-08 median=1.036e-08
+   -> EXACT
+
+3. DOES THE POLE ACTUALLY REPEL?  (the false-negative guard)
+   UNDEFLATED from root+1%: alpha=-0.33273323 ||F||=1.88e-14 steps=7  d(alpha)=4.69e-13
+   DEFLATED   from root+1%: alpha=-0.33175642 ||F||=1.51e-03 steps=13 converged=False  relative distance from the deflated root=1.52e-02
+   -> POLE WORKS (pushed away)
+
+4. WHY shift=1 IS MANDATORY.  ||m F|| at increasing distance from the root:
+    ||u-r||/||r||    m (shift=1)    m (shift=0)   ||G|| shift=0
+         1.00e-02       3.036981   2.036981e+00       1.964e+00
+         1.00e-01       1.020370   2.036981e-02       1.979e-01
+         1.00e+00       1.000204   2.036981e-04       2.168e-02
+         1.00e+01       1.000002   2.036981e-06       5.726e-03
+         1.00e+02       1.000000   2.036981e-08       4.834e-03
+   -> with shift=0 the deflated residual DECAYS with distance, so a norm-based
+      linesearch can report convergence at absurd amplitude. With shift=1,
+      m -> 1 far away and the far field is undisturbed.

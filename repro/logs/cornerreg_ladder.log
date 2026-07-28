@@ -1,0 +1,8 @@
+ deg0         alpha   vs ref     d_cl     ||F|| passes  secs
+   12  NOT CONVERGED ||F||=1.70e+00 zero_steps
+   14  NOT CONVERGED ||F||=2.15e+00 zero_steps
+   16  NOT CONVERGED ||F||=3.57e+00 zero_steps
+   20  NOT CONVERGED ||F||=3.06e+00 zero_steps
+   24  NOT CONVERGED ||F||=3.17e+00 zero_steps
+   28  NOT CONVERGED ||F||=3.63e+00 zero_steps
+ref = -0.34240009  (gate: d_cl -> 0 and alpha within ~2e-4 of ref)

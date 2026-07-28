@@ -1,0 +1,4 @@
+  Nb         alpha   vs ref     d_cl     ||F|| passes  secs
+  36   -0.33883505  +1.041%   -4.61%   (known)
+  48   -0.33896140  +1.004%   -4.48%  9.31e-14     18  1231
+WATCHDOG: no log growth for 1842s with process alive -- killing

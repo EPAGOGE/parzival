@@ -1,0 +1,8 @@
+[B] Lyapunov inertia certificate   n=6438  ||L||=2.453998e+03
+[B] solved  [1379s]   ||L^T P + P L + I||_2 / (||P|| ||L||) = 4.879e-16
+[B] Cholesky(P) -> SUCCEEDS   =>  L is HURWITZ (no eigenvalue with Re >= 0)
+[B] lambda_min(P) = 8.42986701e-04   lambda_max(P) = 5.35987676e+04   kappa(P) = 6.358198e+07   [53s]
+[B] decay rate      1/(2 lambda_max P)      = 9.32857270e-06   (compare spectral abscissa)
+[B] TRANSIENT GROWTH UPPER BOUND  sup_t ||e^(tL)||_2 <= sqrt(kappa P) = 7.973831e+03
+[B] omega_P(L) <= -1/(2 lambda_max P) = -9.328573e-06   <-- the P-norm makes the generator dissipative; every DIAGONAL weight tried left omega > 0
+DONE

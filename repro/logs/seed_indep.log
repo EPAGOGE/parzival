@@ -1,0 +1,10 @@
+                  seed         alpha  vs chenhou        h_id     ||F|| passes  secs
+  chenhou-interp (ref)   -0.34471229     0.0e+00   -1.06e-03         -      -     -
+          analytic L=1  NOT CONVERGED  zero_steps ||F||=2.4e-01  secs=399
+          analytic L=2   -0.34471219   +9.65e-08   -1.06e-03   7.4e-13     11   115
+          analytic L=4   -0.34471221   +7.84e-08   -1.06e-03   1.6e-12     11   109
+          analytic L=8   -0.34471222   +6.94e-08   -1.06e-03   5.3e-13     11   116
+
+VERDICT: 3 analytic seed(s) converged; worst |dalpha| vs chenhou = 9.65e-08; spread among analytic seeds = 2.71e-08
+  GATE (1e-6): PASS -- seed lineage exonerated as an alpha axis
+done

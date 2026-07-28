@@ -1,0 +1,16 @@
+1. FULL-JACOBIAN FD CHECK for constraint='ratio' at N=28
+      col       kind      rel err
+      744      field    3.336e-12
+       50      field    1.333e-09
+     1099      field    1.876e-10
+     1384      field    3.356e-11
+      688      field    6.158e-10
+     1458        c_l    1.943e-11
+     1459        c_w    1.022e-11
+   worst = 1.333e-09  -> EXACT
+
+2. CONVERGE and read the ratio constraint's effect (warm from d2):
+   d2:    alpha=-0.34187584 c_l=3.280970 c_l* viol=+9.129% ||F||=2.54e-14
+   ratio: alpha=-0.32695449 c_l=0.991802 c_l* viol=-67.011% ||F||=6.11e-15 converged=True
+          vs Chen-Hou -0.34240009: +4.511%
+          open-system residual = 5.84e-03 (||F|| blind-check)

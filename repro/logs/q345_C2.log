@@ -1,0 +1,23 @@
+[C] n=4758  ||L||=1.103660e+03  omega=+5.465627e+02  Schur abscissa=-3.39476158e-01
+    [C imag] 300/672  z=+0+41.5j  sigma_min=2.362429e-02  [124s]
+    [C imag] 600/672  z=+0+745j  sigma_min=3.753156e+02  [315s]
+    672 pts [328s]  sigma_min(0) = 3.926543e-03   ||R(0)|| = 2.546769e+02
+    MIN on the axis = 3.901000e-03 at y = +4.7000   ||R||max = 2.563445e+02
+    refined: eps* = 3.90098450e-03 at y = +4.68167
+    ===> eps* = 3.90098450e-03   eps*/||L|| = 3.534589e-06
+    [C real] 150/206  z=+39+0j  sigma_min=1.711428e+00  [39s]
+    KREISS: K >= 9.012736e+01 at z = +2.150  (sigma_min = 2.3855e-02)
+[C] conditioning of the rightmost eigenvalues:
+    lambda = -3.39476158e-01+2.16447419e-01i
+        r=1e-02  min_th sigma_min=5.921927e-06   kappa ~ 1.688640e+03
+        r=1e-03  min_th sigma_min=6.552492e-07   kappa ~ 1.526137e+03
+        r=1e-04  min_th sigma_min=6.618903e-08   kappa ~ 1.510824e+03
+    lambda = -3.39476158e-01-2.16447419e-01i
+        r=1e-02  min_th sigma_min=5.921927e-06   kappa ~ 1.688640e+03
+        r=1e-03  min_th sigma_min=6.552492e-07   kappa ~ 1.526137e+03
+        r=1e-04  min_th sigma_min=6.618903e-08   kappa ~ 1.510824e+03
+    lambda = -5.34025423e-01+1.02606041e+00i
+        r=1e-02  min_th sigma_min=1.750336e-06   kappa ~ 5.713188e+03
+        r=1e-03  min_th sigma_min=1.932178e-07   kappa ~ 5.175508e+03
+        r=1e-04  min_th sigma_min=1.951313e-08   kappa ~ 5.124753e+03
+DONE

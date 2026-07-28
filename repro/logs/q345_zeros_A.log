@@ -1,0 +1,47 @@
+[A] descriptor pencil (E,J)  N=7670  rank(E)=4760  finite count = dim ker(Cg) = 4758
+
+[A] shift sigma = (-0.3+0.2j)   [LU 21s, Arnoldi 20s]
+    24 pencil eigenvalues nearest the shift, rightmost first:
+      -3.1726582852e-01 -2.1355970552e-01i    nearest dense-Schur -3.17265830e-01-2.13559709e-01i   |diff| = 3.449e-09
+      -3.1726582860e-01 +2.1355970681e-01i    nearest dense-Schur -3.17265830e-01+2.13559709e-01i   |diff| = 2.334e-09
+      -4.9315185785e-01 +1.0139224620e+00i    nearest dense-Schur -4.93151862e-01+1.01392247e+00i   |diff| = 6.771e-09
+      -4.9315186870e-01 -1.0139224584e+00i    nearest dense-Schur -4.93151862e-01-1.01392247e+00i   |diff| = 1.066e-08
+      -1.0311585918e+00 +7.7122279541e-01i    nearest dense-Schur -1.03115824e+00+7.71222714e-01i   |diff| = 3.643e-07
+      -1.0311587858e+00 -7.7122317632e-01i    nearest dense-Schur -1.03115824e+00-7.71222714e-01i   |diff| = 7.177e-07
+      -1.0749444692e+00 +1.3950491224e+00i    nearest dense-Schur -1.07494398e+00+1.39504958e+00i   |diff| = 6.661e-07
+      -1.0749455123e+00 -1.3950498877e+00i    nearest dense-Schur -1.07494398e+00-1.39504958e+00i   |diff| = 1.562e-06
+      -1.1754697903e+00 -5.8061125016e-06i    nearest dense-Schur -1.17547105e+00+7.58317329e-11i   |diff| = 5.942e-06
+      -1.2860418466e+00 +1.9883747863e+00i    nearest dense-Schur -1.28604418e+00+1.98837915e+00i   |diff| = 4.946e-06
+    worst |sparse pencil - nearest dense Schur| over all 24 = 4.2619e-01
+    rightmost from this shift: -3.1726582852e-01   (dense Schur global max Re = -3.1726583015e-01)
+
+[A] shift sigma = (0.5+0j)   [LU 21s, Arnoldi 14s]
+    24 pencil eigenvalues nearest the shift, rightmost first:
+      -3.1726582897e-01 -2.1355970803e-01i    nearest dense-Schur -3.17265830e-01-2.13559709e-01i   |diff| = 1.296e-09
+      -3.1726582900e-01 +2.1355970798e-01i    nearest dense-Schur -3.17265830e-01+2.13559709e-01i   |diff| = 1.282e-09
+      -4.9315186195e-01 -1.0139224667e+00i    nearest dense-Schur -4.93151862e-01-1.01392247e+00i   |diff| = 5.717e-10
+      -4.9315186198e-01 +1.0139224667e+00i    nearest dense-Schur -4.93151862e-01+1.01392247e+00i   |diff| = 5.850e-10
+      -1.0311582062e+00 -7.7122278509e-01i    nearest dense-Schur -1.03115824e+00-7.71222714e-01i   |diff| = 7.699e-08
+      -1.0311582426e+00 +7.7122278059e-01i    nearest dense-Schur -1.03115824e+00+7.71222714e-01i   |diff| = 6.654e-08
+      -1.0749440049e+00 -1.3950495615e+00i    nearest dense-Schur -1.07494398e+00-1.39504958e+00i   |diff| = 2.754e-08
+      -1.0749440185e+00 +1.3950495628e+00i    nearest dense-Schur -1.07494398e+00+1.39504958e+00i   |diff| = 3.929e-08
+      -1.1754715731e+00 +1.9686116677e-07i    nearest dense-Schur -1.17547105e+00+7.58317329e-11i   |diff| = 5.554e-07
+      -1.2860441553e+00 +1.9883791502e+00i    nearest dense-Schur -1.28604418e+00+1.98837915e+00i   |diff| = 2.601e-08
+    worst |sparse pencil - nearest dense Schur| over all 24 = 1.3931e-02
+    rightmost from this shift: -3.1726582897e-01   (dense Schur global max Re = -3.1726583015e-01)
+
+[A] shift sigma = (0.05+0.05j)   [LU 20s, Arnoldi 12s]
+    24 pencil eigenvalues nearest the shift, rightmost first:
+      -3.1726583025e-01 +2.1355970929e-01i    nearest dense-Schur -3.17265830e-01+2.13559709e-01i   |diff| = 7.352e-10
+      -3.1726583030e-01 -2.1355970920e-01i    nearest dense-Schur -3.17265830e-01-2.13559709e-01i   |diff| = 6.553e-10
+      -4.9315186303e-01 -1.0139224674e+00i    nearest dense-Schur -4.93151862e-01-1.01392247e+00i   |diff| = 6.911e-10
+      -4.9315186318e-01 +1.0139224672e+00i    nearest dense-Schur -4.93151862e-01+1.01392247e+00i   |diff| = 7.917e-10
+      -1.0311582315e+00 -7.7122265996e-01i    nearest dense-Schur -1.03115824e+00-7.71222714e-01i   |diff| = 5.461e-08
+      -1.0311582483e+00 +7.7122267202e-01i    nearest dense-Schur -1.03115824e+00+7.71222714e-01i   |diff| = 4.388e-08
+      -1.0749439383e+00 -1.3950495861e+00i    nearest dense-Schur -1.07494398e+00-1.39504958e+00i   |diff| = 4.441e-08
+      -1.0749439616e+00 +1.3950496007e+00i    nearest dense-Schur -1.07494398e+00+1.39504958e+00i   |diff| = 3.159e-08
+      -1.1754700781e+00 +1.3399913290e-08i    nearest dense-Schur -1.17547105e+00+7.58317329e-11i   |diff| = 9.758e-07
+      -1.2860440763e+00 -1.9883792251e+00i    nearest dense-Schur -1.28604418e+00-1.98837915e+00i   |diff| = 1.308e-07
+    worst |sparse pencil - nearest dense Schur| over all 24 = 6.8117e-03
+    rightmost from this shift: -3.1726583025e-01   (dense Schur global max Re = -3.1726583015e-01)
+DONE

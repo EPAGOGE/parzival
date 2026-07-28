@@ -1,0 +1,38 @@
+[B] root  degs=(24, 56, 12) Nb=36 eps_b=0.0001   alpha=-0.34541032  h_id=+7.7518e-05  ||F||_rms=2.421e-10  converged=True
+[B] N=10262  n_f=6440  dim ker(Cg)=6438  rank(E)=6440   [load 3.0s]
+[B] blocked M: (6440, 6440)  [20.4s, prolongation 19.2s]
+[B] CHECK blocked M vs Realization.apply_M: 7.257e-15
+[B] quotient by Householder: ||W[:2,:]|| = 9.737e-14   (exact 0: range(Pi_c M) = ker(Cg))
+[B] field of values, Re range = [-1.235626e+03, +1.218808e+03]   omega(L) = +1.218808e+03   [92s]
+[B] complex Schur n=6438  [265s]
+[B] spectrum: max Re = -3.048790e-01   min Re = -7.988414e+01   max |Im| = 1.8273e+02
+[B] 20 rightmost Schur-diagonal eigenvalues:
+      -3.04879002e-01 +3.43611470e-14i
+      -4.78750887e-01 +3.79497347e-01i
+      -4.78750887e-01 -3.79497347e-01i
+      -7.02335553e-01 -8.75144267e-01i
+      -7.02335553e-01 +8.75144267e-01i
+      -8.83786797e-01 +1.32716588e+00i
+      -8.83786797e-01 -1.32716588e+00i
+      -9.50452262e-01 +8.07175432e-01i
+      -9.50452262e-01 -8.07175432e-01i
+      -9.77615341e-01 +1.65598042e+00i
+      -9.77615341e-01 -1.65598042e+00i
+      -1.00615605e+00 +2.00515438e+00i
+      -1.00615605e+00 -2.00515438e+00i
+      -1.17825438e+00 -2.36709404e+00i
+      -1.17825438e+00 +2.36709404e+00i
+      -1.29463799e+00 -5.52068576e+00i
+      -1.29463799e+00 +5.52068576e+00i
+      -1.30484435e+00 +5.49874780e+00i
+      -1.30484435e+00 -5.49874780e+00i
+      -1.31281144e+00 -5.48198267e+00i
+[B] count Re(lambda) > 0 : 0   of 6438
+
+[B] PRODUCTION ROUTE GATE  (dense Schur sigma_min vs spectrum.py sparse LU)
+      z=+0.00+1.00i   ||R|| dense=2.9040712203e+02   sparse=2.9040700000e+02   rel=4.202e-07  [25 it]
+      z=+0.00+2.00i   ||R|| dense=2.4120866216e+02   sparse=2.4120900000e+02   rel=1.401e-06  [24 it]
+      z=+1.00+0.00i   ||R|| dense=1.2026952659e+02   sparse=1.2027000000e+02   rel=3.936e-06  [8 it]
+      z=+2.00+0.00i   ||R|| dense=7.3024248223e+01   sparse=7.3024200000e+01   rel=6.604e-07  [6 it]
+      worst = 3.936e-06   (bar 1e-6, the sparse power iteration's own tol)  -> FAIL
+DONE
