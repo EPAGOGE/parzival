@@ -13,7 +13,7 @@ serves this HTML, so the `og:*` tags in `index.html` control the preview instead
 Share the Pages URL when you want the branded card.
 
 Absolute URLs are required in the OG tags. This build points at
-`https://epagoge.io/parzival`. Find-and-replace that string in `index.html` if the
+`https://epagoge.github.io/parzival`. Find-and-replace that string in `index.html` if the
 live base differs (e.g. `https://epagoge.github.io/parzival`). No trailing slash.
 
 Previews cache hard. LinkedIn: Post Inspector. X: append `?v=2` once. Slack/Discord:

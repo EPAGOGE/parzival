@@ -8,3 +8,5 @@ repro/fields/
 pages/
 .DS_Store
 .venv-dedalus/
+ROADMAP_EULER.md
+note/SOCIAL_KIT.md
