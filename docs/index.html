@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>The 2D Boussinesq corner blowup profile &middot; EPAGOGE</title>
+<meta name="description" content="An independent computation of the 2D Boussinesq corner self-similar blowup profile: the scaling exponent, an eigenvalue-free stability certificate, and a free-residual test that catches a false root.">
+
+<!-- These are the tags that replace GitHub's octocat in a link preview. -->
+<meta property="og:type"        content="article">
+<meta property="og:site_name"   content="EPAGOGE">
+<meta property="og:title"       content="The 2D Boussinesq corner blowup profile">
+<meta property="og:description" content="An independent computation: the scaling exponent, an eigenvalue-free stability certificate, and a free-residual test that catches a false root.">
+<meta property="og:image"       content="https://epagoge.github.io/parzival/og-card.png">
+<meta property="og:image:width"  content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url"         content="https://epagoge.github.io/parzival/">
+
+<meta name="twitter:card"        content="summary_large_image">
+<meta name="twitter:title"       content="The 2D Boussinesq corner blowup profile">
+<meta name="twitter:description" content="An independent computation: the scaling exponent, an eigenvalue-free stability certificate, and a free-residual test that catches a false root.">
+<meta name="twitter:image"       content="https://epagoge.github.io/parzival/og-card.png">
+
+<link rel="icon" type="image/png" href="favicon.png">
+
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --line:#30363d;
+    --fg:#e6edf3; --dim:#9198a1; --acc:#2f81f7; --grn:#3fb950;
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--fg);
+    font-family:var(--serif); font-size:17px; line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:64px 24px 96px}
+  .mark{
+    font-size:15px; font-weight:700; letter-spacing:.34em;
+    color:var(--fg); text-transform:uppercase;
+  }
+  .rule{height:2px; width:132px; background:var(--acc); margin:10px 0 52px}
+  h1{font-size:2.05rem; line-height:1.22; font-weight:600; margin:0 0 .5rem}
+  .sub{color:var(--dim); font-size:1.06rem; margin:0 0 2rem}
+  .meta{color:var(--dim); font-size:.9rem; font-family:var(--mono); margin-bottom:2.4rem}
+
+  .result{
+    background:var(--panel); border:1px solid var(--line); border-radius:8px;
+    padding:20px 24px; margin:0 0 2.6rem;
+  }
+  .result .lab{color:var(--dim); font-size:.82rem; font-family:var(--mono);
+               text-transform:uppercase; letter-spacing:.09em}
+  .result .val{color:var(--acc); font-size:1.55rem; margin-top:6px}
+  .result .note{color:var(--dim); font-size:.92rem; margin-top:10px}
+
+  .btns{display:flex; gap:12px; flex-wrap:wrap; margin:0 0 3rem}
+  a.btn{
+    display:inline-block; padding:11px 20px; border-radius:7px;
+    text-decoration:none; font-size:.95rem; border:1px solid var(--line);
+    color:var(--fg); background:var(--panel); transition:.15s;
+  }
+  a.btn:hover{border-color:var(--acc); color:var(--acc)}
+  a.btn.primary{background:var(--acc); border-color:var(--acc); color:#fff}
+  a.btn.primary:hover{filter:brightness(1.12); color:#fff}
+
+  h2{font-size:1.16rem; font-weight:600; margin:2.6rem 0 .7rem;
+     padding-bottom:.4rem; border-bottom:1px solid var(--line)}
+  p{margin:0 0 1rem}
+  ul{margin:0 0 1rem; padding-left:1.2rem}
+  li{margin-bottom:.45rem}
+  code{font-family:var(--mono); font-size:.87em; background:var(--panel);
+       padding:2px 6px; border-radius:4px; border:1px solid var(--line)}
+  .fig{margin:1.6rem 0; text-align:center}
+  .fig img{max-width:100%; border:1px solid var(--line); border-radius:6px; background:#fff}
+  .cap{color:var(--dim); font-size:.87rem; margin-top:.6rem; text-align:left}
+  .foot{color:var(--dim); font-size:.86rem; margin-top:3.5rem;
+        padding-top:1.2rem; border-top:1px solid var(--line)}
+  a{color:var(--acc)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="mark">Epagoge</div>
+  <div class="rule"></div>
+
+  <h1>The 2D Boussinesq corner blowup profile</h1>
+  <p class="sub">An independent computation: the scaling exponent, an
+  eigenvalue-free stability certificate, and a free-residual test that catches a
+  false root.</p>
+  <p class="meta">Draft &middot; 28 July 2026 &middot; 11 pages</p>
+
+  <div class="result">
+    <div class="lab">Scaling exponent</div>
+    <div class="val">&alpha; = &minus;0.34240 &plusmn; 4.4&times;10<sup>&minus;5</sup></div>
+    <div class="note">Consistent with the cross-method reference &minus;0.34240009,
+    itself agreed on by an adaptive-mesh march and a physics-informed network to
+    3.4&times;10<sup>&minus;7</sup>.</div>
+  </div>
+
+  <div class="btns">
+    <a class="btn primary" href="note.pdf">Read the note (PDF)</a>
+    <a class="btn" href="https://github.com/EPAGOGE/parzival">Code &amp; data</a>
+    <a class="btn" href="https://github.com/EPAGOGE/parzival/blob/main/boussinesq/NOTE_CLAIMS.md">Claims ledger</a>
+  </div>
+
+  <h2>What is in it</h2>
+  <p>The profile underlying the Luo&ndash;Hou scenario for 3D axisymmetric Euler with
+  boundary is solved as a <strong>root problem with an explicit sparse Jacobian</strong>,
+  rather than by marching or by neural approximation &mdash; a third route with a
+  different failure mode from either existing computation.</p>
+  <ul>
+    <li>An <strong>exact one-parameter scaling symmetry</strong> under which &alpha; is
+    invariant, verified symbolically and confirmed on the converged root to
+    2.8&times;10<sup>&minus;12</sup>.</li>
+    <li>Linear stability certified <strong>without trusting any eigenvalue</strong>, by a
+    Lyapunov certificate whose verification reduces to an absolute inequality &mdash;
+    necessary here, because the rightmost eigenvalue is shown to be unconverged as a
+    discretization.</li>
+    <li>A <strong>false root</strong>: a state converging to 5.4&times;10<sup>&minus;14</sup>,
+    distinct under deflation, stable under wedge truncation, morphologically coherent,
+    and nevertheless an artifact.</li>
+  </ul>
+
+  <h2>The part worth borrowing</h2>
+  <p>Residual, distinctness, parameter stability and morphological coherence are
+  <em>jointly insufficient</em> to certify a self-similar profile. The gauge closure
+  leaves one functional unused &mdash; the corner identity
+  <code>h_id = c_l &minus; 2&Theta;xx/Wx</code> &mdash; and reporting it beside every solve
+  separates the true profile from the artifact by three orders of magnitude, at a cost
+  of one extra line of output.</p>
+
+  <div class="fig">
+    <img src="fig2_free_residual.png" alt="Free residual for the converged profile and the false root across corner degree">
+    <div class="cap">The free residual for the converged profile and for the false
+    root. Every other diagnostic agrees; this one does not.</div>
+  </div>
+
+  <h2>Reproduction</h2>
+  <p>Every number in the note traces to a logged run in the
+  <a href="https://github.com/EPAGOGE/parzival">repository</a>: the solver, the
+  measurement scripts, the raw logs, the converged fields, and the figure-generating
+  code. The <a href="https://github.com/EPAGOGE/parzival/blob/main/boussinesq/NOTE_CLAIMS.md">claims
+  ledger</a> grades every statement in the paper against its evidence, and every
+  retraction made during the work is recorded rather than removed.</p>
+
+  <div class="foot">
+    Epagoge &middot; <a href="https://github.com/EPAGOGE/parzival">github.com/EPAGOGE/parzival</a>
+  </div>
+
+</div>
+</body>
+</html>
