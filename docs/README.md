@@ -1,35 +1,43 @@
 # docs/ — the GitHub Pages site
 
-Serves <https://epagoge.github.io/parzival/>.
+Serves the parzival numerics note. Uses the **Organic** design system, shared with
+the `papers` site: same `styles.css`, same Caprasimo/Figtree pairing, same tokens.
+Separate project, separate content, one house style. Nothing cross-links.
 
-**To turn it on (one time):** repo Settings → Pages → Source: *Deploy from a branch*
-→ Branch: `main`, Folder: `/docs` → Save. First build takes a minute or two.
+**To turn it on:** Settings → Pages → Deploy from a branch → `main`, folder `/docs`.
 
-## Why the link preview shows EPAGOGE and not the octocat
+## The link preview
 
-A bare `github.com/...` link is rendered by GitHub's own card (octocat, repo name).
-A **Pages URL** is your HTML, so the `og:*` meta tags in `index.html` control the
-preview: title, description, and `og-card.png` (1200×630). Share the Pages URL, not
-the repo URL, when you want the branded card.
+A bare `github.com/...` link renders GitHub's own card with the octocat. A Pages URL
+serves this HTML, so the `og:*` tags in `index.html` control the preview instead.
+Share the Pages URL when you want the branded card.
 
-After changing `og-card.png`, social platforms cache aggressively. Force a refresh:
-- Slack/iMessage: append `?v=2` to the URL once
-- X: <https://cards-dev.twitter.com/validator>
-- LinkedIn: <https://www.linkedin.com/post-inspector/>
-- Facebook/Meta: <https://developers.facebook.com/tools/debug/>
+Absolute URLs are required in the OG tags. This build points at
+`https://epagoge.io/parzival`. Find-and-replace that string in `index.html` if the
+live base differs (e.g. `https://epagoge.github.io/parzival`). No trailing slash.
+
+Previews cache hard. LinkedIn: Post Inspector. X: append `?v=2` once. Slack/Discord:
+same cache-busting query.
+
+## Rebuilding the share card
+
+The card is real HTML in the design system, rendered headless so it uses the actual
+fonts rather than a matplotlib approximation:
+
+    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
+      --headless --disable-gpu --hide-scrollbars --window-size=1200,630 \
+      --screenshot="docs/og-card-1200x630.png" --virtual-time-budget=6000 \
+      "file://$PWD/docs/_card/card.html"
 
 ## Files
 
 | file | role |
 |---|---|
-| `index.html` | landing page; all `og:*` / `twitter:*` tags live in `<head>` |
-| `og-card.png` | 1200×630 preview image (built by `/tmp/mkcard.py`, archived in `repro/scripts/`) |
-| `favicon.png` | tab icon |
-| `note.pdf` | the paper — copy of `note/note.pdf` |
-| `fig2_free_residual.png` | the figure shown inline |
-| `.nojekyll` | tells Pages to serve files as-is, no Jekyll processing |
+| `index.html` | the page; OG and Twitter tags in `<head>` |
+| `styles.css` | the Organic design system, shared with the papers site |
+| `_card/card.html` | source for the share image |
+| `og-card-1200x630.png` | the share image |
+| `note.pdf` | the paper, copied from `note/note.pdf` |
+| `.nojekyll` | serve files as-is |
 
-**When the note changes**, refresh the copies:
-
-    cp note/note.pdf docs/note.pdf
-    cp note/fig/fig2_free_residual.png docs/
+When the note changes: `cp note/note.pdf docs/note.pdf`

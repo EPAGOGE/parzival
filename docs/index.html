@@ -3,154 +3,192 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The 2D Boussinesq Corner Blowup Profile · Justin Hill</title>
+<meta name="description" content="A state converged to 5.4e-14, distinct under deflation, stable under wedge truncation, morphologically coherent. It was an artifact. One free residual caught it.">
+<link rel="canonical" href="https://epagoge.io/parzival/">
 
-<title>The 2D Boussinesq corner blowup profile &middot; EPAGOGE</title>
-<meta name="description" content="An independent computation of the 2D Boussinesq corner self-similar blowup profile: the scaling exponent, an eigenvalue-free stability certificate, and a free-residual test that catches a false root.">
-
-<!-- These are the tags that replace GitHub's octocat in a link preview. -->
-<meta property="og:type"        content="article">
-<meta property="og:site_name"   content="EPAGOGE">
-<meta property="og:title"       content="The 2D Boussinesq corner blowup profile">
-<meta property="og:description" content="An independent computation: the scaling exponent, an eigenvalue-free stability certificate, and a free-residual test that catches a false root.">
-<meta property="og:image"       content="https://epagoge.github.io/parzival/og-card.png">
-<meta property="og:image:width"  content="1200">
+<!-- Open Graph (LinkedIn, Facebook, Slack, Discord) -->
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="epagoge.io">
+<meta property="og:url" content="https://epagoge.io/parzival/">
+<meta property="og:title" content="The 2D Boussinesq Corner Blowup Profile">
+<meta property="og:description" content="A state converged to 5.4e-14, distinct under deflation, stable under wedge truncation, morphologically coherent. It was an artifact. One free residual caught it.">
+<meta property="og:image" content="https://epagoge.io/parzival/og-card-1200x630.png">
+<meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:url"         content="https://epagoge.github.io/parzival/">
+<meta property="og:image:alt" content="Four convergence tests passed, one free residual failed by three orders of magnitude.">
+<meta property="article:published_time" content="2026-07-28">
+<meta property="article:author" content="Justin Hill">
 
-<meta name="twitter:card"        content="summary_large_image">
-<meta name="twitter:title"       content="The 2D Boussinesq corner blowup profile">
-<meta name="twitter:description" content="An independent computation: the scaling exponent, an eigenvalue-free stability certificate, and a free-residual test that catches a false root.">
-<meta name="twitter:image"       content="https://epagoge.github.io/parzival/og-card.png">
+<!-- X / Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The 2D Boussinesq Corner Blowup Profile">
+<meta name="twitter:description" content="A state converged to 5.4e-14, distinct under deflation, stable under wedge truncation, morphologically coherent. It was an artifact. One free residual caught it.">
+<meta name="twitter:image" content="https://epagoge.io/parzival/og-card-1200x630.png">
+<meta name="twitter:image:alt" content="Four convergence tests passed, one free residual failed by three orders of magnitude.">
 
+<link rel="stylesheet" href="styles.css">
 <link rel="icon" type="image/png" href="favicon.png">
-
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caprasimo&family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --bg:#0d1117; --panel:#161b22; --line:#30363d;
-    --fg:#e6edf3; --dim:#9198a1; --acc:#2f81f7; --grn:#3fb950;
-    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
-    --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+  body { margin: 0; background: #f5ead8; }
+  a { color: #8c491a; }
+  a:hover { color: #b2622d; }
+  img { max-width: 100%; }
+  .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .92em; }
+  @media (max-width: 760px) {
+    h1 { font-size: 40px !important; }
+    .table { font-size: 14px; }
   }
-  *{box-sizing:border-box}
-  body{
-    margin:0; background:var(--bg); color:var(--fg);
-    font-family:var(--serif); font-size:17px; line-height:1.62;
-    -webkit-font-smoothing:antialiased;
-  }
-  .wrap{max-width:760px; margin:0 auto; padding:64px 24px 96px}
-  .mark{
-    font-size:15px; font-weight:700; letter-spacing:.34em;
-    color:var(--fg); text-transform:uppercase;
-  }
-  .rule{height:2px; width:132px; background:var(--acc); margin:10px 0 52px}
-  h1{font-size:2.05rem; line-height:1.22; font-weight:600; margin:0 0 .5rem}
-  .sub{color:var(--dim); font-size:1.06rem; margin:0 0 2rem}
-  .meta{color:var(--dim); font-size:.9rem; font-family:var(--mono); margin-bottom:2.4rem}
-
-  .result{
-    background:var(--panel); border:1px solid var(--line); border-radius:8px;
-    padding:20px 24px; margin:0 0 2.6rem;
-  }
-  .result .lab{color:var(--dim); font-size:.82rem; font-family:var(--mono);
-               text-transform:uppercase; letter-spacing:.09em}
-  .result .val{color:var(--acc); font-size:1.55rem; margin-top:6px}
-  .result .note{color:var(--dim); font-size:.92rem; margin-top:10px}
-
-  .btns{display:flex; gap:12px; flex-wrap:wrap; margin:0 0 3rem}
-  a.btn{
-    display:inline-block; padding:11px 20px; border-radius:7px;
-    text-decoration:none; font-size:.95rem; border:1px solid var(--line);
-    color:var(--fg); background:var(--panel); transition:.15s;
-  }
-  a.btn:hover{border-color:var(--acc); color:var(--acc)}
-  a.btn.primary{background:var(--acc); border-color:var(--acc); color:#fff}
-  a.btn.primary:hover{filter:brightness(1.12); color:#fff}
-
-  h2{font-size:1.16rem; font-weight:600; margin:2.6rem 0 .7rem;
-     padding-bottom:.4rem; border-bottom:1px solid var(--line)}
-  p{margin:0 0 1rem}
-  ul{margin:0 0 1rem; padding-left:1.2rem}
-  li{margin-bottom:.45rem}
-  code{font-family:var(--mono); font-size:.87em; background:var(--panel);
-       padding:2px 6px; border-radius:4px; border:1px solid var(--line)}
-  .fig{margin:1.6rem 0; text-align:center}
-  .fig img{max-width:100%; border:1px solid var(--line); border-radius:6px; background:#fff}
-  .cap{color:var(--dim); font-size:.87rem; margin-top:.6rem; text-align:left}
-  .foot{color:var(--dim); font-size:.86rem; margin-top:3.5rem;
-        padding-top:1.2rem; border-top:1px solid var(--line)}
-  a{color:var(--acc)}
 </style>
 </head>
 <body>
-<div class="wrap">
+  <div style="min-height:100vh; background:var(--color-bg); color:var(--color-text); font-family:var(--font-body)">
 
-  <div class="mark">Epagoge</div>
-  <div class="rule"></div>
+    <header style="max-width:1080px; margin:0 auto; padding:32px 40px 0; display:flex; align-items:center; justify-content:space-between; gap:20px">
+      <div style="display:flex; align-items:center; gap:12px">
+        <span style="width:26px; height:26px; border-radius:999px; background:var(--color-accent)"></span>
+        <span style="font-family:var(--font-heading); font-size:20px">epagoge</span>
+      </div>
+      <nav style="display:flex; gap:26px; font-size:15px; font-weight:600; color:var(--color-neutral-700)">
+        <a href="#diagnostic" style="text-decoration:none">Diagnostic</a>
+        <a href="#exponent" style="text-decoration:none">Exponent</a>
+        <a href="#errors" style="text-decoration:none">Errors</a>
+        <a href="note.pdf" style="text-decoration:none">PDF</a>
+      </nav>
+    </header>
 
-  <h1>The 2D Boussinesq corner blowup profile</h1>
-  <p class="sub">An independent computation: the scaling exponent, an
-  eigenvalue-free stability certificate, and a free-residual test that catches a
-  false root.</p>
-  <p class="meta">Draft &middot; 28 July 2026 &middot; 11 pages</p>
+    <main style="max-width:1080px; margin:0 auto; padding:0 40px 80px">
 
-  <div class="result">
-    <div class="lab">Scaling exponent</div>
-    <div class="val">&alpha; = &minus;0.34240 &plusmn; 4.4&times;10<sup>&minus;5</sup></div>
-    <div class="note">Consistent with the cross-method reference &minus;0.34240009,
-    itself agreed on by an adaptive-mesh march and a physics-informed network to
-    3.4&times;10<sup>&minus;7</sup>.</div>
+      <section style="padding:72px 0 0">
+        <div style="display:flex; align-items:center; gap:10px; font-size:13px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--color-accent-700)">
+          <span style="width:12px; height:12px; border-radius:999px; background:var(--color-accent)"></span>
+          Numerics note <span style="color:var(--color-neutral-500)">/</span> <span style="color:var(--color-neutral-600)">28 July 2026</span>
+        </div>
+        <h1 style="font-family:var(--font-heading); font-weight:400; font-size:64px; line-height:1.03; letter-spacing:-.015em; margin:24px 0 0; max-width:900px; text-wrap:pretty">The 2D Boussinesq corner blowup profile</h1>
+        <p style="font-family:var(--font-heading); font-size:28px; line-height:1.2; color:var(--color-accent-700); margin:18px 0 0; max-width:760px; text-wrap:pretty">Four convergence tests passed. The root was false.</p>
+        <p style="font-size:20px; line-height:1.55; color:var(--color-neutral-700); margin:26px 0 0; max-width:680px; text-wrap:pretty">Justin Hill, Independent Research. An independent computation of the self-similar profile underlying the Luo and Hou scenario for 3D axisymmetric Euler with boundary, solved as a root problem with an explicit sparse Jacobian rather than by marching or neural approximation.</p>
+        <div style="display:flex; gap:14px; flex-wrap:wrap; margin-top:32px">
+          <a href="note.pdf" class="btn btn-primary" style="text-decoration:none">Read the note (PDF)</a>
+          <a href="https://github.com/EPAGOGE/parzival" class="btn btn-secondary" style="text-decoration:none">Code, logs, fields</a>
+        </div>
+      </section>
+
+      <section id="diagnostic" style="margin-top:64px; background:var(--color-surface); border-radius:28px; padding:40px 44px">
+        <div style="font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--color-neutral-700)">The transferable result · one artifact · one functional</div>
+        <p style="font-size:18px; line-height:1.55; color:var(--color-neutral-800); margin:22px 0 0; max-width:800px; text-wrap:pretty">Deflated multistart at a frozen unstable exponent returned a state that satisfied every check the campaign had been applying. Under grid refinement its exponent moved away from its target with growing steps. It has no continuum limit.</p>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:14px; margin-top:28px">
+          <div style="background:var(--color-neutral-100); border-radius:22px; padding:20px 22px">
+            <span style="font-family:var(--font-heading); font-size:20px; color:var(--color-accent-2-700)">5.4&times;10<sup>&minus;14</sup></span>
+            <div style="font-weight:800; font-size:15px; margin-top:6px">Converged</div>
+            <div style="font-size:14px; line-height:1.45; color:var(--color-neutral-700); margin-top:3px">Newton residual at machine precision.</div>
+          </div>
+          <div style="background:var(--color-neutral-100); border-radius:22px; padding:20px 22px">
+            <span style="font-family:var(--font-heading); font-size:20px; color:var(--color-accent-2-700)">1.70</span>
+            <div style="font-weight:800; font-size:15px; margin-top:6px">Distinct</div>
+            <div style="font-size:14px; line-height:1.45; color:var(--color-neutral-700); margin-top:3px">Relative distance from the ground state under deflation.</div>
+          </div>
+          <div style="background:var(--color-neutral-100); border-radius:22px; padding:20px 22px">
+            <span style="font-family:var(--font-heading); font-size:20px; color:var(--color-accent-2-700)">1.3&times;10<sup>&minus;5</sup></span>
+            <div style="font-weight:800; font-size:15px; margin-top:6px">Parameter-stable</div>
+            <div style="font-size:14px; line-height:1.45; color:var(--color-neutral-700); margin-top:3px">Motion across a decade of wedge truncation, where the true profile moves 2.72&times;10<sup>&minus;3</sup>.</div>
+          </div>
+          <div style="background:var(--color-neutral-100); border-radius:22px; padding:20px 22px">
+            <span style="font-family:var(--font-heading); font-size:20px; color:var(--color-accent-2-700)">6172&times;</span>
+            <div style="font-weight:800; font-size:15px; margin-top:6px">Morphologically coherent</div>
+            <div style="font-size:14px; line-height:1.45; color:var(--color-neutral-700); margin-top:3px">Its own angular signature, against the ground branch's variation.</div>
+          </div>
+          <div style="background:var(--color-accent-100); border-radius:22px; padding:20px 22px">
+            <span style="font-family:var(--font-heading); font-size:20px; color:var(--color-accent-800)">+0.88</span>
+            <div style="font-weight:800; font-size:15px; margin-top:6px; color:var(--color-accent-800)">Free residual</div>
+            <div style="font-size:14px; line-height:1.45; color:var(--color-accent-900); margin-top:3px">Against &minus;0.00106 for the true profile. Three orders of magnitude, on the one functional the solve is not answerable to.</div>
+          </div>
+        </div>
+
+        <p style="font-size:18px; line-height:1.55; color:var(--color-neutral-800); margin:26px 0 0; max-width:800px; text-wrap:pretty">The gauge closure fixes two corner constants and leaves the corner identity <span class="mono">c_l = 2&Theta;xx / Wx</span> unused. Reporting that leftover beside every converged solve costs one line of output and separates the cases the other four tests could not. Residual, distinctness, parameter stability and morphological coherence are jointly insufficient to certify a self-similar profile.</p>
+      </section>
+
+      <section id="exponent" style="margin-top:64px">
+        <h2 style="font-family:var(--font-heading); font-weight:400; font-size:40px; line-height:1.1; margin:0">The exponent</h2>
+        <p style="font-size:18px; line-height:1.55; color:var(--color-neutral-700); margin:16px 0 0; max-width:760px; text-wrap:pretty">Chen and Hou solve this profile by adaptive-mesh march (<a href="https://arxiv.org/abs/2210.07191">arXiv:2210.07191</a>, <a href="https://arxiv.org/pdf/2305.05660">arXiv:2305.05660</a>). Wang and collaborators solve it with a physics-informed network refined by Gauss-Newton (<a href="https://arxiv.org/abs/2509.14185">arXiv:2509.14185</a>). They share no discretization and agree to 3.4&times;10<sup>&minus;7</sup>, which is why their value is treated here as reference rather than competitor.</p>
+
+        <div style="margin-top:30px; background:var(--color-surface); border-radius:28px; padding:36px 44px">
+          <div style="font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--color-neutral-700)">Scaling exponent · five-rung extrapolation · model-class spread as the bar</div>
+          <div style="display:flex; align-items:baseline; gap:24px; flex-wrap:wrap; margin-top:20px">
+            <span style="font-family:var(--font-heading); font-size:64px; line-height:1; color:var(--color-accent-2-700)">&minus;0.34240</span>
+            <span style="font-family:var(--font-heading); font-size:34px; color:var(--color-accent)">&plusmn; 4.4&times;10<sup>&minus;5</sup></span>
+            <span style="margin-left:auto; text-align:right; font-size:13px; letter-spacing:.1em; text-transform:uppercase; color:var(--color-neutral-600)">reference &minus;0.34240009</span>
+          </div>
+          <p style="font-size:17px; line-height:1.55; color:var(--color-neutral-800); margin:20px 0 0; max-width:780px; text-wrap:pretty">Three extrapolation families fit the ladder with residuals five points cannot separate. Their spread sets the bar, added in quadrature with the measured corner-degree systematic. Quoting the deepest three rungs alone would report agreement at 2.5&times;10<sup>&minus;6</sup>. That number is not quoted, because choosing the subset that tightens the bar is the same error as choosing the model family that does.</p>
+        </div>
+
+        <p style="font-size:18px; line-height:1.55; color:var(--color-neutral-700); margin:26px 0 0; max-width:760px; text-wrap:pretty">Independence is not total, and the note states the exception in its abstract. Two scalar corner constants are read off the reference profile and imposed as gauge targets. Freeing one moves the exponent by 9.7&times;10<sup>&minus;5</sup>, about twice the bar. The claim is independence of method, not of data.</p>
+
+        <table class="table" style="margin-top:30px; width:100%">
+          <thead>
+            <tr><th>Axis</th><th>Worst effect on the exponent</th><th>Standing</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Angular resolution, 36 to 48</td><td>1.16&times;10<sup>&minus;8</sup></td><td>closed</td></tr>
+            <tr><td>Seed provenance, reference to three analytic</td><td>9.65&times;10<sup>&minus;8</sup></td><td>closed</td></tr>
+            <tr><td>Far-field truncation, 25 to 32</td><td>1.45&times;10<sup>&minus;10</sup></td><td>closed · grids verified to differ</td></tr>
+            <tr><td>Corner degree, 24 to 28</td><td>1.94&times;10<sup>&minus;5</sup></td><td>carried in the bar</td></tr>
+            <tr><td>Corner degree, 16 to 24</td><td>6.98&times;10<sup>&minus;4</sup></td><td>not converged at 16</td></tr>
+            <tr><td>Wedge truncation</td><td>extrapolated, layer analysed</td><td>carried in the bar</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="errors" style="margin-top:64px">
+        <h2 style="font-family:var(--font-heading); font-weight:400; font-size:40px; line-height:1.1; margin:0">What went wrong on the way</h2>
+        <p style="font-size:18px; line-height:1.55; color:var(--color-neutral-700); margin:16px 0 0; max-width:760px; text-wrap:pretty">An adversarial verification pass re-sourced every number in the draft against its log. It found three things worth publishing alongside the result.</p>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:16px; margin-top:26px">
+          <div style="background:var(--color-neutral-100); border-radius:22px; padding:22px 24px">
+            <span style="font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--color-accent-700)">Corrected</span>
+            <div style="font-weight:800; font-size:16px; margin-top:8px">A mislabelled abscissa</div>
+            <div style="font-size:14.5px; line-height:1.45; color:var(--color-neutral-700); margin-top:5px">A rung run at 2.5&times;10<sup>&minus;5</sup> printed as 3&times;10<sup>&minus;5</sup> by a rounding format, then fitted at the printed value. Correcting it tightened the spread and moved the quoted centre onto the reference.</div>
+          </div>
+          <div style="background:var(--color-neutral-100); border-radius:22px; padding:22px 24px">
+            <span style="font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--color-accent-700)">Narrowed</span>
+            <div style="font-weight:800; font-size:16px; margin-top:8px">An independence claim</div>
+            <div style="font-size:14.5px; line-height:1.45; color:var(--color-neutral-700); margin-top:5px">The draft said the method shares no machinery with prior work. The solver hardcodes two of their corner constants. The claim now reads independence of method, and the cost of the shared data is measured.</div>
+          </div>
+          <div style="background:var(--color-neutral-100); border-radius:22px; padding:22px 24px">
+            <span style="font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--color-accent-700)">Deleted</span>
+            <div style="font-weight:800; font-size:16px; margin-top:8px">A model comparison that cannot exist</div>
+            <div style="font-size:14.5px; line-height:1.45; color:var(--color-neutral-700); margin-top:5px">The draft called three fits AICc-indistinguishable. AICc is not computable on five points with three parameters. The statistic is gone and the spread is quoted directly.</div>
+          </div>
+        </div>
+        <p style="font-size:15.5px; line-height:1.55; color:var(--color-neutral-600); margin:22px 0 0; max-width:800px; text-wrap:pretty">Four retractions made during the work are recorded in the note rather than removed, including a spectral mode built on unconverged eigenvalues and a corner-angle derivative withdrawn when its slope proved formulation-dependent. The <a href="https://github.com/EPAGOGE/parzival/blob/main/boussinesq/NOTE_CLAIMS.md">claims ledger</a> grades every statement in the paper against its evidence, and no claim appears in the paper above its grade there.</p>
+      </section>
+
+      <section style="margin-top:64px">
+        <h2 style="font-family:var(--font-heading); font-weight:400; font-size:40px; line-height:1.1; margin:0">Still open</h2>
+        <div style="display:flex; gap:36px; flex-wrap:wrap; margin-top:20px">
+          <p style="flex:1 1 320px; font-size:17px; line-height:1.55; color:var(--color-neutral-700); margin:0; text-wrap:pretty">The unstable branches remain unconfirmed by any method other than the network that found them. The route attempted here produced the artifact above. Treating the exponent as a Newton unknown on the untruncated problem is the next attempt, and it is not built.</p>
+          <p style="flex:1 1 320px; font-size:17px; line-height:1.55; color:var(--color-neutral-700); margin:0; text-wrap:pretty">A geometric reading of the published branch gaps puts the family's accumulation point at &minus;1/2, the classical Leray exponent, and predicts a fourth branch near &minus;0.4649. The network's own empirical law gives &minus;0.46557 for the same branch. Both are extrapolations over the same four numbers, and nobody has measured the fourth reliably yet.</p>
+        </div>
+      </section>
+
+      <section style="margin-top:64px; display:flex; flex-wrap:wrap; gap:28px; align-items:center; justify-content:space-between; border-top:1px solid var(--color-divider); padding-top:34px">
+        <div style="max-width:520px">
+          <div style="font-family:var(--font-heading); font-size:24px">Share card</div>
+          <p style="font-size:16px; line-height:1.5; color:var(--color-neutral-700); margin:10px 0 0">The image social platforms show for this page. <a href="og-card-1200x630.png">1200&times;630</a>.</p>
+        </div>
+        <img src="og-card-1200x630.png" alt="Four convergence tests passed, one free residual failed" style="width:420px; border-radius:20px; box-shadow:var(--shadow-md)">
+      </section>
+
+    </main>
+
+    <footer style="border-top:1px solid var(--color-divider)">
+      <div style="max-width:1080px; margin:0 auto; padding:28px 40px 44px; display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap; font-size:15px; color:var(--color-neutral-600)">
+        <span>Justin Hill · Independent Research · justin@epagoge.io</span>
+        <span style="font-weight:700; color:var(--color-neutral-800)">epagoge.io</span>
+      </div>
+    </footer>
   </div>
-
-  <div class="btns">
-    <a class="btn primary" href="note.pdf">Read the note (PDF)</a>
-    <a class="btn" href="https://github.com/EPAGOGE/parzival">Code &amp; data</a>
-    <a class="btn" href="https://github.com/EPAGOGE/parzival/blob/main/boussinesq/NOTE_CLAIMS.md">Claims ledger</a>
-  </div>
-
-  <h2>What is in it</h2>
-  <p>The profile underlying the Luo&ndash;Hou scenario for 3D axisymmetric Euler with
-  boundary is solved as a <strong>root problem with an explicit sparse Jacobian</strong>,
-  rather than by marching or by neural approximation &mdash; a third route with a
-  different failure mode from either existing computation.</p>
-  <ul>
-    <li>An <strong>exact one-parameter scaling symmetry</strong> under which &alpha; is
-    invariant, verified symbolically and confirmed on the converged root to
-    2.8&times;10<sup>&minus;12</sup>.</li>
-    <li>Linear stability certified <strong>without trusting any eigenvalue</strong>, by a
-    Lyapunov certificate whose verification reduces to an absolute inequality &mdash;
-    necessary here, because the rightmost eigenvalue is shown to be unconverged as a
-    discretization.</li>
-    <li>A <strong>false root</strong>: a state converging to 5.4&times;10<sup>&minus;14</sup>,
-    distinct under deflation, stable under wedge truncation, morphologically coherent,
-    and nevertheless an artifact.</li>
-  </ul>
-
-  <h2>The part worth borrowing</h2>
-  <p>Residual, distinctness, parameter stability and morphological coherence are
-  <em>jointly insufficient</em> to certify a self-similar profile. The gauge closure
-  leaves one functional unused &mdash; the corner identity
-  <code>h_id = c_l &minus; 2&Theta;xx/Wx</code> &mdash; and reporting it beside every solve
-  separates the true profile from the artifact by three orders of magnitude, at a cost
-  of one extra line of output.</p>
-
-  <div class="fig">
-    <img src="fig2_free_residual.png" alt="Free residual for the converged profile and the false root across corner degree">
-    <div class="cap">The free residual for the converged profile and for the false
-    root. Every other diagnostic agrees; this one does not.</div>
-  </div>
-
-  <h2>Reproduction</h2>
-  <p>Every number in the note traces to a logged run in the
-  <a href="https://github.com/EPAGOGE/parzival">repository</a>: the solver, the
-  measurement scripts, the raw logs, the converged fields, and the figure-generating
-  code. The <a href="https://github.com/EPAGOGE/parzival/blob/main/boussinesq/NOTE_CLAIMS.md">claims
-  ledger</a> grades every statement in the paper against its evidence, and every
-  retraction made during the work is recorded rather than removed.</p>
-
-  <div class="foot">
-    Epagoge &middot; <a href="https://github.com/EPAGOGE/parzival">github.com/EPAGOGE/parzival</a>
-  </div>
-
-</div>
 </body>
 </html>
