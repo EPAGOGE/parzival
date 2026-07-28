@@ -6,3 +6,5 @@ vault/
 refs/
 repro/fields/
 pages/
+.DS_Store
+.venv-dedalus/
