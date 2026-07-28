@@ -28,7 +28,8 @@ profile, with a-posteriori gauge diagnostics.*
 | axis-column pinning | 3.0e-8 | closed |
 | corner-panel degree (24 → 28) | 1.94e-5 | in the quoted bar |
 | corner-panel degree (16 → 24) | 6.98e-4 | 16 is not converged |
-| XMAX and panel edges, *on alpha* | never swept on this solver | OPEN |
+| XMAX (25 → 32), *on alpha* | 1.45e-10 | closed |
+| middle panel edge (15 → 18), *on alpha* | 1.45e-10 | closed |
 | eps_b wedge truncation | extrapolated, layer analysed | quoted, not hidden |
 | Nb (36 → 28), *spectral abscissa* | 1.56e-6 | closed |
 | XMAX (25 → 18), *spectral abscissa* | 3.36e-5 | closed |

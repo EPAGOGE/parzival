@@ -198,7 +198,7 @@ distinguish on five points:
 | $a + b\varepsilon + c\varepsilon^2$ | $-0.34240048$ | $-3.9\times10^{-7}$ |
 | $a + b\varepsilon + c\,\varepsilon\ln\varepsilon$ | $-0.34241599$ | $-1.6\times10^{-5}$ |
 
-Their spread is $3.93\times10^{-5}$ about a midrange of $-0.34239632$. Since the
+Their spread is $3.93\times10^{-5}$ about a midrange of $-0.34239632$ (Figure 1). Since the
 singular layer of Section 3.2 has exponent $k - 2 \sim \varepsilon_b$, a
 non-polynomial term is physically plausible and the polynomial fit cannot be preferred
 on principle. Adding in quadrature the measured corner-degree systematic of Section
@@ -223,7 +223,8 @@ choosing the model family that does.
 | corner degree, $24 \to 28$ | $1.94\times10^{-5}$ | in the bar |
 | corner degree, $16 \to 24$ | $6.98\times10^{-4}$ | not converged at 16 |
 | $\varepsilon_b$ truncation | extrapolated, layer analysed | in the bar |
-| far-field truncation $X_{\max}$, panel edges | **not swept on this solver** | open |
+| far-field truncation, $X_{\max}$ $25 \to 32$ | $1.45\times10^{-10}$ | closed |
+| middle panel edge, $15 \to 18$ | $1.45\times10^{-10}$ | closed |
 
 Two entries need comment.
 
@@ -239,8 +240,12 @@ performed at a configuration where $\alpha$ itself is about $0.7\%$ from the
 extrapolated value, so they bound the seed sensitivity of the *root found*, not of the
 extrapolated exponent.
 
-The last row is an open axis, stated as such. $X_{\max} = 25$ and both panel edges are
-frozen in every run of this solver.
+The last two rows were the final open axes and are now closed. Moving the far field
+from $X_{\max} = 25$ to $32$, and independently moving the middle panel edge from $15$
+to $18$, changes $\alpha$ by $1.45\times10^{-10}$ in both cases, five orders below the
+quoted bar. We verified the interventions were real rather than ignored: the radial
+node sets differ by $7.0$ and $3.0$ respectively, so the insensitivity is a property of
+the solution and not of the driver.
 
 ### 4.3 What the shared corner constants cost
 
@@ -405,7 +410,7 @@ it was a new solution.
 ### 7.2 What it was
 
 Under refinement its exponent moved *away* from $\alpha_1$ with *growing* steps, and
-toward $\alpha_2$ and $\alpha_3$ without contracting on either:
+toward $\alpha_2$ and $\alpha_3$ without contracting on either (Figure 3):
 
 | resolution | $\alpha$ | $c_\ell$ | $h_{\mathrm{id}}$ |
 |---|---|---|---|
@@ -415,7 +420,8 @@ toward $\alpha_2$ and $\alpha_3$ without contracting on either:
 | ground, for scale | $-0.34471229$ | $3.005$ | $-0.00106$ |
 
 The free residual of Section 2.3 is violated by $O(1)$ throughout, three orders of
-magnitude above the ground state, while every other diagnostic looks healthy. Its
+magnitude above the ground state (Figure 2), while every other diagnostic looks
+healthy. Its
 distance to $\alpha_2$ shrinks from $2.23\times10^{-2}$ to $1.31\times10^{-2}$ across
 the three rungs, which is why we describe the object as drifting rather than
 diverging, and why an "$\alpha_2$ in disguise" reading cannot be excluded by these
@@ -443,6 +449,21 @@ where those four did not, on a single artifact, at a cost of one extra line of o
 A formulation that pins its gauge to imported corner data can manufacture such a
 state; we have not seen the failure mode reported.
 
+## Figures
+
+All three are generated from logged measurements by `repro/scripts/figures.py`; no
+smoothing and no interpolated points.
+
+- **Figure 1** (`fig/fig1_ladder`): the five-rung $\varepsilon_b$ ladder, with panel
+  (b) resolving the $3.93\times10^{-5}$ spread between the three extrapolation
+  families at $\varepsilon_b \to 0$ against the reference value.
+- **Figure 2** (`fig/fig2_free_residual`): the free residual $|h_{\mathrm{id}}|$ for
+  the converged profile and for the false root of Section 7, across corner degree.
+  Three orders of magnitude, on a functional neither solve is answerable to.
+- **Figure 3** (`fig/fig3_drift`): the false root's exponent under refinement, with
+  the published $\alpha_1, \alpha_2, \alpha_3$ marked and the step sizes labelled.
+  Attribution to $\alpha_1$ requires the steps to shrink; they grow.
+
 ## 8. Reproduction and retractions
 
 `polar_cornerreg.py` implements Section 2 and returns $h_{\mathrm{id}}$ on
@@ -467,9 +488,7 @@ Four questions stand open. The corner-clamped admissible class of Section 6.3 re
 two directions whose dynamical content is unmeasured. The mass matrix $E = I$ on
 transport rows rests on two independent derivations and a reduction check but not on a
 third structurally different test; a short time-march compared against $e^{tL}$ on the
-same perturbation would supply one. The far-field truncation and panel edges have
-never been swept on this solver, and one run at $X_{\max} = 32$ would close the axis.
-And the unstable branches remain unconfirmed by any non-network method, including this
+same perturbation would supply one. And the unstable branches remain unconfirmed by any non-network method, including this
 one: the route attempted here produced the artifact of Section 7, and a formulation
 treating $\alpha$ as a Newton unknown with its own normalization on the untruncated
 problem is the natural next attempt.
@@ -478,7 +497,7 @@ problem is the natural next attempt.
 
 ## References
 
-Verified 2026-07-28 against arXiv and publisher records, except where marked.
+All entries verified 2026-07-28 against arXiv and publisher records.
 
 1. J. Chen and T. Y. Hou. *Stable nearly self-similar blowup of the 2D Boussinesq and
    3D Euler equations with smooth data I: Analysis.* arXiv:2210.07191.
@@ -490,11 +509,13 @@ Verified 2026-07-28 against arXiv and publisher records, except where marked.
 4. Y. Wang et al. *Discovery of Unstable Singularities.* arXiv:2509.14185. Reports one
    stable and three unstable self-similar solutions of the 2D Boussinesq equation,
    plus a candidate fourth, with PDE residuals of order $10^{-8}$ to $10^{-7}$.
-5. *Singularity Formation: Synergy in Theoretical, Numerical and Machine Learning
-   Approaches.* arXiv:2604.16842. **TO VERIFY** — identifier not independently
-   confirmed.
+5. Y. Wang. *Singularity Formation: Synergy in Theoretical, Numerical and Machine
+   Learning Approaches.* arXiv:2604.16842 (PhD thesis).
 6. G. Luo and T. Y. Hou. *Potentially singular solutions of the 3D axisymmetric Euler
-   equations.* **TO VERIFY.**
+   equations.* PNAS **111**(36), 12968-12973 (2014), doi:10.1073/pnas.1405238111.
+   The originating computation: vorticity growth on the solid boundary as
+   $(t_s - t)^{-2.46}$ with $t_s \approx 0.0035056$, and a local analysis suggesting
+   self-similar blowup.
 
 Our converged steady residuals on this object are $3.9\times10^{-12}$ to
 $9.9\times10^{-12}$, against the $10^{-8}$ to $10^{-7}$ reported in [4]. This is not a
