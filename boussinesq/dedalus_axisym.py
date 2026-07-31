@@ -15,7 +15,11 @@ eqs 2.1-2.2/Table 1; cross-checked vs the unified Boussinesq-Euler reduction).
     EVOLVE  u1_t   = - u^r u1_r - u^z u1_z + 2 u1 psi1_z           (PNAS 2a)
             omega1_t = - u^r omega1_r - u^z omega1_z + dz(u1^2)    (PNAS 2b)
     ELLIPTIC  -(drr + (3/r) dr + dzz) psi1 = omega1               (PNAS 2c)
-    IC   u1 = A exp(-30(1-r^2)) sin(2 pi z / L),  omega1 = psi1 = 0  (PNAS 3a)
+    IC   u1 = A exp(-30(1-r^2)^4) sin(2 pi z / L), omega1 = psi1 = 0  (PNAS 3a)
+         [F14, 2026-07-30: this line read (1-r^2) with no power for the whole
+          campaign, contradicting IC_POWER = 4.0 below and its own comment. Three
+          of six blind reviewers reasoned from the stale docstring and flagged the
+          linear form as non-standard. The CODE was always right; the header lied.]
          L = 1/6 (z period);  A = 100 reproduces the paper exactly.
     TARGET  ring singularity at the WALL CORNER (r,z) = (1,0), ts ~= 0.0035056.
 
@@ -82,6 +86,13 @@ IC_POWER = 4.0                # power on (1-r^2). PNAS eq 3a is the FOURTH power
 IC_AMP = 100.0               # u1^0 prefactor (PNAS eq 3a)
 TS_REF = 0.0035056           # pre-registered singularity time (MMS Table 1)
 TRUST_DRIFT = 1e-3           # Casimir-drift trust boundary (matches bsq engine)
+TAIL_TRUST = 1e-6            # spectral energy fraction above (2/3)k_max. A resolved
+                             # spectral field sits near roundoff; 1e-6 is already
+                             # generous. See F2 below -- this, not the Casimir, is
+                             # what actually detects loss of resolution.
+GAMMA_TRUST = 1e-4           # drift of sup|r^2 u1|, which is EXACTLY conserved
+                             # (Gamma is transported). A pointwise invariant, so
+                             # unlike a volume integral it sees the collapsing peak.
 
 
 # ---- Hou-Li spectral filter (verbatim pattern from dedalus_bsq.py) -----------
@@ -98,8 +109,15 @@ def make_filter(field, alpha=36.0, order=36, cutoff=0.65):
 
 
 def tail_fraction(field, frac=2.0 / 3.0):
-    """Fraction of spectral energy above `frac`*k_max (resolution health)."""
+    """Fraction of spectral energy above `frac`*k_max (resolution health).
+    The top two Chebyshev rows are EXCLUDED: that is where tau corrections live
+    by construction, so on any run with Dirichlet/Neumann taus (nu > 0) they
+    carry O(tau) amplitude that is boundary bookkeeping, not unresolved
+    physics. Measured false trip before this fix: tail_w1 = 2.8e-6 at the
+    FIRST viscous record, killing trust at t=0 on a healthy run."""
     c = np.abs(field["c"]) ** 2
+    if c.shape[1] > 4:
+        c = c[:, :-2]
     iz = np.arange(c.shape[0]) / max(c.shape[0] - 1, 1)
     ir = np.arange(c.shape[1]) / max(c.shape[1] - 1, 1)
     IZ, IR = np.meshgrid(iz, ir, indexing="ij")
@@ -147,6 +165,16 @@ def build(Nz, Nr, r0=0.4, L=L_PERIOD, dealias=3.0 / 2.0):
     tau_p2 = dist.Field(name="tau_p2", bases=zb)         # 2nd Dirichlet tau
     rr = dist.Field(name="rr", bases=rb)                 # r NCC (degree-1, exact)
     rr["g"] = r
+    # viscous machinery (used only when nu > 0; inviscid path untouched).
+    # 3/r is smooth on the annulus -> spectrally exact NCC. Second-order
+    # diffusion needs two taus per field, lifted into derivative_basis(2).
+    i3r = dist.Field(name="i3r", bases=rb)
+    i3r["g"] = 3.0 / r
+    tau_u1a = dist.Field(name="tau_u1a", bases=zb)
+    tau_u1b = dist.Field(name="tau_u1b", bases=zb)
+    tau_w1a = dist.Field(name="tau_w1a", bases=zb)
+    tau_w1b = dist.Field(name="tau_w1b", bases=zb)
+    lift2 = lambda F, n: d3.Lift(F, rb.derivative_basis(2), n)
 
     dr = lambda F: d3.Differentiate(F, coords["r"])
     dz = lambda F: d3.Differentiate(F, coords["z"])
@@ -178,6 +206,130 @@ def make_ivp(b, stepper="RK443"):
     problem.add_equation("dt(omega1) = -ur*dr(omega1) - uz*dz(omega1) + dz(u1*u1)")
     solver = problem.build_solver(getattr(d3, stepper))
     return problem, solver
+
+
+def make_ivp_visc(b, nu, stepper="RK443"):
+    """Viscous axisymmetric NS in the rescaled variables: the 5D-Laplacian form.
+    For axisymmetric fields f/r the exact viscous operator (Delta - 1/r^2) on
+    f becomes Delta5 = drr + (3/r)dr + dzz on f/r, so BOTH u1 and omega1
+    diffuse by nu*Delta5 with no extra terms (Hou-Li 5D reduction).
+
+    Walls are FREE-SLIP: no-penetration stays on psi1 (unchanged), zero
+    tangential stress gives tau_{r theta} ~ r d_r(u^theta/r) = 0 -> dr(u1)=0,
+    and tau_{rz} = mu(dz u^r + dr u^z) = 0 with u^r=0 on the wall ->
+    omega^theta = 0 -> omega1 = 0. Free-slip keeps the inviscid corner driver
+    (no-penetration) while adding real viscosity; no-slip is a separate, harder
+    experiment. The quartic IC has dr(u1)=0 at r=1 exactly, so the initial data
+    is compatible with the Neumann condition to machine precision.
+
+    Diffusion is on the LHS (implicit in the IMEX stepper); advection stays
+    explicit, so the existing CFL remains the right stability control."""
+    ns = vars(b)
+    ns["nu"] = nu
+    problem = d3.IVP([b.psi1, b.u1, b.omega1, b.tau_p1, b.tau_p2,
+                      b.tau_u1a, b.tau_u1b, b.tau_w1a, b.tau_w1b], namespace=ns)
+    problem.add_equation(_poisson_lhs() + " + lift(tau_p2) + rr*omega1 = 0")
+    problem.add_equation("psi1(r=1) = 0")
+    problem.add_equation("psi1(r=r0) = 0")
+    problem.add_equation(
+        "dt(u1) - nu*(dz(dz(u1)) + dr(dr(u1)) + i3r*dr(u1))"
+        " + lift2(tau_u1a,-1) + lift2(tau_u1b,-2)"
+        " = -ur*dr(u1) - uz*dz(u1) + 2*u1*dz(psi1)")
+    problem.add_equation(
+        "dt(omega1) - nu*(dz(dz(omega1)) + dr(dr(omega1)) + i3r*dr(omega1))"
+        " + lift2(tau_w1a,-1) + lift2(tau_w1b,-2)"
+        " = -ur*dr(omega1) - uz*dz(omega1) + dz(u1*u1)")
+    problem.add_equation("dr(u1)(r=1) = 0")
+    problem.add_equation("dr(u1)(r=r0) = 0")
+    problem.add_equation("omega1(r=1) = 0")
+    problem.add_equation("omega1(r=r0) = 0")
+    solver = problem.build_solver(getattr(d3, stepper))
+    return problem, solver
+
+
+def set_ic_generic(b, A=IC_AMP, power=IC_POWER, seed=1):
+    """GENERIC near-wall data: seeded multi-mode, parity broken on purpose.
+    Deterministic (fixed seed recorded) so reproducible; 'generic' is scoped
+    honestly: generic WITHIN the near-wall axisymmetric class this domain
+    truncation is valid for, not generic in all of R^3."""
+    rng=np.random.default_rng(int(seed))
+    zz=2*np.pi*b.z/b.L
+    prof=sum(float(rng.normal(0,1))/np.sqrt(k)*np.sin(k*zz+float(rng.uniform(0,2*np.pi)))
+             for k in range(1,6))
+    rad=np.exp(-IC_DECAY*(1.0-b.r**2)**power)*(1.0+0.3*np.sin(3*np.pi*b.r))
+    b.u1["g"]=A*rad*prof
+    b.omega1["g"]=0.0; b.psi1["g"]=0.0
+
+
+def set_ic_single(b, A=IC_AMP, power=IC_POWER, width=None):
+    """SINGLE ISOLATED TUBE -- the collision REMOVED.
+
+    The standard IC u1 ~ sin(2 pi z/L) is ODD about z=0, and that parity is what
+    PINS a stagnation point at z=0: two counter-signed swirl lobes meet there and
+    neither can pass. So the Luo-Hou corner scenario may already BE a two-body
+    collision, with the self-similar profile as the collision's fixed point
+    rather than an alternative to it.
+
+    The sharp test is therefore not adding a collision but REMOVING one. A single
+    localised tube has no counterpart to push against and breaks the odd-z parity
+    (legal -- the equations preserve parity, they do not require it; gate G5 only
+    checks that the standard IC has it). If corner intensification needs the
+    mutual opposition, this configuration should not produce it.
+
+    This is a control, and its value is symmetric: it is informative whether it
+    blows up or not.
+    """
+    L = b.L
+    width = 0.05 * L if width is None else float(width)
+
+    def pdist(z, z0):
+        d = z - z0
+        return d - L * np.round(d / L)
+
+    b.u1["g"] = (A * np.exp(-IC_DECAY * (1.0 - b.r ** 2) ** power)
+                 * np.exp(-0.5 * (pdist(b.z, 0.25 * L) / width) ** 2))
+    b.omega1["g"] = 0.0
+    b.psi1["g"] = 0.0
+
+
+def set_ic_collide(b, A=IC_AMP, power=IC_POWER, sep=None, width=None):
+    """COLLISIONAL IC -- deliberately outside the self-similar ansatz.
+
+    Every run in this campaign has used one IC family, u1 ~ sin(2 pi z / L),
+    whose two swirl lobes are separated by L/2. That separation is LOCKED to the
+    domain period, so the problem carries exactly ONE length scale and a
+    self-similar collapse is the only thing it can express.
+
+    A collision needs TWO independent scales: the structure width and the
+    separation between the colliding structures. Self-similarity requires one.
+    So this IC replaces the global sine with two LOCALISED counter-signed swirl
+    tubes whose separation `sep` is a free parameter decoupled from L.
+
+    THE DISCRIMINATOR. Sweep sep. If the blowup character (rate, aspect ratio,
+    the geometric observable Lambda) is INDEPENDENT of sep, each tube is simply
+    running the corner scenario on its own and there is one scale after all. If
+    the character DEPENDS on sep, the separation is dynamically active and the
+    collapse is not self-similar.
+
+    PARITY. u1 must be ODD about z=0 (gate G5 checks this to 1.4e-14). A
+    difference of Gaussians placed symmetrically about z=0 is odd by
+    construction. Distances are taken periodically so the tubes stay smooth
+    across the RealFourier wrap rather than acquiring a seam.
+    """
+    L = b.L
+    sep = 0.25 * L if sep is None else float(sep)
+    width = 0.06 * L if width is None else float(width)
+
+    def pdist(z, z0):                       # signed periodic distance to z0
+        d = z - z0
+        return d - L * np.round(d / L)
+
+    z = b.z
+    lobe = (np.exp(-0.5 * (pdist(z, +0.5 * sep) / width) ** 2)
+            - np.exp(-0.5 * (pdist(z, -0.5 * sep) / width) ** 2))
+    b.u1["g"] = A * np.exp(-IC_DECAY * (1.0 - b.r ** 2) ** power) * lobe
+    b.omega1["g"] = 0.0
+    b.psi1["g"] = 0.0
 
 
 def set_ic(b, A=IC_AMP, power=IC_POWER, zpow=1, wamp=0.0, wpow=3):
@@ -365,11 +517,13 @@ def run_gates():
 # SCENARIO  (--scenario): the corner blow-up run + blow-up diagnostics
 # =============================================================================
 def run_scenario(A, Nz, Nr, tmax, out, r0=0.4, stepper="RK443", safety=0.2,
-                 use_filter=True, initial_dt=1e-6, max_dt=1e-4, run_id=None,
+                 use_filter=True, initial_dt=1e-6, max_dt=1e-4, run_id=None, ic_sep=None,
+                 ic_single=False, nu=0.0, ic_generic=None,
                  checkpoint_wall=300.0, resume=None, ic_power=IC_POWER, zpow=1,
                  wamp=0.0, wpow=3, ckpt_sim_dt=None, ckpt_max_writes=2):
     b = build(Nz, Nr, r0=r0)
-    _, solver = make_ivp(b, stepper=stepper)
+    _, solver = (make_ivp_visc(b, nu, stepper=stepper) if nu and nu > 0
+                 else make_ivp(b, stepper=stepper))
     solver.stop_sim_time = tmax
 
     tag = run_id or f"axisym_N{Nz}x{Nr}_A{A:g}"
@@ -385,15 +539,39 @@ def run_scenario(A, Nz, Nr, tmax, out, r0=0.4, stepper="RK443", safety=0.2,
               flush=True)
         ck_mode = "append"
     else:
-        set_ic(b, A=A, power=ic_power, zpow=zpow, wamp=wamp, wpow=wpow)
+        (set_ic_generic(b, A=A, power=ic_power, seed=ic_generic) if ic_generic is not None else
+     set_ic_single(b, A=A, power=ic_power) if ic_single else
+     set_ic_collide(b, A=A, power=ic_power, sep=ic_sep) if ic_sep else
+     set_ic(b, A=A, power=ic_power, zpow=zpow, wamp=wamp, wpow=wpow))
         ck_mode = "overwrite"
     # File-handler cadence only -- no effect on the physics or the stepping.
     # ckpt_sim_dt lets snapshots land at controlled SIM times (needed to fit the
     # self-similar spatial exponent, which requires many late snapshots, not two).
     _ck = dict(sim_dt=ckpt_sim_dt) if ckpt_sim_dt else dict(wall_dt=checkpoint_wall)
+    # parallel='gather': rank 0 collects and writes. Without it, 32 MPI ranks
+    # contend for the same HDF5 file and abort with
+    #   BlockingIOError [Errno 11] unable to lock file
+    # MEASURED on RunPod 2026-07-30: killed a 32-rank run at iteration 65 (~1% of
+    # target) inside evaluator.evaluate_scheduled -> handler.process. The
+    # single-process laptop path never exposes this because there is no contention.
+    from mpi4py import MPI as _MPI
+    _par = {} if _MPI.COMM_WORLD.size == 1 else {"parallel": "gather"}
     checkpoints = solver.evaluator.add_file_handler(
-        str(ckpt_dir), max_writes=ckpt_max_writes, mode=ck_mode, **_ck)
+        str(ckpt_dir), max_writes=ckpt_max_writes, mode=ck_mode, **_ck, **_par)
     checkpoints.add_tasks(solver.state, layout="c")
+
+    # GRID SNAPSHOT SERIES for the spatial self-similar fit (alpha_eff.py).  The
+    # checkpoints above are coefficient-layout full state (resume insurance,
+    # untouched).  scales=1 IS LOAD-BEARING: a grid-layout task evaluated at the
+    # dealias scale leaves the FIELD scales there and downstream argmax/grid
+    # indexing breaks (measured in dedalus_bsq.py: IndexError 764 vs 512); it also
+    # keeps these grids equal to the ones alpha_eff.py builds rho from.
+    if ckpt_sim_dt:
+        snaps = solver.evaluator.add_file_handler(
+            str(pathlib.Path(out).parent / f"snap_{tag}"),
+            sim_dt=ckpt_sim_dt, max_writes=50, mode=ck_mode, **_par)
+        snaps.add_task(b.omega1, name="omega1", layout="g", scales=1)
+        snaps.add_task(b.u1, name="u1", layout="g", scales=1)
 
     filt = make_filter(b.omega1) if use_filter else None
 
@@ -429,7 +607,8 @@ def run_scenario(A, Nz, Nr, tmax, out, r0=0.4, stepper="RK443", safety=0.2,
     CFL.add_velocity(b.u_vec)
 
     ser = {"t": [], "sup_w1": [], "sup_wphys": [], "sup_gu2": [],
-           "sup_gth": [], "cas_drift": [], "dt": []}
+           "sup_gth": [], "cas_drift": [], "dt": [],
+           "tail_u1": [], "tail_w1": [], "gamma_drift": []}
     t0, brk, stop_cmd = time.time(), None, None
 
     def record(dt):
@@ -440,15 +619,36 @@ def run_scenario(A, Nz, Nr, tmax, out, r0=0.4, stepper="RK443", safety=0.2,
         sup_wphys = gmax(np.abs(wphys_op.evaluate()["g"]).max())
         sup_gu2 = gmax(np.abs(sup_gu2_op.evaluate()["g"]).max())
         sup_gth = gmax(np.abs(sup_gth_op.evaluate()["g"]).max())
+        # F10 (2026-07-30, blind-review pass). Gamma = r^2 u1 is EXACTLY
+        # transported, so sup|Gamma| is exactly constant -- a POINTWISE invariant,
+        # unlike the Casimir, which is a volume integral and is therefore
+        # structurally blind to a peak whose volume fraction tends to zero.
+        # Measured on this campaign's own archive: 78-88% of records passed the
+        # Casimir gate while spectrally unresolved, and on one run it never
+        # tripped at all while the spectral tail reached 4.3e-2. The operator
+        # `mom` has existed since the Casimir was built and its supremum was
+        # simply never recorded.
+        sup_gamma = gmax(np.abs(mom.evaluate()["g"]).max())
+        if not hasattr(record, "_gamma0"):
+            record._gamma0 = sup_gamma
+        _gd_signed = (sup_gamma - record._gamma0) / max(abs(record._gamma0), 1e-300)
+        # Inviscid: sup|Gamma| is exactly constant, gate on |drift|.
+        # Viscous: sup|Gamma| DECAYS physically (Gamma diffuses); only an
+        # INCREASE is a numerical violation, so gate on positive drift alone.
+        gamma_drift = abs(_gd_signed) if not (nu and nu > 0) else max(_gd_signed, 0.0)
         drift = abs(_scalar(casimir_op) - C0) / max(abs(C0), 1e-300)
+        row_tail_u1 = tail_fraction(b.u1); row_tail_w1 = tail_fraction(b.omega1)
         ser["t"].append(solver.sim_time)
         ser["sup_w1"].append(sup_w1); ser["sup_wphys"].append(sup_wphys)
         ser["sup_gu2"].append(sup_gu2); ser["sup_gth"].append(sup_gth)
         ser["cas_drift"].append(drift); ser["dt"].append(float(dt))
+        ser["tail_u1"].append(row_tail_u1); ser["tail_w1"].append(row_tail_w1)
+        ser["gamma_drift"].append(gamma_drift)
         row = {"t": solver.sim_time, "it": int(solver.iteration),
                "sup_w1": sup_w1, "sup_wphys": sup_wphys, "sup_gu2": sup_gu2,
                "sup_gth": sup_gth, "cas_drift": drift, "dt": float(dt),
-               "tail_u1": tail_fraction(b.u1), "tail_w1": tail_fraction(b.omega1),
+               "tail_u1": row_tail_u1, "tail_w1": row_tail_w1,
+               "sup_gamma": sup_gamma, "gamma_drift": gamma_drift,
                "wall": round(time.time() - t0, 1)}
         if _rank == 0:                   # rank 0 owns the stream file
             with open(stream_p, "a") as f:
@@ -486,7 +686,11 @@ def run_scenario(A, Nz, Nr, tmax, out, r0=0.4, stepper="RK443", safety=0.2,
                         stop_cmd = "control-stop"; break
                 except Exception as exc:
                     print(f"  [control] bad command ignored: {exc}", flush=True)
-            if drift > TRUST_DRIFT:
+            if drift > TRUST_DRIFT and not (nu and nu > 0):
+                # Inviscid: Casimir drift is numerical error -> abort.
+                # Viscous: the Casimir DISSIPATES physically; aborting on it
+                # truncates healthy runs (it killed nu=1e-3 at t=4e-4 while
+                # tail and gamma were clean). Record it, never abort on it.
                 brk = solver.sim_time
                 print(f"  Casimir break at t={brk:.6f} (drift {drift:.2e})", flush=True)
                 break
@@ -497,8 +701,33 @@ def run_scenario(A, Nz, Nr, tmax, out, r0=0.4, stepper="RK443", safety=0.2,
 
     tt = np.array(ser["t"]); w1 = np.array(ser["sup_w1"])
     wp = np.array(ser["sup_wphys"]); dd = np.array(ser["cas_drift"])
-    trust = dd < TRUST_DRIFT
+    # ---- F2 (2026-07-30, blind-review pass, confirmed against this archive) ----
+    # The Casimir is a VOLUME INTEGRAL and is structurally blind to a peak whose
+    # volume fraction tends to zero. Measured on the campaign's own streams:
+    # 78-88% of records passed this gate while spectrally unresolved; loc512
+    # reached a spectral tail of 0.449 at cas_drift 1.0e-3, and on mpi1024 the
+    # gate NEVER tripped while the tail hit 4.3e-2. On a controlled run the
+    # Casimir saturated at 2.9e-8 by t=0.001 and never moved again while the
+    # EXACT pointwise invariant sup|r^2 u1| rose 118x over the same window, and
+    # was 2000x more sensitive at the end.
+    #
+    # The honest trust boundary is the FIRST of three, not the Casimir alone:
+    #   spectral tail  -- is the field still resolved at all
+    #   gamma drift    -- pointwise, exact, sees the peak the integral cannot
+    #   Casimir        -- retained for continuity with prior runs
+    tl = np.array([max(a, b_) for a, b_ in
+                   zip(ser.get("tail_u1", [0.0] * len(tt)),
+                       ser.get("tail_w1", [0.0] * len(tt)))]) \
+        if ser.get("tail_u1") else np.zeros_like(tt)
+    gd = np.array(ser.get("gamma_drift", [0.0] * len(tt)))
+    trust = (dd < TRUST_DRIFT) & (tl < TAIL_TRUST) & (gd < GAMMA_TRUST)
     tb = float(tt[trust][-1]) if trust.any() else 0.0
+    tb_casimir_only = float(tt[dd < TRUST_DRIFT][-1]) if (dd < TRUST_DRIFT).any() else 0.0
+    if tb_casimir_only > tb:
+        print(f"  [F2] Casimir alone would have trusted to t={tb_casimir_only:.6f}; "
+              f"spectral/gamma gates stop at t={tb:.6f} "
+              f"({100*(1-tb/max(tb_casimir_only,1e-300)):.0f}% of the window was "
+              f"unresolved and previously counted as trustworthy)", flush=True)
     res = {
         "engine": "dedalus-axisym-euler", "form": "u1-omega1-psi1 (Luo-Hou)",
         "geometry": {"annulus_r0": r0, "r1": 1.0, "L": b.L, "corner": [1.0, 0.0]},
@@ -543,6 +772,20 @@ if __name__ == "__main__":
                     help="amplitude of an initial omega1 (0 = Luo-Hou rest). ONE-SIDED: measured law ord_z w1(t>0) = min(ord_z w1(0), 2q-1), q=zpow -- so this can only make w1 LESS degenerate than forced, never more.")
     ap.add_argument("--wpow", type=int, default=3,
                     help="ODD power on sin for omega1 (Liu uses cubic; CHL 9th)")
+    ap.add_argument("--ic-generic", type=int, default=None,
+                    help="seeded generic near-wall multi-mode IC (parity broken)")
+    ap.add_argument("--nu", type=float, default=0.0,
+                    help="kinematic viscosity. 0 = inviscid (validated path, "
+                         "untouched). >0 = viscous axisymmetric NS via the 5D "
+                         "Laplacian, free-slip walls, implicit diffusion.")
+    ap.add_argument("--ic-single", action="store_true",
+                    help="CONTROL: one isolated swirl tube, no counterpart to push "
+                         "against. Breaks the odd-z parity that pins the stagnation "
+                         "point. Tests whether the corner needs mutual opposition.")
+    ap.add_argument("--ic-sep", type=float, default=None,
+                    help="COLLISIONAL IC: separation between two localised counter-signed "
+                         "swirl tubes, decoupled from the domain period L. Omit for the "
+                         "original single-mode sine IC.")
     ap.add_argument("--zpow", type=int, default=1,
                     help="odd power on sin(2 pi z/L). u1 ~ z^zpow and theta ~ u1^2, "
                          "so s = 2*zpow: 1->s=2 (Luo-Hou), 3->s=6 (first degenerate "
@@ -573,7 +816,8 @@ if __name__ == "__main__":
                      safety=a.safety, use_filter=not a.no_filter,
                      initial_dt=a.initial_dt, max_dt=a.max_dt, run_id=a.run_id,
                      checkpoint_wall=a.checkpoint_wall, resume=a.resume, ic_power=a.ic_power,
-                 zpow=a.zpow, wamp=a.wamp, wpow=a.wpow,
+                 zpow=a.zpow, wamp=a.wamp, wpow=a.wpow, ic_sep=a.ic_sep,
+                 ic_single=a.ic_single, nu=a.nu, ic_generic=a.ic_generic,
                      ckpt_sim_dt=a.ckpt_sim_dt, ckpt_max_writes=a.ckpt_max_writes)
     else:
         ap.print_help()

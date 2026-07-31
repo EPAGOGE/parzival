@@ -10,3 +10,15 @@ pages/
 .venv-dedalus/
 ROADMAP_EULER.md
 note/SOCIAL_KIT.md
+
+# transfer artifacts and run data (regenerate with boussinesq/bootstrap.sh)
+podstage/
+runs/
+*.h5
+*.jsonl
+!boussinesq/**/*.md
+VERIFY_STATUS
+verify_watch.log
+REGRESSION_*.txt
+finish.log
+note/zahavy_jump.pdf

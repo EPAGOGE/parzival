@@ -1,0 +1,36 @@
+GENERIC-IC WANDERING SCAN -- FINAL
+2026-07-30 18:10  |  8 seeds, 512x1536, gated (tail<=1e-6, gamma<=1e-4)
+
+ANCHOR exact-symmetry noise floor: mean 0.0083 max 0.0457 n=44
+W3         slope +0.187  90% CI [-0.628,+1.141]  n=34 (-0 transient)  span 0.93 e-folds  -> INCONCLUSIVE
+           amplitude growth x2.6  |  1 pairs voided (peak jump)  |  aniso-rescaled slope +0.172  <- the blind variant
+           CI width 1.769 vs 0.30 needed; ~31.6 more e-folds of growth would separate the regimes
+W11        slope +0.559  90% CI [-1.059,+2.242]  n=36 (-0 transient)  span 0.50 e-folds  -> INCONCLUSIVE
+           amplitude growth x1.7  |  1 pairs voided (peak jump)  |  aniso-rescaled slope -0.423  <- the blind variant
+           CI width 3.301 vs 0.30 needed; ~60.5 more e-folds of growth would separate the regimes
+W19        slope +0.680  90% CI [-0.003,+1.376]  n=71 (-0 transient)  span 0.93 e-folds  -> INCONCLUSIVE
+           amplitude growth x2.5  |  0 pairs voided (peak jump)  |  aniso-rescaled slope +0.514  <- the blind variant
+           CI width 1.379 vs 0.30 needed; ~18.7 more e-folds of growth would separate the regimes
+W23        slope +0.194  90% CI [-1.805,+2.208]  n=47 (-0 transient)  span 0.60 e-folds  -> INCONCLUSIVE
+           amplitude growth x1.8  |  1 pairs voided (peak jump)  |  aniso-rescaled slope -0.647  <- the blind variant
+           CI width 4.013 vs 0.30 needed; ~107.4 more e-folds of growth would separate the regimes
+W42        slope -0.390  90% CI [-2.495,+1.798]  n=35 (-0 transient)  span 0.46 e-folds  -> INCONCLUSIVE
+           amplitude growth x1.6  |  1 pairs voided (peak jump)  |  aniso-rescaled slope -0.562  <- the blind variant
+           CI width 4.293 vs 0.30 needed; ~93.1 more e-folds of growth would separate the regimes
+W51        slope +1.431  90% CI [-1.141,+4.097]  n=47 (-0 transient)  span 0.39 e-folds  -> INCONCLUSIVE
+           amplitude growth x1.5  |  1 pairs voided (peak jump)  |  aniso-rescaled slope -0.035  <- the blind variant
+           CI width 5.238 vs 0.30 needed; ~119.8 more e-folds of growth would separate the regimes
+W63        slope -0.515  90% CI [-1.413,+0.507]  n=35 (-0 transient)  span 1.02 e-folds  -> INCONCLUSIVE
+           amplitude growth x2.8  |  1 pairs voided (peak jump)  |  aniso-rescaled slope -0.526  <- the blind variant
+           CI width 1.921 vs 0.30 needed; ~40.6 more e-folds of growth would separate the regimes
+W77        slope +16.293  90% CI [-1.590,+61.395]  n=6 (-0 transient)  span 0.08 e-folds  -> INCONCLUSIVE
+           amplitude growth x1.1  |  1 pairs voided (peak jump)  |  aniso-rescaled slope +11.675  <- the blind variant
+           CI width 62.984 vs 0.30 needed; ~3689.0 more e-folds of growth would separate the regimes
+
+======================================================================
+VERDICT
+  8/8 seeds readable.  SETTLING 0 | WANDERING 0 | other 8
+  slope mean +2.305  sd +5.318  range [-0.515,+16.293]
+  SEEDS DISAGREE -> genericity itself is the finding: identical
+  equations, different data, different fate.
+======================================================================

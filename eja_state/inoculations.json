@@ -1,0 +1,209 @@
+{
+ "identity-closed": {
+  "idea": "SWAP the imposed and free functionals. Standard system imposes (g1,g2,self-consistency cw-alpha*cl) and leaves h_id free; every artifact so far satisfies the first three and violates h_id by O(1). The identity-closed system instead imposes (g1,g2,h_id=0 i.e. cl pinned to 2*THXX/WX) and leaves SELF-CONSISTENCY free. Artifacts of the standard system are not roots of this one by construction. A state that is a root of BOTH is certified by two independent closures",
+  "status": "nullified",
+  "killed_at": 1,
+  "generation": 1,
+  "history": [],
+  "stages": [
+   {
+    "idx": 0,
+    "claim": "grad h_id is transverse to span(grad g1, grad g2), so the swap is not rank-deficient",
+    "quick_check": "h_id = cl - const so grad h_id = e_cl exactly; g1,g2 are derivative functionals on A,B with no cl entry. Measure |proj of e_cl onto span(g1,g2) rows| directly from the assembled Jacobian",
+    "kills_if": "projection > 1e-6, i.e. e_cl lies in the gauge span: the swap is degenerate and dead on arrival",
+    "cost": "seconds, one assembled Jacobian, no solve",
+    "status": "survived",
+    "result": "grad h_id = e_cl exactly; g1 and g2 have IDENTICALLY ZERO cl entries, so the projection is 0.0000e+00, not merely small. Transversality is structural, not numerical"
+   },
+   {
+    "idx": 1,
+    "claim": "the identity-closed system has a root near the ground state and it is well-conditioned",
+    "quick_check": "Newton the swapped system from the certified ground root; read ||F||, sigma_min, and the FREE residual (self-consistency defect cw/cl - alpha)",
+    "kills_if": "no convergence, or sigma_min collapses below 1e-9, or the free self-consistency residual is O(1) rather than O(1e-3)",
+    "cost": "~2 min, one Newton solve at (16,40,12)",
+    "status": "NULLIFIED",
+    "result": "Newton STALLED at ||F||=1.21e-5 (needed 1e-11) after 12 steps and sigma_min = 5.83e-10, an order below the 1e-9 kill line and 4300x worse than the standard system's 2.5e-6. The cl pin cannot be satisfied: it drove cl to 3.00543823 against a target of 3.00649824, leaving the SAME -1.1e-3 defect the standard system reports as h_id. The system is near-singular because the pin fights the interior rows"
+   },
+   {
+    "idx": 2,
+    "claim": "the swap DISCRIMINATES: it does not reproduce the ghost",
+    "quick_check": "run the identity-closed system from the ghost field at its own configuration and see whether a root exists there",
+    "kills_if": "it converges to the ghost, i.e. the artifact satisfies both closures: the swap has no discriminating power and the whole approach is worthless",
+    "cost": "~5 min, one solve at (24,56,12)",
+    "status": "skipped",
+    "result": ""
+   },
+   {
+    "idx": 3,
+    "claim": "the two systems converge to the SAME object under refinement, so the swap is a discretization-error meter and not a different problem",
+    "quick_check": "measure the free residual of each system at two resolutions; both defects must fall together",
+    "kills_if": "the defects do not fall, or fall at different rates: the two closures are not approximating one continuum problem",
+    "cost": "~10 min, two solves at each of two resolutions",
+    "status": "skipped",
+    "result": ""
+   }
+  ]
+ },
+ "euler3d-homotopy": {
+  "idea": "3D axisymmetric Euler at the wall corner is 2D Boussinesq plus four explicit correction terms (3 d_y psi in the elliptic operator; y d_x psi in the wall-normal velocity; 2 psi + y d_y psi in the axial velocity; 4 theta d_x psi in the theta equation). Reach the 3D root by homotopy tau: 0->1 on those terms starting from the CERTIFIED 2D root, and measure d alpha. This replaces G6's write-a-new-3D-solver with a perturbation of machinery already certified, and it sidesteps tension #34 because the gauge stays pinned to the 2D corner data the whole way.",
+  "status": "nullified",
+  "killed_at": 1,
+  "generation": 1,
+  "history": [],
+  "stages": [
+   {
+    "idx": 0,
+    "claim": "The four corrections are correctly derived and each is exactly one corner degree subleading, so the corner exponent and the substitution powers survive untouched",
+    "quick_check": "symbolic degree count of each correction against the 2D term it sits beside, with the wall/axis convention read from polar_cornerreg.py rather than recalled",
+    "kills_if": "any correction is same-degree or lower than its leading partner, which would change the corner asymptotics and make the perturbation framing wrong",
+    "cost": "seconds, no solver",
+    "status": "survived",
+    "result": "All five comparisons gap = +1 exactly (elliptic 0->1; wall-normal 1->2; axial 1->2 twice; theta 2->3). Convention verified against polar_cornerreg.py:112 grid(Nb-1, eps_b, pi/2-eps_b), the g1 pin at beta~0 and the axis label at beta=Nb-1. Separately, the 3D profile system was verified EXACTLY homogeneous under u1->s u1, om1->s om1, ps1->s ps1 at degrees (2,2,1), with the 2D control independently reproducing the minted (2,3,1)."
+   },
+   {
+    "idx": 1,
+    "claim": "The perturbed system still has a root near the 2D one at small tau",
+    "quick_check": "switch the corrections on at tau=1e-3, Newton from the certified 2D root at (16,40,12)/eps_b=1e-4",
+    "kills_if": "Newton fails to reach ||F|| < 1e-11, or h_id departs the ground -1.06e-3 by more than a decade: either means the corrections are not a regular perturbation",
+    "cost": "~2 minutes, one solve",
+    "status": "NULLIFIED",
+    "result": "Triple kill, no solve run and none needed: (1) the endpoint was refused independently (alpha_3D = alpha_2D in the exact self-similar limit, so tau=1 solves a snapshot, not an exponent); (2) the limits lens showed the perturbative window is EMPTY on this grid (in-domain correction at Newton tolerance for every tau with R>0 everywhere; 85 percent of nodes outside the cylinder the map describes); (3) the corner-degrees lens showed stage 0's certification was passed in error on generic fields, with C1 relative O(1) on the solution manifold, meeting the original pre-registered kill condition. Superseded by the eps-linear exponent-only program: windowed shell exponent p = 0.648 +- 0.016 = 1 + alpha (mechanism: elliptic adjoint, mu - 2 = alpha exact) feeding the (T-t)^(1.0 +- 0.1) approach law."
+   },
+   {
+    "idx": 2,
+    "claim": "The 3D root is continuously connected to the 2D root: no fold on the way",
+    "quick_check": "tau ladder 1e-3, 0.01, 0.1, 0.3, 0.6, 1.0 tracking alpha, h_id and sigma_min of the bordered Jacobian",
+    "kills_if": "sigma_min drops below 1e-8 or alpha turns back on itself before tau=1, indicating a fold: the 3D root is then NOT reachable from the 2D one and needs its own continuation",
+    "cost": "~30 minutes, six solves",
+    "status": "skipped",
+    "result": ""
+   },
+   {
+    "idx": 3,
+    "claim": "alpha_3D is resolution-converged and quotable",
+    "quick_check": "at tau=1 repeat the four axis probes that certified alpha_2D: N_beta, seed, axis-pin, XMAX",
+    "kills_if": "any axis moves alpha by more than the 4.4e-5 band quoted for 2D, which would mean the 3D number is not yet a number",
+    "cost": "hours, the full probe battery",
+    "status": "skipped",
+    "result": ""
+   }
+  ]
+ },
+ "kernel-conversion": {
+  "idea": "Convert the ADJUDICATED far-field kernels of the solved profile into the architecture, 1-to-1 via the proven similarity structure: hatted variables Ahat = xi*A -> f(beta), Bhat = xi^2*B -> g(beta), Phat = xi^2*P -> h(beta) with corrections c(beta)*rho^alpha, and compactified infinity replacing the artificial XMAX boundary with exact asymptotic rows -- the same regularization move that beat the corner (dust rows -> analytic-limit pins), mirrored at the other end. Valid family-wide by the sigma=0 eigen-consistency (any self-consistent (alpha,cl,cw) triple carries the kernel), making it the natural home for alpha-continuation (#33). Generalizes the campaign's winning move into a standing operator: proven kernel -> architectural substitution -> provable artifact -> new smaller exploration surface.",
+  "status": "live",
+  "killed_at": null,
+  "generation": 1,
+  "history": [],
+  "stages": [
+   {
+    "idx": 0,
+    "claim": "The hatted far-field system is regular and nondegenerate enough to compactify: hatted fields plateau, every residual term group stays bounded in hatted scaling, and the determining balance for the limit functions f,g,h sits at a clean O(1/xi) order (mirroring the corner, where the leading rows were degenerate and next-order pins closed the system)",
+    "quick_check": "on the certified root: plateau slopes of Ahat/Bhat/Phat; boundedness of each hatted residual term at the outer nodes; the pair-cancellation meter times xi (tests whether the determining order is exactly 1/xi); two-term model residual per beta column",
+    "kills_if": "hatted fields fail to plateau, any term grows with xi in hatted scaling, or the determining balance is messier than a clean 1/xi order (fractional or oscillatory), which would mean the compactified rows cannot be written at a definite order and the architecture dies as designed",
+    "cost": "seconds, one script on the existing root",
+    "status": "survived",
+    "result": "Plateau: Ahat/Bhat/Phat final-third slopes +0.0024/+0.0005/+0.0000, limits 4.85/3.80/1.50. Boundedness: all 8 hatted term groups bounded (cl/cw pair at ~5.02, Pbb at 5.52, advection decaying). Determining order: compensated meter*e^(-alpha*xi) flat at 5.19-5.78 over xi in [8.5,24.8] while raw meter falls 430x; slope -4.2886 vs model -4.3933 (parameter-free, divergence 0.10 on magnitude 4.3). Two-term model: rel rms 1.4e-7 to 9.2e-6 on interior columns j=0,8,17,26 -- tighter than the adjudication's wide-window fits. Gen-1 stage 0 was nullified by a mis-modeled kill line; the correction is on the record in the reinitiation."
+   },
+   {
+    "idx": 1,
+    "claim": "A kernel-aware solver variant (product-rule derivatives against the log-kernel, compactified outer rows at the measured determining order) converges to the SAME certified root with a G0-style exactness gate passing",
+    "quick_check": "derive the hatted residual identities by hand, verify by sympy round trip, implement as a variant class touching nothing in polar_cornerreg, Newton from the adopted root",
+    "kills_if": "the hatted G0 gate fails (identities not exact), or Newton diverges from the certified root, or alpha moves by more than 1e-7 (the conversion must be exactly neutral at fixed resolution -- it changes representation, not the problem)",
+    "cost": "hours, hand derivation plus one solve",
+    "status": "pending",
+    "result": ""
+   },
+   {
+    "idx": 2,
+    "claim": "The conversion pays: XMAX disappears as an axis for the eps_b->0 extrapolation program, and the far-field windows behind p sharpen",
+    "quick_check": "re-run the eps_b ladder and the p sweep in the converted architecture; compare XMAX sensitivity and window wobble against the recorded values",
+    "kills_if": "XMAX sensitivity does not shrink materially and p windows do not tighten: a conversion that is exactly neutral AND buys nothing is dead weight and gets removed",
+    "cost": "hours, ladder plus sweep",
+    "status": "pending",
+    "result": ""
+   },
+   {
+    "idx": 3,
+    "claim": "The converted architecture is the branch-continuation home: alpha-continuation from the certified root (#33 redirect) holds its far field automatically as alpha moves because the kernel carries alpha",
+    "quick_check": "bordered alpha-Newton continuation in hatted variables, watching h_id and sigma_min",
+    "kills_if": "continuation in the converted frame is no better conditioned than the recorded standard-frame attempts",
+    "cost": "hours to days, the actual branch campaign",
+    "status": "pending",
+    "result": ""
+   },
+   {
+    "idx": 4,
+    "claim": "Hatted far-field system is compactifiable: fields plateau, all hatted term groups bounded, determining residual is pure C*e^(alpha*xi) (the 1/xi order cancels identically via kappa=1 exact), two-term model tight on interior columns",
+    "quick_check": "plateau slopes; hatted boundedness table; compensated meter flatness; two-term fits",
+    "kills_if": "no plateau, any growing hatted term, compensated meter NOT flat (slope structure beyond e^(alpha*xi)), or two-term model failing interior columns",
+    "cost": "seconds, already computed",
+    "status": "pending",
+    "result": ""
+   },
+   {
+    "idx": 5,
+    "claim": "A kernel-aware solver variant (hatted variables, compactified outer rows through the rho^alpha structure + plateau extrapolation) converges to the SAME certified root with a G0-style exactness gate",
+    "quick_check": "hand-derive hatted identities, sympy round trip, variant class, Newton from adopted root",
+    "kills_if": "hatted G0 gate fails, Newton diverges, or alpha moves more than 1e-7 at fixed resolution",
+    "cost": "hours, hand derivation plus one solve",
+    "status": "pending",
+    "result": ""
+   },
+   {
+    "idx": 6,
+    "claim": "The conversion pays: XMAX eliminated as an axis for the eps_b->0 extrapolation, p-windows sharpen",
+    "quick_check": "eps_b ladder + p sweep in converted architecture vs recorded values",
+    "kills_if": "no material XMAX shrink and no window tightening",
+    "cost": "hours",
+    "status": "pending",
+    "result": ""
+   },
+   {
+    "idx": 7,
+    "claim": "Converted architecture is the branch-continuation home (#33)",
+    "quick_check": "bordered alpha-continuation in hatted variables, h_id and sigma_min watched",
+    "kills_if": "no better conditioned than recorded standard-frame attempts",
+    "cost": "hours to days",
+    "status": "pending",
+    "result": ""
+   }
+  ]
+ },
+ "e3-physical-run": {
+  "idea": "PHYSICAL 3D axisymmetric Euler march (existing verified dedalus_axisym.py engine, Luo-Hou annulus, A=100, ts ~ 0.0035056) to test the adjudicated drift law alpha_3D(t) - alpha_2D proportional to (T-t)^(1.0 +- 0.1). Instrument: per-snapshot SPATIAL alpha_eff = fitted power of omega across the self-similar window (Omega ~ rho^alpha made physical), differential against a matched 2D Boussinesq control march to cancel instrument and discretization bias. Laptop pilots first; RunPod ladder only after the pilots prove the SS window forms. Plan-time unspanned axes minted alongside.",
+  "status": "live",
+  "killed_at": null,
+  "generation": 1,
+  "history": [],
+  "stages": [
+   {
+    "idx": 0,
+    "claim": "The 2D Boussinesq control march at laptop resolution recovers a usable SS window: spatial alpha_eff(t) trends toward alpha_2D = -0.342 within the trust window",
+    "quick_check": "dedalus_bsq corner scenario, late-snapshot cadence, fit omega spatial power over the pre-registered window rule",
+    "kills_if": "no SS window forms before the trust gate ends (alpha_eff never stabilizes within 0.1 of -0.342): laptop-resolution marches then cannot see the exponent at all and the 3D drift measurement needs the pod from the start",
+    "cost": "under an hour, laptop",
+    "status": "pending",
+    "result": ""
+   },
+   {
+    "idx": 1,
+    "claim": "The 3D march at 256x768 forms the same SS window on the laptop with the identical instrument",
+    "quick_check": "dedalus_axisym scenario from the staged IC, ckpt_sim_dt late cadence, same fit",
+    "kills_if": "trust window ends before any SS window forms at this resolution: pilot insufficient, escalate to pod with the resolution requirement MEASURED from where the pilot died",
+    "cost": "hours, laptop background",
+    "status": "pending",
+    "result": ""
+   },
+   {
+    "idx": 2,
+    "claim": "The differential drift alpha_3D(t) - alpha_2D(t) fits (T-t)^q with q in [0.9, 1.1] across a resolution ladder",
+    "quick_check": "pod ladder (RunPod credits, idle tripwire from minute one, stage before start, tear down same session), two windows, T free",
+    "kills_if": "q outside [0.9,1.1] robustly across the ladder: the eps-linear chain is refuted PHYSICALLY and the drift law dies in public, on the record",
+    "cost": "pod credits, hours",
+    "status": "pending",
+    "result": ""
+   }
+  ]
+ }
+}

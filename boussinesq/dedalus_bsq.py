@@ -41,7 +41,8 @@ def make_filter(field, alpha=36.0, order=36, cutoff=0.65):
 
 def build_and_run(Nx, Nz, A, stop_sim_time, nu, kappa, out,
                   stepper="RK443", safety=0.2, use_filter=True,
-                  run_id=None, checkpoint_wall=300.0, resume=None, ic="s2"):
+                  run_id=None, checkpoint_wall=300.0, resume=None, ic="s2",
+                  snap_sim_dt=0.0):
     Lx, Lz = 2 * np.pi, np.pi
     coords = d3.CartesianCoordinates("x", "z")
     dist = d3.Distributor(coords, dtype=np.float64)
@@ -132,6 +133,25 @@ def build_and_run(Nx, Nz, A, stop_sim_time, nu, kappa, out,
         str(ckpt_dir), wall_dt=checkpoint_wall, max_writes=2, mode=ck_mode)
     checkpoints.add_tasks(solver.state, layout="c")
 
+    # SNAPSHOT SERIES (--snap-sim-dt): fitting a SPATIAL self-similar exponent needs
+    # many late fields at controlled SIM times, which the rotating wall-clock
+    # checkpoints above cannot give: those are WALL-clock cadenced and hold the
+    # full state in coefficient layout (they are resume insurance, and their
+    # max_writes=2 is correct as-is -- untouched here).  This handler is separate:
+    # SIM-time cadence, grid layout, b and w only, max_writes=50 so the series
+    # rolls into complete files rather than one fragile giant one.
+    # scales=1 IS LOAD-BEARING, not cosmetic: a grid-layout task evaluated at the
+    # dealias scale leaves the FIELD scales there, and the argmax diagnostic below
+    # indexes its result into the scale-1 grids x,z -> IndexError (764 vs 512).
+    # Same hazard the sibling engine flags at dedalus_axisym.py:273 "evals rescale".
+    # It also keeps snapshot grids equal to the grids alpha_eff.py builds rho from.
+    if snap_sim_dt and snap_sim_dt > 0:
+        snaps = solver.evaluator.add_file_handler(
+            str(pathlib.Path(out).parent / f"snap_{tag}"),
+            sim_dt=snap_sim_dt, max_writes=50, mode=ck_mode)
+        snaps.add_task(b, name="b", layout="g", scales=1)
+        snaps.add_task(w, name="w", layout="g", scales=1)
+
     # Hou-Li filter: annihilates the aliasing-contaminated top ~1/3 of modes,
     # preserves the physical spectrum to roundoff (gate: 2e-16 on smooth field)
     filt = make_filter(b) if use_filter else None
@@ -173,7 +193,15 @@ def build_and_run(Nx, Nz, A, stop_sim_time, nu, kappa, out,
             # gap; (3) at s=4 the max sits on the WALL at x/pi~0.93, AWAY from the corner
             # -- consistent with the Stage-1 boundary-point blowup of arXiv:2604.01868 --
             # so a CORNER-centred self-similar law cannot apply to it.
-            _g = np.abs(supgb_op.evaluate()["g"])
+            # LATENT BUG FIX 2026-07-28: evaluate() returns the DEALIASED grid
+            # (3/2 scale), while _i/_j below index the scale-1 grids x,z.  It only
+            # bites once argmax|grad b| migrates past index Nx (the interior->wall
+            # migration this very comment documents at t~1.44): measured
+            # IndexError 767 vs 512 at t=2.07.  change_scales(1) is the sibling
+            # engine's idiom (dedalus_axisym.py:273 "evals rescale").
+            _f = supgb_op.evaluate()
+            _f.change_scales(1)
+            _g = np.abs(_f["g"])
             supgb = gmax(_g.max())
             _i, _j = np.unravel_index(np.argmax(_g), _g.shape) if _g.size else (0, 0)
             _xl = float(np.ravel(x)[_i]) if np.size(x) > 1 else 0.0
@@ -272,6 +300,8 @@ if __name__ == "__main__":
                     help="disable the Hou-Li spectral filter")
     ap.add_argument("--run-id", default=None,
                     help="tag for checkpoint/stream/control files (default N<Nx>)")
+    ap.add_argument("--snap-sim-dt", type=float, default=0.0,
+                    help="write b,w grid snapshots every N SIM time (0=off)")
     ap.add_argument("--checkpoint-wall", type=float, default=300.0,
                     help="checkpoint every N wall-seconds (pod-death insurance)")
     ap.add_argument("--resume", nargs="?", const=True, default=None,
@@ -284,4 +314,5 @@ if __name__ == "__main__":
     build_and_run(a.Nx, a.Nz, a.A, a.stop, a.nu, a.kappa, a.out,
                   stepper=a.stepper, safety=a.safety,
                   use_filter=not a.no_filter, run_id=a.run_id,
-                  checkpoint_wall=a.checkpoint_wall, resume=a.resume, ic=a.ic)
+                  checkpoint_wall=a.checkpoint_wall, resume=a.resume, ic=a.ic,
+                  snap_sim_dt=a.snap_sim_dt)

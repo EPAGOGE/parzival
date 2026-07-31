@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Caprasimo&family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{width:1200px;height:630px;background:#f5ead8;font-family:"Figtree",system-ui,sans-serif;
+       color:#201e1d;overflow:hidden;position:relative}
+  .grain{position:absolute;inset:0;opacity:.035;pointer-events:none;
+    background-image:radial-gradient(#201e1d 1px,transparent 1px);background-size:5px 5px}
+  .wrap{padding:44px 58px;height:100%;display:flex;flex-direction:column}
+  .kicker{font-size:15px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+          color:#8c491a;display:flex;align-items:center;gap:12px}
+  .kicker .dot{width:7px;height:7px;border-radius:50%;background:#c67139}
+  h1{font-family:"Caprasimo",serif;font-weight:400;font-size:60px;line-height:1.02;
+     margin-top:16px;letter-spacing:-.015em}
+  .sub{font-size:19px;margin-top:14px;color:#4a453f;font-weight:500;max-width:920px;line-height:1.45}
+  .rail{display:flex;gap:16px;margin-top:30px}
+  .card{flex:1;background:#ebddc5;border-radius:16px;padding:20px 22px;position:relative;
+        box-shadow:0 3px 10px rgba(46,43,37,.16)}
+  .card.off{background:#e4d3b6;border:2px solid #c67139}
+  .mark{font-family:"Caprasimo",serif;font-size:30px;line-height:1;color:#8a8579}
+  .card.off .mark{color:#c67139}
+  .cname{font-weight:800;font-size:19px;margin-top:8px;letter-spacing:-.01em}
+  .cdesc{font-size:14.5px;color:#57514a;margin-top:6px;line-height:1.4}
+  .cstat{font-size:13px;font-weight:700;margin-top:12px;letter-spacing:.05em;
+         text-transform:uppercase;color:#7a746a}
+  .card.off .cstat{color:#8c491a}
+  .quote{margin-top:26px;padding-left:20px;border-left:4px solid #c67139;
+         font-size:20px;line-height:1.42;font-weight:600;max-width:1000px}
+  .foot{margin-top:auto;display:flex;justify-content:space-between;align-items:baseline;
+        border-top:1px solid rgba(32,30,29,.16);padding-top:14px}
+  .cite{font-size:15px;color:#57514a}
+  .cite b{color:#201e1d;font-weight:700}
+  .by{font-size:13px;color:#8a8579;font-weight:600;letter-spacing:.04em}
+</style></head><body>
+<div class="grain"></div>
+<div class="wrap">
+  <div class="kicker"><span class="dot"></span>Position paper · reading notes</div>
+  <h1>LLMs can&rsquo;t jump</h1>
+  <div class="sub">The claim is not that models reason badly. It is that one of the three
+    inferential modes is structurally absent, and it happens to be the one that produces
+    new premises rather than new conclusions.</div>
+
+  <div class="rail">
+    <div class="card">
+      <div class="mark">I.</div>
+      <div class="cname">Induction</div>
+      <div class="cdesc">Statistical pattern matching. Compression of what has already
+        been observed.</div>
+      <div class="cstat">Mastered</div>
+    </div>
+    <div class="card">
+      <div class="mark">II.</div>
+      <div class="cname">Deduction</div>
+      <div class="cdesc">Formal proof from established premises. Theorem follows from
+        axiom.</div>
+      <div class="cstat">Being conquered</div>
+    </div>
+    <div class="card off">
+      <div class="mark">III.</div>
+      <div class="cname">Abduction</div>
+      <div class="cdesc">The jump. Generating the axioms themselves when the data is too
+        sparse to compress.</div>
+      <div class="cstat">Absent</div>
+    </div>
+  </div>
+
+  <div class="quote">Einstein as the test case: general relativity was reached from scarce
+    observation, so creativity-as-compression cannot account for it.</div>
+
+  <div class="foot">
+    <div class="cite">Tom Zahavy, Google DeepMind &middot; 27 Jan 2026 &middot;
+      <b>philsci-archive.pitt.edu/28024</b></div>
+    <div class="by">READING NOTES / EPAGOGE.IO</div>
+  </div>
+</div></body></html>
