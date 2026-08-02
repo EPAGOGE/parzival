@@ -1,0 +1,16 @@
+==============================================================================
+M4 ADDENDUM -- nu=0 pair under the CERTIFIED deep-collapse estimator
+==============================================================================
+Same estimator as M4_SIGMA_DEEP.out (top half of cross-grid overlap in
+ln A, symmetric midpoint cut; G1 rows; OLS + 10k pair bootstrap, rng
+271828). Generated as the retained artifact for the paper's Section 5
+matched-window inviscid numbers (previously recompute-only).
+
+overlap ln-A span 1.63, midpoint cut at A=8518.43
+  nu=0 128x384: sigma_top = +0.5894  CI [+0.5421,+0.6492]  n_top=11   sigma_bottom = +1.4240 (n_bot=28)
+  nu=0 256x768: sigma_top = +0.5848  CI [+0.5481,+0.6322]  n_top=9   sigma_bottom = +1.3625 (n_bot=31)
+  SPREAD = 0.0046
+
+NOTE per numbers-audit row 4: the 256x768 top window carries n=9, below
+the viscous fits' 11-14 -- quoted as such, not blended into their range.
+total wall: 0.4s

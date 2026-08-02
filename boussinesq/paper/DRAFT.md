@@ -41,7 +41,8 @@ against a window-matched inviscid value of +0.589 / +0.585 (spread 0.005).
 Viscosity does not merely damp the corner mechanism's alignment failure: it
 inverts it, by roughly 1.8 powers of ||omega||, to a value far below both
 thresholds of the exclusion chain (-1/6 for onset of geometric depletion,
--1/2 for exclusion of type-I blowup by geometry plus energy alone). As far
+-1/2 for exclusion of type-I blowup by geometry plus energy, under one
+structural hypothesis with a measured constant, Section 4). As far
 as a live literature kill-search reaches (Section 7), no direction-regularity
 exponent has previously been measured as a function of viscosity on any
 blowup candidate.
@@ -60,7 +61,8 @@ corner mechanism exists, it must keep sigma_Lambda(nu) above -1/6 as the
 collapse deepens. If viscosity forces sigma_Lambda below -1/2 in the
 high-vorticity regime, the geometric route closes the mechanism without
 touching the supercritical energy problem: geometry, not energy, kills the
-singularity. Nobody had sigma_Lambda(nu). This paper reports it, for the
+singularity. Nobody had sigma_Lambda(nu) that our kill-search could find
+(Section 7). This paper reports it, for the
 mechanism class where the inviscid answer is proven, at two viscosities, on
 two grids, with the disagreement between grids quantified and under a bar.
 
@@ -127,7 +129,8 @@ This is a one-step corollary of a classical identity and we claim no
 novelty for it; a literature kill-search retracted our earlier framing of
 it as a theorem (Section 7). It earns its place as a validation: our data
 satisfies it with three orders of magnitude of margin at every gated
-snapshot, which any correct direction-field computation must.
+snapshot (campaign ledger), which any correct direction-field computation
+must.
 
 ## 3. Instruments
 
@@ -135,8 +138,9 @@ The DNS side is a Dedalus-based axisymmetric Boussinesq solver in the
 Luo-Hou corner scenario, with free-slip viscosity in 5D-Laplacian form,
 implicit in the IMEX stepper, and a quartic initial condition exactly
 compatible with the Neumann wall condition. Trust gates per snapshot:
-spectral tail at or below 1e-6 and signed Casimir drift (decay under
-viscosity is physics; growth is a violation). Lambda is evaluated on the
+spectral tail at or below 1e-6 and signed drift of the conserved
+circulation invariant sup|r^2 u1| (decay under viscosity is physics;
+growth is a violation). Lambda is evaluated on the
 2x-HWHM box at the vorticity peak; runs are trimmed at the first 10x
 amplitude jump. The exponent is the slope of ln Lambda against
 ln ||omega||_inf over gated snapshots, with pair-resampled bootstrap
@@ -163,8 +167,10 @@ Cauchy-Schwarz. Optimizing rho,
 
 Hypothesis (H): the peak set is a single coherent structure on which the
 gradient bound holds out to the optimal rho. The hypothesis carries a
-measured constant (lambda_0 = 5.0) and the chain inequality holds at 21 of
-21 gated snapshot pairs with the stretching rate inferred independently.
+measured constant (lambda_0 = 5.0) and the chain inequality held at 21 of
+21 gated snapshot pairs with the stretching rate inferred independently
+(campaign ledger, STANDARD.md; that run predates the artifacts retained in
+this campaign's outputs).
 Feeding the only global control Navier-Stokes provides (the energy
 dissipation identity) through this bound, with blowup rate
 ||omega|| ~ (T-t)^(-gamma), gamma >= 1:
@@ -203,8 +209,9 @@ answer is unknown.
 
 Refinement recorded during the viscous campaign: the full-window +1.00 is
 amplitude-composite. Fit on matched cross-grid amplitude windows, the
-inviscid slope runs +1.4 in the lower half and +0.589 / +0.585 in the deep
-half (cross-grid spread 0.005, the tightest certification in this paper).
+inviscid slope runs +1.42/+1.36 in the lower half and +0.589 / +0.585 in
+the deep half (cross-grid spread 0.005, the tightest certification in this
+paper; retained artifact M4_SIGMA_DEEP_NU0.out).
 The symmetry and factorial validations certify the instrument, not slope
 constancy across amplitude; window-matched comparisons below therefore use
 +0.59 as the inviscid contrast value.
@@ -221,7 +228,7 @@ disagreement of naive full-window fits (0.147) was a window artifact, not a
 physics disagreement.
 
 (ii) At finite nu, sigma(A) is not one number. Every viscous run crosses
-over from inviscid-like slope (+0.4 to +0.8) at low amplitude to deep
+over from inviscid-like slope (+0.39 to +0.81) at low amplitude to deep
 depletion near -1.2 at high amplitude, on both grids, at both viscosities.
 A window-averaged slope is a regime mixture; our own earlier quotes of that
 kind (window averages near -0.5, and a single-grid ladder -0.37 to -0.57)
@@ -235,10 +242,10 @@ the cut-sensitivity scan), the deep-collapse exponent is
     nu = 1e-4:  sigma_Lambda = -1.116 (128x384) / -1.237 (256x768), spread 0.121
     nu = 1e-3:  sigma_Lambda = -1.254 (128x384) / -1.285 (256x768), spread 0.032
 
-with bootstrap 95% intervals of order +-0.15 to +-0.35 on each fit and
+with bootstrap 95% intervals of half-width +-0.14 to +-0.30 on each fit and
 cut-position sensitivity reported at 0.4 / 0.5 / 0.6 of the overlap span:
-the magnitude sits in a band -1.0 to -1.3 at every cut, on every grid, at
-both viscosities. Against the window-matched inviscid +0.59, viscosity
+the magnitude sits between -0.99 and -1.31 at every cut, on every grid,
+at both viscosities. Against the window-matched inviscid +0.59, viscosity
 inverts the direction-regularity scaling by roughly 1.8 powers of
 ||omega||, to a value below both thresholds of Section 4.
 
@@ -294,9 +301,10 @@ repository demonstrates.
 The strip -1/2 <= sigma <= 0: Corollary 0 forbids the top under viscosity
 at a growing maximum; the chain of Section 4 needs the bottom. Close the
 strip analytically and type-I Navier-Stokes blowup is finished for this
-route. The crossover amplitude A_c(nu) and the sigma_Lambda(nu) curve
-between 1e-4 and the inviscid limit are unmeasured (stream data exists at
-nu = 3e-4, 3e-5, 1e-5; snapshots were not retained). The wandering sector
+route. The crossover amplitude A_c(nu) and the sigma_Lambda(nu) curve beyond the
+two certified viscosities are unmeasured (stream data exists at nu = 3e-4,
+3e-5, 1e-5, extending coverage one further decade; snapshots were not
+retained). The wandering sector
 remains the measured frontier: generic near-wall data dies too young at
 laptop resolution to read, and that failure is the recorded reason the
 sector is unexplored.

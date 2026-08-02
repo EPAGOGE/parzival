@@ -24,7 +24,7 @@ overlap, cut at the geometric midpoint of the overlap in ln A -- a
 parameter-free symmetric rule, same for both grids. The bottom-half
 slope and the 0.4/0.6-cut sensitivity are reported alongside; the deeper
 cut thins to n=8-9 rows and its noise is visible in the record, but the
-MAGNITUDE (-1.0 .. -1.3) is cut-independent.
+MAGNITUDE (between -0.99 and -1.31 at every cut) is cut-independent.
 
 Rows come from m4_sigma_rows.npz (G1 signed gate; extraction recipe
 verbatim sigma_peak.sigma() -- see m4_sigma_spread.py). Fit: OLS slope,

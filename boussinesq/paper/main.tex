@@ -48,7 +48,8 @@ window-matched inviscid $+0.589/+0.585$ (spread $0.005$). Viscosity does
 not merely damp the corner mechanism's alignment failure: it inverts it,
 by roughly $1.8$ powers of $\vinf$, to a value far below both thresholds
 of the exclusion chain ($-1/6$ for onset of geometric depletion, $-1/2$
-for exclusion of type-I blowup by geometry plus energy alone). As far as a
+for exclusion of type-I blowup by geometry plus energy, under one
+structural hypothesis with a measured constant, Section~4). As far as a
 live literature kill-search reaches, no direction-regularity exponent has
 previously been measured as a function of viscosity on any blowup
 candidate. On the dynamical side, a Lyapunov-certified march in the
@@ -66,7 +67,8 @@ corner mechanism exists, it must keep $\sL(\nu)$ above $-1/6$ as the
 collapse deepens. If viscosity forces $\sL$ below $-1/2$ in the
 high-vorticity regime, the geometric route closes the mechanism without
 touching the supercritical energy problem: geometry, not energy, kills the
-singularity. Nobody had $\sL(\nu)$. This paper reports it, for the
+singularity. Nobody had $\sL(\nu)$ that our kill-search could find
+(Section~\ref{sec:kill}). This paper reports it, for the
 mechanism class where the inviscid answer is proven, at two viscosities,
 on two grids, with the disagreement between grids quantified and under a
 bar.
@@ -141,8 +143,8 @@ This is a one-step corollary of a classical identity and we claim no
 novelty for it; a literature kill-search retracted our earlier framing of
 it as a theorem (Section~\ref{sec:kill}). It earns its place as a
 validation: our data satisfies it with three orders of magnitude of margin
-at every gated snapshot, which any correct direction-field computation
-must.
+at every gated snapshot (campaign ledger), which any correct
+direction-field computation must.
 
 \section{Instruments}\label{sec:instruments}
 
@@ -152,8 +154,8 @@ Luo--Hou corner scenario, with free-slip viscosity in 5D-Laplacian form
 +(3/r)\partial_r+\partial_{zz}$), implicit in the IMEX stepper, and a
 quartic initial condition exactly compatible with the Neumann wall
 condition. Trust gates per snapshot: spectral tail at or below $10^{-6}$
-and signed Casimir drift (decay under viscosity is physics; growth is a
-violation). $\Lam$ is evaluated on the $2\times$-HWHM box at the vorticity
+and signed drift of the conserved circulation invariant $\sup|r^2u_1|$
+(decay under viscosity is physics; growth is a violation). $\Lam$ is evaluated on the $2\times$-HWHM box at the vorticity
 peak; runs are trimmed at the first $10\times$ amplitude jump. The
 exponent is the slope of $\ln\Lam$ against $\ln\vinf$ over gated
 snapshots, with pair-resampled bootstrap confidence intervals ($10^4$
@@ -182,9 +184,10 @@ through Cauchy--Schwarz; optimizing $\rho$,
 \end{equation}
 Hypothesis (H): the peak set is a single coherent structure on which the
 gradient bound holds out to the optimal $\rho$. The hypothesis carries a
-measured constant ($\lambda_0=5.0$) and the chain inequality holds at 21
-of 21 gated snapshot pairs with the stretching rate inferred
-independently. Feeding the only global control Navier--Stokes provides
+measured constant ($\lambda_0=5.0$) and the chain inequality held at 21
+of 21 gated snapshot pairs with the stretching rate inferred independently
+(campaign ledger, STANDARD.md; that run predates the artifacts retained in
+this campaign's outputs). Feeding the only global control Navier--Stokes provides
 (the energy dissipation identity) through this bound, with blowup rate
 $\vinf\sim(T-t)^{-\gamma}$, $\gamma\ge1$:
 \begin{align}
@@ -223,9 +226,9 @@ cases where the answer is unknown.
 
 Refinement recorded during the viscous campaign: the full-window $+1.00$
 is amplitude-composite. Fit on matched cross-grid amplitude windows, the
-inviscid slope runs $+1.4$ in the lower half and $+0.589/+0.585$ in the
-deep half (cross-grid spread $0.005$, the tightest certification in this
-paper). The symmetry and factorial validations certify the instrument, not
+inviscid slope runs $+1.42/+1.36$ in the lower half and $+0.589/+0.585$
+in the deep half (cross-grid spread $0.005$, the tightest certification in
+this paper; retained artifact \texttt{M4\_SIGMA\_DEEP\_NU0.out}). The symmetry and factorial validations certify the instrument, not
 slope constancy across amplitude; window-matched comparisons below
 therefore use $+0.59$ as the inviscid contrast value.
 
@@ -242,7 +245,7 @@ The cross-grid disagreement of naive full-window fits ($0.147$) was a
 window artifact, not a physics disagreement.
 
 (ii) \emph{At finite $\nu$, $\sigma(A)$ is not one number.} Every viscous
-run crosses over from inviscid-like slope ($+0.4$ to $+0.8$) at low
+run crosses over from inviscid-like slope ($+0.39$ to $+0.81$) at low
 amplitude to deep depletion near $-1.2$ at high amplitude, on both grids,
 at both viscosities. A window-averaged slope is a regime mixture; our own
 earlier quotes of that kind (window averages near $-0.5$, and a
@@ -265,9 +268,9 @@ $\nu=0$ (matched window) & $+0.589$ & $+0.585$ & $0.005$ \\
 \bottomrule
 \end{tabular}
 \end{center}
-with bootstrap 95\% intervals of order $\pm0.15$ to $\pm0.35$ on each fit
+with bootstrap 95\% intervals of half-width $\pm0.14$ to $\pm0.30$ on each fit
 and cut-position sensitivity reported at $0.4/0.5/0.6$ of the overlap
-span: the magnitude sits in a band $-1.0$ to $-1.3$ at every cut, on every
+span: the magnitude sits between $-0.99$ and $-1.31$ at every cut, on every
 grid, at both viscosities. Against the window-matched inviscid $+0.59$,
 viscosity inverts the direction-regularity scaling by roughly $1.8$ powers
 of $\vinf$, to a value below both thresholds of Section~\ref{sec:chain}.
@@ -328,9 +331,10 @@ The strip $-1/2\le\sigma\le0$: Corollary~\ref{cor:zero} forbids the top
 under viscosity at a growing maximum; the chain of
 Section~\ref{sec:chain} needs the bottom. Close the strip analytically and
 type-I Navier--Stokes blowup is finished for this route. The crossover
-amplitude $A_c(\nu)$ and the $\sL(\nu)$ curve between $10^{-4}$ and the
-inviscid limit are unmeasured (stream data exists at
-$\nu=3\times10^{-4},3\times10^{-5},10^{-5}$; snapshots were not retained).
+amplitude $A_c(\nu)$ and the $\sL(\nu)$ curve beyond the two certified
+viscosities are unmeasured (stream data exists at
+$\nu=3\times10^{-4},3\times10^{-5},10^{-5}$, extending coverage one
+further decade; snapshots were not retained).
 The wandering sector remains the measured frontier: generic near-wall data
 dies too young at laptop resolution to read, and that failure is the
 recorded reason the sector is unexplored.

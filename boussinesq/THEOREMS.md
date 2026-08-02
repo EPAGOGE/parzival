@@ -60,12 +60,19 @@ caps the geometry at Batchelor; only nu = 0 permits the measured inviscid
 sigma = +1.
 
 Confrontation with data. MEASURED: inviscid corner flow sigma = +1.01 (triple
-validated). Viscous ladder sigma_PEAK = -0.37, -0.37, -0.43, -0.54, -0.57 at
-nu = 1e-5 .. 1e-3: all <= 0 as the corollary requires, sitting below the cap
-(dissipation, plus the peak is not always growing). The observed
-discontinuity of sigma at nu = 0+ is exactly the content of Theorem 0: the
-cap exists for every nu > 0 and is absent at nu = 0. The mechanism is proven;
-the ladder shows it saturating.
+validated). [RETRACTED 2026-08-02: the viscous ladder values below are
+window-averaged REGIME MIXTURES -- sigma(A) crosses over from inviscid-like
+to deeply depleted inside every trusted window (M4_SIGMA_SPREAD.out
+half-split diagnostic). Certified replacement: deep-collapse sigma_Lambda =
+-1.12/-1.24 at nu=1e-4 and -1.25/-1.29 at nu=1e-3, cross-grid spreads
+0.121/0.032 (M4_SIGMA_DEEP.out). The sign conclusion below survives; the
+magnitudes do not.] Viscous ladder sigma_PEAK = -0.37, -0.37, -0.43, -0.54,
+-0.57 at nu = 1e-5 .. 1e-3: all <= 0 as the corollary requires, sitting
+below the cap (dissipation, plus the peak is not always growing). The
+observed discontinuity of sigma at nu = 0+ is exactly the content of
+Theorem 0 [demoted 2026-08-02 to Corollary 0 of Constantin's
+|omega|-equation, NOVELTY.md C3]: the cap exists for every nu > 0 and is
+absent at nu = 0. The mechanism is proven; the ladder shows it saturating.
 
 ---
 
@@ -149,7 +156,11 @@ The entire remaining mathematical distance on this route is the strip
 
     -1/2 <= sigma <= 0.
 
-MEASURED: the ladder sits at -0.37 .. -0.57, crossing -1/2 by nu = 3e-4.
+MEASURED [SUPERSEDED 2026-08-02: the -0.37..-0.57 ladder is retracted as a
+window-average regime mixture; the certified deep-collapse values are
+-1.12..-1.29 at nu in {1e-4, 1e-3}, BELOW -1/2 at both viscosities on both
+grids (M4_SIGMA_DEEP.out). The "crossing -1/2 by nu = 3e-4" claim is void;
+the certified measurement is already below -1/2 at both viscosities tried.]
 The open problem is now sharp: prove that for Navier-Stokes the direction
 sheet coarsens strictly faster than Batchelor, Lambda <~ ||omega||^{-1/2-eps},
 or exhibit a solution class that rides the cap.
