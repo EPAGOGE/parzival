@@ -136,8 +136,8 @@
   "tid": 19,
   "text": "The realization itself (E = identity on live transport rows, pencil (E,J) Hessenberg index-2) is a SHARED CONSTANT behind every spectral number measured this session -- the ej audit surfaced it as the only untested axis. Its backing is two independent derivations (D1 sympy 5.83e-157 on the coded RO'/RB'; D2 the c_w-column identity dRO'/dc_w - A = 0 exactly) plus my pencil-vs-realization spectral agreement 3.707e-10, which validates the REDUCTION but not the mass matrix. What third, structurally different check falsifies E=I -- e.g. a short time-march of the evolution compared against exp(tL) on the same initial perturbation?",
   "source": "dualtrack",
-  "status": "open",
-  "outcome": ""
+  "status": "confirmed",
+  "outcome": "Third structurally-different check DONE and E=I UPHELD: march_s.py backward-Euler at ds=0.01 amp=1e-6 tracks expm(t*Lred)v0 with 0.47%-1.4% relative discrepancy growing ~linearly in t (the O(ds) BE signature), alongside the fixed-point kill shot and the sparse-resolvent-vs-dense-Lred agreement <1e-10 at 4 complex points. M1_GATE_PNORM.out"
  },
  {
   "tid": 20,
@@ -220,8 +220,8 @@
   "tid": 31,
   "text": "GROUND TIME-MARCH (dedalus_bsq, existing code): perturb the converged profile, march, compare decay against exp(tL) from the certified generator. Closes the E=I mass-matrix open question (third structurally different check) and is the template for measuring branch instability ORDERS later",
   "source": "euler-roadmap",
-  "status": "open",
-  "outcome": ""
+  "status": "confirmed",
+  "outcome": "Ground time-march vs exp(tL) comparison executed (10 steps ds=0.01, amp 1e-6 admissible pert): march matches the certified generator to O(ds). Closes the E=I mass-matrix question jointly with #19. M1_GATE_PNORM.out"
  },
  {
   "tid": 32,
@@ -465,6 +465,76 @@
   "tid": 66,
   "text": "COMPUTE ROUTE DECISION, honest: laptop 8-rank run is LIVE at 13.3 s/it, ETA ~30 hours to trust end, cost zero, parallel-write path exercised and working. Pod alternative: a 32-vCPU CPU pod at cpu5c 0.035/vCPU = 1.12/hr, ~5.6 h, ~6.30 dollars, but must be created in the RunPod console (MCP cannot set vCPU count) and requires a fresh dedalus install since the old volume was deleted. GPU pods are currently unavailable across A100 / RTX5090 / RTX PRO 6000 on community cloud. Credit remaining ~81 dollars. Recommendation: let the laptop run; 30 background hours costs nothing and the result is identical. Spend only if the answer is time-critical.",
   "source": "compute-route",
+  "status": "open",
+  "outcome": ""
+ },
+ {
+  "tid": 67,
+  "text": "Generic W-seed full-field snapshots (W3,W11,W19,W23,W42,W51,W63,W77) are DELETED from runs/ (scalar streams survive). The decisive generic-|D| bootstrap cannot run on the runs that produced the 1.01; surviving snap tags are mostly engineered/control. Full verdict needs W-seed re-runs at 256x768",
+  "source": "curious_k1",
+  "status": "confirmed",
+  "outcome": "W3R/W63R/W77R regenerated at 256x768 (deterministic seeds, ic-power 4, snap cadence 2.5e-5; sims healthy to t=0.0013). RESULT: instrument-limited, not decisive. Trust gating leaves n=21/21/8 snapshots spanning 0.97/1.07/0.08 e-folds; block-bootstrap CIs [-1.32,1.42] / [-1.29,0.99] / uninformative. The 07-30 generic |D|~1.01 was a point estimate inside +-1.2 per-run noise - its sign-inconsistency across seeds was the tell. Generic |D| carries NO per-run significance at this cadence/span"
+ },
+ {
+  "tid": 68,
+  "text": "K1-A1 load-bearing assumption: strict power laws. Log-drift/prefactor wandering evades the |D|<1 exclusion entirely. The s-march (M1) is the only instrument that can see past A1 - the curious track and the blocker fix converge on the same requirement",
+  "source": "curious_k1",
+  "status": "open",
+  "outcome": ""
+ },
+ {
+  "tid": 69,
+  "text": "Is sigma_Lambda = +1.00 (ESTABLISHED) literally Constantin-Fefferman vorticity-direction-criterion marginality? If yes the banked criticality result IS a named NS regularity criterion at its boundary. K2 criterion race on existing snapshots decides",
+  "source": "curious_k2",
+  "status": "open",
+  "outcome": ""
+ },
+ {
+  "tid": 70,
+  "text": "curious_dbars v1 verdict branch labeled a spans-both-boundaries CI (G5_11: [-1.268,1.430], n=16) as FORBIDDEN - an overclaim minted by my own script; a CI covering both boundaries is UNINFORMATIVE, not refuting",
+  "source": "self-audit",
+  "status": "confirmed",
+  "outcome": "verdict branch corrected in curious_dbars.py (FORBIDDEN now requires the CI wholly beyond a boundary with consistent sign; spans-both = UNINFORMATIVE); artifact regenerates automatically when the W-seed rerun sweep completes"
+ },
+ {
+  "tid": 71,
+  "text": "W2 is UNDECIDABLE from physical-frame generic runs: trusted spans are ~1 e-fold (inside the S6 transient) and per-run |D| CIs span the admissibility boundary. The discriminating instrument is longer trusted spans in rescaled time - the s-march. K1's A1 assumption AND W2's measurement now BOTH converge on M1 (T2+T4)",
+  "source": "curious_k1",
+  "status": "open",
+  "outcome": ""
+ },
+ {
+  "tid": 72,
+  "text": "M1's PASS bar as written in DONE.md (amp 1e-3 perturbation, monotone contraction in the RAW norm over 20 s-units) is unsatisfiable by the certified physics itself: S6 transient growth 89.66-5807.6x is real, so a CORRECT march cannot be raw-norm monotone; and amp 1e-3 x 5807 ~ 5.8 guarantees nonlinear escape before turnover (measured: order-one crossing at s=49.5, 1269x, then Newton stall, constraints at machine tol throughout). The correct bar is monotone contraction in the LYAPUNOV P-NORM at linear-regime amplitude (1e-6) - exactly what S4 certifies. DONE.md amendment needed (spec decision, operator's call); P-norm gate running now",
+  "source": "m1-avengers",
+  "status": "consumed",
+  "outcome": "consumed by production_pnorm_gate_PASS"
+ },
+ {
+  "tid": 73,
+  "text": "The handoff section 6.1 P-norm probe on EXISTING orbit data is DEAD as specified: P regenerated+persisted (pnorm_P.npz, 4758-dim production root A, Bartels-Stewart residual 4.97e-16, cholesky OK) but no faithful map exists from features.py physical DNS crops (21x21 |omega| box, sup-normalized, Eulerian grid) to the solver's divided-variable spectral state - four missing pieces enumerated in PNORM_PROBE.out (blowup-point fitting, r<->xi inversion for arbitrary DNS, A/B/P recovery from scalar |omega|, gauge renormalization). The P-norm lives on the MARCH side only",
+  "source": "m1-avengers",
+  "status": "open",
+  "outcome": ""
+ },
+ {
+  "tid": 74,
+  "text": "GATE-GRID NON-HURWITZ (the new M1 blocker, quantified): at the (edges 0/2/15/25, degs (10,20,8), Nb=16, eps_b=1e-3) gate grid, the Lyapunov solve is exact (residual 5.72e-16) but cholesky(P) FAILS - P indefinite, 2 of 1138 directions negative and LARGE (-7757.2, -715.5), reproducible across 6 perturbation seeds (V(v0)<0 every time). Construction cross-checked against the production sparse-bordered resolvent to <1e-10, so not a bug. Production Nb=36 roots are cholesky-certified Hurwitz (S4). So Hurwitz-ness on ker(Cg) is RESOLUTION-DEPENDENT below production scale, the raw-norm gate FAILs at this grid are uninterpretable (possibly genuine coarse-grid instability, not just transient), and M1's gate MUST run at a cholesky-certified grid. Blocker there: dense reduced correction too slow at Nb=36 on laptop (>120s/step). Paths: minimal-certified-grid hunt (Nb 20/24/28 ladder) or matrix-free Krylov correction",
+  "source": "pnorm-gate",
+  "status": "confirmed",
+  "outcome": "Blocker dissolved without the ladder: project_oblique is identity on ker(Cg), frozen reduced BE operator = -sign*Lred + I/ds; 0.5s LU then 0.04s/step at production. Gate ran there and PASSED."
+ },
+ {
+  "tid": 75,
+  "text": "LADDER SIDE-FINDING: cholesky certification never turns on across the ladder - Nb20/Nb24 have NO root at fixed alpha (floors 7.1e-3/6.6e-3); Nb28 (n_f 4104) and Nb32 (n_f 5208) converge to 1e-11 with exact Lyapunov solves but P INDEFINITE (4 negative directions each), including a rung LARGER than certified production (n_f 4760). Hurwitz-ness is CONFIG-dependent not size-dependent. Prime suspect: eps_b (ladder at 1e-3 = singular wedge layer; production cert at 1e-4 where it vanishes). DISCRIMINATING TEST: rung-3 config at eps_b=1e-4 - cholesky flips = eps_b is the driver",
+  "source": "m1-ladder",
+  "status": "confirmed",
+  "outcome": "DISCRIMINATING TEST RUN AND DECISIVE: exact rung-3 config (edges (0,2,15,25), degs (16,48,12), Nb28, fixed alpha=-0.3447, identical Newton recipe/tolerances) with ONLY eps_b changed 1e-3 -> 1e-4: root converged in 3 Newton steps/16.5s (vs 30 steps/181s at 1e-3), ||F||_max 3.34e-11, Lyapunov residual 5.76e-16, cholesky(P) PASS on n=4102. Same grid at 1e-3: FAIL, 4 negative directions. eps_b IS the driver of Hurwitz-certifiability; the ladder's universal FAIL was an artifact of sitting at eps_b=1e-3 inside the singular wedge layer, not a property of resolution. Bonus: fast Newton at 1e-4 suggests the wedge layer was also what Newton fought on rungs 1-2. Certificate saved pnorm_P_Nb28_epsb1em4.npz. EPSB_DISCRIMINATOR.out"
+ },
+ {
+  "tid": 76,
+  "text": "'M4 SIDE-FINDINGS wanting follow-up: (1) crossover amplitude A_c(nu) where sigma(A) flips from inviscid-like to depleted is a NEW unmeasured observable -- its nu-scaling would pin WHERE viscosity restores direction regularity; (2) top-half windows are thin (n=11-14 snapshots, bootstrap CIs +-0.15-0.35) -- denser snapshot cadence at the existing grids/nu (laptop, ~1hr DNS) would tighten the certification for free; (3) nu in {3e-4,3e-5,1e-5} stream files exist but snapshots were never kept -- the sigma_Lambda(nu) CURVE between 1e-4 and the inviscid limit is open.'",
+  "source": "m4-sigma-deep",
   "status": "open",
   "outcome": ""
  }

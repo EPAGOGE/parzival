@@ -1,0 +1,184 @@
+==============================================================================
+M1 GATE GRID LADDER HUNT -- minimal cholesky-certified grid
+==============================================================================
+Following up M1_GATE_PNORM.out: the M1 gate grid ((10,20,8)/Nb16) has INDEFINITE P (cholesky fails, 2 of 1138 negative eigenvalues); production roots A/B/C (Nb=36, degs up to (24,56,12)) are cholesky-certified per NOTE_CLAIMS S4. This hunts the minimal grid in between where cholesky(P) first succeeds, cheapest rung first.
+
+------------------------------------------------------------------------------
+RUNG 1: grid={'edges': (0.0, 2.0, 15.0, 25.0), 'degs': (12, 32, 10), 'Nb': 20, 'eps_b': 0.001} alpha=-0.3447
+  dims: N=3422  n_f=2052  dim ker(Cg)=2050
+  root: ||F||_max=7.127404e-03  ||F||_rms=1.374565e-04  newton_taken=32  root_wall=38.2s  converged(<1e-10)=False
+  RUNG 1 SKIPPED -- root did not reach ||F||_max<1e-10 (got 7.127e-03); no Lred/Lyapunov built, per spec ("else report and skip").
+------------------------------------------------------------------------------
+RUNG 2: grid={'edges': (0.0, 2.0, 15.0, 25.0), 'degs': (14, 40, 10), 'Nb': 24, 'eps_b': 0.001} alpha=-0.3447
+  dims: N=4826  n_f=2944  dim ker(Cg)=2942
+  root: ||F||_max=6.546342e-03  ||F||_rms=1.081475e-04  newton_taken=7  root_wall=23.3s  converged(<1e-10)=False
+  RUNG 2 SKIPPED -- root did not reach ||F||_max<1e-10 (got 6.546e-03); no Lred/Lyapunov built, per spec ("else report and skip").
+------------------------------------------------------------------------------
+RUNG 3: grid={'edges': (0.0, 2.0, 15.0, 25.0), 'degs': (16, 48, 12), 'Nb': 28, 'eps_b': 0.001} alpha=-0.3447
+  dims: N=6638  n_f=4104  dim ker(Cg)=4102
+  root: ||F||_max=2.424921e-11  ||F||_rms=5.895766e-13  newton_taken=30  root_wall=180.8s  converged(<1e-10)=True
+  dense_L(): 10.1s  kernel_basis(): 0.1s  ||Lred||_2=1.101774e+03 (SVD-based norm, not an eigenvalue)
+  solve_lyapunov(Lred.T, -I) [Bartels-Stewart]: 334.0s  (n=4102)
+  relative residual ||L^T P + P L + I||/(||P|| ||L||) = 5.558955e-16
+  cholesky(P): FAIL -- P indefinite (4 negative eigenvalue(s) of 4102, diagnostic count via eigvalsh, not part of the decision).
+  rung 3 total wall: 524.9s
+  ascending to next rung (disk not written for this FAIL rung -- "skip failed rungs, disk is finite").
+------------------------------------------------------------------------------
+RUNG 4: grid={'edges': (0.0, 2.0, 15.0, 25.0), 'degs': (16, 56, 12), 'Nb': 32, 'eps_b': 0.001} alpha=-0.3447
+  dims: N=8354  n_f=5208  dim ker(Cg)=5206
+  root: ||F||_max=1.278305e-11  ||F||_rms=4.752250e-13  newton_taken=37  root_wall=482.0s  converged(<1e-10)=True
+  dense_L(): 20.4s  kernel_basis(): 0.1s  ||Lred||_2=1.220162e+03 (SVD-based norm, not an eigenvalue)
+  solve_lyapunov(Lred.T, -I) [Bartels-Stewart]: 678.9s  (n=5206)
+  relative residual ||L^T P + P L + I||/(||P|| ||L||) = 6.020554e-16
+  cholesky(P): FAIL -- P indefinite (4 negative eigenvalue(s) of 5206, diagnostic count via eigvalsh, not part of the decision).
+  rung 4 total wall: 1181.5s
+  ascending to next rung (disk not written for this FAIL rung -- "skip failed rungs, disk is finite").
+------------------------------------------------------------------------------
+PER-RUNG SUMMARY
+------------------------------------------------------------------------------
+rung   Nb             degs    n_f   root||F||max   lyap_resid  cholesky   wall(s)
+   1   20     (12, 32, 10)   2052      7.127e-03           --   SKIPPED      38.2
+   2   24     (14, 40, 10)   2944      6.546e-03           --   SKIPPED      23.3
+   3   28     (16, 48, 12)   4104      2.425e-11    5.559e-16      FAIL     524.9
+   4   32     (16, 56, 12)   5208      1.278e-11    6.021e-16      FAIL    1181.5
+
+VERDICT: NO CHOLESKY-CERTIFIED RUNG FOUND in the candidate ladder -- P-norm M1 gate NOT RUN (would be UNANSWERABLE AS SPECIFIED at every rung tried, same finding as the gate grid itself).
+
+================================================================================
+COORDINATOR REDIRECT (this round): the ladder hunt above found the naive
+resolution ladder's solvable/certified-grid set sparse -- rungs 1-2 do not
+even converge at fixed alpha=-0.3447 (floor at 6.5e-3 to 7.1e-3, alpha
+implied by the gauge solution visibly drifting off -0.3447 as Newton
+proceeds -- a genuine "no root at this fixed alpha for this grid" outcome,
+consistent with the campaign's own corner-dust/panel-sensitivity lore: the
+solvable-grid set under a FIXED-alpha Newton solve is sparse, not dense,
+between the gate grid and production scale), and rungs 3-4 DO converge but
+cholesky(P) FAILS both times (4 negative eigenvalues of 4102 and of 5206
+respectively) -- Hurwitz-ness on ker(Cg) has NOT turned on anywhere in this
+candidate ladder, all the way up to n_f=5208 (LARGER than the production
+root's own n_f=4760).
+
+Rather than keep ascending an unbounded ladder, this run instead reuses the
+ALREADY cholesky-certified PRODUCTION root (pnorm_P.npz, root A: degs=
+(16,40,12) Nb=36 eps_b=1e-4, n_f=4760, NOTE_CLAIMS S4 / PNORM_PROBE.out) and
+makes the march there affordable by FREEZING the reduced Jacobian (see
+run_production_pnorm_gate / QuasiNewtonSMarcher in march_s.py) instead of
+paying SMarcher._reduced_correction's per-Newton-iteration dense rebuild
+(the cost that made rungs 3/4's Lyapunov builds alone take 525s/1182s
+above, and would make a full march at that scale far more expensive
+still). The frozen-Jacobian scheme was verified (not merely assumed) to
+reproduce SMarcher's exact per-step result to 4.6e-14 relative difference
+on the gate grid before being trusted at production scale -- see the
+module docstring section above QuasiNewtonSMarcher in march_s.py for the
+closed-form identity (project_oblique is the identity on ker(Cg)) that
+makes this exact on the reduced block, not just a convenient
+approximation.
+================================================================================
+
+==============================================================================
+M1 P-NORM GATE -- PRODUCTION GRID, FROZEN REDUCED JACOBIAN (quasi-Newton)
+==============================================================================
+loaded: /Users/epagogellc/parzival/boussinesq/pnorm_P.npz  field: /Users/epagogellc/parzival/repro/fields/rung_00_a-0.344712.npz
+grid={'edges': (0.0, 2.0, 15.0, 25.0), 'degs': (16, 40, 12), 'Nb': 36, 'eps_b': 0.0001} alpha=-0.3447122873723904  n_f=4760  n_finite=4758  N=7670
+root ||F||_max (fresh residual check, current solver) = 2.429e-11  converged(<1e-9)=True  (file's own stored res_rms=5.843e-13)
+cholesky(P): RE-VERIFIED PASS  (file's stored cholesky_ok=True)
+CornerRegSolver build+adopt_seed: 2.3s  Realization(S,z0) [fresh Cg/Bc/CgBc/free, NOT a re-derived Z0]: 0.2s
+------------------------------------------------------------------------------
+FROZEN reduced operator factorized ONCE: LU of (-sign*Lred + I/ds), n=4758x4758, wall=0.6s. Reused, unmodified, for every Newton iteration of every step below -- no further O(n^3) factorization anywhere in the march.
+------------------------------------------------------------------------------
+perturbed start: |dz|_rel(raw)=1.000000e-06  V(v)=v^TPv=8.603265e-08  ||v||_P=2.933132e-04  [pert confined to corner-clamped admissible class, T5 fix, reused unmodified]
+grid={'edges': (0.0, 2.0, 15.0, 25.0), 'degs': (16, 40, 12), 'Nb': 36, 'eps_b': 0.0001} alpha=-0.3447122873723904  ds=0.25 nsteps=80 (s-units=20)  amp=1e-06 seed=0  sign=+1.0
+------------------------------------------------------------------------------
+step   1 (s=  0.25): V(v)=4.103293e-08  rel_growth_V=-5.231e-01   ||v||_P=2.025659e-04   |dz|_rel(raw)=2.080537e-06  quasiNewton r=6.17e-11 it=1  step_wall=0.303s
+step   2 (s=  0.50): V(v)=3.354937e-08  rel_growth_V=-1.824e-01   ||v||_P=1.831649e-04   |dz|_rel(raw)=2.388799e-06  quasiNewton r=6.31e-11 it=1  step_wall=0.042s
+step   3 (s=  0.75): V(v)=3.059535e-08  rel_growth_V=-8.805e-02   ||v||_P=1.749153e-04   |dz|_rel(raw)=2.268355e-06  quasiNewton r=2.47e-11 it=1  step_wall=0.042s
+step   4 (s=  1.00): V(v)=2.877649e-08  rel_growth_V=-5.945e-02   ||v||_P=1.696364e-04   |dz|_rel(raw)=2.083419e-06  quasiNewton r=1.17e-11 it=1  step_wall=0.043s
+step   5 (s=  1.25): V(v)=2.738687e-08  rel_growth_V=-4.829e-02   ||v||_P=1.654898e-04   |dz|_rel(raw)=1.981778e-06  quasiNewton r=4.13e-11 it=1  step_wall=0.042s
+step   6 (s=  1.50): V(v)=2.618959e-08  rel_growth_V=-4.372e-02   ||v||_P=1.618320e-04   |dz|_rel(raw)=1.956864e-06  quasiNewton r=4.40e-11 it=2  step_wall=0.078s
+step   7 (s=  1.75): V(v)=2.508306e-08  rel_growth_V=-4.225e-02   ||v||_P=1.583763e-04   |dz|_rel(raw)=1.980358e-06  quasiNewton r=2.59e-11 it=1  step_wall=0.041s
+step   8 (s=  2.00): V(v)=2.402021e-08  rel_growth_V=-4.237e-02   ||v||_P=1.549845e-04   |dz|_rel(raw)=2.023895e-06  quasiNewton r=2.76e-11 it=1  step_wall=0.041s
+step   9 (s=  2.25): V(v)=2.298572e-08  rel_growth_V=-4.307e-02   ||v||_P=1.516104e-04   |dz|_rel(raw)=2.059851e-06  quasiNewton r=4.92e-11 it=1  step_wall=0.041s
+step  10 (s=  2.50): V(v)=2.198573e-08  rel_growth_V=-4.350e-02   ||v||_P=1.482759e-04   |dz|_rel(raw)=2.068218e-06  quasiNewton r=2.86e-11 it=1  step_wall=0.040s
+step  11 (s=  2.75): V(v)=2.103508e-08  rel_growth_V=-4.324e-02   ||v||_P=1.450348e-04   |dz|_rel(raw)=2.041679e-06  quasiNewton r=7.95e-11 it=1  step_wall=0.041s
+step  12 (s=  3.00): V(v)=2.014838e-08  rel_growth_V=-4.215e-02   ||v||_P=1.419450e-04   |dz|_rel(raw)=1.984397e-06  quasiNewton r=2.69e-11 it=1  step_wall=0.041s
+step  13 (s=  3.25): V(v)=1.933338e-08  rel_growth_V=-4.045e-02   ||v||_P=1.390445e-04   |dz|_rel(raw)=1.906898e-06  quasiNewton r=7.55e-11 it=2  step_wall=0.078s
+step  14 (s=  3.50): V(v)=1.859059e-08  rel_growth_V=-3.842e-02   ||v||_P=1.363473e-04   |dz|_rel(raw)=1.820963e-06  quasiNewton r=3.03e-11 it=1  step_wall=0.041s
+step  15 (s=  3.75): V(v)=1.791399e-08  rel_growth_V=-3.639e-02   ||v||_P=1.338431e-04   |dz|_rel(raw)=1.736613e-06  quasiNewton r=1.73e-11 it=1  step_wall=0.041s
+step  16 (s=  4.00): V(v)=1.729442e-08  rel_growth_V=-3.459e-02   ||v||_P=1.315082e-04   |dz|_rel(raw)=1.660978e-06  quasiNewton r=4.40e-11 it=1  step_wall=0.040s
+step  17 (s=  4.25): V(v)=1.672127e-08  rel_growth_V=-3.314e-02   ||v||_P=1.293107e-04   |dz|_rel(raw)=1.598204e-06  quasiNewton r=2.14e-11 it=1  step_wall=0.041s
+step  18 (s=  4.50): V(v)=1.618382e-08  rel_growth_V=-3.214e-02   ||v||_P=1.272156e-04   |dz|_rel(raw)=1.549784e-06  quasiNewton r=5.77e-11 it=1  step_wall=0.040s
+step  19 (s=  4.75): V(v)=1.567287e-08  rel_growth_V=-3.157e-02   ||v||_P=1.251913e-04   |dz|_rel(raw)=1.515175e-06  quasiNewton r=9.80e-11 it=2  step_wall=0.078s
+step  20 (s=  5.00): V(v)=1.518072e-08  rel_growth_V=-3.140e-02   ||v||_P=1.232101e-04   |dz|_rel(raw)=1.492640e-06  quasiNewton r=4.21e-11 it=1  step_wall=0.040s
+step  21 (s=  5.25): V(v)=1.470092e-08  rel_growth_V=-3.161e-02   ||v||_P=1.212473e-04   |dz|_rel(raw)=1.480089e-06  quasiNewton r=1.88e-11 it=1  step_wall=0.041s
+step  22 (s=  5.50): V(v)=1.422880e-08  rel_growth_V=-3.211e-02   ||v||_P=1.192845e-04   |dz|_rel(raw)=1.475650e-06  quasiNewton r=2.21e-11 it=1  step_wall=0.040s
+step  23 (s=  5.75): V(v)=1.376049e-08  rel_growth_V=-3.291e-02   ||v||_P=1.173051e-04   |dz|_rel(raw)=1.477882e-06  quasiNewton r=1.81e-11 it=1  step_wall=0.041s
+step  24 (s=  6.00): V(v)=1.329270e-08  rel_growth_V=-3.400e-02   ||v||_P=1.152940e-04   |dz|_rel(raw)=1.485684e-06  quasiNewton r=3.23e-11 it=1  step_wall=0.041s
+step  25 (s=  6.25): V(v)=1.282279e-08  rel_growth_V=-3.535e-02   ||v||_P=1.132378e-04   |dz|_rel(raw)=1.498068e-06  quasiNewton r=4.62e-11 it=1  step_wall=0.041s
+step  26 (s=  6.50): V(v)=1.234876e-08  rel_growth_V=-3.697e-02   ||v||_P=1.111250e-04   |dz|_rel(raw)=1.513927e-06  quasiNewton r=5.29e-11 it=1  step_wall=0.040s
+step  27 (s=  6.75): V(v)=1.186912e-08  rel_growth_V=-3.884e-02   ||v||_P=1.089455e-04   |dz|_rel(raw)=1.531947e-06  quasiNewton r=5.39e-11 it=1  step_wall=0.040s
+step  28 (s=  7.00): V(v)=1.138345e-08  rel_growth_V=-4.092e-02   ||v||_P=1.066933e-04   |dz|_rel(raw)=1.550615e-06  quasiNewton r=2.82e-11 it=1  step_wall=0.041s
+step  29 (s=  7.25): V(v)=1.089182e-08  rel_growth_V=-4.319e-02   ||v||_P=1.043639e-04   |dz|_rel(raw)=1.568381e-06  quasiNewton r=3.33e-11 it=1  step_wall=0.040s
+step  30 (s=  7.50): V(v)=1.039515e-08  rel_growth_V=-4.560e-02   ||v||_P=1.019566e-04   |dz|_rel(raw)=1.583819e-06  quasiNewton r=5.55e-11 it=1  step_wall=0.040s
+step  31 (s=  7.75): V(v)=9.895021e-09  rel_growth_V=-4.811e-02   ||v||_P=9.947372e-05   |dz|_rel(raw)=1.595782e-06  quasiNewton r=9.18e-11 it=2  step_wall=0.078s
+step  32 (s=  8.00): V(v)=9.393561e-09  rel_growth_V=-5.068e-02   ||v||_P=9.692039e-05   |dz|_rel(raw)=1.603484e-06  quasiNewton r=3.54e-11 it=1  step_wall=0.040s
+step  33 (s=  8.25): V(v)=8.893167e-09  rel_growth_V=-5.327e-02   ||v||_P=9.430359e-05   |dz|_rel(raw)=1.606525e-06  quasiNewton r=8.94e-11 it=1  step_wall=0.040s
+step  34 (s=  8.50): V(v)=8.396277e-09  rel_growth_V=-5.587e-02   ||v||_P=9.163120e-05   |dz|_rel(raw)=1.604845e-06  quasiNewton r=6.48e-11 it=1  step_wall=0.040s
+step  35 (s=  8.75): V(v)=7.905340e-09  rel_growth_V=-5.847e-02   ||v||_P=8.891198e-05   |dz|_rel(raw)=1.598637e-06  quasiNewton r=2.95e-11 it=1  step_wall=0.041s
+step  36 (s=  9.00): V(v)=7.422494e-09  rel_growth_V=-6.108e-02   ||v||_P=8.615390e-05   |dz|_rel(raw)=1.588246e-06  quasiNewton r=4.61e-11 it=1  step_wall=0.040s
+step  37 (s=  9.25): V(v)=6.949749e-09  rel_growth_V=-6.369e-02   ||v||_P=8.336515e-05   |dz|_rel(raw)=1.574073e-06  quasiNewton r=9.23e-11 it=1  step_wall=0.041s
+step  38 (s=  9.50): V(v)=6.488838e-09  rel_growth_V=-6.632e-02   ||v||_P=8.055332e-05   |dz|_rel(raw)=1.556502e-06  quasiNewton r=5.61e-11 it=1  step_wall=0.040s
+step  39 (s=  9.75): V(v)=6.041213e-09  rel_growth_V=-6.898e-02   ||v||_P=7.772524e-05   |dz|_rel(raw)=1.535848e-06  quasiNewton r=4.28e-11 it=1  step_wall=0.040s
+step  40 (s= 10.00): V(v)=5.608201e-09  rel_growth_V=-7.168e-02   ||v||_P=7.488792e-05   |dz|_rel(raw)=1.512347e-06  quasiNewton r=3.01e-11 it=3  step_wall=0.115s
+step  41 (s= 10.25): V(v)=5.190997e-09  rel_growth_V=-7.439e-02   ||v||_P=7.204858e-05   |dz|_rel(raw)=1.486163e-06  quasiNewton r=3.57e-11 it=1  step_wall=0.040s
+step  42 (s= 10.50): V(v)=4.790642e-09  rel_growth_V=-7.712e-02   ||v||_P=6.921447e-05   |dz|_rel(raw)=1.457411e-06  quasiNewton r=3.64e-11 it=2  step_wall=0.080s
+step  43 (s= 10.75): V(v)=4.408016e-09  rel_growth_V=-7.987e-02   ||v||_P=6.639289e-05   |dz|_rel(raw)=1.426183e-06  quasiNewton r=4.87e-11 it=1  step_wall=0.041s
+step  44 (s= 11.00): V(v)=4.043887e-09  rel_growth_V=-8.261e-02   ||v||_P=6.359157e-05   |dz|_rel(raw)=1.392584e-06  quasiNewton r=4.00e-11 it=1  step_wall=0.040s
+step  45 (s= 11.25): V(v)=3.698870e-09  rel_growth_V=-8.532e-02   ||v||_P=6.081834e-05   |dz|_rel(raw)=1.356748e-06  quasiNewton r=3.46e-11 it=1  step_wall=0.040s
+step  46 (s= 11.50): V(v)=3.373380e-09  rel_growth_V=-8.800e-02   ||v||_P=5.808081e-05   |dz|_rel(raw)=1.318850e-06  quasiNewton r=3.94e-11 it=1  step_wall=0.040s
+step  47 (s= 11.75): V(v)=3.067691e-09  rel_growth_V=-9.062e-02   ||v||_P=5.538674e-05   |dz|_rel(raw)=1.279120e-06  quasiNewton r=2.20e-11 it=1  step_wall=0.041s
+step  48 (s= 12.00): V(v)=2.781848e-09  rel_growth_V=-9.318e-02   ||v||_P=5.274323e-05   |dz|_rel(raw)=1.237825e-06  quasiNewton r=2.09e-11 it=1  step_wall=0.042s
+step  49 (s= 12.25): V(v)=2.515700e-09  rel_growth_V=-9.567e-02   ||v||_P=5.015675e-05   |dz|_rel(raw)=1.195263e-06  quasiNewton r=4.04e-11 it=1  step_wall=0.042s
+step  50 (s= 12.50): V(v)=2.268874e-09  rel_growth_V=-9.811e-02   ||v||_P=4.763269e-05   |dz|_rel(raw)=1.151734e-06  quasiNewton r=5.26e-11 it=1  step_wall=0.041s
+step  51 (s= 12.75): V(v)=2.040886e-09  rel_growth_V=-1.005e-01   ||v||_P=4.517617e-05   |dz|_rel(raw)=1.107558e-06  quasiNewton r=4.24e-11 it=1  step_wall=0.041s
+step  52 (s= 13.00): V(v)=1.831121e-09  rel_growth_V=-1.028e-01   ||v||_P=4.279161e-05   |dz|_rel(raw)=1.063050e-06  quasiNewton r=4.50e-11 it=2  step_wall=0.078s
+step  53 (s= 13.25): V(v)=1.638782e-09  rel_growth_V=-1.050e-01   ||v||_P=4.048188e-05   |dz|_rel(raw)=1.018483e-06  quasiNewton r=7.28e-11 it=1  step_wall=0.040s
+step  54 (s= 13.50): V(v)=1.462999e-09  rel_growth_V=-1.073e-01   ||v||_P=3.824917e-05   |dz|_rel(raw)=9.741011e-07  quasiNewton r=2.87e-11 it=3  step_wall=0.115s
+step  55 (s= 13.75): V(v)=1.302891e-09  rel_growth_V=-1.094e-01   ||v||_P=3.609558e-05   |dz|_rel(raw)=9.301379e-07  quasiNewton r=2.63e-11 it=1  step_wall=0.040s
+step  56 (s= 14.00): V(v)=1.157495e-09  rel_growth_V=-1.116e-01   ||v||_P=3.402197e-05   |dz|_rel(raw)=8.867762e-07  quasiNewton r=4.59e-11 it=1  step_wall=0.040s
+step  57 (s= 14.25): V(v)=1.025845e-09  rel_growth_V=-1.137e-01   ||v||_P=3.202881e-05   |dz|_rel(raw)=8.441704e-07  quasiNewton r=7.13e-11 it=1  step_wall=0.040s
+step  58 (s= 14.50): V(v)=9.069740e-10  rel_growth_V=-1.159e-01   ||v||_P=3.011601e-05   |dz|_rel(raw)=8.024435e-07  quasiNewton r=9.30e-11 it=1  step_wall=0.040s
+step  59 (s= 14.75): V(v)=7.999418e-10  rel_growth_V=-1.180e-01   ||v||_P=2.828324e-05   |dz|_rel(raw)=7.616994e-07  quasiNewton r=3.31e-11 it=1  step_wall=0.041s
+step  60 (s= 15.00): V(v)=7.038167e-10  rel_growth_V=-1.202e-01   ||v||_P=2.652954e-05   |dz|_rel(raw)=7.220074e-07  quasiNewton r=1.39e-11 it=1  step_wall=0.041s
+step  61 (s= 15.25): V(v)=6.177281e-10  rel_growth_V=-1.223e-01   ||v||_P=2.485414e-05   |dz|_rel(raw)=6.834386e-07  quasiNewton r=2.15e-11 it=1  step_wall=0.040s
+step  62 (s= 15.50): V(v)=5.408274e-10  rel_growth_V=-1.245e-01   ||v||_P=2.325570e-05   |dz|_rel(raw)=6.460367e-07  quasiNewton r=4.35e-11 it=1  step_wall=0.040s
+step  63 (s= 15.75): V(v)=4.723146e-10  rel_growth_V=-1.267e-01   ||v||_P=2.173280e-05   |dz|_rel(raw)=6.098366e-07  quasiNewton r=5.05e-11 it=1  step_wall=0.041s
+step  64 (s= 16.00): V(v)=4.114419e-10  rel_growth_V=-1.289e-01   ||v||_P=2.028403e-05   |dz|_rel(raw)=5.748715e-07  quasiNewton r=2.75e-11 it=1  step_wall=0.041s
+step  65 (s= 16.25): V(v)=3.574978e-10  rel_growth_V=-1.311e-01   ||v||_P=1.890761e-05   |dz|_rel(raw)=5.411557e-07  quasiNewton r=8.86e-11 it=1  step_wall=0.042s
+step  66 (s= 16.50): V(v)=3.098248e-10  rel_growth_V=-1.334e-01   ||v||_P=1.760184e-05   |dz|_rel(raw)=5.087052e-07  quasiNewton r=4.94e-11 it=2  step_wall=0.080s
+step  67 (s= 16.75): V(v)=2.678100e-10  rel_growth_V=-1.356e-01   ||v||_P=1.636490e-05   |dz|_rel(raw)=4.775288e-07  quasiNewton r=1.54e-11 it=1  step_wall=0.040s
+step  68 (s= 17.00): V(v)=2.308817e-10  rel_growth_V=-1.379e-01   ||v||_P=1.519479e-05   |dz|_rel(raw)=4.476243e-07  quasiNewton r=7.97e-11 it=1  step_wall=0.041s
+step  69 (s= 17.25): V(v)=1.985148e-10  rel_growth_V=-1.402e-01   ||v||_P=1.408953e-05   |dz|_rel(raw)=4.189877e-07  quasiNewton r=3.68e-11 it=2  step_wall=0.078s
+step  70 (s= 17.50): V(v)=1.702260e-10  rel_growth_V=-1.425e-01   ||v||_P=1.304707e-05   |dz|_rel(raw)=3.916094e-07  quasiNewton r=7.47e-11 it=1  step_wall=0.041s
+step  71 (s= 17.75): V(v)=1.455730e-10  rel_growth_V=-1.448e-01   ||v||_P=1.206536e-05   |dz|_rel(raw)=3.654785e-07  quasiNewton r=2.65e-11 it=1  step_wall=0.041s
+step  72 (s= 18.00): V(v)=1.241512e-10  rel_growth_V=-1.472e-01   ||v||_P=1.114232e-05   |dz|_rel(raw)=3.405792e-07  quasiNewton r=5.40e-11 it=1  step_wall=0.041s
+step  73 (s= 18.25): V(v)=1.055927e-10  rel_growth_V=-1.495e-01   ||v||_P=1.027583e-05   |dz|_rel(raw)=3.168947e-07  quasiNewton r=3.92e-11 it=1  step_wall=0.041s
+step  74 (s= 18.50): V(v)=8.956276e-11  rel_growth_V=-1.518e-01   ||v||_P=9.463760e-06   |dz|_rel(raw)=2.944027e-07  quasiNewton r=4.03e-11 it=1  step_wall=0.040s
+step  75 (s= 18.75): V(v)=7.575909e-11  rel_growth_V=-1.541e-01   ||v||_P=8.703970e-06   |dz|_rel(raw)=2.730792e-07  quasiNewton r=3.94e-11 it=1  step_wall=0.041s
+step  76 (s= 19.00): V(v)=6.390933e-11  rel_growth_V=-1.564e-01   ||v||_P=7.994331e-06   |dz|_rel(raw)=2.528987e-07  quasiNewton r=8.47e-11 it=1  step_wall=0.040s
+step  77 (s= 19.25): V(v)=5.376887e-11  rel_growth_V=-1.587e-01   ||v||_P=7.332726e-06   |dz|_rel(raw)=2.338371e-07  quasiNewton r=1.58e-11 it=1  step_wall=0.041s
+step  78 (s= 19.50): V(v)=4.511837e-11  rel_growth_V=-1.609e-01   ||v||_P=6.717021e-06   |dz|_rel(raw)=2.158651e-07  quasiNewton r=3.91e-11 it=1  step_wall=0.040s
+step  79 (s= 19.75): V(v)=3.776234e-11  rel_growth_V=-1.630e-01   ||v||_P=6.145107e-06   |dz|_rel(raw)=1.989504e-07  quasiNewton r=3.93e-11 it=1  step_wall=0.040s
+step  80 (s= 20.00): V(v)=3.152686e-11  rel_growth_V=-1.651e-01   ||v||_P=5.614878e-06   |dz|_rel(raw)=1.830670e-07  quasiNewton r=2.99e-11 it=1  step_wall=0.040s
+------------------------------------------------------------------------------
+steps completed: 80/80  (s covered = 20 of 20)
+quasi-Newton iterations per step: min=1  max=3  mean=1.15
+V(v): 8.603265e-08 -> 3.152686e-11
+peak V(v) = 8.603265e-08 at step 0 (s=0)
+V growth violations (rel_growth_V > 1e-12): 0 of 80 steps
+[raw norm below is EXPECTED to show the certified transient -- not a failure, see module docstring / S6]
+raw |dz|_rel: 1.000000e-06 -> 1.830670e-07  (ratio 1.830670e-01)
+peak raw |dz|_rel = 2.388799e-06 at step 2 (s=0.5), = 2.389e+00x initial
+march wall time (excludes the one-time LU factorization above): 4.7s
+
+VERDICT (P-norm gate, production grid, frozen Jacobian): PASS
+CONTRACTS -- ||v||_P (equivalently V(v) = v^T P v) decreases monotonically over the full 80-step/20-s-unit run, exactly as the S4 Lyapunov certificate (cholesky(P) succeeding at the PRODUCTION root) guarantees for the linear flow on ker(Cg). The quasi-Newton march genuinely converged the TRUE nonlinear reduced residual at every accepted step (see per-step iteration counts above) -- the frozen Jacobian only cheapened the linear solve, it did not relax the convergence criterion. The raw-norm transient recorded above is certified physics (S6), not a march defect.

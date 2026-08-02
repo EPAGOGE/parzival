@@ -1,0 +1,222 @@
+==============================================================================
+M1 T4 SMOKE -- index-aware s-march, ker(Cg) Newton correction
+==============================================================================
+grid (SMOKE SCALE, not production): edges=(0.0, 2.0, 15.0, 25.0) degs=(6, 10, 5) Nb=10 eps_b=0.001
+root: alpha=-0.3447  ||F||_max=1.099e-02  newton_taken=11  c_l=2.742505  c_w=-0.886590
+perturbed start: |z-z*|_rel = 1.000e-03  ds=0.25  sign=+1.0 (S4-structural, see module docstring)
+------------------------------------------------------------------------------
+step 1: Newton residual=1.703e-13 in 3 it   ||Cg z||=1.496421e+00   |g1|=2.220e-16 |g2|=3.331e-16   ||RP||_max=2.875e-14   |z-z*|_rel=1.292e-02
+step 2: Newton residual=4.816e-14 in 3 it   ||Cg z||=1.496421e+00   |g1|=0.000e+00 |g2|=3.331e-16   ||RP||_max=2.420e-14   |z-z*|_rel=2.793e-02
+step 3: Newton residual=1.393e-13 in 3 it   ||Cg z||=1.496421e+00   |g1|=2.220e-16 |g2|=5.551e-16   ||RP||_max=2.187e-14   |z-z*|_rel=4.378e-02
+------------------------------------------------------------------------------
+Interpretation: |g1|,|g2|,||RP|| at/near machine or Newton-tol precision confirm the algebraic manifold (gauge + P-slaving) holds EXACTLY at every accepted step, which is what T4 was missing -- the old version only checked the full residual max, not these rows individually, and never re-slaved damped trial points.
+This is a SMOKE test at reduced grid scale (see module docstring's KNOWN LIMITATION); it is a correctness/mechanism check, not an M2/M3 production run.
+
+##############################################################################
+# M1 fix round 1 RE-RUN appended 2026-08-02 12:58:47
+# Trigger: verify round flagged M1_T2_SMOKE.out as a 0-byte orphaned
+# placeholder (no code in march_s.py or elsewhere ever wrote that
+# filename -- grep of write_text across boussinesq/*.py confirms the
+# only writers are march_s.smoke_test -> M1_T4_SMOKE.out and
+# killshot_fixedpoint.py -> M1_FIXEDPOINT_CHECK.out). Diagnosis: T2's
+# fix (adopt_seed(z_old) referencing the PREVIOUS step, not the frozen
+# seed -- march_s.py:226) is not orphaned in substance -- it is
+# witnessed live below (|g1|,|g2|,||RP|| stay at machine epsilon across
+# all 3 steps while |z-z*|_rel keeps growing 1.3e-2 -> 2.8e-2 -> 4.4e-2,
+# which is exactly the signature that breaks under T2's original bug --
+# a stale seed-pin would drag the manifold residuals off machine-eps as
+# the state moves away from A0/B0). M1_T2_SMOKE.out itself is a stale
+# filename from before the T2 check was folded into this file; it is
+# left untouched (0 bytes, per the no-delete/no-truncate rule) rather
+# than backfilled with guessed content.
+##############################################################################
+
+--- 3-step smoke re-run (march_s.smoke_test, same params as original) ---
+==============================================================================
+M1 T4 SMOKE -- index-aware s-march, ker(Cg) Newton correction
+==============================================================================
+grid (SMOKE SCALE, not production): edges=(0.0, 2.0, 15.0, 25.0) degs=(6, 10, 5) Nb=10 eps_b=0.001
+root: alpha=-0.3447  ||F||_max=1.099e-02  newton_taken=11  c_l=2.742505  c_w=-0.886590
+perturbed start: |z-z*|_rel = 1.000e-03  ds=0.25  sign=+1.0 (S4-structural, see module docstring)
+------------------------------------------------------------------------------
+step 1: Newton residual=1.703e-13 in 3 it   ||Cg z||=1.496421e+00   |g1|=2.220e-16 |g2|=3.331e-16   ||RP||_max=2.875e-14   |z-z*|_rel=1.292e-02
+step 2: Newton residual=4.816e-14 in 3 it   ||Cg z||=1.496421e+00   |g1|=0.000e+00 |g2|=3.331e-16   ||RP||_max=2.420e-14   |z-z*|_rel=2.793e-02
+step 3: Newton residual=1.393e-13 in 3 it   ||Cg z||=1.496421e+00   |g1|=2.220e-16 |g2|=5.551e-16   ||RP||_max=2.187e-14   |z-z*|_rel=4.378e-02
+------------------------------------------------------------------------------
+Interpretation: |g1|,|g2|,||RP|| at/near machine or Newton-tol precision confirm the algebraic manifold (gauge + P-slaving) holds EXACTLY at every accepted step, which is what T4 was missing -- the old version only checked the full residual max, not these rows individually, and never re-slaved damped trial points.
+This is a SMOKE test at reduced grid scale (see module docstring's KNOWN LIMITATION); it is a correctness/mechanism check, not an M2/M3 production run.
+
+--- fixed-point invariance re-run (killshot_fixedpoint.py, POST-FIX) ---
+# killshot_fixedpoint.py had a real bug, fixed in this round: its SCALING
+# CHECK divided loose-root movement by max(tight-root movement, 1e-300).
+# Tight-root movement is legitimately EXACT 0.0 (step() short-circuits at
+# k=0 whenever the root's own ||F||_max is already below step()'s Newton
+# tol=1e-10 -- that is the T4 fix working, not an edge case). Dividing by
+# ~1e-300 manufactured a ~1e296 ratio and tripped a false
+# '>>> FLAG: possible leakage' line that directly contradicted the same
+# file's own VERDICT section two lines later (PASS). Fixed by falling back
+# to an absolute residual-scaled bar (identical to the VERDICT's own bar)
+# whenever the tight-root movement is below a 1e-13 noise floor. No change
+# to march_s.py: projectors/sign/no-eigenvalues constraints untouched --
+# this was a diagnostic-script arithmetic bug, not a DAE/physics defect.
+ADVERSARIAL KILL-SHOT: does a tight-tol fixed point stay fixed under
+one backward-Euler s-march step, at SMOKE grid scale?
+(No eigenvalues used anywhere in this check -- pure residual/movement
+ diagnostics, per standing refusal S9.)
+
+==============================================================================
+[TEST A -- tight root (10,20,8)/Nb16, the actual kill shot] root: tol=1e-12 steps=120  grid={'edges': (0.0, 2.0, 15.0, 25.0), 'degs': (10, 20, 8), 'Nb': 16, 'eps_b': 0.001} alpha=-0.3447
+==============================================================================
+root quality: ||F||_max=4.170359e-12  ||F||_rms=1.104281e-13  newton_taken=5  c_l=3.01434101  c_w=-1.05737853
+root manifold: |g1|=1.110e-15 |g2|=8.882e-16 ||RP||_max=2.006e-13
+------------------------------------------------------------------------------
+sign=+1 ds=0.05    Newton: residual=4.170e-12 in 0 it   |z_new-z_old|_max=0.000000e+00  |z_new-z_old|_rel(A,B)=0.000000e+00
+                      post-step manifold: |g1|=1.110e-15 |g2|=8.882e-16  ||RP||_max=2.006e-13  ||F||_max=4.170e-12
+sign=+1 ds=0.25    Newton: residual=4.170e-12 in 0 it   |z_new-z_old|_max=0.000000e+00  |z_new-z_old|_rel(A,B)=0.000000e+00
+                      post-step manifold: |g1|=1.110e-15 |g2|=8.882e-16  ||RP||_max=2.006e-13  ||F||_max=4.170e-12
+sign=+1 ds=1       Newton: residual=4.170e-12 in 0 it   |z_new-z_old|_max=0.000000e+00  |z_new-z_old|_rel(A,B)=0.000000e+00
+                      post-step manifold: |g1|=1.110e-15 |g2|=8.882e-16  ||RP||_max=2.006e-13  ||F||_max=4.170e-12
+sign=-1 ds=0.05    Newton: residual=4.170e-12 in 0 it   |z_new-z_old|_max=0.000000e+00  |z_new-z_old|_rel(A,B)=0.000000e+00
+                      post-step manifold: |g1|=1.110e-15 |g2|=8.882e-16  ||RP||_max=2.006e-13  ||F||_max=4.170e-12
+sign=-1 ds=0.25    Newton: residual=4.170e-12 in 0 it   |z_new-z_old|_max=0.000000e+00  |z_new-z_old|_rel(A,B)=0.000000e+00
+                      post-step manifold: |g1|=1.110e-15 |g2|=8.882e-16  ||RP||_max=2.006e-13  ||F||_max=4.170e-12
+sign=-1 ds=1       Newton: residual=4.170e-12 in 0 it   |z_new-z_old|_max=0.000000e+00  |z_new-z_old|_rel(A,B)=0.000000e+00
+                      post-step manifold: |g1|=1.110e-15 |g2|=8.882e-16  ||RP||_max=2.006e-13  ||F||_max=4.170e-12
+------------------------------------------------------------------------------
+
+==============================================================================
+[TEST B -- deliberately loose root, same grid as A (leakage-scaling probe)] root: tol=0.0001 steps=2  grid={'edges': (0.0, 2.0, 15.0, 25.0), 'degs': (10, 20, 8), 'Nb': 16, 'eps_b': 0.001} alpha=-0.3447
+==============================================================================
+root quality: ||F||_max=4.269510e-04  ||F||_rms=5.106499e-05  newton_taken=2  c_l=3.01116575  c_w=-1.05558817
+root manifold: |g1|=2.220e-16 |g2|=2.220e-16 ||RP||_max=4.660e-13
+------------------------------------------------------------------------------
+sign=+1 ds=0.25    Newton: residual=1.118e-12 in 2 it   |z_new-z_old|_max=8.628286e-04  |z_new-z_old|_rel(A,B)=1.121096e-04
+                      post-step manifold: |g1|=2.220e-16 |g2|=0.000e+00  ||RP||_max=2.149e-13  ||F||_max=9.899e-04
+------------------------------------------------------------------------------
+
+==============================================================================
+[TEST C -- smoke_test's own (6,10,5)/Nb10 grid, NOT converged tight (informational only, not a kill shot)] root: tol=1e-11 steps=80  grid={'edges': (0.0, 2.0, 15.0, 25.0), 'degs': (6, 10, 5), 'Nb': 10, 'eps_b': 0.001} alpha=-0.3447
+==============================================================================
+root quality: ||F||_max=1.098656e-02  ||F||_rms=4.809336e-04  newton_taken=11  c_l=2.74250454  c_w=-0.88658990
+root manifold: |g1|=1.083e-05 |g2|=1.148e-05 ||RP||_max=3.020e-14
+------------------------------------------------------------------------------
+sign=+1 ds=0.25    Newton: residual=6.266e-13 in 3 it   |z_new-z_old|_max=9.805826e-02  |z_new-z_old|_rel(A,B)=1.364068e-02
+                      post-step manifold: |g1|=0.000e+00 |g2|=2.220e-16  ||RP||_max=4.208e-14  ||F||_max=5.153e-02
+------------------------------------------------------------------------------
+
+==============================================================================
+SCALING CHECK (Test A vs Test B, sign=+1, ds=0.25):
+==============================================================================
+root ||F||_max ratio  (loose/tight) = 1.024e+08
+PASS criterion: movement ratio should track (be of comparable
+order to, not wildly exceed) the residual ratio -- movement
+that is O(1) regardless of root quality would be the DAE-leakage
+signature (constraint/mass-term touching non-evolution rows).
+step |z_new-z_old|_max (tight) = 0.000e+00 -- below the 1e-13 noise floor (step() returned at k=0, no correction computed); a loose/tight RATIO is undefined here, not large. Falling back to an absolute bar on the loose-root movement instead:
+  loose |z_new-z_old|_max = 8.628e-04  vs  bar = 5.337e-03
+>>> loose-root movement is within the residual-scaled bar -- no leakage signature at this scale.
+
+==============================================================================
+VERDICT (Test A, the actual kill shot, sign=+1.0 S4-structural, ds=0.25):
+==============================================================================
+root ||F||_max = 4.170e-12   step |z_new-z_old|_max = 0.000e+00   generous bar = 1.000e-08
+PASS: fixed point stays fixed to within a residual-scaled bar under one backward-Euler step.
+
+==============================================================================
+RE-RUN after T5 fix (2026-08-02T13:19:48):
+T5 FIX: perturbation (calibrate/smoke_test/m1_gate) now confined to the
+corner-clamped admissible class -- zeroed on S.rT_pin rows before scaling
+(see march_s.py _admissible_pert()). rT_pin previously received nonzero
+random perturbation that, once T2/adopt_seed refreshed A0 <- z_old each
+step, froze permanently off the analytic corner/axis data instead of
+decaying or evolving -- outside the S4/S10-certified corner-clamped class.
+This smoke test is UNCHANGED in character (this grid (6,10,5)/Nb10 root
+is not converged, ||F||_max~1.1e-2 floor per m1_gate() docstring, so it
+is not a fair contraction test regardless of pert construction -- see
+M1_GATE_v2.out / M1_GATE_EXTENDED.out for the real contraction check on
+the (10,20,8)/Nb16 tight-converged grid).
+==============================================================================
+==============================================================================
+M1 T4 SMOKE -- index-aware s-march, ker(Cg) Newton correction
+==============================================================================
+grid (SMOKE SCALE, not production): edges=(0.0, 2.0, 15.0, 25.0) degs=(6, 10, 5) Nb=10 eps_b=0.001
+root: alpha=-0.3447  ||F||_max=1.099e-02  newton_taken=11  c_l=2.742505  c_w=-0.886590
+perturbed start: |z-z*|_rel = 1.000e-03  ds=0.25  sign=+1.0 (S4-structural, see module docstring)  [pert confined to corner-clamped admissible class, T5 fix]
+------------------------------------------------------------------------------
+step 1: Newton residual=2.915e-13 in 3 it   ||Cg z||=1.496421e+00   |g1|=4.441e-16 |g2|=6.661e-16   ||RP||_max=4.602e-14   |z-z*|_rel=1.409e-02
+step 2: Newton residual=5.332e-14 in 3 it   ||Cg z||=1.496421e+00   |g1|=2.220e-16 |g2|=0.000e+00   ||RP||_max=3.819e-14   |z-z*|_rel=3.041e-02
+step 3: Newton residual=5.951e-14 in 3 it   ||Cg z||=1.496421e+00   |g1|=2.220e-16 |g2|=3.331e-16   ||RP||_max=2.352e-14   |z-z*|_rel=4.758e-02
+------------------------------------------------------------------------------
+Interpretation: |g1|,|g2|,||RP|| at/near machine or Newton-tol precision confirm the algebraic manifold (gauge + P-slaving) holds EXACTLY at every accepted step, which is what T4 was missing -- the old version only checked the full residual max, not these rows individually, and never re-slaved damped trial points.
+This is a SMOKE test at reduced grid scale (see module docstring's KNOWN LIMITATION); it is a correctness/mechanism check, not an M2/M3 production run.
+
+==============================================================================
+RE-RUN after T5 fix (2026-08-02T13:20:29):
+killshot_fixedpoint.py does not touch calibrate/smoke_test/m1_gate perturbation
+construction (no march_s._admissible_pert involved -- z_old = z0 EXACTLY, no
+perturbation at all). Re-run purely to reconfirm SMarcher.step() itself is
+unchanged by the T5 fix (only the pert-construction helper changed) and the
+fixed-point invariance property still holds.
+==============================================================================
+ADVERSARIAL KILL-SHOT: does a tight-tol fixed point stay fixed under
+one backward-Euler s-march step, at SMOKE grid scale?
+(No eigenvalues used anywhere in this check -- pure residual/movement
+ diagnostics, per standing refusal S9.)
+
+==============================================================================
+[TEST A -- tight root (10,20,8)/Nb16, the actual kill shot] root: tol=1e-12 steps=120  grid={'edges': (0.0, 2.0, 15.0, 25.0), 'degs': (10, 20, 8), 'Nb': 16, 'eps_b': 0.001} alpha=-0.3447
+==============================================================================
+root quality: ||F||_max=4.170359e-12  ||F||_rms=1.104281e-13  newton_taken=5  c_l=3.01434101  c_w=-1.05737853
+root manifold: |g1|=1.110e-15 |g2|=8.882e-16 ||RP||_max=2.006e-13
+------------------------------------------------------------------------------
+sign=+1 ds=0.05    Newton: residual=4.170e-12 in 0 it   |z_new-z_old|_max=0.000000e+00  |z_new-z_old|_rel(A,B)=0.000000e+00
+                      post-step manifold: |g1|=1.110e-15 |g2|=8.882e-16  ||RP||_max=2.006e-13  ||F||_max=4.170e-12
+sign=+1 ds=0.25    Newton: residual=4.170e-12 in 0 it   |z_new-z_old|_max=0.000000e+00  |z_new-z_old|_rel(A,B)=0.000000e+00
+                      post-step manifold: |g1|=1.110e-15 |g2|=8.882e-16  ||RP||_max=2.006e-13  ||F||_max=4.170e-12
+sign=+1 ds=1       Newton: residual=4.170e-12 in 0 it   |z_new-z_old|_max=0.000000e+00  |z_new-z_old|_rel(A,B)=0.000000e+00
+                      post-step manifold: |g1|=1.110e-15 |g2|=8.882e-16  ||RP||_max=2.006e-13  ||F||_max=4.170e-12
+sign=-1 ds=0.05    Newton: residual=4.170e-12 in 0 it   |z_new-z_old|_max=0.000000e+00  |z_new-z_old|_rel(A,B)=0.000000e+00
+                      post-step manifold: |g1|=1.110e-15 |g2|=8.882e-16  ||RP||_max=2.006e-13  ||F||_max=4.170e-12
+sign=-1 ds=0.25    Newton: residual=4.170e-12 in 0 it   |z_new-z_old|_max=0.000000e+00  |z_new-z_old|_rel(A,B)=0.000000e+00
+                      post-step manifold: |g1|=1.110e-15 |g2|=8.882e-16  ||RP||_max=2.006e-13  ||F||_max=4.170e-12
+sign=-1 ds=1       Newton: residual=4.170e-12 in 0 it   |z_new-z_old|_max=0.000000e+00  |z_new-z_old|_rel(A,B)=0.000000e+00
+                      post-step manifold: |g1|=1.110e-15 |g2|=8.882e-16  ||RP||_max=2.006e-13  ||F||_max=4.170e-12
+------------------------------------------------------------------------------
+
+==============================================================================
+[TEST B -- deliberately loose root, same grid as A (leakage-scaling probe)] root: tol=0.0001 steps=2  grid={'edges': (0.0, 2.0, 15.0, 25.0), 'degs': (10, 20, 8), 'Nb': 16, 'eps_b': 0.001} alpha=-0.3447
+==============================================================================
+root quality: ||F||_max=4.269510e-04  ||F||_rms=5.106499e-05  newton_taken=2  c_l=3.01116575  c_w=-1.05558817
+root manifold: |g1|=2.220e-16 |g2|=2.220e-16 ||RP||_max=4.660e-13
+------------------------------------------------------------------------------
+sign=+1 ds=0.25    Newton: residual=1.118e-12 in 2 it   |z_new-z_old|_max=8.628286e-04  |z_new-z_old|_rel(A,B)=1.121096e-04
+                      post-step manifold: |g1|=2.220e-16 |g2|=0.000e+00  ||RP||_max=2.149e-13  ||F||_max=9.899e-04
+------------------------------------------------------------------------------
+
+==============================================================================
+[TEST C -- smoke_test's own (6,10,5)/Nb10 grid, NOT converged tight (informational only, not a kill shot)] root: tol=1e-11 steps=80  grid={'edges': (0.0, 2.0, 15.0, 25.0), 'degs': (6, 10, 5), 'Nb': 10, 'eps_b': 0.001} alpha=-0.3447
+==============================================================================
+root quality: ||F||_max=1.098656e-02  ||F||_rms=4.809336e-04  newton_taken=11  c_l=2.74250454  c_w=-0.88658990
+root manifold: |g1|=1.083e-05 |g2|=1.148e-05 ||RP||_max=3.020e-14
+------------------------------------------------------------------------------
+sign=+1 ds=0.25    Newton: residual=6.266e-13 in 3 it   |z_new-z_old|_max=9.805826e-02  |z_new-z_old|_rel(A,B)=1.364068e-02
+                      post-step manifold: |g1|=0.000e+00 |g2|=2.220e-16  ||RP||_max=4.208e-14  ||F||_max=5.153e-02
+------------------------------------------------------------------------------
+
+==============================================================================
+SCALING CHECK (Test A vs Test B, sign=+1, ds=0.25):
+==============================================================================
+root ||F||_max ratio  (loose/tight) = 1.024e+08
+PASS criterion: movement ratio should track (be of comparable
+order to, not wildly exceed) the residual ratio -- movement
+that is O(1) regardless of root quality would be the DAE-leakage
+signature (constraint/mass-term touching non-evolution rows).
+step |z_new-z_old|_max (tight) = 0.000e+00 -- below the 1e-13 noise floor (step() returned at k=0, no correction computed); a loose/tight RATIO is undefined here, not large. Falling back to an absolute bar on the loose-root movement instead:
+  loose |z_new-z_old|_max = 8.628e-04  vs  bar = 5.337e-03
+>>> loose-root movement is within the residual-scaled bar -- no leakage signature at this scale.
+
+==============================================================================
+VERDICT (Test A, the actual kill shot, sign=+1.0 S4-structural, ds=0.25):
+==============================================================================
+root ||F||_max = 4.170e-12   step |z_new-z_old|_max = 0.000e+00   generous bar = 1.000e-08
+PASS: fixed point stays fixed to within a residual-scaled bar under one backward-Euler step.

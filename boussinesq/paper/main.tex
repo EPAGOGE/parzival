@@ -1,0 +1,406 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1.1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage[hidelinks]{hyperref}
+\usepackage{microtype}
+
+\newtheorem{corollary}{Corollary}
+\setcounter{corollary}{-1} % so the first corollary is Corollary 0
+\newcommand{\om}{\omega}
+\newcommand{\vinf}{\|\om\|_\infty}
+\newcommand{\Lam}{\Lambda}
+\newcommand{\sL}{\sigma_{\!\Lambda}}
+
+\title{Viscosity inverts the direction-regularity scaling of the
+corner-flow blowup mechanism: a measured exponent crosses the type-I
+exclusion threshold}
+\author{Justin Hill\\ \small Independent Research \\ \small justin@epagoge.io}
+\date{Draft 0.1 --- 2026-08-02\thanks{Every number in this paper
+regenerates from bytes on disk with one command (Section~\ref{sec:repro}).
+Claims are graded against a frozen standard; the grading ledger, the
+confound engine, and the failed versions of our own claims are part of the
+repository, not part of a memory hole.}}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+For vorticity $\om$ with direction $\xi=\om/|\om|$ and peak set $P(t)$, the
+quantity $\Lam=\sup_P |\nabla\xi|\,|\om|^{-1/2}$ is scale invariant under
+the Navier--Stokes rescaling, and its exponent
+$\sL = d\ln\Lam / d\ln\vinf$ turns the direction-coherence regularity
+criteria of Constantin--Fefferman and Beir\~ao da Veiga--Berselli into a
+single measurable number. We measure it. On the inviscid Luo--Hou corner
+flow, where blowup is proven in the Boussinesq analogue by Chen--Hou, the
+instrument returns $\sL=+1.00\pm0.03$, anchored by an exact amplitude
+symmetry (predicted $\Lam$ ratio $0.707107$, measured $0.706891$) and a
+$2\times2$ off-ray grid factorial (spread $0.029$). Under free-slip
+viscosity, $\sigma(A)$ is not one number: every viscous run crosses over
+from inviscid-like scaling at low amplitude to deep depletion at high
+amplitude; window-averaged slopes are regime mixtures and we retract our
+own earlier quotes of that kind. Measured in the asymptotic window
+(top half of the cross-grid amplitude overlap, symmetric midpoint cut,
+pre-registered), the deep-collapse exponent is
+$\sL(10^{-4})=-1.12/-1.24$ (grids $128\times384$ / $256\times768$, spread
+$0.121$) and $\sL(10^{-3})=-1.25/-1.29$ (spread $0.032$), against a
+window-matched inviscid $+0.589/+0.585$ (spread $0.005$). Viscosity does
+not merely damp the corner mechanism's alignment failure: it inverts it,
+by roughly $1.8$ powers of $\vinf$, to a value far below both thresholds
+of the exclusion chain ($-1/6$ for onset of geometric depletion, $-1/2$
+for exclusion of type-I blowup by geometry plus energy alone). As far as a
+live literature kill-search reaches, no direction-regularity exponent has
+previously been measured as a function of viscosity on any blowup
+candidate. On the dynamical side, a Lyapunov-certified march in the
+rescaled frame (definiteness by Cholesky only; no eigenvalue enters any
+decision) shows the collapse profile is an attractor: perturbed orbits
+settle with $\cos_{\mathrm{step}}=0.986$ and contraction rate
+$0.270\pm0.003$ per rescaled time unit, unanimous across five independent
+seeds at the largest basin-validated amplitude.
+\end{abstract}
+
+\section{Introduction}\label{sec:intro}
+
+Two problems sit on one function. If a viscous singularity inheriting the
+corner mechanism exists, it must keep $\sL(\nu)$ above $-1/6$ as the
+collapse deepens. If viscosity forces $\sL$ below $-1/2$ in the
+high-vorticity regime, the geometric route closes the mechanism without
+touching the supercritical energy problem: geometry, not energy, kills the
+singularity. Nobody had $\sL(\nu)$. This paper reports it, for the
+mechanism class where the inviscid answer is proven, at two viscosities,
+on two grids, with the disagreement between grids quantified and under a
+bar.
+
+What is not new here, stated first. Direction-coherence regularity
+criteria originate with Constantin and Fefferman \cite{CF93} and were
+sharpened to the $1/2$-H\"older class by Beir\~ao da Veiga and Berselli
+\cite{BdVB02,BdVB09}: the pairing of $|\nabla\xi|$ with the $1/2$ power of
+amplitude lives in their sharp exponent before it lives in our observable.
+Qualitative exclusion of type-I blowup under direction continuity is
+likewise prior art: Giga--Miura \cite{GM11} for the infinite-energy class,
+and Barker--Prange \cite{BP20} with scale-invariant alignment estimates in
+the half-space with no-slip boundary, which is the Luo--Hou geometry
+itself. The identity behind our instrument check
+(Corollary~\ref{cor:zero}) is Constantin's classical decomposition of the
+vorticity equation into magnitude and direction \cite{Con94}. A 2026
+analytical line by Gruji\'c \cite{Gru26} pursues logarithmic depletion
+through direction classes; it defines no observable and measures nothing.
+
+What is new, correspondingly narrowed. First, the observable program:
+treating the scale-forced pairing as a measurable scalar with an exponent,
+and calibrating the instrument on a case where blowup is proven
+\cite{CH22,CH25}, so that its verdict means something where blowup is
+unknown. Second, the numbers: $\sL=+1.00\pm0.03$ on the inviscid corner
+mechanism, the first direction-regularity exponent measured on any blowup
+candidate as far as our search reaches. Third, the viscous inversion:
+$\sL(\nu)$ measured at two viscosities with cross-grid certification,
+crossing both thresholds deep in the collapse. Fourth, the quantified
+exclusion chain (Section~\ref{sec:chain}): the known qualitative principle
+\cite{GM11,BP20} sharpened to an explicit threshold on the measured
+exponent by feeding the energy dissipation budget through Constantin's
+kernel split, with the structural hypothesis carrying a measured constant.
+
+The laboratory operates under a discipline that we consider part of the
+result (Section~\ref{sec:repro}): a backwards proof of fifteen checks that
+failed its own authors until the fit protocol was encoded, a confound
+engine enumerating the ways each claim could be false, exact-symmetry
+anchors with zero free parameters, and a standing watcher that reruns the
+certification every twenty minutes. Several of our own earlier numbers
+died by these instruments and are retained in the repository as corpses
+with names.
+
+\section{The observable}\label{sec:obs}
+
+For a Navier--Stokes (or Euler, or Boussinesq) vorticity field, let
+$\xi=\om/|\om|$ and $P(t)=\{x : |\om(x,t)|\ge\tfrac12\vinf\}$, and define
+\begin{equation}
+\Lam(t)=\sup_{P(t)}|\nabla\xi|\,|\om|^{-1/2},
+\qquad
+\sL=\frac{d\ln\Lam}{d\ln\vinf}.
+\end{equation}
+Under $u\to s\,u(sx,s^2t)$ the field $|\om|$ carries $s^2$ and
+$|\nabla\xi|$ carries $s$, so $\Lam$ is exactly scale invariant; the $1/2$
+power is forced by the group, and $|\xi|=1$ makes the direction field
+globally controlled for free. The same pairing appears, in criterion form,
+as the $\beta=1/2$ sharpness in \cite{BdVB02,BdVB09}; the observable is
+that criterion turned into a number a simulation can return.
+
+\begin{corollary}[of Constantin's $|\om|$-equation \cite{Con94}; stated as
+a corollary, used as an instrument check]\label{cor:zero}
+The magnitude of vorticity obeys
+$\partial_t|\om|+u\!\cdot\!\nabla|\om|
+=\alpha|\om|+\nu\left(\Delta|\om|-|\om|\,|\nabla\xi|^2\right)$,
+where $\alpha=\xi\!\cdot\! S\xi$ is the stretching rate. At any growing
+spatial maximum of $|\om|$ the Laplacian term is nonpositive, hence
+\begin{equation}
+\nu\,|\nabla\xi|^2\;\le\;\alpha \qquad\text{at the maximum.}
+\end{equation}
+\end{corollary}
+
+This is a one-step corollary of a classical identity and we claim no
+novelty for it; a literature kill-search retracted our earlier framing of
+it as a theorem (Section~\ref{sec:kill}). It earns its place as a
+validation: our data satisfies it with three orders of magnitude of margin
+at every gated snapshot, which any correct direction-field computation
+must.
+
+\section{Instruments}\label{sec:instruments}
+
+The DNS side is a Dedalus-based axisymmetric Boussinesq solver in the
+Luo--Hou corner scenario, with free-slip viscosity in 5D-Laplacian form
+($\nu\Delta_5$ on $u_1$ and $\om_1$, $\Delta_5=\partial_{rr}
++(3/r)\partial_r+\partial_{zz}$), implicit in the IMEX stepper, and a
+quartic initial condition exactly compatible with the Neumann wall
+condition. Trust gates per snapshot: spectral tail at or below $10^{-6}$
+and signed Casimir drift (decay under viscosity is physics; growth is a
+violation). $\Lam$ is evaluated on the $2\times$-HWHM box at the vorticity
+peak; runs are trimmed at the first $10\times$ amplitude jump. The
+exponent is the slope of $\ln\Lam$ against $\ln\vinf$ over gated
+snapshots, with pair-resampled bootstrap confidence intervals ($10^4$
+resamples) everywhere a slope is quoted.
+
+The rescaled-frame side is a corner-frame $s$-march on the certified
+self-similar profile: backward Euler on the index-2 DAE with the algebraic
+manifold re-imposed at every iterate, a frozen reduced Jacobian whose
+exact validity on $\ker(C_g)$ is a closed-form identity (verified at
+$4.6\times10^{-14}$ against the exact marcher before being trusted), and a
+Lyapunov $P$-norm gate in which definiteness is decided by Cholesky
+factorization only. No eigenvalue of any operator enters any decision
+anywhere in this paper; that refusal is standing and was never violated
+under pressure.
+
+\section{The exclusion chain, quantified}\label{sec:chain}
+
+Constantin's identity for the stretching rate $\alpha=\xi\!\cdot\! S\xi$
+consumes the Biot--Savart kernel geometry: misalignment is the only way to
+stretch. Splitting the integral at radius $\rho$, the near field is
+controlled by $\Lam\,\vinf^{3/2}\rho$ and the far field by the energy
+through Cauchy--Schwarz; optimizing $\rho$,
+\begin{equation}
+\alpha \;\lesssim\;
+\left(\Lam\,\vinf^{3/2}\right)^{3/5}\|\om\|_{L^2}^{2/5}.
+\end{equation}
+Hypothesis (H): the peak set is a single coherent structure on which the
+gradient bound holds out to the optimal $\rho$. The hypothesis carries a
+measured constant ($\lambda_0=5.0$) and the chain inequality holds at 21
+of 21 gated snapshot pairs with the stretching rate inferred
+independently. Feeding the only global control Navier--Stokes provides
+(the energy dissipation identity) through this bound, with blowup rate
+$\vinf\sim(T-t)^{-\gamma}$, $\gamma\ge1$:
+\begin{align}
+\sL\le-\tfrac16 &: \text{geometric depletion begins to act at all,}\\
+\sL<-\tfrac12 &: \text{type-I blowup excluded by geometry and energy alone.}
+\end{align}
+The qualitative principle here is not ours: under a type-I condition,
+direction continuity where vorticity is large already excludes blowup
+\cite{GM11}, including in the half-space with no-slip boundary
+\cite{BP20}. What the chain above adds is the exponent: an explicit
+threshold on a measurable number, so that a simulation, or eventually an
+experiment, can locate a given flow on the right or wrong side of it.
+
+\section{The inviscid calibration}\label{sec:inviscid}
+
+On the inviscid corner flow the instrument returns
+\begin{equation}
+\sL = +1.00 \pm 0.03.
+\end{equation}
+Two validations with zero free parameters between them. First, the exact
+amplitude symmetry $u\to\lambda u$, $t\to t/\lambda$ of the Euler
+equations predicts a $\Lam$ ratio of $1/\sqrt2=0.707107$ between paired
+runs; measured $0.706891\pm0.001441$, three parts in ten thousand, with
+the predicted $|\nabla\xi|$ ratio of $1$ measured at $0.999746$. Second, a
+$2\times2$ off-ray factorial refining $N_z$ and $N_r$ independently
+returns slopes $+1.0159$, $+0.9873$, $+1.0027$, $+0.9978$ (spread $0.029$,
+main effects at or below $0.017$), rejecting the axial-mesh and
+single-ray confounds by test rather than by assertion.
+
+Reading: $|\nabla\xi|\sim\vinf^{3/2}$. Direction regularity fails a full
+$3/2$ of a power above the exclusion threshold; the Euler mechanism blows
+up because its geometry is maximally non-depleting. The observable returns
+the correct sign on a case where blowup is proven in the Boussinesq
+analogue \cite{CH22,CH25}, which is precisely what licenses pointing it at
+cases where the answer is unknown.
+
+Refinement recorded during the viscous campaign: the full-window $+1.00$
+is amplitude-composite. Fit on matched cross-grid amplitude windows, the
+inviscid slope runs $+1.4$ in the lower half and $+0.589/+0.585$ in the
+deep half (cross-grid spread $0.005$, the tightest certification in this
+paper). The symmetry and factorial validations certify the instrument, not
+slope constancy across amplitude; window-matched comparisons below
+therefore use $+0.59$ as the inviscid contrast value.
+
+\section{The viscous measurement}\label{sec:viscous}
+
+Runs at $\nu\in\{10^{-4},10^{-3}\}$ on grids $128\times384$ and
+$256\times768$ with inviscid references on both grids. Three findings, in
+discovery order.
+
+(i) \emph{The common-amplitude overlap window reproduces the calibration.}
+Fit on the same amplitude range, the two inviscid grids give
+$+1.016/+1.033$ (spread $0.017$) against the calibrated $+1.00\pm0.03$.
+The cross-grid disagreement of naive full-window fits ($0.147$) was a
+window artifact, not a physics disagreement.
+
+(ii) \emph{At finite $\nu$, $\sigma(A)$ is not one number.} Every viscous
+run crosses over from inviscid-like slope ($+0.4$ to $+0.8$) at low
+amplitude to deep depletion near $-1.2$ at high amplitude, on both grids,
+at both viscosities. A window-averaged slope is a regime mixture; our own
+earlier quotes of that kind (window averages near $-0.5$, and a
+single-grid ladder $-0.37$ to $-0.57$) are retracted as measurements of a
+mixture, and the retraction is part of the repository record.
+
+(iii) \emph{Measured where the asymptotic regime actually lives} (top half
+of the cross-grid overlap in $\ln A$, symmetric midpoint cut,
+pre-registered before the cut-sensitivity scan), the deep-collapse
+exponent is
+\begin{center}
+\begin{tabular}{lccc}
+\toprule
+ & $128\times384$ & $256\times768$ & spread \\
+\midrule
+$\nu=10^{-4}$ & $-1.116$ & $-1.237$ & $0.121$ \\
+$\nu=10^{-3}$ & $-1.254$ & $-1.285$ & $0.032$ \\
+\midrule
+$\nu=0$ (matched window) & $+0.589$ & $+0.585$ & $0.005$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+with bootstrap 95\% intervals of order $\pm0.15$ to $\pm0.35$ on each fit
+and cut-position sensitivity reported at $0.4/0.5/0.6$ of the overlap
+span: the magnitude sits in a band $-1.0$ to $-1.3$ at every cut, on every
+grid, at both viscosities. Against the window-matched inviscid $+0.59$,
+viscosity inverts the direction-regularity scaling by roughly $1.8$ powers
+of $\vinf$, to a value below both thresholds of Section~\ref{sec:chain}.
+
+Honest bounds on what this shows. Two viscosities, one mechanism class,
+one scenario geometry, laptop resolution; the deep windows carry 11 to 14
+snapshots each; the crossover amplitude $A_c(\nu)$ is visible but not yet
+resolved as its own observable; and the exclusion chain runs through
+Hypothesis (H) with its measured constant. What the measurement supports,
+within those bounds, is exact: on the strongest known blowup mechanism of
+this class, the geometric quantity that must stay above $-1/6$ for the
+mechanism to survive viscosity is measured at $-1.2$ and below, deep in
+the collapse, grid-certified, at both viscosities tried.
+
+\section{The kill-search}\label{sec:kill}
+
+A live literature search (2026-08-02; arXiv, Springer, journal indices;
+queries on direction-coherence criteria, H\"older-$1/2$ direction results,
+scale-invariant alignment estimates, type-I exclusion via direction,
+Luo--Hou alignment measurements, and name collisions for $\sL$) graded
+every novelty-bearing claim. One claim died: our Theorem~0 is a one-step
+corollary of Constantin's $|\om|$-equation and is demoted to
+Corollary~\ref{cor:zero} above. Theorem-1-as-principle died too, as it
+should: the qualitative type-I exclusion belongs to \cite{GM11} and
+\cite{BP20}; what survives is the quantification. The observable program,
+the inviscid measurement, and the viscous inversion survived the search
+outright, with the standing caveat that survived means \emph{not found by
+this search}, not \emph{proven absent}. Closest adjacent art in the
+numerical literature: Hou's dynamic-depletion diagnostics (alignment with
+strain eigenvectors, vortex-line regularity; qualitative)
+\cite{Hou09,LH14}, and Kerr's numerical tests of direction-derived
+regularity conditions on antiparallel vortex tubes \cite{Kerr13}.
+
+\section{Reproducibility and discipline}\label{sec:repro}
+
+\begin{verbatim}
+python verify.py        # the backwards proof: 15 checks, 3 tiers
+python mythos.py        # the confound engine
+./done.sh               # the milestone ladder, M1-M5, all PASS
+cat VERIFY_STATUS       # what the standing watcher currently holds
+\end{verbatim}
+
+\texttt{verify.py} holds at 15/15 with EXACT-tier worst deviation
+$3.05\times10^{-4}$ against references forced by the equations before any
+measurement existed; input checksums are in the verify output; a watcher
+reruns the full certification every twenty minutes and files a regression
+report if anything drifts. The laboratory was built by a human directing
+an AI system; the AI invented a branch that did not exist, fit through
+windows that moved, and glossed a mechanism its own certification refuted
+within the hour. Every failure was caught the same day by exact symmetry
+anchors, context-free review, or the backwards proof, and the corpses are
+kept on the page. The discipline that survives contact with an AI that
+launders inference is part of what this repository demonstrates.
+
+\section{Open}\label{sec:open}
+
+The strip $-1/2\le\sigma\le0$: Corollary~\ref{cor:zero} forbids the top
+under viscosity at a growing maximum; the chain of
+Section~\ref{sec:chain} needs the bottom. Close the strip analytically and
+type-I Navier--Stokes blowup is finished for this route. The crossover
+amplitude $A_c(\nu)$ and the $\sL(\nu)$ curve between $10^{-4}$ and the
+inviscid limit are unmeasured (stream data exists at
+$\nu=3\times10^{-4},3\times10^{-5},10^{-5}$; snapshots were not retained).
+The wandering sector remains the measured frontier: generic near-wall data
+dies too young at laptop resolution to read, and that failure is the
+recorded reason the sector is unexplored.
+
+\begin{thebibliography}{99}
+
+\bibitem{CF93} P.~Constantin, C.~Fefferman.
+Direction of vorticity and the problem of global regularity for the
+Navier--Stokes equations.
+\emph{Indiana Univ. Math. J.} \textbf{42}, 775--789 (1993).
+
+\bibitem{Con94} P.~Constantin.
+Geometric statistics in turbulence.
+\emph{SIAM Review} \textbf{36}, 73--98 (1994).
+
+\bibitem{BdVB02} H.~Beir\~ao da Veiga, L.C.~Berselli.
+On the regularizing effect of the vorticity direction in incompressible
+viscous flows.
+\emph{Differential Integral Equations} \textbf{15} (2002).
+
+\bibitem{BdVB09} H.~Beir\~ao da Veiga, L.C.~Berselli.
+Navier--Stokes equations: Green's matrices, vorticity direction, and
+regularity up to the boundary (2009).
+
+\bibitem{GM11} Y.~Giga, H.~Miura.
+On vorticity directions near singularities for the Navier--Stokes flows
+with infinite energy.
+\emph{Comm. Math. Phys.} (2011). doi:10.1007/s00220-011-1197-x
+
+\bibitem{BP20} T.~Barker, C.~Prange.
+Scale-invariant estimates and vorticity alignment for Navier--Stokes in
+the half-space with no-slip boundary conditions.
+\emph{Arch. Ration. Mech. Anal.} \textbf{235}, 881--926 (2020).
+arXiv:1906.08225.
+
+\bibitem{Gru26} Z.~Gruji\'c.
+Logarithmic depletion of vortex stretching and singularity evasion in the
+3D Navier--Stokes equations.
+arXiv:2607.08866 (2026).
+
+\bibitem{Hou09} T.Y.~Hou.
+Blow-up or no blow-up? A unified computational and analytic approach to 3D
+incompressible Euler and Navier--Stokes equations.
+\emph{Acta Numerica} (2009).
+
+\bibitem{LH14} G.~Luo, T.Y.~Hou.
+Toward the finite-time blowup of the 3D axisymmetric Euler equations: a
+numerical investigation.
+\emph{Multiscale Model. Simul.} (2014).
+
+\bibitem{CH22} J.~Chen, T.Y.~Hou.
+Stable nearly self-similar blowup of the 2D Boussinesq and 3D Euler
+equations with smooth data I: Analysis.
+arXiv:2210.07191.
+
+\bibitem{CH25} J.~Chen, T.Y.~Hou.
+Stable nearly self-similar blowup of the 2D Boussinesq and 3D Euler
+equations with smooth data II: Rigorous Numerics.
+\emph{Multiscale Model. Simul.} \textbf{23}(1), 25--130 (2025).
+arXiv:2305.05660.
+
+\bibitem{Kerr13} R.M.~Kerr.
+Bounds for Euler from vorticity moments and line divergence.
+arXiv:1212.1106.
+
+\bibitem{Surv21} (Survey.)
+A survey of geometric constraints on the blowup of solutions of the
+Navier--Stokes equation.
+arXiv:2111.00040.
+
+\end{thebibliography}
+
+\end{document}

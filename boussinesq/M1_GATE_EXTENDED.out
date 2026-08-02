@@ -1,0 +1,260 @@
+==============================================================================
+M1 GATE -- s-march of a perturbed fixed point, S4-structural sign
+==============================================================================
+grid={'edges': (0.0, 2.0, 15.0, 25.0), 'degs': (10, 20, 8), 'Nb': 16, 'eps_b': 0.001} alpha=-0.3447  ds=0.25 nsteps=240 (s-units=60)  amp=0.001 seed=0  sign=+1.0
+root: ||F||_max=4.170e-12  newton_taken=5  c_l=3.01434101  c_w=-1.05737853  root manifold |g1|=1.110e-15 |g2|=8.882e-16 ||RP||_max=2.006e-13
+root convergence check (< 1e-9): OK
+perturbed start: |z-z*|_rel = 1.000000e-03  [pert confined to corner-clamped admissible class, T5 fix]
+------------------------------------------------------------------------------
+step   1 (s=  0.25): |dz|_rel=1.354739e-02  Newton r=1.68e-12 it=4  |g1|=4.44e-16 |g2|=6.66e-16 ||RP||=4.51e-13  constraint_residual=4.51e-13  rel_step_growth=1.255e+01  <-- GROWTH VIOLATION
+step   2 (s=  0.50): |dz|_rel=1.401194e-02  Newton r=8.01e-13 it=3  |g1|=2.22e-16 |g2|=1.11e-15 ||RP||=1.34e-13  constraint_residual=1.34e-13  rel_step_growth=3.429e-02  <-- GROWTH VIOLATION
+step   3 (s=  0.75): |dz|_rel=1.360560e-02  Newton r=1.17e-12 it=3  |g1|=6.66e-16 |g2|=2.22e-16 ||RP||=2.96e-13  constraint_residual=2.96e-13  rel_step_growth=-2.900e-02
+step   4 (s=  1.00): |dz|_rel=1.278579e-02  Newton r=1.20e-12 it=3  |g1|=1.11e-15 |g2|=4.44e-16 ||RP||=1.76e-13  constraint_residual=1.76e-13  rel_step_growth=-6.026e-02
+step   5 (s=  1.25): |dz|_rel=1.179553e-02  Newton r=4.45e-11 it=2  |g1|=6.66e-16 |g2|=2.22e-16 ||RP||=1.81e-13  constraint_residual=1.81e-13  rel_step_growth=-7.745e-02
+step   6 (s=  1.50): |dz|_rel=1.077575e-02  Newton r=2.21e-11 it=2  |g1|=6.66e-16 |g2|=4.44e-16 ||RP||=3.40e-13  constraint_residual=3.40e-13  rel_step_growth=-8.645e-02
+step   7 (s=  1.75): |dz|_rel=9.817419e-03  Newton r=1.47e-11 it=2  |g1|=4.44e-16 |g2|=4.44e-16 ||RP||=1.75e-13  constraint_residual=1.75e-13  rel_step_growth=-8.893e-02
+step   8 (s=  2.00): |dz|_rel=8.988652e-03  Newton r=1.04e-11 it=2  |g1|=1.11e-15 |g2|=2.00e-15 ||RP||=1.83e-13  constraint_residual=1.83e-13  rel_step_growth=-8.442e-02
+step   9 (s=  2.25): |dz|_rel=8.348917e-03  Newton r=7.16e-12 it=2  |g1|=2.22e-16 |g2|=1.55e-15 ||RP||=3.50e-13  constraint_residual=3.50e-13  rel_step_growth=-7.117e-02
+step  10 (s=  2.50): |dz|_rel=7.951658e-03  Newton r=5.39e-12 it=2  |g1|=6.66e-16 |g2|=4.44e-16 ||RP||=1.18e-13  constraint_residual=1.18e-13  rel_step_growth=-4.758e-02
+step  11 (s=  2.75): |dz|_rel=7.834381e-03  Newton r=4.14e-12 it=2  |g1|=8.88e-16 |g2|=6.66e-16 ||RP||=1.60e-13  constraint_residual=1.60e-13  rel_step_growth=-1.475e-02
+step  12 (s=  3.00): |dz|_rel=8.002733e-03  Newton r=2.95e-12 it=2  |g1|=2.22e-16 |g2|=1.11e-15 ||RP||=3.82e-13  constraint_residual=3.82e-13  rel_step_growth=2.149e-02  <-- GROWTH VIOLATION
+step  13 (s=  3.25): |dz|_rel=8.423586e-03  Newton r=2.09e-12 it=2  |g1|=2.22e-16 |g2|=1.78e-15 ||RP||=1.17e-13  constraint_residual=1.17e-13  rel_step_growth=5.259e-02  <-- GROWTH VIOLATION
+step  14 (s=  3.50): |dz|_rel=9.035000e-03  Newton r=1.63e-12 it=2  |g1|=2.22e-16 |g2|=0.00e+00 ||RP||=2.38e-13  constraint_residual=2.38e-13  rel_step_growth=7.258e-02  <-- GROWTH VIOLATION
+step  15 (s=  3.75): |dz|_rel=9.764208e-03  Newton r=8.59e-13 it=2  |g1|=2.22e-16 |g2|=4.44e-16 ||RP||=2.68e-13  constraint_residual=2.68e-13  rel_step_growth=8.071e-02  <-- GROWTH VIOLATION
+step  16 (s=  4.00): |dz|_rel=1.054140e-02  Newton r=9.04e-13 it=2  |g1|=4.44e-16 |g2|=6.66e-16 ||RP||=2.36e-13  constraint_residual=2.36e-13  rel_step_growth=7.960e-02  <-- GROWTH VIOLATION
+step  17 (s=  4.25): |dz|_rel=1.130586e-02  Newton r=1.16e-12 it=2  |g1|=2.22e-16 |g2|=4.44e-16 ||RP||=2.60e-13  constraint_residual=2.60e-13  rel_step_growth=7.252e-02  <-- GROWTH VIOLATION
+step  18 (s=  4.50): |dz|_rel=1.200712e-02  Newton r=2.06e-12 it=2  |g1|=6.66e-16 |g2|=6.66e-16 ||RP||=2.16e-13  constraint_residual=2.16e-13  rel_step_growth=6.203e-02  <-- GROWTH VIOLATION
+step  19 (s=  4.75): |dz|_rel=1.260423e-02  Newton r=3.21e-12 it=2  |g1|=2.22e-16 |g2|=6.66e-16 ||RP||=1.25e-13  constraint_residual=1.25e-13  rel_step_growth=4.973e-02  <-- GROWTH VIOLATION
+step  20 (s=  5.00): |dz|_rel=1.306458e-02  Newton r=4.70e-12 it=2  |g1|=2.22e-16 |g2|=6.66e-16 ||RP||=3.39e-13  constraint_residual=3.39e-13  rel_step_growth=3.652e-02  <-- GROWTH VIOLATION
+step  21 (s=  5.25): |dz|_rel=1.336310e-02  Newton r=6.34e-12 it=2  |g1|=1.11e-15 |g2|=6.66e-16 ||RP||=1.74e-13  constraint_residual=1.74e-13  rel_step_growth=2.285e-02  <-- GROWTH VIOLATION
+step  22 (s=  5.50): |dz|_rel=1.348174e-02  Newton r=8.13e-12 it=2  |g1|=6.66e-16 |g2|=2.22e-16 ||RP||=1.03e-13  constraint_residual=1.03e-13  rel_step_growth=8.878e-03  <-- GROWTH VIOLATION
+step  23 (s=  5.75): |dz|_rel=1.340943e-02  Newton r=9.52e-12 it=2  |g1|=0.00e+00 |g2|=6.66e-16 ||RP||=1.88e-13  constraint_residual=1.88e-13  rel_step_growth=-5.364e-03
+step  24 (s=  6.00): |dz|_rel=1.314238e-02  Newton r=9.86e-12 it=2  |g1|=2.00e-15 |g2|=8.88e-16 ||RP||=3.04e-13  constraint_residual=3.04e-13  rel_step_growth=-1.991e-02
+step  25 (s=  6.25): |dz|_rel=1.268501e-02  Newton r=1.11e-11 it=2  |g1|=1.55e-15 |g2|=2.22e-16 ||RP||=1.70e-13  constraint_residual=1.70e-13  rel_step_growth=-3.480e-02
+step  26 (s=  6.50): |dz|_rel=1.205149e-02  Newton r=1.28e-11 it=2  |g1|=1.33e-15 |g2|=1.11e-15 ||RP||=1.68e-13  constraint_residual=1.68e-13  rel_step_growth=-4.994e-02
+step  27 (s=  6.75): |dz|_rel=1.126867e-02  Newton r=1.38e-11 it=2  |g1|=0.00e+00 |g2|=4.44e-16 ||RP||=2.20e-13  constraint_residual=2.20e-13  rel_step_growth=-6.496e-02
+step  28 (s=  7.00): |dz|_rel=1.038079e-02  Newton r=1.34e-11 it=2  |g1|=2.22e-16 |g2|=2.22e-16 ||RP||=1.55e-13  constraint_residual=1.55e-13  rel_step_growth=-7.879e-02
+step  29 (s=  7.25): |dz|_rel=9.457173e-03  Newton r=1.35e-11 it=2  |g1|=2.22e-16 |g2|=8.88e-16 ||RP||=1.56e-13  constraint_residual=1.56e-13  rel_step_growth=-8.897e-02
+step  30 (s=  7.50): |dz|_rel=8.602549e-03  Newton r=1.42e-11 it=2  |g1|=6.66e-16 |g2|=4.44e-16 ||RP||=3.07e-13  constraint_residual=3.07e-13  rel_step_growth=-9.037e-02
+step  31 (s=  7.75): |dz|_rel=7.963889e-03  Newton r=1.84e-11 it=2  |g1|=8.88e-16 |g2|=4.44e-16 ||RP||=1.79e-13  constraint_residual=1.79e-13  rel_step_growth=-7.424e-02
+step  32 (s=  8.00): |dz|_rel=7.712328e-03  Newton r=2.22e-11 it=2  |g1|=2.22e-16 |g2|=6.66e-16 ||RP||=1.40e-13  constraint_residual=1.40e-13  rel_step_growth=-3.159e-02
+step  33 (s=  8.25): |dz|_rel=7.975804e-03  Newton r=2.36e-11 it=2  |g1|=2.22e-16 |g2|=0.00e+00 ||RP||=2.22e-13  constraint_residual=2.22e-13  rel_step_growth=3.416e-02  <-- GROWTH VIOLATION
+step  34 (s=  8.50): |dz|_rel=8.762073e-03  Newton r=2.20e-11 it=2  |g1|=1.11e-15 |g2|=8.88e-16 ||RP||=1.71e-13  constraint_residual=1.71e-13  rel_step_growth=9.858e-02  <-- GROWTH VIOLATION
+step  35 (s=  8.75): |dz|_rel=9.964994e-03  Newton r=1.94e-11 it=2  |g1|=6.66e-16 |g2|=4.44e-16 ||RP||=2.06e-13  constraint_residual=2.06e-13  rel_step_growth=1.373e-01  <-- GROWTH VIOLATION
+step  36 (s=  9.00): |dz|_rel=1.143873e-02  Newton r=1.94e-11 it=2  |g1|=1.33e-15 |g2|=2.22e-16 ||RP||=1.66e-13  constraint_residual=1.66e-13  rel_step_growth=1.479e-01  <-- GROWTH VIOLATION
+step  37 (s=  9.25): |dz|_rel=1.305129e-02  Newton r=1.66e-11 it=2  |g1|=1.55e-15 |g2|=2.22e-15 ||RP||=2.32e-13  constraint_residual=2.32e-13  rel_step_growth=1.410e-01  <-- GROWTH VIOLATION
+step  38 (s=  9.50): |dz|_rel=1.469763e-02  Newton r=1.17e-11 it=2  |g1|=6.66e-16 |g2|=4.44e-16 ||RP||=1.48e-13  constraint_residual=1.48e-13  rel_step_growth=1.261e-01  <-- GROWTH VIOLATION
+step  39 (s=  9.75): |dz|_rel=1.629562e-02  Newton r=5.59e-12 it=2  |g1|=4.44e-16 |g2|=2.22e-16 ||RP||=1.58e-13  constraint_residual=1.58e-13  rel_step_growth=1.087e-01  <-- GROWTH VIOLATION
+step  40 (s= 10.00): |dz|_rel=1.777974e-02  Newton r=2.75e-12 it=2  |g1|=4.44e-16 |g2|=4.44e-16 ||RP||=2.37e-13  constraint_residual=2.37e-13  rel_step_growth=9.108e-02  <-- GROWTH VIOLATION
+step  41 (s= 10.25): |dz|_rel=1.909680e-02  Newton r=7.48e-12 it=2  |g1|=2.22e-16 |g2|=1.33e-15 ||RP||=1.03e-13  constraint_residual=1.03e-13  rel_step_growth=7.408e-02  <-- GROWTH VIOLATION
+step  42 (s= 10.50): |dz|_rel=2.020345e-02  Newton r=1.45e-11 it=2  |g1|=0.00e+00 |g2|=2.22e-16 ||RP||=1.55e-13  constraint_residual=1.55e-13  rel_step_growth=5.795e-02  <-- GROWTH VIOLATION
+step  43 (s= 10.75): |dz|_rel=2.106499e-02  Newton r=2.23e-11 it=2  |g1|=2.22e-16 |g2|=0.00e+00 ||RP||=2.20e-13  constraint_residual=2.20e-13  rel_step_growth=4.264e-02  <-- GROWTH VIOLATION
+step  44 (s= 11.00): |dz|_rel=2.165496e-02  Newton r=3.06e-11 it=2  |g1|=2.22e-16 |g2|=1.33e-15 ||RP||=1.56e-13  constraint_residual=1.56e-13  rel_step_growth=2.801e-02  <-- GROWTH VIOLATION
+step  45 (s= 11.25): |dz|_rel=2.195511e-02  Newton r=3.87e-11 it=2  |g1|=2.22e-16 |g2|=1.33e-15 ||RP||=3.45e-13  constraint_residual=3.45e-13  rel_step_growth=1.386e-02  <-- GROWTH VIOLATION
+step  46 (s= 11.50): |dz|_rel=2.195564e-02  Newton r=4.50e-11 it=2  |g1|=6.66e-16 |g2|=8.88e-16 ||RP||=1.43e-13  constraint_residual=1.43e-13  rel_step_growth=2.393e-05  <-- GROWTH VIOLATION
+step  47 (s= 11.75): |dz|_rel=2.165559e-02  Newton r=4.67e-11 it=2  |g1|=4.44e-16 |g2|=2.22e-16 ||RP||=1.57e-13  constraint_residual=1.57e-13  rel_step_growth=-1.367e-02
+step  48 (s= 12.00): |dz|_rel=2.106355e-02  Newton r=5.66e-11 it=2  |g1|=2.22e-16 |g2|=2.22e-16 ||RP||=4.17e-13  constraint_residual=4.17e-13  rel_step_growth=-2.734e-02
+step  49 (s= 12.25): |dz|_rel=2.019869e-02  Newton r=6.56e-11 it=2  |g1|=2.22e-16 |g2|=1.55e-15 ||RP||=1.93e-13  constraint_residual=1.93e-13  rel_step_growth=-4.106e-02
+step  50 (s= 12.50): |dz|_rel=1.909250e-02  Newton r=7.23e-11 it=2  |g1|=1.11e-15 |g2|=6.66e-16 ||RP||=2.94e-13  constraint_residual=2.94e-13  rel_step_growth=-5.477e-02
+step  51 (s= 12.75): |dz|_rel=1.779167e-02  Newton r=7.35e-11 it=2  |g1|=2.22e-16 |g2|=4.44e-16 ||RP||=2.18e-13  constraint_residual=2.18e-13  rel_step_growth=-6.813e-02
+step  52 (s= 13.00): |dz|_rel=1.636291e-02  Newton r=6.97e-11 it=2  |g1|=0.00e+00 |g2|=2.22e-16 ||RP||=2.65e-13  constraint_residual=2.65e-13  rel_step_growth=-8.030e-02
+step  53 (s= 13.25): |dz|_rel=1.490045e-02  Newton r=6.59e-11 it=2  |g1|=6.66e-16 |g2|=2.66e-15 ||RP||=3.38e-13  constraint_residual=3.38e-13  rel_step_growth=-8.938e-02
+step  54 (s= 13.50): |dz|_rel=1.353594e-02  Newton r=5.89e-11 it=2  |g1|=6.66e-16 |g2|=4.44e-16 ||RP||=1.55e-13  constraint_residual=1.55e-13  rel_step_growth=-9.158e-02
+step  55 (s= 13.75): |dz|_rel=1.244508e-02  Newton r=6.13e-11 it=2  |g1|=2.22e-16 |g2|=6.66e-16 ||RP||=3.80e-13  constraint_residual=3.80e-13  rel_step_growth=-8.059e-02
+step  56 (s= 14.00): |dz|_rel=1.183257e-02  Newton r=6.02e-11 it=2  |g1|=4.44e-16 |g2|=6.66e-16 ||RP||=2.22e-13  constraint_residual=2.22e-13  rel_step_growth=-4.922e-02
+step  57 (s= 14.25): |dz|_rel=1.186998e-02  Newton r=6.71e-11 it=2  |g1|=2.22e-16 |g2|=0.00e+00 ||RP||=1.48e-13  constraint_residual=1.48e-13  rel_step_growth=3.161e-03  <-- GROWTH VIOLATION
+step  58 (s= 14.50): |dz|_rel=1.260752e-02  Newton r=6.81e-11 it=2  |g1|=2.22e-16 |g2|=6.66e-16 ||RP||=1.32e-13  constraint_residual=1.32e-13  rel_step_growth=6.214e-02  <-- GROWTH VIOLATION
+step  59 (s= 14.75): |dz|_rel=1.395004e-02  Newton r=6.30e-11 it=2  |g1|=0.00e+00 |g2|=8.88e-16 ||RP||=3.35e-13  constraint_residual=3.35e-13  rel_step_growth=1.065e-01  <-- GROWTH VIOLATION
+step  60 (s= 15.00): |dz|_rel=1.572492e-02  Newton r=6.01e-11 it=2  |g1|=2.22e-16 |g2|=4.44e-16 ||RP||=1.62e-13  constraint_residual=1.62e-13  rel_step_growth=1.272e-01  <-- GROWTH VIOLATION
+step  61 (s= 15.25): |dz|_rel=1.775850e-02  Newton r=5.58e-11 it=2  |g1|=6.66e-16 |g2|=1.11e-15 ||RP||=1.30e-13  constraint_residual=1.30e-13  rel_step_growth=1.293e-01  <-- GROWTH VIOLATION
+step  62 (s= 15.50): |dz|_rel=1.990829e-02  Newton r=4.67e-11 it=2  |g1|=2.22e-16 |g2|=2.22e-16 ||RP||=1.28e-13  constraint_residual=1.28e-13  rel_step_growth=1.211e-01  <-- GROWTH VIOLATION
+step  63 (s= 15.75): |dz|_rel=2.206431e-02  Newton r=3.43e-11 it=2  |g1|=4.44e-16 |g2|=6.66e-16 ||RP||=1.47e-13  constraint_residual=1.47e-13  rel_step_growth=1.083e-01  <-- GROWTH VIOLATION
+step  64 (s= 16.00): |dz|_rel=2.414138e-02  Newton r=2.08e-11 it=2  |g1|=2.22e-16 |g2|=4.44e-16 ||RP||=1.31e-13  constraint_residual=1.31e-13  rel_step_growth=9.414e-02  <-- GROWTH VIOLATION
+step  65 (s= 16.25): |dz|_rel=2.607173e-02  Newton r=8.04e-12 it=2  |g1|=0.00e+00 |g2|=0.00e+00 ||RP||=1.88e-13  constraint_residual=1.88e-13  rel_step_growth=7.996e-02  <-- GROWTH VIOLATION
+step  66 (s= 16.50): |dz|_rel=2.779988e-02  Newton r=8.20e-12 it=2  |g1|=1.11e-15 |g2|=6.66e-16 ||RP||=1.65e-13  constraint_residual=1.65e-13  rel_step_growth=6.628e-02  <-- GROWTH VIOLATION
+step  67 (s= 16.75): |dz|_rel=2.927943e-02  Newton r=2.15e-11 it=2  |g1|=1.11e-15 |g2|=4.44e-16 ||RP||=1.96e-13  constraint_residual=1.96e-13  rel_step_growth=5.322e-02  <-- GROWTH VIOLATION
+step  68 (s= 17.00): |dz|_rel=3.047122e-02  Newton r=4.11e-11 it=2  |g1|=8.88e-16 |g2|=8.88e-16 ||RP||=2.42e-13  constraint_residual=2.42e-13  rel_step_growth=4.070e-02  <-- GROWTH VIOLATION
+step  69 (s= 17.25): |dz|_rel=3.134224e-02  Newton r=6.60e-11 it=2  |g1|=6.66e-16 |g2|=8.88e-16 ||RP||=2.65e-13  constraint_residual=2.65e-13  rel_step_growth=2.859e-02  <-- GROWTH VIOLATION
+step  70 (s= 17.50): |dz|_rel=3.186531e-02  Newton r=9.53e-11 it=2  |g1|=0.00e+00 |g2|=6.66e-16 ||RP||=2.27e-13  constraint_residual=2.27e-13  rel_step_growth=1.669e-02  <-- GROWTH VIOLATION
+step  71 (s= 17.75): |dz|_rel=3.201910e-02  Newton r=6.75e-13 it=3  |g1|=2.22e-16 |g2|=2.22e-16 ||RP||=1.68e-13  constraint_residual=1.68e-13  rel_step_growth=4.826e-03  <-- GROWTH VIOLATION
+step  72 (s= 18.00): |dz|_rel=3.178868e-02  Newton r=8.13e-13 it=3  |g1|=2.22e-16 |g2|=6.66e-16 ||RP||=1.18e-13  constraint_residual=1.18e-13  rel_step_growth=-7.196e-03
+step  73 (s= 18.25): |dz|_rel=3.116651e-02  Newton r=7.10e-13 it=3  |g1|=6.66e-16 |g2|=2.22e-16 ||RP||=1.44e-13  constraint_residual=1.44e-13  rel_step_growth=-1.957e-02
+step  74 (s= 18.50): |dz|_rel=3.015409e-02  Newton r=1.32e-12 it=3  |g1|=1.11e-15 |g2|=4.44e-16 ||RP||=1.19e-13  constraint_residual=1.19e-13  rel_step_growth=-3.248e-02
+step  75 (s= 18.75): |dz|_rel=2.876461e-02  Newton r=5.26e-13 it=3  |g1|=6.66e-16 |g2|=6.66e-16 ||RP||=2.49e-13  constraint_residual=2.49e-13  rel_step_growth=-4.608e-02
+step  76 (s= 19.00): |dz|_rel=2.702693e-02  Newton r=5.05e-13 it=3  |g1|=2.22e-16 |g2|=6.66e-16 ||RP||=1.38e-13  constraint_residual=1.38e-13  rel_step_growth=-6.041e-02
+step  77 (s= 19.25): |dz|_rel=2.499212e-02  Newton r=7.60e-13 it=3  |g1|=0.00e+00 |g2|=2.22e-16 ||RP||=2.67e-13  constraint_residual=2.67e-13  rel_step_growth=-7.529e-02
+step  78 (s= 19.50): |dz|_rel=2.274398e-02  Newton r=3.20e-13 it=3  |g1|=2.22e-16 |g2|=1.55e-15 ||RP||=1.13e-13  constraint_residual=1.13e-13  rel_step_growth=-8.995e-02
+step  79 (s= 19.75): |dz|_rel=2.041644e-02  Newton r=8.52e-13 it=3  |g1|=6.66e-16 |g2|=8.88e-16 ||RP||=1.40e-13  constraint_residual=1.40e-13  rel_step_growth=-1.023e-01
+step  80 (s= 20.00): |dz|_rel=1.821971e-02  Newton r=4.43e-13 it=3  |g1|=2.22e-16 |g2|=6.66e-16 ||RP||=4.43e-13  constraint_residual=4.43e-13  rel_step_growth=-1.076e-01
+step  81 (s= 20.25): |dz|_rel=1.646698e-02  Newton r=1.50e-12 it=3  |g1|=1.11e-15 |g2|=1.11e-15 ||RP||=1.19e-13  constraint_residual=1.19e-13  rel_step_growth=-9.620e-02
+step  82 (s= 20.50): |dz|_rel=1.555592e-02  Newton r=8.86e-13 it=3  |g1|=1.11e-15 |g2|=0.00e+00 ||RP||=2.06e-13  constraint_residual=2.06e-13  rel_step_growth=-5.533e-02
+step  83 (s= 20.75): |dz|_rel=1.582031e-02  Newton r=5.62e-13 it=3  |g1|=6.66e-16 |g2|=2.22e-16 ||RP||=1.81e-13  constraint_residual=1.81e-13  rel_step_growth=1.700e-02  <-- GROWTH VIOLATION
+step  84 (s= 21.00): |dz|_rel=1.730623e-02  Newton r=2.86e-13 it=3  |g1|=2.22e-16 |g2|=0.00e+00 ||RP||=1.33e-13  constraint_residual=1.33e-13  rel_step_growth=9.392e-02  <-- GROWTH VIOLATION
+step  85 (s= 21.25): |dz|_rel=1.975272e-02  Newton r=9.81e-13 it=3  |g1|=0.00e+00 |g2|=4.44e-16 ||RP||=2.72e-13  constraint_residual=2.72e-13  rel_step_growth=1.414e-01  <-- GROWTH VIOLATION
+step  86 (s= 21.50): |dz|_rel=2.279299e-02  Newton r=8.91e-13 it=3  |g1|=2.22e-16 |g2|=1.11e-15 ||RP||=1.56e-13  constraint_residual=1.56e-13  rel_step_growth=1.539e-01  <-- GROWTH VIOLATION
+step  87 (s= 21.75): |dz|_rel=2.610565e-02  Newton r=5.71e-13 it=3  |g1|=2.22e-16 |g2|=2.22e-16 ||RP||=2.22e-13  constraint_residual=2.22e-13  rel_step_growth=1.453e-01  <-- GROWTH VIOLATION
+step  88 (s= 22.00): |dz|_rel=2.944609e-02  Newton r=8.12e-13 it=3  |g1|=2.22e-16 |g2|=1.11e-15 ||RP||=3.83e-13  constraint_residual=3.83e-13  rel_step_growth=1.280e-01  <-- GROWTH VIOLATION
+step  89 (s= 22.25): |dz|_rel=3.263107e-02  Newton r=5.52e-11 it=2  |g1|=2.22e-16 |g2|=8.88e-16 ||RP||=3.32e-13  constraint_residual=3.32e-13  rel_step_growth=1.082e-01  <-- GROWTH VIOLATION
+step  90 (s= 22.50): |dz|_rel=3.552049e-02  Newton r=1.61e-12 it=3  |g1|=2.22e-16 |g2|=0.00e+00 ||RP||=1.57e-13  constraint_residual=1.57e-13  rel_step_growth=8.855e-02  <-- GROWTH VIOLATION
+step  91 (s= 22.75): |dz|_rel=3.800568e-02  Newton r=7.21e-13 it=3  |g1|=2.22e-16 |g2|=6.66e-16 ||RP||=2.92e-13  constraint_residual=2.92e-13  rel_step_growth=6.997e-02  <-- GROWTH VIOLATION
+step  92 (s= 23.00): |dz|_rel=4.000306e-02  Newton r=7.28e-13 it=3  |g1|=4.44e-16 |g2|=1.11e-15 ||RP||=1.14e-13  constraint_residual=1.14e-13  rel_step_growth=5.255e-02  <-- GROWTH VIOLATION
+step  93 (s= 23.25): |dz|_rel=4.145095e-02  Newton r=1.82e-12 it=3  |g1|=6.66e-16 |g2|=1.33e-15 ||RP||=1.39e-13  constraint_residual=1.39e-13  rel_step_growth=3.619e-02  <-- GROWTH VIOLATION
+step  94 (s= 23.50): |dz|_rel=4.230817e-02  Newton r=1.28e-12 it=3  |g1|=6.66e-16 |g2|=4.44e-16 ||RP||=2.19e-13  constraint_residual=2.19e-13  rel_step_growth=2.068e-02  <-- GROWTH VIOLATION
+step  95 (s= 23.75): |dz|_rel=4.255360e-02  Newton r=6.47e-13 it=3  |g1|=6.66e-16 |g2|=0.00e+00 ||RP||=2.86e-13  constraint_residual=2.86e-13  rel_step_growth=5.801e-03  <-- GROWTH VIOLATION
+step  96 (s= 24.00): |dz|_rel=4.218626e-02  Newton r=1.25e-12 it=3  |g1|=1.11e-15 |g2|=0.00e+00 ||RP||=2.73e-13  constraint_residual=2.73e-13  rel_step_growth=-8.632e-03
+step  97 (s= 24.25): |dz|_rel=4.122607e-02  Newton r=8.07e-13 it=3  |g1|=6.66e-16 |g2|=6.66e-16 ||RP||=1.72e-13  constraint_residual=1.72e-13  rel_step_growth=-2.276e-02
+step  98 (s= 24.50): |dz|_rel=3.971532e-02  Newton r=1.35e-12 it=3  |g1|=6.66e-16 |g2|=1.33e-15 ||RP||=1.87e-13  constraint_residual=1.87e-13  rel_step_growth=-3.665e-02
+step  99 (s= 24.75): |dz|_rel=3.772144e-02  Newton r=1.31e-12 it=3  |g1|=4.44e-16 |g2|=6.66e-16 ||RP||=1.51e-13  constraint_residual=1.51e-13  rel_step_growth=-5.020e-02
+step 100 (s= 25.00): |dz|_rel=3.534186e-02  Newton r=1.77e-12 it=3  |g1|=2.22e-16 |g2|=8.88e-16 ||RP||=1.84e-13  constraint_residual=1.84e-13  rel_step_growth=-6.308e-02
+step 101 (s= 25.25): |dz|_rel=3.271198e-02  Newton r=1.70e-12 it=3  |g1|=1.11e-15 |g2|=8.88e-16 ||RP||=2.98e-13  constraint_residual=2.98e-13  rel_step_growth=-7.441e-02
+step 102 (s= 25.50): |dz|_rel=3.001753e-02  Newton r=8.81e-13 it=3  |g1|=2.22e-16 |g2|=6.66e-16 ||RP||=1.29e-13  constraint_residual=1.29e-13  rel_step_growth=-8.237e-02
+step 103 (s= 25.75): |dz|_rel=2.750933e-02  Newton r=2.18e-12 it=3  |g1|=2.22e-16 |g2|=0.00e+00 ||RP||=1.77e-13  constraint_residual=1.77e-13  rel_step_growth=-8.356e-02
+step 104 (s= 26.00): |dz|_rel=2.551029e-02  Newton r=1.09e-12 it=3  |g1|=2.22e-16 |g2|=2.22e-16 ||RP||=2.14e-13  constraint_residual=2.14e-13  rel_step_growth=-7.267e-02
+step 105 (s= 26.25): |dz|_rel=2.438493e-02  Newton r=1.73e-12 it=3  |g1|=0.00e+00 |g2|=2.22e-15 ||RP||=2.34e-13  constraint_residual=2.34e-13  rel_step_growth=-4.411e-02
+step 106 (s= 26.50): |dz|_rel=2.443706e-02  Newton r=6.55e-13 it=3  |g1|=2.22e-16 |g2|=8.88e-16 ||RP||=1.77e-13  constraint_residual=1.77e-13  rel_step_growth=2.138e-03  <-- GROWTH VIOLATION
+step 107 (s= 26.75): |dz|_rel=2.577062e-02  Newton r=1.96e-12 it=3  |g1|=4.44e-16 |g2|=6.66e-16 ||RP||=1.54e-13  constraint_residual=1.54e-13  rel_step_growth=5.457e-02  <-- GROWTH VIOLATION
+step 108 (s= 27.00): |dz|_rel=2.824545e-02  Newton r=7.03e-13 it=3  |g1|=6.66e-16 |g2|=4.44e-16 ||RP||=2.89e-13  constraint_residual=2.89e-13  rel_step_growth=9.603e-02  <-- GROWTH VIOLATION
+step 109 (s= 27.25): |dz|_rel=3.157624e-02  Newton r=1.45e-12 it=3  |g1|=0.00e+00 |g2|=4.44e-16 ||RP||=2.12e-13  constraint_residual=2.12e-13  rel_step_growth=1.179e-01  <-- GROWTH VIOLATION
+step 110 (s= 27.50): |dz|_rel=3.545956e-02  Newton r=8.82e-13 it=3  |g1|=0.00e+00 |g2|=4.44e-16 ||RP||=3.41e-13  constraint_residual=3.41e-13  rel_step_growth=1.230e-01  <-- GROWTH VIOLATION
+step 111 (s= 27.75): |dz|_rel=3.963813e-02  Newton r=2.22e-12 it=3  |g1|=6.66e-16 |g2|=6.66e-16 ||RP||=1.71e-13  constraint_residual=1.71e-13  rel_step_growth=1.178e-01  <-- GROWTH VIOLATION
+step 112 (s= 28.00): |dz|_rel=4.391105e-02  Newton r=1.28e-12 it=3  |g1|=2.22e-16 |g2|=1.11e-15 ||RP||=1.18e-13  constraint_residual=1.18e-13  rel_step_growth=1.078e-01  <-- GROWTH VIOLATION
+step 113 (s= 28.25): |dz|_rel=4.812364e-02  Newton r=1.00e-12 it=3  |g1|=6.66e-16 |g2|=4.44e-16 ||RP||=2.10e-13  constraint_residual=2.10e-13  rel_step_growth=9.593e-02  <-- GROWTH VIOLATION
+step 114 (s= 28.50): |dz|_rel=5.215496e-02  Newton r=5.05e-13 it=3  |g1|=2.22e-16 |g2|=4.44e-16 ||RP||=1.73e-13  constraint_residual=1.73e-13  rel_step_growth=8.377e-02  <-- GROWTH VIOLATION
+step 115 (s= 28.75): |dz|_rel=5.590791e-02  Newton r=6.67e-13 it=3  |g1|=4.44e-16 |g2|=4.44e-16 ||RP||=1.23e-13  constraint_residual=1.23e-13  rel_step_growth=7.196e-02  <-- GROWTH VIOLATION
+step 116 (s= 29.00): |dz|_rel=5.930240e-02  Newton r=6.51e-11 it=2  |g1|=1.11e-15 |g2|=1.11e-15 ||RP||=3.84e-13  constraint_residual=3.84e-13  rel_step_growth=6.072e-02  <-- GROWTH VIOLATION
+step 117 (s= 29.25): |dz|_rel=6.227070e-02  Newton r=8.87e-11 it=2  |g1|=2.22e-16 |g2|=8.88e-16 ||RP||=1.07e-13  constraint_residual=1.07e-13  rel_step_growth=5.005e-02  <-- GROWTH VIOLATION
+step 118 (s= 29.50): |dz|_rel=6.475424e-02  Newton r=9.95e-13 it=3  |g1|=1.11e-15 |g2|=8.88e-16 ||RP||=1.33e-13  constraint_residual=1.33e-13  rel_step_growth=3.988e-02  <-- GROWTH VIOLATION
+step 119 (s= 29.75): |dz|_rel=6.670131e-02  Newton r=3.98e-13 it=3  |g1|=6.66e-16 |g2|=5.55e-16 ||RP||=1.22e-13  constraint_residual=1.22e-13  rel_step_growth=3.007e-02  <-- GROWTH VIOLATION
+step 120 (s= 30.00): |dz|_rel=6.806552e-02  Newton r=2.14e-12 it=3  |g1|=2.22e-16 |g2|=6.66e-16 ||RP||=2.53e-13  constraint_residual=2.53e-13  rel_step_growth=2.045e-02  <-- GROWTH VIOLATION
+step 121 (s= 30.25): |dz|_rel=6.880471e-02  Newton r=1.05e-12 it=3  |g1|=6.66e-16 |g2|=2.22e-16 ||RP||=1.40e-13  constraint_residual=1.40e-13  rel_step_growth=1.086e-02  <-- GROWTH VIOLATION
+step 122 (s= 30.50): |dz|_rel=6.888057e-02  Newton r=1.02e-12 it=3  |g1|=6.66e-16 |g2|=1.89e-15 ||RP||=1.15e-13  constraint_residual=1.15e-13  rel_step_growth=1.103e-03  <-- GROWTH VIOLATION
+step 123 (s= 30.75): |dz|_rel=6.825897e-02  Newton r=9.55e-13 it=3  |g1|=6.66e-16 |g2|=0.00e+00 ||RP||=1.52e-13  constraint_residual=1.52e-13  rel_step_growth=-9.024e-03
+step 124 (s= 31.00): |dz|_rel=6.691134e-02  Newton r=6.41e-13 it=3  |g1|=2.22e-16 |g2|=5.55e-16 ||RP||=1.21e-13  constraint_residual=1.21e-13  rel_step_growth=-1.974e-02
+step 125 (s= 31.25): |dz|_rel=6.481774e-02  Newton r=7.66e-13 it=3  |g1|=2.22e-16 |g2|=2.22e-16 ||RP||=2.01e-13  constraint_residual=2.01e-13  rel_step_growth=-3.129e-02
+step 126 (s= 31.50): |dz|_rel=6.197215e-02  Newton r=6.89e-13 it=3  |g1|=2.22e-16 |g2|=0.00e+00 ||RP||=1.82e-13  constraint_residual=1.82e-13  rel_step_growth=-4.390e-02
+step 127 (s= 31.75): |dz|_rel=5.839164e-02  Newton r=7.40e-13 it=3  |g1|=6.66e-16 |g2|=8.88e-16 ||RP||=1.13e-13  constraint_residual=1.13e-13  rel_step_growth=-5.778e-02
+step 128 (s= 32.00): |dz|_rel=5.413126e-02  Newton r=2.44e-12 it=3  |g1|=6.66e-16 |g2|=1.11e-16 ||RP||=9.61e-14  constraint_residual=9.61e-14  rel_step_growth=-7.296e-02
+step 129 (s= 32.25): |dz|_rel=4.930884e-02  Newton r=7.60e-13 it=3  |g1|=2.22e-16 |g2|=1.11e-15 ||RP||=2.56e-13  constraint_residual=2.56e-13  rel_step_growth=-8.909e-02
+step 130 (s= 32.50): |dz|_rel=4.414634e-02  Newton r=1.09e-12 it=3  |g1|=4.44e-16 |g2|=1.33e-15 ||RP||=1.70e-13  constraint_residual=1.70e-13  rel_step_growth=-1.047e-01
+step 131 (s= 32.75): |dz|_rel=3.903745e-02  Newton r=6.88e-13 it=3  |g1|=2.22e-16 |g2|=4.44e-16 ||RP||=1.26e-13  constraint_residual=1.26e-13  rel_step_growth=-1.157e-01
+step 132 (s= 33.00): |dz|_rel=3.464061e-02  Newton r=1.00e-12 it=3  |g1|=1.11e-15 |g2|=6.66e-16 ||RP||=2.55e-13  constraint_residual=2.55e-13  rel_step_growth=-1.126e-01
+step 133 (s= 33.25): |dz|_rel=3.191785e-02  Newton r=8.47e-13 it=3  |g1|=2.22e-16 |g2|=1.11e-15 ||RP||=2.11e-13  constraint_residual=2.11e-13  rel_step_growth=-7.860e-02
+step 134 (s= 33.50): |dz|_rel=3.185715e-02  Newton r=6.96e-13 it=3  |g1|=1.55e-15 |g2|=1.55e-15 ||RP||=2.55e-13  constraint_residual=2.55e-13  rel_step_growth=-1.902e-03
+step 135 (s= 33.75): |dz|_rel=3.479255e-02  Newton r=6.41e-13 it=3  |g1|=2.22e-16 |g2|=4.44e-16 ||RP||=1.67e-13  constraint_residual=1.67e-13  rel_step_growth=9.214e-02  <-- GROWTH VIOLATION
+step 136 (s= 34.00): |dz|_rel=4.013656e-02  Newton r=1.61e-12 it=3  |g1|=4.44e-16 |g2|=6.66e-16 ||RP||=1.80e-13  constraint_residual=1.80e-13  rel_step_growth=1.536e-01  <-- GROWTH VIOLATION
+step 137 (s= 34.25): |dz|_rel=4.692596e-02  Newton r=2.14e-12 it=3  |g1|=2.22e-16 |g2|=6.66e-16 ||RP||=1.59e-13  constraint_residual=1.59e-13  rel_step_growth=1.692e-01  <-- GROWTH VIOLATION
+step 138 (s= 34.50): |dz|_rel=5.431881e-02  Newton r=5.42e-13 it=3  |g1|=6.66e-16 |g2|=4.44e-16 ||RP||=2.40e-13  constraint_residual=2.40e-13  rel_step_growth=1.575e-01  <-- GROWTH VIOLATION
+step 139 (s= 34.75): |dz|_rel=6.169870e-02  Newton r=3.14e-13 it=3  |g1|=1.11e-15 |g2|=2.00e-15 ||RP||=2.71e-13  constraint_residual=2.71e-13  rel_step_growth=1.359e-01  <-- GROWTH VIOLATION
+step 140 (s= 35.00): |dz|_rel=6.862591e-02  Newton r=6.42e-13 it=3  |g1|=1.33e-15 |g2|=4.44e-16 ||RP||=4.33e-13  constraint_residual=4.33e-13  rel_step_growth=1.123e-01  <-- GROWTH VIOLATION
+step 141 (s= 35.25): |dz|_rel=7.478304e-02  Newton r=1.10e-12 it=3  |g1|=6.66e-16 |g2|=6.66e-16 ||RP||=1.18e-13  constraint_residual=1.18e-13  rel_step_growth=8.972e-02  <-- GROWTH VIOLATION
+step 142 (s= 35.50): |dz|_rel=7.994053e-02  Newton r=2.16e-12 it=3  |g1|=4.44e-16 |g2|=2.22e-15 ||RP||=2.40e-13  constraint_residual=2.40e-13  rel_step_growth=6.897e-02  <-- GROWTH VIOLATION
+step 143 (s= 35.75): |dz|_rel=8.393712e-02  Newton r=4.77e-13 it=3  |g1|=2.22e-16 |g2|=1.11e-15 ||RP||=3.72e-13  constraint_residual=3.72e-13  rel_step_growth=4.999e-02  <-- GROWTH VIOLATION
+step 144 (s= 36.00): |dz|_rel=8.666889e-02  Newton r=2.27e-12 it=3  |g1|=1.33e-15 |g2|=0.00e+00 ||RP||=2.28e-13  constraint_residual=2.28e-13  rel_step_growth=3.255e-02  <-- GROWTH VIOLATION
+step 145 (s= 36.25): |dz|_rel=8.808334e-02  Newton r=5.36e-13 it=3  |g1|=1.11e-15 |g2|=6.66e-16 ||RP||=2.11e-13  constraint_residual=2.11e-13  rel_step_growth=1.632e-02  <-- GROWTH VIOLATION
+step 146 (s= 36.50): |dz|_rel=8.817694e-02  Newton r=1.55e-12 it=3  |g1|=2.22e-16 |g2|=2.00e-15 ||RP||=1.36e-13  constraint_residual=1.36e-13  rel_step_growth=1.063e-03  <-- GROWTH VIOLATION
+step 147 (s= 36.75): |dz|_rel=8.699533e-02  Newton r=3.13e-13 it=3  |g1|=2.22e-16 |g2|=2.22e-16 ||RP||=2.84e-13  constraint_residual=2.84e-13  rel_step_growth=-1.340e-02
+step 148 (s= 37.00): |dz|_rel=8.463566e-02  Newton r=1.19e-12 it=3  |g1|=1.11e-15 |g2|=1.55e-15 ||RP||=1.44e-13  constraint_residual=1.44e-13  rel_step_growth=-2.712e-02
+step 149 (s= 37.25): |dz|_rel=8.125141e-02  Newton r=1.40e-12 it=3  |g1|=4.44e-16 |g2|=4.44e-16 ||RP||=3.41e-13  constraint_residual=3.41e-13  rel_step_growth=-3.999e-02
+step 150 (s= 37.50): |dz|_rel=7.706006e-02  Newton r=8.98e-13 it=3  |g1|=2.22e-16 |g2|=1.33e-15 ||RP||=1.74e-13  constraint_residual=1.74e-13  rel_step_growth=-5.158e-02
+step 151 (s= 37.75): |dz|_rel=7.235451e-02  Newton r=9.03e-13 it=3  |g1|=6.66e-16 |g2|=4.44e-16 ||RP||=1.82e-13  constraint_residual=1.82e-13  rel_step_growth=-6.106e-02
+step 152 (s= 38.00): |dz|_rel=6.751799e-02  Newton r=7.32e-13 it=3  |g1|=2.22e-16 |g2|=6.66e-16 ||RP||=2.92e-13  constraint_residual=2.92e-13  rel_step_growth=-6.684e-02
+step 153 (s= 38.25): |dz|_rel=6.303723e-02  Newton r=3.13e-12 it=3  |g1|=6.66e-16 |g2|=8.88e-16 ||RP||=1.58e-13  constraint_residual=1.58e-13  rel_step_growth=-6.636e-02
+step 154 (s= 38.50): |dz|_rel=5.949628e-02  Newton r=7.16e-13 it=3  |g1|=1.11e-15 |g2|=4.44e-16 ||RP||=1.80e-13  constraint_residual=1.80e-13  rel_step_growth=-5.617e-02
+step 155 (s= 38.75): |dz|_rel=5.751548e-02  Newton r=1.59e-12 it=3  |g1|=4.44e-16 |g2|=1.78e-15 ||RP||=1.70e-13  constraint_residual=1.70e-13  rel_step_growth=-3.329e-02
+step 156 (s= 39.00): |dz|_rel=5.760722e-02  Newton r=1.70e-12 it=3  |g1|=2.22e-16 |g2|=2.22e-16 ||RP||=2.44e-13  constraint_residual=2.44e-13  rel_step_growth=1.595e-03  <-- GROWTH VIOLATION
+step 157 (s= 39.25): |dz|_rel=5.999825e-02  Newton r=9.87e-13 it=3  |g1|=4.44e-16 |g2|=4.44e-16 ||RP||=3.45e-13  constraint_residual=3.45e-13  rel_step_growth=4.151e-02  <-- GROWTH VIOLATION
+step 158 (s= 39.50): |dz|_rel=6.455818e-02  Newton r=9.85e-13 it=3  |g1|=2.22e-16 |g2|=4.44e-16 ||RP||=1.76e-13  constraint_residual=1.76e-13  rel_step_growth=7.600e-02  <-- GROWTH VIOLATION
+step 159 (s= 39.75): |dz|_rel=7.090114e-02  Newton r=1.45e-12 it=3  |g1|=4.44e-16 |g2|=8.88e-16 ||RP||=2.47e-13  constraint_residual=2.47e-13  rel_step_growth=9.825e-02  <-- GROWTH VIOLATION
+step 160 (s= 40.00): |dz|_rel=7.855787e-02  Newton r=7.54e-13 it=3  |g1|=6.66e-16 |g2|=8.88e-16 ||RP||=2.91e-13  constraint_residual=2.91e-13  rel_step_growth=1.080e-01  <-- GROWTH VIOLATION
+step 161 (s= 40.25): |dz|_rel=8.709620e-02  Newton r=1.33e-12 it=3  |g1|=1.55e-15 |g2|=1.11e-15 ||RP||=3.20e-13  constraint_residual=3.20e-13  rel_step_growth=1.087e-01  <-- GROWTH VIOLATION
+step 162 (s= 40.50): |dz|_rel=9.616623e-02  Newton r=2.89e-12 it=3  |g1|=2.22e-16 |g2|=2.22e-16 ||RP||=2.01e-13  constraint_residual=2.01e-13  rel_step_growth=1.041e-01  <-- GROWTH VIOLATION
+step 163 (s= 40.75): |dz|_rel=1.055018e-01  Newton r=7.39e-13 it=3  |g1|=2.22e-16 |g2|=6.66e-16 ||RP||=1.67e-13  constraint_residual=1.67e-13  rel_step_growth=9.708e-02  <-- GROWTH VIOLATION
+step 164 (s= 41.00): |dz|_rel=1.149069e-01  Newton r=1.04e-12 it=3  |g1|=2.22e-16 |g2|=6.66e-16 ||RP||=2.50e-13  constraint_residual=2.50e-13  rel_step_growth=8.915e-02  <-- GROWTH VIOLATION
+step 165 (s= 41.25): |dz|_rel=1.242416e-01  Newton r=1.62e-12 it=3  |g1|=6.66e-16 |g2|=2.11e-15 ||RP||=4.03e-13  constraint_residual=4.03e-13  rel_step_growth=8.124e-02  <-- GROWTH VIOLATION
+step 166 (s= 41.50): |dz|_rel=1.334092e-01  Newton r=9.24e-13 it=3  |g1|=6.66e-16 |g2|=1.44e-15 ||RP||=2.06e-13  constraint_residual=2.06e-13  rel_step_growth=7.379e-02  <-- GROWTH VIOLATION
+step 167 (s= 41.75): |dz|_rel=1.423474e-01  Newton r=2.46e-12 it=3  |g1|=2.22e-16 |g2|=7.77e-16 ||RP||=1.86e-13  constraint_residual=1.86e-13  rel_step_growth=6.700e-02  <-- GROWTH VIOLATION
+step 168 (s= 42.00): |dz|_rel=1.510211e-01  Newton r=1.03e-12 it=3  |g1|=1.11e-15 |g2|=1.55e-15 ||RP||=1.54e-13  constraint_residual=1.54e-13  rel_step_growth=6.093e-02  <-- GROWTH VIOLATION
+step 169 (s= 42.25): |dz|_rel=1.594164e-01  Newton r=4.33e-13 it=3  |g1|=2.22e-16 |g2|=8.88e-16 ||RP||=1.26e-13  constraint_residual=1.26e-13  rel_step_growth=5.559e-02  <-- GROWTH VIOLATION
+step 170 (s= 42.50): |dz|_rel=1.675362e-01  Newton r=7.15e-13 it=3  |g1|=8.88e-16 |g2|=5.55e-16 ||RP||=1.12e-13  constraint_residual=1.12e-13  rel_step_growth=5.093e-02  <-- GROWTH VIOLATION
+step 171 (s= 42.75): |dz|_rel=1.753961e-01  Newton r=2.29e-12 it=3  |g1|=1.11e-15 |g2|=2.22e-16 ||RP||=1.70e-13  constraint_residual=1.70e-13  rel_step_growth=4.691e-02  <-- GROWTH VIOLATION
+step 172 (s= 43.00): |dz|_rel=1.830215e-01  Newton r=2.28e-12 it=3  |g1|=2.22e-16 |g2|=2.22e-16 ||RP||=2.24e-13  constraint_residual=2.24e-13  rel_step_growth=4.348e-02  <-- GROWTH VIOLATION
+step 173 (s= 43.25): |dz|_rel=1.904445e-01  Newton r=4.75e-13 it=3  |g1|=6.66e-16 |g2|=3.33e-16 ||RP||=4.62e-13  constraint_residual=4.62e-13  rel_step_growth=4.056e-02  <-- GROWTH VIOLATION
+step 174 (s= 43.50): |dz|_rel=1.977027e-01  Newton r=7.07e-13 it=3  |g1|=8.88e-16 |g2|=1.44e-15 ||RP||=1.81e-13  constraint_residual=1.81e-13  rel_step_growth=3.811e-02  <-- GROWTH VIOLATION
+step 175 (s= 43.75): |dz|_rel=2.048376e-01  Newton r=1.77e-12 it=3  |g1|=6.66e-16 |g2|=3.33e-16 ||RP||=1.49e-13  constraint_residual=1.49e-13  rel_step_growth=3.609e-02  <-- GROWTH VIOLATION
+step 176 (s= 44.00): |dz|_rel=2.118939e-01  Newton r=1.21e-12 it=3  |g1|=2.22e-16 |g2|=1.11e-15 ||RP||=3.40e-13  constraint_residual=3.40e-13  rel_step_growth=3.445e-02  <-- GROWTH VIOLATION
+step 177 (s= 44.25): |dz|_rel=2.189201e-01  Newton r=1.30e-12 it=3  |g1|=2.22e-16 |g2|=5.55e-16 ||RP||=4.42e-13  constraint_residual=4.42e-13  rel_step_growth=3.316e-02  <-- GROWTH VIOLATION
+step 178 (s= 44.50): |dz|_rel=2.259688e-01  Newton r=3.07e-13 it=3  |g1|=2.22e-16 |g2|=4.44e-16 ||RP||=3.07e-13  constraint_residual=3.07e-13  rel_step_growth=3.220e-02  <-- GROWTH VIOLATION
+step 179 (s= 44.75): |dz|_rel=2.330983e-01  Newton r=1.32e-12 it=3  |g1|=1.11e-15 |g2|=2.22e-16 ||RP||=2.47e-13  constraint_residual=2.47e-13  rel_step_growth=3.155e-02  <-- GROWTH VIOLATION
+step 180 (s= 45.00): |dz|_rel=2.403745e-01  Newton r=4.25e-13 it=3  |g1|=2.22e-16 |g2|=1.33e-15 ||RP||=1.25e-13  constraint_residual=1.25e-13  rel_step_growth=3.122e-02  <-- GROWTH VIOLATION
+step 181 (s= 45.25): |dz|_rel=2.478740e-01  Newton r=9.42e-13 it=3  |g1|=1.11e-15 |g2|=8.88e-16 ||RP||=2.09e-13  constraint_residual=2.09e-13  rel_step_growth=3.120e-02  <-- GROWTH VIOLATION
+step 182 (s= 45.50): |dz|_rel=2.556875e-01  Newton r=4.94e-13 it=3  |g1|=1.11e-15 |g2|=1.11e-16 ||RP||=2.55e-13  constraint_residual=2.55e-13  rel_step_growth=3.152e-02  <-- GROWTH VIOLATION
+step 183 (s= 45.75): |dz|_rel=2.639256e-01  Newton r=5.02e-13 it=3  |g1|=6.66e-16 |g2|=1.22e-15 ||RP||=2.74e-13  constraint_residual=2.74e-13  rel_step_growth=3.222e-02  <-- GROWTH VIOLATION
+step 184 (s= 46.00): |dz|_rel=2.727253e-01  Newton r=3.69e-13 it=3  |g1|=2.22e-16 |g2|=3.33e-16 ||RP||=1.41e-13  constraint_residual=1.41e-13  rel_step_growth=3.334e-02  <-- GROWTH VIOLATION
+step 185 (s= 46.25): |dz|_rel=2.822600e-01  Newton r=1.39e-12 it=3  |g1|=2.22e-16 |g2|=2.11e-15 ||RP||=1.11e-13  constraint_residual=1.11e-13  rel_step_growth=3.496e-02  <-- GROWTH VIOLATION
+step 186 (s= 46.50): |dz|_rel=2.927534e-01  Newton r=1.09e-12 it=3  |g1|=8.88e-16 |g2|=7.77e-16 ||RP||=3.24e-13  constraint_residual=3.24e-13  rel_step_growth=3.718e-02  <-- GROWTH VIOLATION
+step 187 (s= 46.75): |dz|_rel=3.044998e-01  Newton r=8.58e-13 it=3  |g1|=6.66e-16 |g2|=1.22e-15 ||RP||=1.45e-13  constraint_residual=1.45e-13  rel_step_growth=4.012e-02  <-- GROWTH VIOLATION
+step 188 (s= 47.00): |dz|_rel=3.178949e-01  Newton r=2.00e-12 it=3  |g1|=2.22e-16 |g2|=1.22e-15 ||RP||=3.42e-13  constraint_residual=3.42e-13  rel_step_growth=4.399e-02  <-- GROWTH VIOLATION
+step 189 (s= 47.25): |dz|_rel=3.334832e-01  Newton r=7.15e-13 it=3  |g1|=6.66e-16 |g2|=1.33e-15 ||RP||=3.35e-13  constraint_residual=3.35e-13  rel_step_growth=4.904e-02  <-- GROWTH VIOLATION
+step 190 (s= 47.50): |dz|_rel=3.520364e-01  Newton r=1.13e-12 it=3  |g1|=4.44e-16 |g2|=1.11e-15 ||RP||=1.60e-13  constraint_residual=1.60e-13  rel_step_growth=5.563e-02  <-- GROWTH VIOLATION
+step 191 (s= 47.75): |dz|_rel=3.746858e-01  Newton r=3.04e-13 it=3  |g1|=8.88e-16 |g2|=1.44e-15 ||RP||=1.25e-13  constraint_residual=1.25e-13  rel_step_growth=6.434e-02  <-- GROWTH VIOLATION
+step 192 (s= 48.00): |dz|_rel=4.031657e-01  Newton r=9.72e-13 it=3  |g1|=6.66e-16 |g2|=3.33e-16 ||RP||=3.29e-13  constraint_residual=3.29e-13  rel_step_growth=7.601e-02  <-- GROWTH VIOLATION
+step 193 (s= 48.25): |dz|_rel=4.402970e-01  Newton r=1.45e-12 it=3  |g1|=1.11e-15 |g2|=5.55e-16 ||RP||=2.73e-13  constraint_residual=2.73e-13  rel_step_growth=9.210e-02  <-- GROWTH VIOLATION
+step 194 (s= 48.50): |dz|_rel=4.910756e-01  Newton r=1.90e-11 it=3  |g1|=1.11e-15 |g2|=0.00e+00 ||RP||=2.66e-13  constraint_residual=2.66e-13  rel_step_growth=1.153e-01  <-- GROWTH VIOLATION
+step 195 (s= 48.75): |dz|_rel=5.655946e-01  Newton r=1.45e-12 it=4  |g1|=4.44e-16 |g2|=3.33e-16 ||RP||=1.86e-13  constraint_residual=1.86e-13  rel_step_growth=1.517e-01  <-- GROWTH VIOLATION
+step 196 (s= 49.00): |dz|_rel=6.896829e-01  Newton r=9.86e-13 it=4  |g1|=8.88e-16 |g2|=3.22e-15 ||RP||=1.26e-13  constraint_residual=1.26e-13  rel_step_growth=2.194e-01  <-- GROWTH VIOLATION
+step 197 (s= 49.25): |dz|_rel=9.925809e-01  Newton r=2.79e-12 it=5  |g1|=2.22e-16 |g2|=8.88e-16 ||RP||=1.76e-13  constraint_residual=1.76e-13  rel_step_growth=4.392e-01  <-- GROWTH VIOLATION
+step 198 (s= 49.50): |dz|_rel=1.268974e+00  Newton r=2.97e+00 it=10  |g1|=3.77e-15 |g2|=8.88e-16 ||RP||=2.55e-13  constraint_residual=2.55e-13  rel_step_growth=2.785e-01  <-- GROWTH VIOLATION
+step 199 (s= 49.75): |dz|_rel=1.268974e+00  Newton r=6.20e+00 it=0  |g1|=3.77e-15 |g2|=8.88e-16 ||RP||=2.55e-13  constraint_residual=2.55e-13  rel_step_growth=0.000e+00
+step 200 (s= 50.00): |dz|_rel=1.268974e+00  Newton r=6.20e+00 it=0  |g1|=3.77e-15 |g2|=8.88e-16 ||RP||=2.55e-13  constraint_residual=2.55e-13  rel_step_growth=0.000e+00
+step 201 (s= 50.25): |dz|_rel=1.268974e+00  Newton r=6.20e+00 it=0  |g1|=3.77e-15 |g2|=8.88e-16 ||RP||=2.55e-13  constraint_residual=2.55e-13  rel_step_growth=0.000e+00
+step 202 (s= 50.50): |dz|_rel=1.268974e+00  Newton r=6.20e+00 it=0  |g1|=3.77e-15 |g2|=8.88e-16 ||RP||=2.55e-13  constraint_residual=2.55e-13  rel_step_growth=0.000e+00
+step 203 (s= 50.75): |dz|_rel=1.268974e+00  Newton r=6.20e+00 it=0  |g1|=3.77e-15 |g2|=8.88e-16 ||RP||=2.55e-13  constraint_residual=2.55e-13  rel_step_growth=0.000e+00
+step 204 (s= 51.00): |dz|_rel=1.268974e+00  Newton r=6.20e+00 it=0  |g1|=3.77e-15 |g2|=8.88e-16 ||RP||=2.55e-13  constraint_residual=2.55e-13  rel_step_growth=0.000e+00
+step 205 (s= 51.25): |dz|_rel=1.268974e+00  Newton r=6.20e+00 it=0  |g1|=3.77e-15 |g2|=8.88e-16 ||RP||=2.55e-13  constraint_residual=2.55e-13  rel_step_growth=0.000e+00
+step 206 (s= 51.50): |dz|_rel=1.268974e+00  Newton r=6.20e+00 it=0  |g1|=3.77e-15 |g2|=8.88e-16 ||RP||=2.55e-13  constraint_residual=2.55e-13  rel_step_growth=0.000e+00
+step 207 (s= 51.75): |dz|_rel=1.268974e+00  Newton r=6.20e+00 it=0  |g1|=3.77e-15 |g2|=8.88e-16 ||RP||=2.55e-13  constraint_residual=2.55e-13  rel_step_growth=0.000e+00
+step 208 (s= 52.00): |dz|_rel=1.268974e+00  Newton r=6.20e+00 it=0  |g1|=3.77e-15 |g2|=8.88e-16 ||RP||=2.55e-13  constraint_residual=2.55e-13  rel_step_growth=0.000e+00
+step 209 (s= 52.25): |dz|_rel=1.268974e+00  Newton r=6.20e+00 it=0  |g1|=3.77e-15 |g2|=8.88e-16 ||RP||=2.55e-13  constraint_residual=2.55e-13  rel_step_growth=0.000e+00
+step 210 (s= 52.50): |dz|_rel=1.268974e+00  Newton r=6.20e+00 it=0  |g1|=3.77e-15 |g2|=8.88e-16 ||RP||=2.55e-13  constraint_residual=2.55e-13  rel_step_growth=0.000e+00
+step 211 (s= 52.75): |dz|_rel=1.268974e+00  Newton r=6.20e+00 it=0  |g1|=3.77e-15 |g2|=8.88e-16 ||RP||=2.55e-13  constraint_residual=2.55e-13  rel_step_growth=0.000e+00
+step 212 (s= 53.00): |dz|_rel=1.268974e+00  Newton r=6.20e+00 it=0  |g1|=3.77e-15 |g2|=8.88e-16 ||RP||=2.55e-13  constraint_residual=2.55e-13  rel_step_growth=0.000e+00
+step 213 (s= 53.25): |dz|_rel=1.268974e+00  Newton r=6.20e+00 it=0  |g1|=3.77e-15 |g2|=8.88e-16 ||RP||=2.55e-13  constraint_residual=2.55e-13  rel_step_growth=0.000e+00
+step 214 (s= 53.50): |dz|_rel=1.268974e+00  Newton r=6.20e+00 it=0  |g1|=3.77e-15 |g2|=8.88e-16 ||RP||=2.55e-13  constraint_residual=2.55e-13  rel_step_growth=0.000e+00
+step 215 (s= 53.75): |dz|_rel=1.268974e+00  Newton r=6.20e+00 it=0  |g1|=3.77e-15 |g2|=8.88e-16 ||RP||=2.55e-13  constraint_residual=2.55e-13  rel_step_growth=0.000e+00
+step 216 (s= 54.00): |dz|_rel=1.268974e+00  Newton r=6.20e+00 it=0  |g1|=3.77e-15 |g2|=8.88e-16 ||RP||=2.55e-13  constraint_residual=2.55e-13  rel_step_growth=0.000e+00
+step 217 (s= 54.25): |dz|_rel=1.268974e+00  Newton r=6.20e+00 it=0  |g1|=3.77e-15 |g2|=8.88e-16 ||RP||=2.55e-13  constraint_residual=2.55e-13  rel_step_growth=0.000e+00
+step 218 (s= 54.50): |dz|_rel=1.268974e+00  Newton r=6.20e+00 it=0  |g1|=3.77e-15 |g2|=8.88e-16 ||RP||=2.55e-13  constraint_residual=2.55e-13  rel_step_growth=0.000e+00
+step 219 (s= 54.75): |dz|_rel=1.268974e+00  Newton r=6.20e+00 it=0  |g1|=3.77e-15 |g2|=8.88e-16 ||RP||=2.55e-13  constraint_residual=2.55e-13  rel_step_growth=0.000e+00
+step 220 (s= 55.00): |dz|_rel=1.268974e+00  Newton r=6.20e+00 it=0  |g1|=3.77e-15 |g2|=8.88e-16 ||RP||=2.55e-13  constraint_residual=2.55e-13  rel_step_growth=0.000e+00
+step 221 (s= 55.25): |dz|_rel=1.268974e+00  Newton r=6.20e+00 it=0  |g1|=3.77e-15 |g2|=8.88e-16 ||RP||=2.55e-13  constraint_residual=2.55e-13  rel_step_growth=0.000e+00
+step 222 (s= 55.50): |dz|_rel=1.268974e+00  Newton r=6.20e+00 it=0  |g1|=3.77e-15 |g2|=8.88e-16 ||RP||=2.55e-13  constraint_residual=2.55e-13  rel_step_growth=0.000e+00
+step 223 (s= 55.75): |dz|_rel=1.268974e+00  Newton r=6.20e+00 it=0  |g1|=3.77e-15 |g2|=8.88e-16 ||RP||=2.55e-13  constraint_residual=2.55e-13  rel_step_growth=0.000e+00
+step 224 (s= 56.00): |dz|_rel=1.268974e+00  Newton r=6.20e+00 it=0  |g1|=3.77e-15 |g2|=8.88e-16 ||RP||=2.55e-13  constraint_residual=2.55e-13  rel_step_growth=0.000e+00
+step 225 (s= 56.25): |dz|_rel=1.268974e+00  Newton r=6.20e+00 it=0  |g1|=3.77e-15 |g2|=8.88e-16 ||RP||=2.55e-13  constraint_residual=2.55e-13  rel_step_growth=0.000e+00
+step 226 (s= 56.50): |dz|_rel=1.268974e+00  Newton r=6.20e+00 it=0  |g1|=3.77e-15 |g2|=8.88e-16 ||RP||=2.55e-13  constraint_residual=2.55e-13  rel_step_growth=0.000e+00
+step 227 (s= 56.75): |dz|_rel=1.268974e+00  Newton r=6.20e+00 it=0  |g1|=3.77e-15 |g2|=8.88e-16 ||RP||=2.55e-13  constraint_residual=2.55e-13  rel_step_growth=0.000e+00
+step 228 (s= 57.00): |dz|_rel=1.268974e+00  Newton r=6.20e+00 it=0  |g1|=3.77e-15 |g2|=8.88e-16 ||RP||=2.55e-13  constraint_residual=2.55e-13  rel_step_growth=0.000e+00
+step 229 (s= 57.25): |dz|_rel=1.268974e+00  Newton r=6.20e+00 it=0  |g1|=3.77e-15 |g2|=8.88e-16 ||RP||=2.55e-13  constraint_residual=2.55e-13  rel_step_growth=0.000e+00
+step 230 (s= 57.50): |dz|_rel=1.268974e+00  Newton r=6.20e+00 it=0  |g1|=3.77e-15 |g2|=8.88e-16 ||RP||=2.55e-13  constraint_residual=2.55e-13  rel_step_growth=0.000e+00
+step 231 (s= 57.75): |dz|_rel=1.268974e+00  Newton r=6.20e+00 it=0  |g1|=3.77e-15 |g2|=8.88e-16 ||RP||=2.55e-13  constraint_residual=2.55e-13  rel_step_growth=0.000e+00
+step 232 (s= 58.00): |dz|_rel=1.268974e+00  Newton r=6.20e+00 it=0  |g1|=3.77e-15 |g2|=8.88e-16 ||RP||=2.55e-13  constraint_residual=2.55e-13  rel_step_growth=0.000e+00
+step 233 (s= 58.25): |dz|_rel=1.268974e+00  Newton r=6.20e+00 it=0  |g1|=3.77e-15 |g2|=8.88e-16 ||RP||=2.55e-13  constraint_residual=2.55e-13  rel_step_growth=0.000e+00
+step 234 (s= 58.50): |dz|_rel=1.268974e+00  Newton r=6.20e+00 it=0  |g1|=3.77e-15 |g2|=8.88e-16 ||RP||=2.55e-13  constraint_residual=2.55e-13  rel_step_growth=0.000e+00
+step 235 (s= 58.75): |dz|_rel=1.268974e+00  Newton r=6.20e+00 it=0  |g1|=3.77e-15 |g2|=8.88e-16 ||RP||=2.55e-13  constraint_residual=2.55e-13  rel_step_growth=0.000e+00
+step 236 (s= 59.00): |dz|_rel=1.268974e+00  Newton r=6.20e+00 it=0  |g1|=3.77e-15 |g2|=8.88e-16 ||RP||=2.55e-13  constraint_residual=2.55e-13  rel_step_growth=0.000e+00
+step 237 (s= 59.25): |dz|_rel=1.268974e+00  Newton r=6.20e+00 it=0  |g1|=3.77e-15 |g2|=8.88e-16 ||RP||=2.55e-13  constraint_residual=2.55e-13  rel_step_growth=0.000e+00
+step 238 (s= 59.50): |dz|_rel=1.268974e+00  Newton r=6.20e+00 it=0  |g1|=3.77e-15 |g2|=8.88e-16 ||RP||=2.55e-13  constraint_residual=2.55e-13  rel_step_growth=0.000e+00
+step 239 (s= 59.75): |dz|_rel=1.268974e+00  Newton r=6.20e+00 it=0  |g1|=3.77e-15 |g2|=8.88e-16 ||RP||=2.55e-13  constraint_residual=2.55e-13  rel_step_growth=0.000e+00
+step 240 (s= 60.00): |dz|_rel=1.268974e+00  Newton r=6.20e+00 it=0  |g1|=3.77e-15 |g2|=8.88e-16 ||RP||=2.55e-13  constraint_residual=2.55e-13  rel_step_growth=0.000e+00
+------------------------------------------------------------------------------
+steps completed: 240/240  (s covered = 60 of 60)
+|dz|_rel: 1.000000e-03 -> 1.268974e+00  (ratio 1.269e+03)
+peak |dz|_rel = 1.268974e+00 at step 198 (s=49.5), = 1.269e+03x initial
+max constraint_residual over run: 4.617e-13  (solver step_tol=1.0e-10)
+growth violations (rel_growth > 1e-12): 127 of 240 steps
+  first violation: step 1 (s=0.25)  1.000000e-03 -> 1.354739e-02  rel_growth=1.255e+01
+  last violation:  step 198 (s=49.5)
+wall time: 323.0 s
+
+VERDICT: FAIL  (S4-structural sign +1.0, ker(Cg) reduced correction, grid={'edges': (0.0, 2.0, 15.0, 25.0), 'degs': (10, 20, 8), 'Nb': 16, 'eps_b': 0.001})
+FAIL -- M1 s-march does not pass: sustained growth/oscillation, no monotone contraction.

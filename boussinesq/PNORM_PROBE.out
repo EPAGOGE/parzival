@@ -1,0 +1,152 @@
+PNORM PROBE -- FEASIBILITY GATE VERDICT: BLOCKED
+==================================================
+Task: re-measure existing DNS orbit data in the Lyapunov P-norm (L^T P + P L = -I
+certificate from archive/polar_spectrum.py, root A) to test whether transient growth
+that looks large in the raw physical-space norm is provably contained once weighted
+by P.
+
+STEP 0 (regenerate + persist P): DONE regardless of this gate's outcome, and it
+  completed (was still running when the rest of this file was first drafted; these
+  are the actual finished numbers, not projections).
+  Root A, PROD_CFG edges=(0.0,2.0,15.0,25.0) degs=(16,40,12) Nb=36 eps_b=1e-4.
+  Field used: /Users/epagogellc/parzival/repro/fields/rung_00_a-0.344712.npz
+  (ROOTS['A'] repointed there at runtime -- the path polar_spectrum.py hardcodes,
+  under the dead d3b8cd8d scratchpad, no longer exists; no file was edited).
+  alpha=-0.34471229  h_id=-1.0605e-03  ||F||_rms=5.843e-13  N=7670  n_f=4760
+  dim ker(Cg)=n_finite=4758  built via Realization.dense_L() + kernel_basis()
+  (polar_spectrum.py's own SVD-basis route, NOT q345.py's Householder-quotient
+  basis -- different orthonormal basis of the same ker(Cg), same Lred up to an
+  orthogonal change of basis).  ||Lred||_2=1.112468e+03 (matches the ledger's
+  nrmL['A'] exactly).
+  Bartels-Stewart (scipy solve_continuous_lyapunov(Lred.T, -I), n=4758): 523.8s.
+  Residual ||L^T P + P L + I||_2 / (||P|| ||L||) = 4.966e-16 (ledger-scale, ~1e-16).
+  cholesky(P) -> SUCCEEDS  =>  L is Hurwitz on this ker(Cg) quotient (no
+  eigenvalue was computed or used to reach this verdict -- Cholesky
+  success/failure is the certificate, per the standing refusal on S9).
+  lambda_min(P)=1.68016955e-03  lambda_max(P)=5.66683085e+04
+  kappa(P)=3.372773e+07  sqrt(kappa(P))=5.807558e+03 (transient-growth UPPER
+  BOUND from ||e^{tL}||_2 <= sqrt(kappa(P)) -- notably this upper bound sits at
+  essentially the SAME number as the top of the already-observed raw-norm
+  transient-growth range, 89.66..5807.6 from ledger S6; the P-norm bound is not
+  tighter than what the raw-norm data already showed, for this generator).
+  Total wall time 644.4s. Saved to
+  /Users/epagogellc/parzival/boussinesq/pnorm_P.npz (543 MB: P, Lred, Z0, free
+  index map, cfg, and the fields above as arrays -- see the file itself for the
+  exact key list; NEW filename, nothing existing overwritten).
+
+STEP 1 (feasibility gate): FAILS. No faithful cheap map exists from a DNS orbit
+snapshot (features.py's U) into the space P is defined on (polar_spectrum.py's
+ker(Cg) quotient of the corner solver's state z). Below is exactly what such a map
+would need to do, and why each piece is not a normalization/interpolation problem
+but a separate, expensive inverse problem in its own right. Per the standing
+instruction, this file is the deliverable; no interpolation was faked, no P-norm
+numbers were computed for any orbit.
+
+--------------------------------------------------------------------------
+WHAT P IS DEFINED ON (from archive/polar_spectrum.py + polar_cornerreg.py)
+--------------------------------------------------------------------------
+z is the packed state of a STEADY, self-similar corner profile, found by Newton's
+method (not a time series): three fields (A, B, P-field) plus two scalar gauge
+unknowns (c_l, c_w), on a multi-panel Chebyshev grid in a self-similar radial
+coordinate xi = ln(1+r) covering the FULL corner-to-outer domain
+edges=(0.0, 2.0, 15.0, 25.0), crossed with an angular grid b in
+[eps_b, pi/2-eps_b] (36 points, quarter-plane). For root A (the certified
+production root): Nx=71 radial nodes, Nb=36 angular nodes, n2=2556,
+N=3*n2+2=7670.
+
+The fields A, B, P are DIVIDED variables: Om = xi*A, Bf = xi^2*B, Psi = xi^2*P,
+further carrying an e^{a0 xi} self-similar exponential weight (a0 = alpha, the
+solved-for blowup exponent). This is a nonlinear reparametrization of the
+underlying vorticity/velocity/streamfunction triple, not a relabeling: recovering
+A, B, P at a point requires already knowing xi, b, and a0 there.
+
+Amplitude convention: the profile is gauge-fixed by two corner boundary values
+(WX_REF=1.19620314, THXX_REF=1.79819132, i.e. A(0,b)=WX*cos(b),
+B(0,b)=(THXX/2)*cos^2(b)) -- a FIXED corner normalization, not a sup-amplitude=1
+normalization. z is explicitly documented as "UNNORMALIZED in amplitude" (recon
+note, confirmed by re-reading polar_cornerreg.py __init__).
+
+P itself (this run) lives on a further-reduced coordinate: the n_finite=4758-
+dimensional Z0 (orthonormal SVD) basis of ker(Cg) inside the n_f=4760 "free"
+coordinates of z (free = live transport rows, excluding axis pins and C0-duplicate
+interface rows). P is an operator on Z0-basis coefficient vectors, not on z
+directly and not on any physical quantity directly.
+
+--------------------------------------------------------------------------
+WHAT THE ORBIT DATA IS (from features.py extract()/orbit())
+--------------------------------------------------------------------------
+U is built from actual time-dependent Dedalus DNS snapshots (HDF5, tasks
+'omega1'/'u1' on the REAL physical (z, r) Eulerian grid, real simulation time t).
+Per snapshot: compute vorticity magnitude mag = sqrt(wr^2+wt^2+wz^2) on the full
+physical grid, find its peak (iz, ir), take a local box of up to 21x21=441 cells
+CENTERED ON THE MOVING PEAK, sized by that snapshot's own HWHM length scale
+Lp = sqrt(lz*lr), and normalize by A = sup|omega| at that snapshot (a
+sup-amplitude=1, HWHM-length=1 convention -- unrelated to WX_REF/THXX_REF).
+U therefore changes basis, origin, and scale from snapshot to snapshot, by
+construction (features.py:133-140).
+
+--------------------------------------------------------------------------
+WHY THE GAP IS NOT BRIDGEABLE CHEAPLY
+--------------------------------------------------------------------------
+A faithful map orbit-snapshot -> P-space coefficient vector would need ALL of:
+
+1. LOCATE the self-similar blowup point (z*, t*) for that DNS run. Nothing in
+   features.py or lambda_geom.py computes this; the peak (iz, ir) tracked per
+   snapshot is a proxy, not a fitted blowup center, and no fitting code for it
+   exists in this tree (grepped: no "blowup_time", "t_star", "self_similar" hits
+   outside the solver files themselves).
+
+2. INVERT the self-similar coordinate change (z, r, t) -> (xi, b) at that (z*, t*),
+   which is the SOLVER's own definition (r = exp(xi)-1 is documented only as the
+   solver's SEED construction, polar_cornerreg.py:120-121 -- there is no general
+   physical-r -> xi map stated for arbitrary DNS output, and no code computes one).
+   This also requires knowing which self-similar exponent a0 applies -- a0 is a
+   Newton-solved property of the STEADY profile, not a measured property of a
+   moving DNS snapshot.
+
+3. RECOVER the three DECOUPLED fields (A, B, P-field) from a single scalar
+   mag = |omega|: mag is sqrt(wr^2+wt^2+wz^2), a magnitude that already destroys
+   the directional/component information the divided variables Om, Bf, Psi encode
+   separately. There is no formula in this codebase (or invertible under it) that
+   recovers Om, Bf, Psi, let alone A = Om/xi etc., from mag alone.
+
+4. RENORMALIZE from features.py's per-snapshot sup=1, HWHM=1 local convention to
+   the solver's FIXED corner-gauge (WX_REF, THXX_REF) global convention -- these are
+   different normalizations of different objects (a local peak-relative crop vs. a
+   globally gauge-fixed field over the whole domain), not a scalar rescale.
+
+5. RESTRICT to the domain P is defined on: even after (1)-(4), the result would need
+   to be evaluated over the FULL angular range b in [eps_b, pi/2-eps_b] and the FULL
+   radial range xi in [0, 25.0] to be comparable to z -- but features.py's box is a
+   LOCAL 21x21 crop around one moving point. A local crop cannot populate a global
+   field without extrapolation, which is exactly the kind of faked interpolation
+   this gate is here to refuse.
+
+6. PROJECT into free/ker(Cg)/Z0 coordinates -- this step alone IS cheap and reuses
+   real.restrict / real.project_oblique / kernel_basis as required, but it is the
+   very last step and presupposes (1)-(5) already produced a length-N vector on the
+   solver's own grid.
+
+Each of (1)-(5) is a separate nontrivial inverse problem (blowup-point fitting,
+coordinate un-warping, vector-field decomposition, gauge normalization, and
+global-field reconstruction from a local sample) -- collectively comparable in cost
+to re-deriving the self-similar profile from DNS data, which is a different, much
+larger research program than this probe, not a "cheap hedge." No such code exists
+in the tree today (grepped for pack/unpack/adopt_seed users, U_star/Ustar/fixed_point
+references, and any DNS->spectral bridge: none found outside the solver's own seed
+construction, which itself only maps a KNOWN ANALYTIC/interpolated seed shape, not
+raw DNS output, onto the panel grid).
+
+--------------------------------------------------------------------------
+VERDICT
+--------------------------------------------------------------------------
+STOP at the feasibility gate, per instruction. No P-norm projection was attempted
+on any orbit tag (available tags found under boussinesq/runs and repro/runs include
+G5_11, N2_1e-3/1e-4, NUL1e-3/1e-4, OR_z128r384/z128r768/z256r384/z256r768, SYMa/SYMb,
+W3R/W63R/W77R, loc1024, mpi1024 -- listed for completeness, not touched). No fake
+interpolation was written. The cheap hedge does not exist as stated; closing this
+gap is a separate, expensive project (a blowup-point/self-similar-fit pipeline from
+DNS output into the corner solver's own coordinates), not a re-measurement of
+existing data.
+
+outcome=blocked

@@ -1,0 +1,62 @@
+ADVERSARIAL KILL-SHOT: does a tight-tol fixed point stay fixed under
+one backward-Euler s-march step, at SMOKE grid scale?
+(No eigenvalues used anywhere in this check -- pure residual/movement
+ diagnostics, per standing refusal S9.)
+
+==============================================================================
+[TEST A -- tight root (10,20,8)/Nb16, the actual kill shot] root: tol=1e-12 steps=120  grid={'edges': (0.0, 2.0, 15.0, 25.0), 'degs': (10, 20, 8), 'Nb': 16, 'eps_b': 0.001} alpha=-0.3447
+==============================================================================
+root quality: ||F||_max=4.170359e-12  ||F||_rms=1.104281e-13  newton_taken=5  c_l=3.01434101  c_w=-1.05737853
+root manifold: |g1|=1.110e-15 |g2|=8.882e-16 ||RP||_max=2.006e-13
+------------------------------------------------------------------------------
+sign=+1 ds=0.05    Newton: residual=4.170e-12 in 0 it   |z_new-z_old|_max=0.000000e+00  |z_new-z_old|_rel(A,B)=0.000000e+00
+                      post-step manifold: |g1|=1.110e-15 |g2|=8.882e-16  ||RP||_max=2.006e-13  ||F||_max=4.170e-12
+sign=+1 ds=0.25    Newton: residual=4.170e-12 in 0 it   |z_new-z_old|_max=0.000000e+00  |z_new-z_old|_rel(A,B)=0.000000e+00
+                      post-step manifold: |g1|=1.110e-15 |g2|=8.882e-16  ||RP||_max=2.006e-13  ||F||_max=4.170e-12
+sign=+1 ds=1       Newton: residual=4.170e-12 in 0 it   |z_new-z_old|_max=0.000000e+00  |z_new-z_old|_rel(A,B)=0.000000e+00
+                      post-step manifold: |g1|=1.110e-15 |g2|=8.882e-16  ||RP||_max=2.006e-13  ||F||_max=4.170e-12
+sign=-1 ds=0.05    Newton: residual=4.170e-12 in 0 it   |z_new-z_old|_max=0.000000e+00  |z_new-z_old|_rel(A,B)=0.000000e+00
+                      post-step manifold: |g1|=1.110e-15 |g2|=8.882e-16  ||RP||_max=2.006e-13  ||F||_max=4.170e-12
+sign=-1 ds=0.25    Newton: residual=4.170e-12 in 0 it   |z_new-z_old|_max=0.000000e+00  |z_new-z_old|_rel(A,B)=0.000000e+00
+                      post-step manifold: |g1|=1.110e-15 |g2|=8.882e-16  ||RP||_max=2.006e-13  ||F||_max=4.170e-12
+sign=-1 ds=1       Newton: residual=4.170e-12 in 0 it   |z_new-z_old|_max=0.000000e+00  |z_new-z_old|_rel(A,B)=0.000000e+00
+                      post-step manifold: |g1|=1.110e-15 |g2|=8.882e-16  ||RP||_max=2.006e-13  ||F||_max=4.170e-12
+------------------------------------------------------------------------------
+
+==============================================================================
+[TEST B -- deliberately loose root, same grid as A (leakage-scaling probe)] root: tol=0.0001 steps=2  grid={'edges': (0.0, 2.0, 15.0, 25.0), 'degs': (10, 20, 8), 'Nb': 16, 'eps_b': 0.001} alpha=-0.3447
+==============================================================================
+root quality: ||F||_max=4.269510e-04  ||F||_rms=5.106499e-05  newton_taken=2  c_l=3.01116575  c_w=-1.05558817
+root manifold: |g1|=2.220e-16 |g2|=2.220e-16 ||RP||_max=4.660e-13
+------------------------------------------------------------------------------
+sign=+1 ds=0.25    Newton: residual=1.118e-12 in 2 it   |z_new-z_old|_max=8.628286e-04  |z_new-z_old|_rel(A,B)=1.121096e-04
+                      post-step manifold: |g1|=2.220e-16 |g2|=0.000e+00  ||RP||_max=2.149e-13  ||F||_max=9.899e-04
+------------------------------------------------------------------------------
+
+==============================================================================
+[TEST C -- smoke_test's own (6,10,5)/Nb10 grid, NOT converged tight (informational only, not a kill shot)] root: tol=1e-11 steps=80  grid={'edges': (0.0, 2.0, 15.0, 25.0), 'degs': (6, 10, 5), 'Nb': 10, 'eps_b': 0.001} alpha=-0.3447
+==============================================================================
+root quality: ||F||_max=1.098656e-02  ||F||_rms=4.809336e-04  newton_taken=11  c_l=2.74250454  c_w=-0.88658990
+root manifold: |g1|=1.083e-05 |g2|=1.148e-05 ||RP||_max=3.020e-14
+------------------------------------------------------------------------------
+sign=+1 ds=0.25    Newton: residual=6.266e-13 in 3 it   |z_new-z_old|_max=9.805826e-02  |z_new-z_old|_rel(A,B)=1.364068e-02
+                      post-step manifold: |g1|=0.000e+00 |g2|=2.220e-16  ||RP||_max=4.208e-14  ||F||_max=5.153e-02
+------------------------------------------------------------------------------
+
+==============================================================================
+SCALING CHECK (Test A vs Test B, sign=+1, ds=0.25):
+==============================================================================
+root ||F||_max ratio  (loose/tight) = 1.024e+08
+PASS criterion: movement ratio should track (be of comparable
+order to, not wildly exceed) the residual ratio -- movement
+that is O(1) regardless of root quality would be the DAE-leakage
+signature (constraint/mass-term touching non-evolution rows).
+step |z_new-z_old|_max (tight) = 0.000e+00 -- below the 1e-13 noise floor (step() returned at k=0, no correction computed); a loose/tight RATIO is undefined here, not large. Falling back to an absolute bar on the loose-root movement instead:
+  loose |z_new-z_old|_max = 8.628e-04  vs  bar = 5.337e-03
+>>> loose-root movement is within the residual-scaled bar -- no leakage signature at this scale.
+
+==============================================================================
+VERDICT (Test A, the actual kill shot, sign=+1.0 S4-structural, ds=0.25):
+==============================================================================
+root ||F||_max = 4.170e-12   step |z_new-z_old|_max = 0.000e+00   generous bar = 1.000e-08
+PASS: fixed point stays fixed to within a residual-scaled bar under one backward-Euler step.

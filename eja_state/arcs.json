@@ -76,5 +76,20 @@
     ]
    }
   ]
+ },
+ "curious-fulleq": {
+  "thesis": "Attacking the full Boussinesq equation directly (not the instrument) yields structure the blocked M1 track cannot: the two-scale question is partially decidable by order-counting plus already-banked numbers",
+  "closed": "",
+  "nodes": [
+   {
+    "idx": 0,
+    "text": "K1: theta-transport alone forces w = 1 + Delta for any strict two-scale power-law collapse; omega eq then balances identically; hence |D|=(w-1)/w < 1 is an admissibility boundary and generic |D|~1.01 sits at/over it",
+    "link": "from CURIOUS_TWOSCALE.out, sympy-checked order counting under A1-A4",
+    "proof_condition": "per-run bootstrap CIs on D: generic CIs wholly >=1 refute strict two-scale for generic data; CIs <1 must predict w=1/(1-|D|) consistent with banked w",
+    "status": "unproven",
+    "faults": [],
+    "evidence": []
+   }
+  ]
  }
 }

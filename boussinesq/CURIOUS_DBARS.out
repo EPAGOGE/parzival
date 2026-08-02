@@ -1,0 +1,28 @@
+W2 KILL TEST: per-run |D| CIs vs the K1-R1 admissibility boundary |D| < 1
+==============================================================================
+run              n   span        D                CI95  |D|<1?  verdict under K1-R1
+------------------------------------------------------------------------------
+OR_z256r768     44   2.07   -0.174[  -0.257,  0.187]     yes  admissible; R1 predicts w~1.21
+OR_z256r384     44   2.06   -0.162[  -0.253,  0.232]     yes  admissible; R1 predicts w~1.19
+OR_z128r768     40   1.52    0.006[  -0.124,  0.220]     yes  admissible; R1 predicts w~1.01
+OR_z128r384     39   1.53    0.001[  -0.122,  0.222]     yes  admissible; R1 predicts w~1.00
+G5_11           16   1.39    0.602[  -1.268,  1.430]     n/a  UNINFORMATIVE (CI spans both boundaries)
+NUL1e-3         42   1.44   -0.171[  -0.305,  0.031]     yes  admissible; R1 predicts w~1.21
+NUL1e-4         39   1.42   -0.141[  -0.354,  0.066]     yes  admissible; R1 predicts w~1.16
+N2_1e-3         49   1.96   -0.338[  -0.415, -0.057]     yes  admissible; R1 predicts w~1.51
+N2_1e-4         45   1.98   -0.266[  -0.351,  0.044]     yes  admissible; R1 predicts w~1.36
+SYMa            44   2.07   -0.174[  -0.254,  0.198]     yes  admissible; R1 predicts w~1.21
+SYMb            45   2.06   -0.169[  -0.251,  0.190]     yes  admissible; R1 predicts w~1.20
+loc1024         15   3.12   -0.429[  -0.628,  0.230]     yes  admissible; R1 predicts w~1.75
+mpi1024         26   1.87   -0.097[  -0.228,  0.258]     yes  admissible; R1 predicts w~1.11
+W3R             21   0.97    0.829[  -1.323,  1.424]     n/a  UNINFORMATIVE (CI spans both boundaries)
+W63R            21   1.07    0.500[  -1.292,  0.989]   strad  CI straddles the boundary
+W77R             8   0.08   -2.914[ -21.479, 38.574]     n/a  UNINFORMATIVE (CI spans both boundaries)
+------------------------------------------------------------------------------
+Reading guide: D is the OLS aspect-drift slope (HWHM estimator,
+same as the 07-30 battery). K1-R1: strict two-scale power law
+needs |D| < 1 and then forces w = 1/(1-|D|). A CI wholly at or
+above 1 refuses the two-exponent picture for that run; a CI
+wholly below 1 with w-prediction far from banked w=1 is the W3
+tension instead. All UNGRADED; S6 caveat applies (short spans
+sit inside the transient; D inherits that limitation).

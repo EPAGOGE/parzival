@@ -22,3 +22,5 @@ verify_watch.log
 REGRESSION_*.txt
 finish.log
 note/zahavy_jump.pdf
+pnorm_P*.npz
+*.log

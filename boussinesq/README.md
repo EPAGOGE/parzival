@@ -21,8 +21,10 @@ ESTABLISHED (provenance + tier + exact anchor + identity + two streams + confoun
 - sigma_Lambda(inviscid corner flow) = +1.00 +- 0.03. Anchored by an exact
   amplitude symmetry of the equations (predicted 1/sqrt(2) = 0.707107, measured
   0.706891) and a 2x2 off-ray grid factorial (spread 0.029).
-- Theorem 0: at any growing vorticity maximum, nu |grad xi|^2 <= alpha. One
-  page, unconditional. Data satisfies it with three orders of margin.
+- Corollary 0 (novelty RETRACTED by kill-search, NOVELTY.md C3: one-step
+  corollary of Constantin's |omega|-equation): at any growing vorticity
+  maximum, nu |grad xi|^2 <= alpha. Unconditional; retained as an
+  instrument check. Data satisfies it with three orders of margin.
 - alpha_0 = -0.34240 for the stable profile, two disjoint methods.
 
 ESTABLISHED GIVEN NAMED HYPOTHESES
@@ -32,8 +34,12 @@ ESTABLISHED GIVEN NAMED HYPOTHESES
   snapshot pairs with the stretching rate inferred independently.
 
 ABDUCED (one stream; second stream named)
-- Viscosity inverts the blowup geometry: sigma_PEAK = -0.37 to -0.57 across
-  nu = 1e-5..1e-3, monotone, negative at every nu. Single grid; needs 256x768.
+- Viscosity inverts the blowup geometry. 2026-08-02: second stream
+  DELIVERED (M4): deep-collapse sigma_Lambda = -1.12/-1.24 (nu=1e-4) and
+  -1.25/-1.29 (nu=1e-3), cross-grid spreads 0.121/0.032 (M4_SIGMA_DEEP.out).
+  The earlier window-averaged quotes (-0.37..-0.57) are RETRACTED as regime
+  mixtures (sigma(A) crosses over within the trusted window). Awaits the
+  STANDARD.md confound pass before promotion to ESTABLISHED.
 - c_l = -1/alpha = 2.9206 physical identification (far-field matching).
 
 DEAD (refuted by this laboratory's own machinery; kept because a refuted claim
@@ -51,9 +57,13 @@ OPEN, STATED EXACTLY
   Generic near-wall data dies too young at laptop resolution to read; that
   failure is the measured reason this sector is unexplored.
 
-NOVELTY: UNVERIFIED. No literature kill-search has been run. Theorem skeletons
-exist in Constantin-Fefferman 1993 and descendants. Treat every novelty
-implication as open until that search closes. This paragraph is load-bearing.
+NOVELTY: kill-search run 2026-08-02, per-claim verdicts in NOVELTY.md.
+One kill (Theorem 0 -> Corollary 0, Constantin's identity). Theorem 1
+survives as quantification only -- cite Giga-Miura 2011 and Barker-Prange
+2020 beside it. The observable/exponent program (C1, C2) and the viscous
+inversion measurement (C5, the strongest) survive the search. All
+CONFIRMED verdicts mean "not found by this one-session search," not
+"proven absent." This paragraph remains load-bearing.
 
 ## The AI part, stated plainly
 

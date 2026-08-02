@@ -1,0 +1,78 @@
+==============================================================================
+M3 ORBIT VERDICT -- cos_step + V with bootstrap CI, 5 seeds
+==============================================================================
+amp=0.001  ds=0.25 nsteps<=240  seeds=[0, 1, 2, 3, 4]  stop: r>=1e-10 or it>15
+valid window: raw > 10 x 3e-10 (M2 floor)  bootstrap: 10000 resamples, 2.5-97.5% CI, rng seed 12345
+
+certificate: /Users/epagogellc/parzival/boussinesq/pnorm_P.npz
+grid={'edges': (0.0, 2.0, 15.0, 25.0), 'degs': (16, 40, 12), 'Nb': 36, 'eps_b': 0.0001} alpha=-0.3447122873723904  n_finite=4758
+root ||F||_max fresh = 2.429e-11  cholesky(P): RE-VERIFIED PASS
+frozen LU: 0.5s (once, shared across seeds)
+
+--- SEED 0 (= M2 amp-1e-3 rung, regression check) ----------------------------------------
+  steps=240/240  wall=18.1s  stop=none (completed)
+  V(v): 8.603265e-02 -> 1.350134e-15   raw: 1.000e-03 -> 7.610e-10
+
+--- SEED 1 ----------------------------------------
+  steps=240/240  wall=17.7s  stop=none (completed)
+  V(v): 1.341465e-01 -> 1.246850e-15   raw: 1.000e-03 -> 7.364e-10
+
+--- SEED 2 ----------------------------------------
+  steps=240/240  wall=18.7s  stop=none (completed)
+  V(v): 1.877149e-01 -> 9.752513e-16   raw: 1.000e-03 -> 7.758e-10
+
+--- SEED 3 ----------------------------------------
+  steps=240/240  wall=20.8s  stop=none (completed)
+  V(v): 6.136127e-01 -> 8.862025e-15   raw: 1.000e-03 -> 2.265e-09
+
+--- SEED 4 ----------------------------------------
+  steps=240/240  wall=18.4s  stop=none (completed)
+  V(v): 1.416153e-01 -> 1.442995e-15   raw: 1.000e-03 -> 8.468e-10
+
+SEED INDEPENDENCE (pairwise cosines of the 5 perturbation directions; expect ~0):
+  seed 0 vs 1: +0.0023
+  seed 0 vs 2: -0.0002
+  seed 0 vs 3: -0.0180
+  seed 0 vs 4: -0.0042
+  seed 1 vs 2: +0.0051
+  seed 1 vs 3: +0.0099
+  seed 1 vs 4: +0.0138
+  seed 2 vs 3: -0.0147
+  seed 2 vs 4: +0.0269
+  seed 3 vs 4: +0.0084
+
+==============================================================================
+PER-SEED VERDICTS (rubric = features.py report(), CI-level)
+==============================================================================
+seed 0: 219 valid increment steps (21 cut at the floor)
+  cos_step = +0.9847  CI [+0.9739, +0.9925]
+  cos_aim  = +0.7037  CI [+0.6610, +0.7424]
+  dln|dv|/ds = -0.2710  CI [-0.2765, -0.2660]
+  REGIME: SETTLING  (cos_step CI > 0.5, cos_aim CI > 0.5, ln-speed slope CI < 0)
+seed 1: 218 valid increment steps (22 cut at the floor)
+  cos_step = +0.9850  CI [+0.9739, +0.9925]
+  cos_aim  = +0.7142  CI [+0.6725, +0.7523]
+  dln|dv|/ds = -0.2732  CI [-0.2784, -0.2684]
+  REGIME: SETTLING  (cos_step CI > 0.5, cos_aim CI > 0.5, ln-speed slope CI < 0)
+seed 2: 226 valid increment steps (14 cut at the floor)
+  cos_step = +0.9869  CI [+0.9792, +0.9929]
+  cos_aim  = +0.6981  CI [+0.6535, +0.7407]
+  dln|dv|/ds = -0.2689  CI [-0.2751, -0.2632]
+  REGIME: SETTLING  (cos_step CI > 0.5, cos_aim CI > 0.5, ln-speed slope CI < 0)
+seed 3: 234 valid increment steps (6 cut at the floor)
+  cos_step = +0.9881  CI [+0.9754, +0.9954]
+  cos_aim  = +0.7112  CI [+0.6685, +0.7503]
+  dln|dv|/ds = -0.2688  CI [-0.2748, -0.2631]
+  REGIME: SETTLING  (cos_step CI > 0.5, cos_aim CI > 0.5, ln-speed slope CI < 0)
+seed 4: 222 valid increment steps (18 cut at the floor)
+  cos_step = +0.9862  CI [+0.9749, +0.9939]
+  cos_aim  = +0.7013  CI [+0.6563, +0.7425]
+  dln|dv|/ds = -0.2699  CI [-0.2753, -0.2647]
+  REGIME: SETTLING  (cos_step CI > 0.5, cos_aim CI > 0.5, ln-speed slope CI < 0)
+
+==============================================================================
+M3 TEST: PASS -- all 5 seeds' CIs inside ONE regime: SETTLING  (DONE.md requires >= 3 agreeing; have 5)
+per-step data saved: m3_orbit_data.npz
+VERDICT_ORBIT.txt updated with the M3 section (keyword: SETTLING).
+
+total wall: 99.1s

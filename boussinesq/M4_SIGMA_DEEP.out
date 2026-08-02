@@ -1,0 +1,36 @@
+==============================================================================
+M4 CERTIFIED QUOTE -- deep-collapse sigma_Lambda(nu)
+==============================================================================
+definition: top-half-of-overlap local slope, symmetric ln-A midpoint cut (pre-registered). bar: cross-grid spread < 0.15 at two viscosities. bootstrap 10000, seed 271828.
+
+nu=0.0001: overlap ln-A span 1.78
+  cut 0.4   128x384: sigma_deep = -1.1725  CI [-1.3931,-1.0229]  n=15
+  cut 0.4   256x768: sigma_deep = -1.1982  CI [-1.3159,-1.1115]  n=14
+  cut 0.4    SPREAD = 0.0257
+  cut 0.5   128x384: sigma_deep = -1.1164  CI [-1.4769,-0.8680]  n=11
+  cut 0.5   256x768: sigma_deep = -1.2371  CI [-1.3935,-1.1192]  n=11
+  cut 0.5    SPREAD = 0.1207  <-- CERTIFIED CUT
+  cut 0.5 bottom-half slopes (crossover record): +0.4846 / +0.8054
+  cut 0.6   128x384: sigma_deep = -0.9972  CI [-1.4803,-0.6721]  n=9
+  cut 0.6   256x768: sigma_deep = -1.1817  CI [-1.4174,-0.9636]  n=8
+  cut 0.6    SPREAD = 0.1846
+
+nu=0.001: overlap ln-A span 1.89
+  cut 0.4   128x384: sigma_deep = -1.2784  CI [-1.4631,-1.1268]  n=17
+  cut 0.4   256x768: sigma_deep = -1.2292  CI [-1.3566,-1.0945]  n=16
+  cut 0.4    SPREAD = 0.0491
+  cut 0.5   128x384: sigma_deep = -1.2538  CI [-1.4822,-1.0508]  n=14
+  cut 0.5   256x768: sigma_deep = -1.2854  CI [-1.4297,-1.1132]  n=13
+  cut 0.5    SPREAD = 0.0316  <-- CERTIFIED CUT
+  cut 0.5 bottom-half slopes (crossover record): +0.3908 / +0.5219
+  cut 0.6   128x384: sigma_deep = -1.2500  CI [-1.5820,-0.8634]  n=11
+  cut 0.6   256x768: sigma_deep = -1.3052  CI [-1.5478,-1.0266]  n=10
+  cut 0.6    SPREAD = 0.0552
+
+==============================================================================
+nu=0.0001: sigma_Lambda(deep) = -1.1164 (128x384) / -1.2371 (256x768)  spread 0.1207 OK
+nu=0.001: sigma_Lambda(deep) = -1.2538 (128x384) / -1.2854 (256x768)  spread 0.0316 OK
+
+M4 TEST: PASS -- both spreads < 0.15. wrote sigma_grid_spread.txt
+MAGNITUDE: deep-collapse sigma_Lambda(nu) ~ -1.2 at both viscosities, both grids -- far below the -1/2 type-I exclusion threshold (SIGMA_LAMBDA.md). Viscosity does not merely damp the corner mechanism's alignment failure (inviscid +1.0), it INVERTS it deep in the collapse: outcome B, measured, grid-certified.
+total wall: 2.1s

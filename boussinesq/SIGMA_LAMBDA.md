@@ -126,3 +126,51 @@ measured, and an independent, sharper companion to the c_l = -1/alpha energy
 argument for why this mechanism dies in Navier-Stokes.
 
 Either outcome is a result. The number decides.
+
+## The viscous measurement (2026-08-02) -- the number decided
+
+The ladder's surviving snapshot pairs (nu in {1e-4, 1e-3}, grids 128x384
+and 256x768, nu=0 references on disk) went through the certified chain
+sigma_peak.py -> m4_sigma_spread.py (2x2 instrument factorial) ->
+m4_sigma_deep.py (certified quote). Three findings, in discovery order:
+
+1. The common-amplitude overlap window REPRODUCES THE CALIBRATION: the
+   two inviscid grids, fit on the same amplitude range, give +1.016 /
+   +1.033 (spread 0.017) against the twice-validated +1.00 +- 0.03.
+2. At finite nu, sigma(A) is NOT one number: every viscous run crosses
+   over from inviscid-like slope (+0.4..+0.8) at low amplitude to deep
+   depletion (~-1.2) at high amplitude. Window-averaged quotes are
+   regime mixtures and were discarded (the alpha campaign's XMAX
+   lesson applied here).
+3. DEEP-COLLAPSE MAGNITUDE, grid-certified (top half of the cross-grid
+   overlap, symmetric midpoint cut, pre-registered; M4 bar spread<0.15):
+
+       sigma_Lambda(1e-4) = -1.116 / -1.237   spread 0.121
+       sigma_Lambda(1e-3) = -1.254 / -1.285   spread 0.032
+
+OUTCOME B, MEASURED: viscosity does not merely damp the corner
+mechanism's alignment failure -- it inverts it, from +1.0 inviscid to
+about -1.2 deep in the collapse, a value well below BOTH thresholds of
+the reduction (-1/6 depletion onset, -1/2 type-I exclusion). Within this
+mechanism class and at these two viscosities, the geometric route is
+doing exactly what the regularity head requires: geometry, not energy,
+kills the singularity. Caveats owned: two viscosities, top-half windows
+carry n=11-14 snapshots (bootstrap CIs +-0.15-0.35), crossover amplitude
+A_c(nu) not yet resolved as its own observable. Files:
+SIGMA_PEAK_M4.out, M4_SIGMA_SPREAD.out, M4_SIGMA_DEEP.out,
+sigma_grid_spread.txt, m4_sigma_rows.npz.
+
+### Self-audit correction (2026-08-02, same session)
+
+Applying the certified deep-collapse estimator to the nu=0 pair (the
+apples-to-apples check) gives sigma_top(nu=0) = +0.589 / +0.585, spread
+0.005 -- the inviscid slope itself drifts within the trusted window
+(+1.4 low-amplitude, +0.59 deep; the +1.00 +- 0.03 calibration is the
+full-window number, whose validations certify the INSTRUMENT, not slope
+constancy). The window-matched inversion statement is therefore
++0.59 -> ~-1.2 (still a sign flip, ~1.8 powers), NOT "+1.0 -> -1.2" as
+the section above loosely phrased it. Thresholds unaffected: deep
+inviscid +0.59 stays far above -1/6; deep viscous -1.2 stays far below
+-1/2. Robustness note: the deep viscous value agrees across grids with
+4x cell-count difference and across the two viscosities, arguing
+against a trust-boundary artifact.

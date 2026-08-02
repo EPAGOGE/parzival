@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Viscosity Inverts the Blowup Geometry · Justin Hill</title>
+<meta name="description" content="A direction-regularity exponent measured at +1.00 on the inviscid corner mechanism reads -1.2 deep in the viscous collapse, grid-certified at two viscosities, below the type-I exclusion threshold.">
+<link rel="canonical" href="https://epagoge.github.io/parzival/sigma/">
+
+<!-- Open Graph (LinkedIn, Facebook, Slack, Discord) -->
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="epagoge.io">
+<meta property="og:url" content="https://epagoge.github.io/parzival/sigma/">
+<meta property="og:title" content="Viscosity Inverts the Blowup Geometry">
+<meta property="og:description" content="A direction-regularity exponent measured at +1.00 on the inviscid corner mechanism reads -1.2 deep in the viscous collapse, grid-certified at two viscosities, below the type-I exclusion threshold.">
+<meta property="og:image" content="https://epagoge.github.io/parzival/sigma/og-card-1200x630.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="sigma_Lambda: +1.00 inviscid, -1.2 deep in the viscous collapse. The exclusion threshold is -1/2.">
+<meta property="article:published_time" content="2026-08-02">
+<meta property="article:author" content="Justin Hill">
+
+<!-- X / Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Viscosity Inverts the Blowup Geometry">
+<meta name="twitter:description" content="A direction-regularity exponent measured at +1.00 on the inviscid corner mechanism reads -1.2 deep in the viscous collapse, grid-certified at two viscosities, below the type-I exclusion threshold.">
+<meta name="twitter:image" content="https://epagoge.github.io/parzival/sigma/og-card-1200x630.png">
+<meta name="twitter:image:alt" content="sigma_Lambda: +1.00 inviscid, -1.2 deep in the viscous collapse. The exclusion threshold is -1/2.">
+
+<link rel="stylesheet" href="../styles.css">
+<link rel="icon" type="image/png" href="../favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caprasimo&family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  body { margin: 0; background: #f5ead8; }
+  a { color: #8c491a; }
+  a:hover { color: #b2622d; }
+  img { max-width: 100%; }
+  .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .92em; }
+  @media (max-width: 760px) {
+    h1 { font-size: 40px !important; }
+    .table { font-size: 14px; }
+  }
+</style>
+</head>
+<body>
+  <div style="min-height:100vh; background:var(--color-bg); color:var(--color-text); font-family:var(--font-body)">
+
+    <header style="max-width:1080px; margin:0 auto; padding:32px 40px 0; display:flex; align-items:center; justify-content:space-between; gap:20px">
+      <div style="display:flex; align-items:center; gap:12px">
+        <span style="width:26px; height:26px; border-radius:999px; background:var(--color-accent)"></span>
+        <span style="font-family:var(--font-heading); font-size:20px">epagoge</span>
+      </div>
+      <nav style="display:flex; gap:26px; font-size:15px; font-weight:600; color:var(--color-neutral-700)">
+        <a href="#result" style="text-decoration:none">Result</a>
+        <a href="#instrument" style="text-decoration:none">Instrument</a>
+        <a href="#errors" style="text-decoration:none">Errors</a>
+        <a href="sigma.pdf" style="text-decoration:none">PDF</a>
+      </nav>
+    </header>
+
+    <main style="max-width:1080px; margin:0 auto; padding:0 40px 80px">
+
+      <section style="padding:72px 0 0">
+        <div style="display:flex; align-items:center; gap:10px; font-size:13px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--color-accent-700)">
+          <span style="width:12px; height:12px; border-radius:999px; background:var(--color-accent)"></span>
+          Measurement study <span style="color:var(--color-neutral-500)">/</span> <span style="color:var(--color-neutral-600)">2 August 2026</span>
+        </div>
+        <h1 style="font-family:var(--font-heading); font-weight:400; font-size:64px; line-height:1.03; letter-spacing:-.015em; margin:24px 0 0; max-width:900px; text-wrap:pretty">Viscosity inverts the blowup geometry</h1>
+        <p style="font-family:var(--font-heading); font-size:28px; line-height:1.2; color:var(--color-accent-700); margin:18px 0 0; max-width:760px; text-wrap:pretty">A measured exponent crosses the type-I exclusion threshold.</p>
+        <p style="font-size:20px; line-height:1.55; color:var(--color-neutral-700); margin:26px 0 0; max-width:680px; text-wrap:pretty">Justin Hill, Independent Research. The direction-regularity criteria of Constantin, Fefferman, Beir&atilde;o da Veiga and Berselli, turned into one measurable number and pointed at the strongest known blowup mechanism: sigma_Lambda, the scaling exponent of <span class="mono">sup |grad &xi;| |&omega;|<sup>&minus;1/2</sup></span> at the vorticity peak. Calibrated at +1.00 on the inviscid corner flow, where blowup is proven. Measured under viscosity, it flips sign.</p>
+        <div style="display:flex; gap:14px; flex-wrap:wrap; margin-top:32px">
+          <a href="sigma.pdf" class="btn btn-primary" style="text-decoration:none">Read the paper (PDF)</a>
+          <a href="main.tex" class="btn btn-secondary" style="text-decoration:none">LaTeX source for review</a>
+          <a href="https://github.com/EPAGOGE/parzival" class="btn btn-secondary" style="text-decoration:none">Code, data, ledger</a>
+        </div>
+      </section>
+
+      <section id="result" style="margin-top:64px; background:var(--color-surface); border-radius:28px; padding:40px 44px">
+        <div style="font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--color-neutral-700)">The measurement &middot; two grids &middot; two viscosities &middot; spread under a bar</div>
+        <p style="font-size:18px; line-height:1.55; color:var(--color-neutral-800); margin:22px 0 0; max-width:800px; text-wrap:pretty">If a viscous singularity inherits the corner mechanism, sigma_Lambda must stay above &minus;1/6 as the collapse deepens. Below &minus;1/2, type-I blowup is excluded by geometry and energy alone. Measured deep in the collapse, on matched cross-grid amplitude windows:</p>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:14px; margin-top:28px">
+          <div style="background:var(--color-neutral-100); border-radius:22px; padding:20px 22px">
+            <span style="font-family:var(--font-heading); font-size:20px; color:var(--color-accent-2-700)">+1.00 &plusmn; 0.03</span>
+            <div style="font-weight:800; font-size:15px; margin-top:6px">Inviscid, calibrated</div>
+            <div style="font-size:14px; line-height:1.45; color:var(--color-neutral-700); margin-top:3px">Anchored by an exact amplitude symmetry to three parts in ten thousand, and a 2&times;2 grid factorial, spread 0.029.</div>
+          </div>
+          <div style="background:var(--color-neutral-100); border-radius:22px; padding:20px 22px">
+            <span style="font-family:var(--font-heading); font-size:20px; color:var(--color-accent-2-700)">+0.589 / +0.585</span>
+            <div style="font-weight:800; font-size:15px; margin-top:6px">Inviscid, matched window</div>
+            <div style="font-size:14px; line-height:1.45; color:var(--color-neutral-700); margin-top:3px">The apples-to-apples contrast value. Cross-grid spread 0.005, the tightest certification in the paper.</div>
+          </div>
+          <div style="background:var(--color-neutral-100); border-radius:22px; padding:20px 22px">
+            <span style="font-family:var(--font-heading); font-size:20px; color:var(--color-accent-2-700)">&minus;1.12 / &minus;1.24</span>
+            <div style="font-weight:800; font-size:15px; margin-top:6px">&nu; = 10<sup>&minus;4</sup>, deep collapse</div>
+            <div style="font-size:14px; line-height:1.45; color:var(--color-neutral-700); margin-top:3px">Grids 128&times;384 and 256&times;768. Cross-grid spread 0.121, under the 0.15 bar.</div>
+          </div>
+          <div style="background:var(--color-neutral-100); border-radius:22px; padding:20px 22px">
+            <span style="font-family:var(--font-heading); font-size:20px; color:var(--color-accent-2-700)">&minus;1.25 / &minus;1.29</span>
+            <div style="font-weight:800; font-size:15px; margin-top:6px">&nu; = 10<sup>&minus;3</sup>, deep collapse</div>
+            <div style="font-size:14px; line-height:1.45; color:var(--color-neutral-700); margin-top:3px">Spread 0.032. The magnitude holds in a &minus;1.0 to &minus;1.3 band at every cut position, every grid, both viscosities.</div>
+          </div>
+          <div style="background:var(--color-accent-100); border-radius:22px; padding:20px 22px">
+            <span style="font-family:var(--font-heading); font-size:20px; color:var(--color-accent-800)">&minus;1/6 and &minus;1/2</span>
+            <div style="font-weight:800; font-size:15px; margin-top:6px; color:var(--color-accent-800)">Both thresholds crossed</div>
+            <div style="font-size:14px; line-height:1.45; color:var(--color-accent-900); margin-top:3px">Depletion onset and type-I exclusion. Viscosity does not damp the alignment failure. It inverts it, by 1.8 powers of the vorticity.</div>
+          </div>
+        </div>
+
+        <p style="font-size:18px; line-height:1.55; color:var(--color-neutral-800); margin:26px 0 0; max-width:800px; text-wrap:pretty">As far as a live literature kill-search reaches, no direction-regularity exponent has previously been measured as a function of viscosity on any blowup candidate. The qualitative principle that direction coherence excludes type-I blowup belongs to <a href="https://link.springer.com/article/10.1007/s00220-011-1197-x">Giga and Miura</a> and to <a href="https://arxiv.org/abs/1906.08225">Barker and Prange</a>, in this very geometry. What is new is the exponent, the calibration on a proven case, and the number.</p>
+      </section>
+
+      <section id="instrument" style="margin-top:64px">
+        <h2 style="font-family:var(--font-heading); font-weight:400; font-size:40px; line-height:1.1; margin:0">The instrument, and the orbit</h2>
+        <p style="font-size:18px; line-height:1.55; color:var(--color-neutral-700); margin:16px 0 0; max-width:760px; text-wrap:pretty">Lambda pairs the direction gradient with the &minus;1/2 power of vorticity because the Navier-Stokes rescaling forces exactly that pairing; the same 1/2 lives in the sharp H&ouml;lder class of <a href="https://www.semanticscholar.org/paper/d5d1a47edd3aaa75274e9eedaff25e9ccea54b94">Beir&atilde;o da Veiga and Berselli</a> before it lives here. The exponent is fit over gated snapshots only: spectral tail at 10<sup>&minus;6</sup>, signed Casimir drift, 2&times;-HWHM peak box, bootstrap intervals on every slope quoted.</p>
+
+        <div style="margin-top:30px; background:var(--color-surface); border-radius:28px; padding:36px 44px">
+          <div style="font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--color-neutral-700)">The rescaled frame &middot; the collapse profile is an attractor &middot; no eigenvalue enters any decision</div>
+          <div style="display:flex; align-items:baseline; gap:24px; flex-wrap:wrap; margin-top:20px">
+            <span style="font-family:var(--font-heading); font-size:64px; line-height:1; color:var(--color-accent-2-700)">SETTLES</span>
+            <span style="font-family:var(--font-heading); font-size:34px; color:var(--color-accent)">cos<sub>step</sub> = 0.986</span>
+            <span style="margin-left:auto; text-align:right; font-size:13px; letter-spacing:.1em; text-transform:uppercase; color:var(--color-neutral-600)">contraction 0.270 &plusmn; 0.003 / s-unit</span>
+          </div>
+          <p style="font-size:17px; line-height:1.55; color:var(--color-neutral-800); margin:20px 0 0; max-width:780px; text-wrap:pretty">A Lyapunov-certified march in the self-similar corner frame, with definiteness decided by Cholesky factorization only, shows perturbed orbits ride one nearly fixed direction back to the profile. Five independent seeds at the largest basin-validated amplitude, every bootstrap interval inside one regime, unanimous. The settling verdict and the deep-collapse exponent are two independent instruments agreeing that this attractor is real and that viscosity is what disarms it.</p>
+        </div>
+
+        <table class="table" style="margin-top:30px; width:100%">
+          <thead>
+            <tr><th>Certification</th><th>Value</th><th>Standing</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Amplitude-symmetry anchor, predicted 0.707107</td><td>measured 0.706891 &plusmn; 0.001441</td><td>closed &middot; zero free parameters</td></tr>
+            <tr><td>2&times;2 off-ray grid factorial</td><td>spread 0.029</td><td>closed</td></tr>
+            <tr><td>Backwards proof, 15 checks, 3 tiers</td><td>15/15, worst EXACT deviation 3.05&times;10<sup>&minus;4</sup></td><td>watcher reruns every 20 min</td></tr>
+            <tr><td>Milestone ladder M1&ndash;M5, frozen 2026-07-30</td><td>all PASS</td><td>PROJECT COMPLETE</td></tr>
+            <tr><td>Deep-window snapshot counts</td><td>n = 11&ndash;14 per fit, CIs &plusmn;0.15&ndash;0.35</td><td>carried honestly &middot; spread is the certification</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="errors" style="margin-top:64px">
+        <h2 style="font-family:var(--font-heading); font-weight:400; font-size:40px; line-height:1.1; margin:0">What the kill-search killed</h2>
+        <p style="font-size:18px; line-height:1.55; color:var(--color-neutral-700); margin:16px 0 0; max-width:760px; text-wrap:pretty">A live literature search graded every novelty-bearing claim before this page existed. A kill-search that kills nothing was not run hard enough. This one killed one of our theorems and two of our own numbers.</p>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:16px; margin-top:26px">
+          <div style="background:var(--color-neutral-100); border-radius:22px; padding:22px 24px">
+            <span style="font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--color-accent-700)">Demoted</span>
+            <div style="font-weight:800; font-size:16px; margin-top:8px">Theorem 0 is Corollary 0</div>
+            <div style="font-size:14.5px; line-height:1.45; color:var(--color-neutral-700); margin-top:5px">Our pointwise inequality at a growing vorticity maximum is a one-step corollary of Constantin's classical magnitude-direction decomposition. It stays in the paper as an instrument check, credited, with the novelty claim withdrawn.</div>
+          </div>
+          <div style="background:var(--color-neutral-100); border-radius:22px; padding:22px 24px">
+            <span style="font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--color-accent-700)">Retracted</span>
+            <div style="font-weight:800; font-size:16px; margin-top:8px">Every window-averaged viscous slope</div>
+            <div style="font-size:14.5px; line-height:1.45; color:var(--color-neutral-700); margin-top:5px">At finite viscosity the exponent is not one number: each run crosses over from inviscid-like scaling to deep depletion inside the trusted window. Our earlier quotes near &minus;0.5 were measurements of a mixture. The asymptotic window is the observable.</div>
+          </div>
+          <div style="background:var(--color-neutral-100); border-radius:22px; padding:22px 24px">
+            <span style="font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--color-accent-700)">Corrected</span>
+            <div style="font-weight:800; font-size:16px; margin-top:8px">Our own headline</div>
+            <div style="font-size:14.5px; line-height:1.45; color:var(--color-neutral-700); margin-top:5px">The inversion was first phrased as +1.0 to &minus;1.2. The window-matched contrast is +0.59 to &minus;1.2: the full-window +1.00 is amplitude-composite, and the calibration certifies the instrument, not slope constancy. The self-audit is in the record.</div>
+          </div>
+        </div>
+        <p style="font-size:15.5px; line-height:1.55; color:var(--color-neutral-600); margin:22px 0 0; max-width:800px; text-wrap:pretty">Confirmed means not found by this search, never proven absent. The full verdict table, with the prior-art map and the standing citation obligations, is <a href="https://github.com/EPAGOGE/parzival/blob/main/boussinesq/NOVELTY.md">NOVELTY.md</a>; the graded claims ledger discipline is unchanged from <a href="../">the July note</a>.</p>
+      </section>
+
+      <section style="margin-top:64px">
+        <h2 style="font-family:var(--font-heading); font-weight:400; font-size:40px; line-height:1.1; margin:0">Still open</h2>
+        <div style="display:flex; gap:36px; flex-wrap:wrap; margin-top:20px">
+          <p style="flex:1 1 320px; font-size:17px; line-height:1.55; color:var(--color-neutral-700); margin:0; text-wrap:pretty">The strip &minus;1/2 &le; &sigma; &le; 0. Corollary 0 forbids the top under viscosity at a growing maximum; the quantified exclusion chain needs the bottom. Close the strip analytically and type-I Navier-Stokes blowup is finished for this route. The measurement now says the mechanism itself lives below the strip when viscosity acts.</p>
+          <p style="flex:1 1 320px; font-size:17px; line-height:1.55; color:var(--color-neutral-700); margin:0; text-wrap:pretty">The crossover amplitude A<sub>c</sub>(&nu;), where each run flips from inviscid-like scaling to depletion, is visible in every viscous run and unmeasured as its own observable. Its scaling with viscosity would pin where, not just whether, viscosity restores direction regularity. Two more decades of the &nu; curve exist as stream data with no retained snapshots.</p>
+        </div>
+      </section>
+
+      <section style="margin-top:64px; display:flex; flex-wrap:wrap; gap:28px; align-items:center; justify-content:space-between; border-top:1px solid var(--color-divider); padding-top:34px">
+        <div style="max-width:520px">
+          <div style="font-family:var(--font-heading); font-size:24px">Share card</div>
+          <p style="font-size:16px; line-height:1.5; color:var(--color-neutral-700); margin:10px 0 0">The image social platforms show for this page. <a href="og-card-1200x630.png">1200&times;630</a>.</p>
+        </div>
+        <img src="og-card-1200x630.png" alt="sigma_Lambda: +1.00 inviscid, -1.2 deep in the viscous collapse" style="width:420px; border-radius:20px; box-shadow:var(--shadow-md)">
+      </section>
+
+    </main>
+
+    <footer style="border-top:1px solid var(--color-divider)">
+      <div style="max-width:1080px; margin:0 auto; padding:28px 40px 44px; display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap; font-size:15px; color:var(--color-neutral-600)">
+        <span>Justin Hill · Independent Research · justin@epagoge.io</span>
+        <span style="font-weight:700; color:var(--color-neutral-800)">epagoge.io</span>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

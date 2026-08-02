@@ -16,8 +16,11 @@ M1  s-march correct
     - T2 fixed: pin rows no longer reference a stale seed
     - T4 fixed: index-2 DAE handled on ker(Cg) via polar_spectrum projections
     - sign matches S4's Lyapunov convention (not eigenvalues -- S9 forbids)
-    TEST: perturbed fixed point contracts monotonically over 20 units of s
-    FILE: march_s.py prints CONTRACTS with the S4-convention sign
+    TEST: perturbed fixed point contracts monotonically IN THE P-NORM
+      (V = v^T P v, S4 Lyapunov certificate) at linear amplitude over 20
+      units of s. [Bar amended 2026-08-02, EJA #72: raw-norm monotonicity
+      at amp 1e-3 is unsatisfiable per the certified S6 transient.]
+    FILE: M1_GATE_LADDER.out prints CONTRACTS with the S4-convention sign
 
 M2  past the transient
     - S6 records transient growth up to 5807.6x

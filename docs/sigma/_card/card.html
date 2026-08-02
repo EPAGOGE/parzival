@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../styles.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caprasimo&family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; }
+  .card-1200 {
+    width:1200px; height:630px; background:var(--color-bg);
+    color:var(--color-text); font-family:var(--font-body);
+    padding:56px 60px; display:flex; gap:44px; align-items:stretch;
+    box-sizing:border-box;
+  }
+  .left { flex:1.28; display:flex; flex-direction:column; }
+  .right { flex:1; background:var(--color-surface); border-radius:32px;
+           padding:34px 32px; display:flex; flex-direction:column;
+           justify-content:center; gap:18px; }
+  .kicker { font-size:14px; font-weight:700; letter-spacing:.14em;
+            text-transform:uppercase; color:var(--color-accent-700); }
+  h1 { font-family:var(--font-heading); font-weight:400; font-size:52px;
+       line-height:1.04; letter-spacing:-.015em; margin:20px 0 0; }
+  h1 .hl { color:var(--color-accent); }
+  .lede { font-size:17px; line-height:1.5; color:var(--color-neutral-700);
+          margin:18px 0 0; max-width:520px; }
+  .panel { background:var(--color-accent-100); border-radius:22px;
+           padding:18px 22px; margin-top:22px; }
+  .panel-t { font-family:var(--font-heading); font-size:17px;
+             color:var(--color-accent-800); }
+  .panel-b { font-size:14px; line-height:1.45; color:var(--color-accent-900);
+             margin-top:5px; }
+  .nums { display:flex; align-items:baseline; gap:16px; margin-top:auto;
+          padding-top:22px; }
+  .big { font-family:var(--font-heading); font-size:40px; line-height:1;
+         color:var(--color-accent-2-700); white-space:nowrap; }
+  .lbl { font-size:14px; color:var(--color-neutral-600); }
+  .rule { height:1px; background:var(--color-divider); margin:18px 0 0; }
+  .foot { display:flex; align-items:center; justify-content:space-between;
+          margin-top:14px; font-size:14px; color:var(--color-neutral-600); }
+  .pill { background:var(--color-accent); color:var(--color-bg);
+          font-family:var(--font-heading); font-size:15px;
+          padding:10px 20px; border-radius:999px; }
+  .row { display:flex; align-items:center; gap:14px; }
+  .dot { width:44px; height:44px; border-radius:999px; display:grid;
+         place-items:center; font-family:var(--font-heading); font-size:15px;
+         flex:none; }
+  .rname { font-weight:800; font-size:16px; }
+  .rsub { font-size:13.5px; line-height:1.4; color:var(--color-neutral-700); }
+</style>
+</head>
+<body>
+<div class="card-1200">
+  <div class="left">
+    <div class="kicker">Measurement study · 2 August 2026</div>
+    <h1>Viscosity <span class="hl">inverts</span><br>the blowup geometry.</h1>
+    <p class="lede">A direction-regularity exponent, calibrated at +1.00 on the
+    inviscid corner mechanism where blowup is proven, measured under viscosity
+    for the first time. It flips sign and keeps going.</p>
+    <div class="panel">
+      <div class="panel-t">The exclusion threshold is &minus;1/2</div>
+      <div class="panel-b">Below it, type-I blowup is excluded by geometry and
+      energy alone. Deep in the viscous collapse the exponent reads &minus;1.2,
+      grid-certified at both viscosities tried.</div>
+    </div>
+    <div class="nums">
+      <span class="big">+0.59 &rarr; &minus;1.2</span>
+      <span class="lbl">window-matched · 1.8 powers of ‖&omega;‖ · spread 0.03&ndash;0.12</span>
+    </div>
+    <div class="rule"></div>
+    <div class="foot">
+      <span>Justin Hill · Independent Research</span>
+      <span class="pill">Read the paper →</span>
+    </div>
+  </div>
+
+  <div class="right">
+    <div class="row">
+      <span class="dot" style="background:var(--color-accent-2-700); color:var(--color-accent-2-100)">✓</span>
+      <span><span class="rname">Calibrated where blowup is proven</span><br><span class="rsub">inviscid corner flow, +1.00 ± 0.03</span></span>
+    </div>
+    <div class="row">
+      <span class="dot" style="background:var(--color-accent-2-700); color:var(--color-accent-2-100)">✓</span>
+      <span><span class="rname">Symmetry-anchored</span><br><span class="rsub">predicted 0.707107, measured 0.706891</span></span>
+    </div>
+    <div class="row">
+      <span class="dot" style="background:var(--color-accent-2-700); color:var(--color-accent-2-100)">✓</span>
+      <span><span class="rname">Grid-certified inversion</span><br><span class="rsub">two grids, two viscosities, spread &lt; 0.15</span></span>
+    </div>
+    <div class="row">
+      <span class="dot" style="background:var(--color-accent-2-700); color:var(--color-accent-2-100)">✓</span>
+      <span><span class="rname">The profile is an attractor</span><br><span class="rsub">orbit settles, 5 seeds unanimous</span></span>
+    </div>
+    <div class="row" style="margin-top:6px">
+      <span class="dot" style="background:var(--color-accent); color:var(--color-accent-100)">✕</span>
+      <span><span class="rname" style="color:var(--color-accent-800)">One theorem killed on the way</span><br><span class="rsub">our Theorem 0 is Constantin's corollary</span></span>
+    </div>
+  </div>
+</div>
+</body>
+</html>

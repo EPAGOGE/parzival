@@ -1,0 +1,58 @@
+K1: strict two-scale power-law collapse vs the full Boussinesq system
+========================================================================
+
+Exponent table (powers of (T-t); smaller = more dominant as t->T):
+  omega_t (incl. drift)   : -w - 1
+  u.grad omega            : Delta - 2*w
+  theta_x  (buoy, slow)   : -c_s + g
+  theta_x  (buoy, fast)   : -Delta - c_s + g
+  theta_t                 : g - 1
+  u.grad theta            : Delta + g - w
+
+R1  THE THETA-TRANSPORT RELATION.  theta has exactly two terms; if it
+    is actively transported (A2) they must balance, which forces
+        w = 1 + Delta,   Delta = c_fast - c_slow >= 0.
+    The anisotropy gap is paid for by a FASTER vorticity amplitude.
+    Delta = 0 recovers w = 1 (Chen-Hou).  [check: PASS]
+
+R2  With w = 1 + Delta, omega_t and u.grad omega balance IDENTICALLY
+    (transport structure; not an extra condition).  [check: PASS]
+
+R3  Buoyancy in the leading balance fixes g:
+      gradient along slow direction: g = -Delta + c_s - 2
+      gradient along fast direction: g = c_s - 2
+    (Delta = 0: both give g = c_s - 2, the isotropic value.  Buoyancy
+    subdominant is also admissible: an Euler-like transport collapse.)
+
+R4  w = 1 + Delta >= 1 always: a strict two-scale collapse is
+    automatically BKM-supercritical.  The ansatz cannot manufacture a
+    sub-BKM fake blowup.  (Small, but it closes a checking chore.)
+
+R5  CONFRONTATION.  |D| := |dln(aspect)/dln|omega||  =  Delta/w.
+    R1 then demands   w = 1/(1 - |D|),  admissible only if |D| < 1.
+
+      measured |D|          predicted w        verdict
+       0.00  corner profile (exact)    w = 1.0000
+       0.16  engineered corner ICs     w = 1.1905
+       1.01  generic seeded ICs        NO ADMISSIBLE w  (|D| >= 1)
+
+    Fallout, stated at UNGRADED strength:
+    (a) GENERIC ICs: |D| ~ 1.01 sits at/above the admissibility
+        boundary.  If the per-run bar keeps |D| >= 1, generic data
+        CANNOT be a strict two-scale power-law collapse at all --
+        independent of any w measurement.  The two-exponent "settled
+        wandering" picture would be refuted by the equation itself;
+        what remains is asymptotically-isotropic-with-drift (log/
+        prefactor wandering) or genuinely non-power-law.
+    (b) ENGINEERED ICs: |D| = 0.16 with the banked w = 1 violates R1
+        by 0.16.  Either the 0.16 is transient drift on a truly
+        isotropic collapse, or w = 1.19 on those runs.  KILL TEST:
+        refit the existing T* logs with forced exponent -1.19 vs -1.00
+        and compare residuals (free-residual style, no new runs).
+    (c) M3 hypothesis space SHRINKS pending grading: "settles to a
+        two-exponent profile" is not on the menu; settling means the
+        isotropic corner class, or nothing.
+
+Assumptions that bound all of the above: A1-A4 in the header.
+A1 is the load-bearing one -- the s-march (M1) is exactly the
+instrument that can see log corrections.  The tracks converge.

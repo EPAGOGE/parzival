@@ -1,0 +1,2 @@
+0.1207 nu=0.0001 sigma_deep_128x384=-1.1164 sigma_deep_256x768=-1.2371 def=top-half-overlap-midcut gate=signed
+0.0316 nu=0.001 sigma_deep_128x384=-1.2538 sigma_deep_256x768=-1.2854 def=top-half-overlap-midcut gate=signed

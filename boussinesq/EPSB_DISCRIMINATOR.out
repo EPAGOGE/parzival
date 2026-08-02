@@ -1,0 +1,25 @@
+==============================================================================
+EJA #75 DISCRIMINATING TEST -- rung-3 config, eps_b 1e-3 -> 1e-4
+==============================================================================
+grid={'edges': (0.0, 2.0, 15.0, 25.0), 'degs': (16, 48, 12), 'Nb': 28, 'eps_b': 0.0001}
+control (from M1_GATE_LADDER.out, NOT rerun): same grid at eps_b=1e-3, alpha=-0.3447 -> root 2.425e-11, lyap resid 5.559e-16, cholesky FAIL (4 negative of 4102).
+
+ROOT at fixed alpha=-0.3447 (ladder protocol, tolerances identical: newton_tol=1e-12, steps=120, root_tol=1e-10)
+  ||F||_max=3.341387e-11  ||F||_rms=9.097915e-13  newton_taken=3  wall=16.5s  converged(<1e-10)=True
+
+LYAPUNOV at the converged root (ladder recipe, unmodified: dense_L -> kernel_basis -> Lred -> solve_lyapunov(Lred.T,-I) [Bartels-Stewart]; definiteness by CHOLESKY ONLY)
+  dense_L(): 10.2s  kernel_basis(): 0.1s  solve_lyapunov: 334.9s  (n=4102)
+  ||Lred||_2=1.022234e+03 (SVD-based norm, not an eigenvalue)
+  relative residual ||L^T P + P L + I||/(||P|| ||L||) = 5.761863e-16
+  cholesky(P): PASS
+
+------------------------------------------------------------------------------
+DISCRIMINATION TABLE (same grid/degs/Nb/recipe throughout)
+------------------------------------------------------------------------------
+  eps_b=1e-3  alpha=-0.3447          : cholesky FAIL (4 neg of 4102)   [M1_GATE_LADDER.out rung 3]
+  eps_b=1e-4  alpha=-0.3447           : cholesky PASS   [this run]
+
+VERDICT: CHOLESKY FLIPPED. eps_b IS the driver of Hurwitz-certifiability at this config: the ladder's universal FAIL was an artifact of sitting at eps_b=1e-3, inside the singular wedge layer, not a property of resolution. Config-dependence localizes to the eps_b axis. #75: resolve confirmed.
+saved certificate (PASS rung discipline): /Users/epagogellc/parzival/boussinesq/pnorm_P_Nb28_epsb1em4.npz
+
+total wall: 417.1s

@@ -1,0 +1,6 @@
+VERDICT DRAFT (M2, amplitude ladder) -- DRAFT DELIBERATELY: flipping done.sh milestones is the operator's call.
+source: M2_AMPLADDER.out (2026-08-02)
+
+amp 1e-05: s_transient = 13.5 (march valid all 240 steps, true residual converged every step)
+amp 0.0001: s_transient = 13.5 (march valid all 240 steps, true residual converged every step)
+amp 0.001: s_transient = 13.5 (march valid all 240 steps, true residual converged every step)
