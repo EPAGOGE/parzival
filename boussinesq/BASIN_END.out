@@ -1,0 +1,29 @@
+==============================================================================
+BASIN END -- bisection + second direction (pre-registered CLOSING SWEEP C)
+==============================================================================
+cert: fresh ||F||max=2.43e-11  cholesky PASS
+  start: |dz|_rel(raw)=5.000000e-02  V(v)=2.150816e+02  ||v||_P=1.466566e+01
+  step   1 (s=  0.25): V=1.332754e+02  rel_dV=-3.803e-01  ||v||_P=1.154450e+01  raw=1.291331e-01  r=8.94e-11 it=19
+  STOP step 1 (s=0.25): quasi-Newton took 19 > 15 iterations -- the march is no longer validly converging the TRUE nonlinear residual here. Stall point recorded as DATA (spec).
+------------------------------------------------------------------------------
+seed 0  amp 0.05: steps 1/240  stop=NONLINEAR ESCAPE (stall) at step 1 (s=0.25)
+  s_peak=0.25  peak=2.5827x  raw 5.00e-02 -> 1.29e-01  V 2.15e+02 -> 1.33e+02
+  start: |dz|_rel(raw)=7.000000e-02  V(v)=4.215600e+02  ||v||_P=2.053193e+01
+  step   1 (s=  0.25): V=2.968190e+02  rel_dV=-2.959e-01  ||v||_P=1.722844e+01  raw=1.995159e-01  r=1.44e-10 it=25
+  STOP step 1 (s=0.25): residual 1.436e-10 >= 1e-10 -- the march is no longer validly converging the TRUE nonlinear residual here. Stall point recorded as DATA (spec).
+------------------------------------------------------------------------------
+seed 0  amp 0.07: steps 1/240  stop=NONLINEAR ESCAPE (stall) at step 1 (s=0.25)
+  s_peak=0.25  peak=2.8502x  raw 7.00e-02 -> 2.00e-01  V 4.22e+02 -> 2.97e+02
+  start: |dz|_rel(raw)=3.000000e-02  V(v)=1.207318e+02  ||v||_P=1.098780e+01
+  step   1 (s=  0.25): V=1.777005e+02  rel_dV=+4.719e-01  <-- V GROWTH  ||v||_P=1.333043e+01  raw=3.302681e-01  r=8.94e-04 it=25
+  STOP step 1 (s=0.25): residual 8.945e-04 >= 1e-10 -- the march is no longer validly converging the TRUE nonlinear residual here. Stall point recorded as DATA (spec).
+------------------------------------------------------------------------------
+seed 1  amp 0.03: steps 1/240  stop=NONLINEAR ESCAPE (stall) at step 1 (s=0.25)
+  s_peak=0.25  peak=11.0089x  raw 3.00e-02 -> 3.30e-01  V 1.21e+02 -> 1.78e+02
+  start: |dz|_rel(raw)=1.000000e-01  V(v)=1.341465e+03  ||v||_P=3.662602e+01
+  step   1 (s=  0.25): V=9.913586e+02  rel_dV=-2.610e-01  ||v||_P=3.148585e+01  raw=7.507880e-01  r=4.84e+00 it=2
+  STOP step 1 (s=0.25): residual 4.836e+00 >= 1e-10 -- the march is no longer validly converging the TRUE nonlinear residual here. Stall point recorded as DATA (spec).
+------------------------------------------------------------------------------
+seed 1  amp 0.1: steps 1/240  stop=NONLINEAR ESCAPE (stall) at step 1 (s=0.25)
+  s_peak=0.25  peak=7.5079x  raw 1.00e-01 -> 7.51e-01  V 1.34e+03 -> 9.91e+02
+==============================================================================

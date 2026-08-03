@@ -134,3 +134,39 @@ adjudication (violation at V within 100x of the 5e-16 floor = artifact;
 violation at V >> floor while residual-valid = GENUINE nonlinear P-norm
 growth, the wandering sector's first signature -- report loudly).
 Output: LD_MARCH.out. EJA: closes the bridge caveat or reports the edge.
+
+## CLOSING SWEEP (pre-registered 2026-08-02 late night, before running)
+
+(A) NU-GAP EXTENSION: C128_3e-6/C256_3e-6/C128_1e-6/C256_1e-6, recipe
+    identical to the nu-curve runs (tmax 3e-3, dt 3e-5, A0=100).
+    Certified estimator verbatim. Outcomes, fixed now: sigma_deep in the
+    -0.99..-1.31 band with spread < 0.15 = flat continues, gap narrows
+    below 1e-6; both grids agreeing outside the band toward the inviscid
+    value = crossover FOUND (quote it); window/gate failure or spread
+    over bar = unanswerable at that nu (report).
+(B) WITHIN-RUN TURNAROUND TEST: for the six clock-fit runs, profile
+    series U per gated snapshot (features.py-style amplitude-and-length
+    normalized crop), deviation speed V_k = |U_{k+1}-U_k| per unit s on
+    the run's own fitted clock; s_turn = position of the smoothed
+    (5-point median) V peak. BAR: |s_turn - s*| <= 0.25 (one march step)
+    counts as within-run coincidence; require >= 5 of 6 runs inside to
+    claim it. Else report the offsets, no forcing.
+(C) BASIN END: march amps 5e-2 and 7e-2 seed 0 (bisect the 3e-2..1e-1
+    bracket), plus 3e-2 and 1e-1 with seed 1 (direction dependence).
+    Same stop rule; stall = basin-or-instrument edge as before.
+
+## 1E-6 DEEPENING ADJUDICATION (pre-registered before the replica runs)
+
+Question: is the 128-grid 1e-6 value (-1.366, 4% below the band edge)
+trajectory-real or row-sampling scatter? Instrument: cadence replicas
+R128_1e-6/R256_1e-6 at ckpt-sim-dt 1.5e-5 (the trajectory is
+deterministic; changing output cadence resamples the SAME trajectory
+independently -- the campaign's established replication tool).
+DECISION RULE, fixed now:
+  DEEPENING REAL (at that grid) = replica 128 value also below -1.31
+    AND the 0.4/0.5/0.6 cut-sensitivity keeps 128 below the band at
+    >= 2 of 3 cuts on BOTH cadences.
+  SAMPLING SCATTER = replica lands in-band, or cut positions scatter
+    the value across the band edge.
+  Secondary readout (report only, no verdict): slope of sigma vs ln nu
+  over the three lowest nu per grid, as a trend indicator.

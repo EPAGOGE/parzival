@@ -1,0 +1,76 @@
+==============================================================================
+CLOSING SWEEP -- three ends attacked (pre-registered in NU_CURVE_SPEC.md)
+==============================================================================
+
+(B) WITHIN-RUN TURNAROUND TEST: 6/6 runs inside the pre-registered bar
+(|s_turn - s*| <= 0.25, needed >= 5). Per run (s_turn / s* / |diff|):
+  OR_z128r384  0.65 / 0.61 / 0.04      OR_z256r768  0.57 / 0.54 / 0.03
+  C128_1e-4    0.38 / 0.55 / 0.17      C256_1e-4    0.29 / 0.48 / 0.19
+  C128_1e-3    0.28 / 0.47 / 0.19      C256_1e-3    0.29 / 0.49 / 0.20
+WITHIN-RUN COINCIDENCE ESTABLISHED: each run's own profile-speed
+turnaround sits within one march step of that run's switch. The
+cross-instrument statement upgrades: the coincidence holds run-by-run
+inside the DNS alone. Honest structure in the offsets: inviscid runs
+near-exact; all four viscous runs show s_turn ~0.2 BELOW s* -- the
+transient turns around first and the inversion completes ~0.2 s-units
+later, a consistent ordering (turnaround, then switch). The viscous
+turnarounds also sit earlier (s~0.28-0.38) than inviscid (0.57-0.65);
+reported as observed, unmodeled.
+
+(C) BASIN END: seed 0 stalls at amp 5e-2 (and 7e-2) at step 1 -- the
+seed-0 basin-or-instrument edge tightens to 3e-2 < r < 5e-2. Seed 1
+stalls already at 3e-2 (and 1e-1): the edge is DIRECTION-DEPENDENT,
+r_edge(seed 1) < 3e-2 while seed 0 held 240 valid steps there. All
+stalls are step-1 residual failures; the protocol still does not
+separate dynamical escape from solver stall (P-norm decreased on 3 of 4
+stall steps, mixed signals as before). BASIN_END.out carries the runs.
+
+(A) NU-GAP EXTENSION: pending (runs in flight at nu = 3e-6, 1e-6).
+
+(A) NU-GAP EXTENSION -- RESULTS AND ADJUDICATION (runs complete):
+  nu=3e-6: -1.2112 / -1.1529, spread 0.058, both grids in the
+    pre-registered band -> FLAT CONTINUES, letter-clean.
+  nu=1e-6: -1.3657 / -1.2565, spread 0.109 (under bar). The 256-grid
+    value is in-band; the 128-grid point estimate (-1.366) falls 4%
+    BELOW the deep edge of the pre-registered band (-1.31), i.e. MORE
+    inverted, away from the inviscid value; its CI [-1.55, -1.19]
+    overlaps the band broadly. Adjudication per the pre-registered
+    outcomes: NOT "flat continues" by the letter (band=OUT on one
+    grid); emphatically NOT "crossover found" (the excursion is in the
+    wrong direction for that); reported as measured, no forcing.
+  NET: no approach toward the inviscid value anywhere down to
+  nu = 1e-6. Any crossover toward inviscid now lies below 1e-6: the
+  no-approach statement extends from two decades to THREE. The curve
+  is flat-or-deeper across 1e-6..1e-3, every spread under the bar
+  (0.016-0.115), deep windows n=19-27.
+
+SWEEP SUMMARY: three ends attacked, three moved.
+  (A) the nu-gap pushed down a decade: crossover, if any, below 1e-6.
+  (B) turnaround-switch coincidence established WITHIN each run (6/6),
+      with a consistent ordering: turnaround, then switch ~0.2 later
+      in viscous runs.
+  (C) seed-0 edge tightened to (3e-2, 5e-2); edge is direction-
+      dependent (seed 1 < 3e-2). Basin-or-instrument caveat stands.
+
+==============================================================================
+1E-6 DEEPENING ADJUDICATED (cadence replicas, pre-registered rule)
+==============================================================================
+Replica pair at dt=1.5e-5 (same trajectory, independent row sampling):
+  R128_1e-6: -1.3644 [CI -1.51,-1.23] n=34   (original -1.3657 -- delta 0.001)
+  R256_1e-6: -1.2182 [CI -1.30,-1.14] n=38   (original -1.2565)
+Cut sensitivity, replica cadence: 128 below-band at 2/3 cuts (same as
+original cadence); 256 at 0/3 (same as original).
+
+VERDICT under the pre-registered rule: the deepening is REAL AT THE
+128-GRID (replica reproduces it to 0.001; both cadences, 2/3 cuts) and
+ABSENT AT THE 256-GRID (in-band, 0/3 cuts, both cadences). Combined
+with the trend readout (monotone low-nu deepening on 128 only; no trend
+on 256), the coherent reading is a RESOLUTION EFFECT: at nu = 1e-6 the
+coarse grid's discretized trajectory genuinely deepens, the fine grid's
+does not. Not sampling scatter; not continuum physics. nu = 1e-6 is the
+128-grid's resolution floor for this observable; the continuum-facing
+value at 1e-6 is the fine grid's in-band -1.22 (replica) / -1.26
+(original), and the flat-curve statement stands there with a stated
+coarse-grid caveat. The three-decade no-approach statement is
+unaffected (every value on every grid remains deeply inverted).
+Published quotes (nu >= 1e-5) are untouched by any of this.
