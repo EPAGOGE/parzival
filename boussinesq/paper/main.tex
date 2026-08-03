@@ -339,7 +339,63 @@ The wandering sector remains the measured frontier: generic near-wall data
 dies too young at laptop resolution to read, and that failure is the
 recorded reason the sector is unexplored.
 
+
+\section{Tool and computational resource disclosure}\label{sec:disclosure}
+
+This section follows the Leiden Declaration's first recommendation
+\cite{Leiden26} and the call to normalize responsible disclosure of AI
+assistance rather than conceal it.
+
+\textbf{Tools.} Dedalus (spectral PDE solver) for the direct numerical
+simulations; NumPy/SciPy for all estimators; no proof assistant was
+used. An AI assistant (Anthropic Claude, used interactively throughout)
+wrote and debugged the solver configuration, the estimator and
+analysis code, and the corner-frame march; derived the analytical chain
+of Section~\ref{sec:chain}; drafted this paper's prose; and executed the
+prior-art search of Section~\ref{sec:prior}.
+
+\textbf{Division of labour, stated plainly.} The instrument code, the
+derivation in Section~\ref{sec:chain}, and the prose of this paper were
+produced with AI assistance and would not exist in this form without
+it. What is the author's: the choice of observable and the decision to
+calibrate it on a case where blowup is proven; the epistemic protocol
+under which every result here was obtained (pre-registration of every
+estimator, bar, and hypothesis space \emph{before} the data it judges
+existed; adversarial re-audit before publication; the standing refusals
+of Section~\ref{sec:instruments}); the decisions of what to measure,
+what to retract, and what to publish; and the repeated enforcement of
+scope against machine-generated first drafts. Several results in this
+paper exist \emph{because} that protocol killed earlier machine-produced
+claims; those are recorded in Section~\ref{sec:corpses}.
+
+\textbf{What the author can and cannot defend at expert level.} The
+author can defend: the observable's construction and the scale
+invariance that forces the $-1/2$ power; the measurement protocol and
+its failure modes; why window-averaged slopes are regime mixtures; the
+estimator lineage, including which estimators died and why; and the
+retraction record. The author \emph{cannot} defend at expert level the
+analytical steps of Section~\ref{sec:chain} --- the Biot--Savart kernel
+split, the optimization over $\rho$, and the passage to the threshold
+exponents. Those were machine-derived under the author's direction, are
+reported as a chain conditional on Hypothesis~(H) with its measured
+constant, and have not been independently verified. Readers should treat
+Section~\ref{sec:chain} as a stated derivation awaiting expert review,
+not as established analysis. \textbf{The measurements of
+Sections~\ref{sec:inviscid} and \ref{sec:viscous} do not depend on it};
+they stand or fall on the instrument and the data, both of which are
+public.
+
+\textbf{Responsibility.} Per the Leiden Declaration's fourth
+recommendation, responsibility for the correctness and adequacy of
+everything in this paper, including the machine-assisted portions,
+rests with the human author.
+
 \begin{thebibliography}{99}
+
+\bibitem{Leiden26} Leiden Declaration on Artificial Intelligence
+and Mathematics. 2 June 2026. doi:10.5281/zenodo.20302944.
+\url{https://leidendeclaration.ai}
+
 
 \bibitem{CF93} P.~Constantin, C.~Fefferman.
 Direction of vorticity and the problem of global regularity for the

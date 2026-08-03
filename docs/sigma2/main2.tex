@@ -364,7 +364,46 @@ tracer recomputing ${\sim}230$ claims from the raw arrays and
 snapshots; an adversarial referee producing the twelve scoping
 corrections now baked into the text) is itself part of the record.
 
+
+\section{Tool and computational resource disclosure}\label{sec:disclosure}
+
+As in [P1], and following the Leiden Declaration \cite{Leiden26}:
+
+\textbf{Tools.} Dedalus for the simulations, NumPy/SciPy for the
+estimators, no proof assistant. An AI assistant (Anthropic Claude, used
+interactively) wrote the run drivers, the tracking and estimator code,
+and this paper's prose, and executed the supplementary prior-art search
+of Section~\ref{sec:prior}.
+
+\textbf{Division of labour.} The code and prose are machine-assisted;
+the protocol is the author's, and in this paper the protocol is most of
+the method: every estimator, bar, and hypothesis space in
+Sections~\ref{sec:curve}--\ref{sec:ld} was written down before the data
+it judges existed (the specification file's section timestamps
+interleave with the run logs), and two pre-registered routes were
+stopped by their own tests rather than rescued. The four corpses in
+Section~\ref{sec:corpses} are machine-produced results that the author's
+protocol killed.
+
+\textbf{What the author can and cannot defend at expert level.} This
+paper is almost entirely measurement, and its exposure is
+correspondingly narrower than [P1]'s. The author can defend the
+estimators, their invariance tests, the pre-registration record, and
+every retraction. The one inherited analytical dependency is [P1]'s
+exclusion chain, which is cited here for context and carries the same
+caveat stated in [P1]'s disclosure: it is machine-derived, conditional
+on a structural hypothesis with a measured constant, and unverified.
+No measurement in this paper depends on it.
+
+\textbf{Responsibility.} Rests with the human author, including for the
+machine-assisted portions.
+
 \begin{thebibliography}{99}
+
+\bibitem{Leiden26} Leiden Declaration on Artificial Intelligence
+and Mathematics. 2 June 2026. doi:10.5281/zenodo.20302944.
+\url{https://leidendeclaration.ai}
+
 
 \bibitem{P1} J.~Hill.
 Viscosity inverts the direction-regularity scaling of the corner-flow
