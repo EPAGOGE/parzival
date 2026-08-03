@@ -1,0 +1,425 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1.1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage[hidelinks]{hyperref}
+\usepackage{microtype}
+
+\newcommand{\om}{\omega}
+\newcommand{\vinf}{\|\om\|_\infty}
+\newcommand{\Lam}{\Lambda}
+\newcommand{\sL}{\sigma_{\!\Lambda}}
+\newcommand{\Anaught}{A_0}
+
+\title{The viscous inversion of the corner-flow blowup geometry fires at
+the collapse transient's turnaround, at every viscosity tested}
+\author{Justin Hill\\ \small Independent Research \\ \small justin@epagoge.io}
+\date{Draft 0.1 --- 2026-08-02\thanks{Sequel to [P1]. Every number
+regenerates from bytes on disk (Section~\ref{sec:repro}). This paper was
+drafted after, not before, a two-lens verification pass over its own
+claim records: roughly 230 numeric claims recomputed independently,
+twelve scoping corrections applied, and four of our own estimators and
+readings killed en route. The corpses are in Section~\ref{sec:corpses}.}}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Paper [P1] measured $\sL$, the scaling exponent of the scale-invariant
+direction-regularity observable $\Lam=\sup_P|\nabla\xi|\,|\om|^{-1/2}$,
+on the Boussinesq corner-flow blowup scenario: $+1.00\pm0.03$ inviscid
+(calibrated where blowup is proven), inverting to a deep-collapse value
+near $-1.2$ under viscosity at $\nu\in\{10^{-4},10^{-3}\}$. This paper
+asks the questions that result forces: how the inversion depends on
+viscosity, where in the collapse it happens, and what sets that
+location. Within the tested scenario family (Section~\ref{sec:scope}):
+(1)~\emph{No resolved viscosity dependence.} At the five tested
+viscosities $\nu\in\{10^{-5},3\times10^{-5},10^{-4},3\times10^{-4},
+10^{-3}\}$ the deep-collapse exponent shows no trend (chord estimator
+$-1.12$ to $-1.29$, every cross-grid spread under the pre-registered
+$0.15$ bar; two-slope-form asymptote $-1.07\pm0.03$); the two
+previously certified viscosities replicated 4/4 against independent
+runs. Against the window-matched inviscid anchor ($+0.589/+0.585$) the
+data show no approach toward the inviscid value down to $\nu=10^{-5}$:
+any crossover in $\nu$ lies below the tested range. The data are
+consistent with a $\nu\to0^{+}$ discontinuity of the exponent; they
+cannot distinguish it from a crossover below $10^{-5}$.
+(2)~\emph{A fixed trigger.} The switch sits at
+$A^{*}=52.7$--$54.2\times\Anaught$ in twelve measurements at
+$\nu\in\{10^{-4},10^{-3}\}\times\Anaught\in\{50,100,200\}$, both grids,
+and is bracketed inside the same band at the three other viscosities
+($\Anaught=100$ only). Since the initial corner-gradient amplitude is
+$37.7\times\Anaught$ (a geometric constant of this IC family), the
+trigger is a growth factor $1.43$ (spread $1.40$--$1.44$) above the
+initial value: about a third of an e-fold. The switch is nearly a step,
+completing within ${\sim}0.2$--$0.3$ e-folds (measured at $\nu=10^{-4}$
+only). (3)~\emph{The two instruments meet.} An empirical clock fit
+($\gamma_A=0.77$--$1.11$) places the switch at $s^{*}=0.52\pm0.05$ in
+rescaled time (per-run degeneracy widens this to $[0.29,0.70]$),
+consistent with the corner-frame march's fast-transient turnaround at
+$s=0.5$ (resolved to the $ds=0.25$ step); the pre-registered lock-on
+hypothesis ($s\sim3.7$--$13.5$) is refuted by more than a factor of
+five. A large-deviation march closes the linearity gap as far as the
+march reaches: the $s=0.5$ turnaround is amplitude-invariant across
+4.5 decades of perturbation amplitude, and the march's
+basin-or-instrument edge lies between amplitudes $3\times10^{-2}$ and
+$10^{-1}$ along the one direction tested. The licensed mechanism
+statement, exactly bounded: viscosity is necessary for the inversion
+(inviscid runs never invert), and at the two viscosities where the
+clock was fit the inversion occurs at a rescaled time consistent with
+the transient's turnaround, well before self-similar settling; the
+switch location tracks a $\nu$-independent, $\Anaught$-linear stage of
+the collapse whose dynamical identity remains open.
+\end{abstract}
+
+\section{Scope, stated first}\label{sec:scope}
+
+Everything in this paper is measured on one scenario family: the
+axisymmetric Boussinesq corner flow of the Luo--Hou type, quartic
+initial condition, corner scale $r_0=0.4$, \texttt{zpow}~1, free-slip
+viscosity in 5D-Laplacian form (the no-slip results of Barker--Prange
+\cite{BP20} concern a different boundary condition and are cited as
+prior art for the criteria, not as the same setting). Amplitudes are in
+code units of the vector-$|\om|$ maximum; grids are $128\times384$ and
+$256\times768$ (one refinement doubling; the $0.15$ cross-grid bar
+tests consistency under that doubling, not asymptotic grid
+convergence); the march runs seed-0 perturbations at $ds=0.25$ with the
+M2 stop rule, and every accepted march step converged the true
+nonlinear residual below $10^{-10}$.
+
+\emph{Novelty scoping.} The prior-art search of [P1] (a one-session web
+sweep; ``not found by this search,'' never ``proven absent'') covers
+the viscosity-resolved exponent curve: no measurement of a
+direction-regularity exponent as a function of viscosity was found, and
+Section~\ref{sec:curve} is that curve. The trigger invariant, switch
+width, clock comparison, and basin bound are reported as measurements
+with no novelty claim attached. Adjacent art sighted in a supplementary
+search: analytical viscous geometric depletion \cite{Ju06,Gru26}, and
+nearly self-similar viscous blowup in \emph{generalized} axisymmetric
+Navier--Stokes with dimension as a parameter \cite{Hou24}; our
+measurements concern the standard equations at fixed dimension, on this
+scenario family, at the viscosities stated.
+
+\section{The curve: no resolved \texorpdfstring{$\nu$}{nu}-dependence}
+\label{sec:curve}
+
+Ten new DNS runs (five viscosities, both grids, doubled snapshot
+cadence, fresh tags) went through the certified estimator of [P1]
+verbatim: signed circulation-drift gate, peak-box $\Lam$ recipe,
+cross-grid common-amplitude overlap, top half, symmetric midpoint cut,
+OLS slope with $10^4$-resample bootstrap intervals.
+
+\begin{center}
+\begin{tabular}{lccc}
+\toprule
+$\nu$ & $128\times384$ & $256\times768$ & spread \\
+\midrule
+$0$ (anchor) & $+0.589$ & $+0.585$ & $0.005$ \\
+$10^{-5}$ & $-1.174$ & $-1.190$ & $0.016$ \\
+$3\times10^{-5}$ & $-1.271$ & $-1.156$ & $0.115$ \\
+$10^{-4}$ & $-1.119$ & $-1.187$ & $0.068$ \\
+$3\times10^{-4}$ & $-1.286$ & $-1.204$ & $0.082$ \\
+$10^{-3}$ & $-1.207$ & $-1.231$ & $0.024$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Every spread passes the pre-registered $0.15$ bar. The two viscosities
+certified in [P1] replicated 4/4 against these independent runs (worst
+$|\Delta|=0.055$, within tolerance); the three new viscosities are
+single run-pairs with cross-grid agreement as their check. The deep
+windows carry $n=20$--$27$ snapshots (the doubled cadence fixed [P1]'s
+thinnest tables). A two-slope-form fit (Section~\ref{sec:trigger}) puts
+the asymptotic deep slope at $-1.07\pm0.03$ across all six fitted runs,
+systematically shallower than the chord values; both are quoted and
+neither replaces the other. The chord-vs-form gap (${\sim}0.1$) is the
+current estimator systematic on the exponent's absolute value; the
+$\nu$-flatness conclusion is insensitive to it.
+
+What the table does not show: any approach toward the inviscid anchor.
+If $\sL^{\mathrm{deep}}(\nu)$ returns to $+0.59$ as $\nu\to0$, it does
+so below $\nu=10^{-5}$. Within the tested range the inversion is
+viscosity-blind. The Corollary-0 reading of [P1] (the viscous cap on
+direction-gradient growth exists for every $\nu>0$ and is absent at
+$\nu=0$ \cite{Con94}) is consistent with a genuine $0^{+}$
+discontinuity; that reading is interpretation, and the measurement
+alone cannot exclude a crossover below the tested range.
+
+\section{The trigger: a fixed growth factor, and a near-step switch}
+\label{sec:trigger}
+
+At finite $\nu$, $\sigma(A)$ is not one number: every viscous run
+crosses from inviscid-like slope ($+0.39$ to $+0.81$) at low amplitude
+to the inverted value at high amplitude. [P1] adjudicated
+window-averaged slopes as regime mixtures; here the crossover itself
+becomes the observable.
+
+The estimator lineage is part of the record. A pre-registered
+chord-intersection estimator for the crossover amplitude \emph{failed}
+its split-invariance test (15--42\% drift tracking the window split,
+monotone in nine of ten runs) and its outputs are void: $\sigma(A)$
+curves smoothly rather than breaking, so a two-chord intersection
+follows the split point. Its successor, the first zero crossing of a
+$k$-row sliding-window local slope, passes the same class of test that
+killed its predecessor: $k$-drift 0.9--2.1\% on the discovery runs and
+0.7--1.0\% on the cross-term runs, cross-grid agreement under 1\%.
+
+By that estimator, the crossover amplitude is $\Anaught$-linear with
+measured power $+1.00$ (ratios $0.50/0.49$ at $\Anaught=50$ and
+$2.01/2.00$ at $\Anaught=200$ against the amplitude-symmetry
+prediction), and the twelve measurements at
+$\nu\in\{10^{-4},10^{-3}\}\times\Anaught\in\{50,100,200\}$ give
+$A^{*}/\Anaught=52.7$--$54.2$. At $\nu\in\{3\times10^{-4},
+3\times10^{-5},10^{-5}\}$ ($\Anaught=100$ only) the crossover is
+bracketed inside the same fixed band: the lower half of every overlap
+window reads inviscid-positive and the upper half reads inverted, so
+the crossover cannot have moved with $\nu$ within the tested window.
+The tested region of the $(\nu,\Anaught)$ plane is a cross, not a tile;
+the plane statement is exact for that cross.
+
+The initial corner-gradient amplitude is $37.7\times\Anaught$ in every
+run, a geometric constant of the quartic IC family (early inviscid
+snapshots grow $37.71\to37.80\to37.93$: the value at the first trusted
+snapshot is essentially the initial value). The trigger is therefore a
+growth factor of $1.43$ above the initial amplitude (twelve-run spread
+$1.40$--$1.44$; the tanh-form estimator places the crossing
+systematically ${\sim}8\%$ lower, so the absolute factor is
+estimator-conditional at that level while $\Anaught$-linearity and
+$\nu$-independence are estimator-robust). Three dependencies are
+declared: the factor is a property of this IC family, of the
+vector-$|\om|$ observable, and of the zero-crossing estimator.
+
+The switch is nearly a step. A two-slope blend fit is
+residual-adequate on all six runs at $\nu=10^{-4}$ but
+parameter-degenerate (the optimizer drives it into an
+exponential-transient limit; its center, width, and low-$A$ slope are
+not individually physical and are not quoted). The robust extract is
+the transient decay scale: the local slope completes its transition
+from $0$ to the inverted value within ${\sim}0.2$--$0.3$ e-folds of
+amplitude. The width is measured at $\nu=10^{-4}$ only.
+
+One confound was tested and killed before these claims were written:
+across the switch, the $|\om|$ argmax stays at the corner ($z^{*}=0$,
+$r^{*}=1.000$) at every gated snapshot, and the observable tracks the
+swirl-gradient structure throughout ($\om_\theta$ vanishes at the
+corner by symmetry). The diagnostic was run at $\nu=10^{-4}$ on the
+128-grid and on the matched inviscid run; we treat it as excluding a
+structure handoff for the runs where the switch is certified. The
+inversion is a change in the direction-field geometry at one fixed
+structure, not the instrument changing targets.
+
+\section{The clock: two instruments meet at the transient's turnaround}
+\label{sec:clock}
+
+[P1]'s rescaled-frame march certified the corner profile as an
+attractor: perturbations peak at $s=0.5$ (raw factor $2.389$ at linear
+amplitude) and contract at $0.270$ per $s$-unit. The DNS switch can be
+placed on the same $s$-axis by fitting the collapse clock
+$\ln A=-\gamma_A\ln(1-t/T^{*})+\ln A_i$ per run, $T^{*}$ scanned, with
+$s=-\ln(1-t/T^{*})$.
+
+\begin{center}
+\begin{tabular}{lccc}
+\toprule
+run & $\gamma_A$ & $s^{*}$ & $s^{*}$ over $2\times$-residual $T^{*}$ set \\
+\midrule
+OR $128\times384$ ($\nu=0$) & $0.77$ & $0.61$ & $[0.42, 0.70]$ \\
+OR $256\times768$ ($\nu=0$) & $0.94$ & $0.54$ & $[0.41, 0.58]$ \\
+C $128\times384$ ($10^{-4}$) & $0.86$ & $0.55$ & $[0.38, 0.61]$ \\
+C $256\times768$ ($10^{-4}$) & $1.11$ & $0.48$ & $[0.35, 0.51]$ \\
+C $128\times384$ ($10^{-3}$) & $1.04$ & $0.47$ & $[0.30, 0.53]$ \\
+C $256\times768$ ($10^{-3}$) & $1.03$ & $0.49$ & $[0.31, 0.55]$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+$s^{*}=0.52\pm0.05$ (run-to-run scatter; the $T^{*}$--$\gamma_A$
+degeneracy widens the honest per-run interval to $[0.29,0.70]$),
+consistent with the march turnaround at $s=0.5$, itself resolved only
+to the $ds=0.25$ step. The value is conditional on the clock form and
+on the $54\times\Anaught$ switch input: the tanh-implied
+$49$--$50\times\Anaught$ shifts $s^{*}$ by about $-0.09$, inside the
+degeneracy band. $\gamma_A$ spans $0.77$--$1.11$, consistent with the
+corner frame's one-e-folding-per-$s$-unit and measured rather than
+assumed. The pre-registered hypothesis space put lock-on at
+$s\sim3.7$--$13.5$; even the widest degeneracy bound clears that window
+by more than a factor of five. Within the pre-registered space and
+clock family, the lock-on hypothesis is refuted: the switch does not
+wait for the collapse to settle onto the profile.
+
+The comparison identifies matching timescales of one operator, not
+coincident trajectories: the march transient is measured for
+perturbations about the settled profile, while the DNS approach is a
+large deviation. The next section closes that gap as far as the march
+can reach.
+
+\section{The large-deviation march}\label{sec:ld}
+
+The certified march ran the same seed-0 perturbation at amplitudes
+$3\times10^{-3}$, $10^{-2}$, $3\times10^{-2}$, and $10^{-1}$ (the
+largest previously validated amplitude was $10^{-3}$). At the first
+three, all 240 steps are valid and the raw-norm peak sits at
+$s_{\mathrm{peak}}=0.5$ exactly, at step resolution. Combined with
+[P1]'s M2 ladder, the transient turnaround is amplitude-invariant
+across 4.5 decades of relative deviation ($10^{-6}$ to
+$3\times10^{-2}$). The $s=0.5$ timescale that the DNS switch lands on
+is a property of the operator's nonlinear neighborhood, not merely of
+its linearization.
+
+Around the pinned turnaround, genuine nonlinear structure appears for
+the first time in this campaign: the transient's end stretches
+($s_{\mathrm{transient}}=13.5\to14.0\to14.75$, $+9\%$) and the peak
+factor grows ($2.4068\to2.4504\to2.5884$ within this ladder; M2's
+linear value is $2.389$) while the peak position does not move. The
+Lyapunov $P$-norm contracts monotonically from $V_0=77$ through 13.7
+decades with zero violations above the pre-registered $V$-floor
+artifact threshold: the certificate's contraction holds at 3\%
+deviation.
+
+At amplitude $10^{-1}$ the march stalls at step one (raw growth
+$3.3\times$ in one step; the $P$-norm nevertheless decreased on that
+step, a mixed signal). The pre-registered protocol does not separate
+dynamical escape from solver stall, so the honest statement is a
+basin-or-instrument edge: along the seed-0 direction,
+$3\times10^{-2}<r<10^{-1}$ in the march's norm. This also bounds the
+remaining daylight in Section~\ref{sec:clock}'s comparison: the DNS
+initial deviation exceeds this basin, and its approach enters the
+basin during the transient. Full closure would need DNS-state
+initialization of the march, which is a different instrument build.
+
+\section{Mechanism, stated within bounds}\label{sec:mechanism}
+
+For every viscosity tested, the inversion is present only with
+$\nu>0$: inviscid runs on identical amplitude windows never invert. At
+the two viscosities where the clock was fit, the switch occurs at a
+rescaled time consistent with the corner-frame transient's turnaround,
+well before self-similar settling, and the turnaround timescale is
+amplitude-robust across every amplitude the march can hold. Viscosity
+is necessary for the inversion; the location of the switch tracks a
+$\nu$-independent, $\Anaught$-linear stage of the collapse. What sets
+that stage dynamically is open, and Section~\ref{sec:curve}'s gap below
+$\nu=10^{-5}$ is open with it. The strongest reading consistent with
+all measurements: the geometric depletion that [P1] measured deep in
+the collapse is already fully switched on by the end of the approach
+transient, at every viscosity and amplitude tested, and the
+deep-collapse exponent it switches to does not depend on how much
+viscosity did the switching.
+
+\section{Relation to prior art}\label{sec:prior}
+
+The criteria territory is [P1]'s: Constantin--Fefferman \cite{CF93},
+Beir\~ao da Veiga--Berselli \cite{BdVB02,BdVB09} at the definition of
+$\Lam$, Giga--Miura \cite{GM11} and Barker--Prange \cite{BP20} for
+qualitative type-I exclusion under direction coherence, and
+Constantin's identity \cite{Con94} behind the Corollary-0 diagnostic.
+Analytical viscous geometric depletion is developed in \cite{Ju06} and,
+through logarithmically weighted direction classes, in \cite{Gru26};
+neither defines a measured exponent or an onset. Nearly self-similar
+viscous blowup is reported in \emph{generalized} axisymmetric
+Navier--Stokes with dimension as a parameter \cite{Hou24}; the present
+measurements concern the standard equations on this scenario family
+and are not in tension with results for modified systems. The measured
+objects of this paper (an exponent-vs-viscosity curve, a trigger
+invariant, a cross-instrument clock comparison) were not found in the
+[P1] search; only the curve carries a novelty claim, under that
+search's stated horizon.
+
+\section{What died on the way}\label{sec:corpses}
+
+Four of our own results were killed by our own instruments during this
+campaign, and the corpses are retained:
+
+\begin{itemize}
+\item The chord-intersection crossover estimator: failed
+  split-invariance (15--42\% drift); all its outputs, including a
+  fitted crossover-vs-viscosity slope, are void.
+\item The tanh-form parameters: residual-adequate fit, degenerate
+  parameters; only the decay scale and asymptote survive.
+\item The ``four e-folds of dynamical age'' reading of the trigger:
+  killed by the normalization audit (the initial corner-gradient
+  amplitude is $37.7\times\Anaught$, not $\Anaught$); the honest
+  trigger is $1.43\times$ above the initial value, essentially at
+  collapse onset.
+\item The lock-on bridge hypothesis: the clocks were compared and it
+  lost, by a factor of five beyond the widest degeneracy bound.
+\end{itemize}
+
+[P1]'s standing retractions (window-averaged viscous slopes; the
+amplitude-composite reading of the full-window inviscid calibration)
+are inherited: no full-window $\sigma$ is quoted anywhere in this
+paper, and every viscous contrast is drawn against the window-matched
+inviscid $+0.589$, never against $+1.00$.
+
+\section{Reproducibility}\label{sec:repro}
+
+The DNS campaign is 18 runs (about 90 minutes of laptop wall time)
+plus the march ladders (${\sim}90$ seconds each), all regenerable: run
+scripts, pre-registration (every estimator, bar, and hypothesis space
+in this paper was written down before the data it judges existed; the
+spec file's section dates interleave with the run logs), extraction
+code, and per-claim records with their adjudication addenda are in the
+repository alongside [P1]'s verification suite (15/15 standing,
+watcher live). The two-lens audit that preceded this draft (a numbers
+tracer recomputing ${\sim}230$ claims from the raw arrays and
+snapshots; an adversarial referee producing the twelve scoping
+corrections now baked into the text) is itself part of the record.
+
+\begin{thebibliography}{99}
+
+\bibitem{P1} J.~Hill.
+Viscosity inverts the direction-regularity scaling of the corner-flow
+blowup mechanism: a measured exponent crosses the type-I exclusion
+threshold. 2026.
+\url{https://epagoge.github.io/parzival/sigma/}
+(paper, LaTeX, data, and claims ledger; repository EPAGOGE/parzival).
+
+\bibitem{CF93} P.~Constantin, C.~Fefferman.
+Direction of vorticity and the problem of global regularity for the
+Navier--Stokes equations.
+\emph{Indiana Univ. Math. J.} \textbf{42}, 775--789 (1993).
+
+\bibitem{Con94} P.~Constantin.
+Geometric statistics in turbulence.
+\emph{SIAM Review} \textbf{36}, 73--98 (1994).
+
+\bibitem{BdVB02} H.~Beir\~ao da Veiga, L.C.~Berselli.
+On the regularizing effect of the vorticity direction in
+incompressible viscous flows.
+\emph{Differential Integral Equations} \textbf{15} (2002).
+
+\bibitem{BdVB09} H.~Beir\~ao da Veiga, L.C.~Berselli.
+Navier--Stokes equations: Green's matrices, vorticity direction, and
+regularity up to the boundary (2009).
+
+\bibitem{GM11} Y.~Giga, H.~Miura.
+On vorticity directions near singularities for the Navier--Stokes
+flows with infinite energy.
+\emph{Comm. Math. Phys.} (2011).
+
+\bibitem{BP20} T.~Barker, C.~Prange.
+Scale-invariant estimates and vorticity alignment for Navier--Stokes
+in the half-space with no-slip boundary conditions.
+\emph{Arch. Ration. Mech. Anal.} \textbf{235}, 881--926 (2020).
+arXiv:1906.08225.
+
+\bibitem{Ju06} N.~Ju.
+Geometric depletion of vortex stretch in 3D viscous incompressible
+flow.
+\emph{J. Math. Anal. Appl.} \textbf{321}(1), 412--425 (2006).
+doi:10.1016/j.jmaa.2005.08.048.
+
+\bibitem{Gru26} Z.~Gruji\'c.
+Logarithmic depletion of vortex stretching and singularity evasion in
+the 3D Navier--Stokes equations.
+arXiv:2607.08866 (2026).
+
+\bibitem{Hou24} T.Y.~Hou.
+Nearly self-similar blowup of generalized axisymmetric Navier--Stokes
+equations.
+arXiv:2405.10916 (2024, revised 2025).
+[Verified 2026-08-02: generalized equations, dimension as parameter;
+preprint.]
+
+\end{thebibliography}
+
+\end{document}

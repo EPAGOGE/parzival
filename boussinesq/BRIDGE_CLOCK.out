@@ -1,0 +1,72 @@
+==============================================================================
+BRIDGE CLOCK FIT (EJA #79) -- the DNS switch on the march's s-axis
+==============================================================================
+Pre-registration: NU_CURVE_SPEC.md BRIDGE CLOCK FIT section (hypothesis
+space fixed before fitting). Fit: ln A = -gamma_A ln(1-t/T*) + ln A_i,
+T* grid-scanned, s* = -ln(1-t*/T*) at the certified switch A = 54 x A0.
+
+tag            n     T*      gamma_A  A_i/A0   s*    s* over 2x-resid T* set
+OR_z128r384   40  0.00279     0.77     33.8   0.61   [0.42, 0.70]
+OR_z256r768   45  0.00298     0.94     32.6   0.54   [0.41, 0.58]
+C128_1e-4     72  0.00299     0.86     33.7   0.55   [0.38, 0.61]
+C256_1e-4     93  0.00326     1.11     31.7   0.48   [0.35, 0.51]
+C128_1e-3     82  0.00344     1.04     33.1   0.47   [0.30, 0.53]
+C256_1e-3     93  0.00339     1.03     32.8   0.49   [0.31, 0.55]
+
+RESULT: s* = 0.52 +- 0.05 (six runs, inviscid and viscous, both grids;
+answerable on every run by the pre-registered bar). gamma_A ~ 1 measured
+(the frame's "one e-folding of amplitude per s-unit", confirmed
+empirically; the c_l-based guess of ~2.9 was wrong and is discarded).
+
+VERDICT AGAINST THE PRE-REGISTERED HYPOTHESIS SPACE: s* << 3.7 -- the
+ORIGINAL BRIDGE HYPOTHESIS (switch = profile lock-on, s ~ 3.7-13.5) IS
+REFUTED. The switch precedes lock-on by an order of magnitude. What the
+clocks actually show: s* ~ 0.5 coincides with the certified march's
+FAST-TRANSIENT PEAK (raw perturbation norm peaks 2.39x at s = 0.5, S6
+certified, then contracts). The viscous inversion switches on at the
+turnaround of the approach transient: by the time the collapse begins
+settling onto the self-similar profile, its direction-field geometry is
+already inverted, at every nu tested.
+
+CAVEATS OWNED: (1) the march transient is LINEAR (perturbations 1e-6..
+1e-3 around the settled profile); the DNS approach is a large deviation
+-- the s=0.5 coincidence identifies matching timescales of the same
+operator, not identical trajectories. (2) s-origins differ in kind (IC
+release vs perturbation release), though both clock "time since the
+off-profile state was released". (3) T*-gamma_A degeneracy quoted per
+run; s* stable within [0.29, 0.70] across the full 2x-residual T* sets
+(lower edge 0.29 from a finer T* scan of C128_1e-3; the table row's
+coarser scan gives 0.30).
+
+MECHANISM STATEMENT (honest form, first cross-instrument link of the
+campaign): the certified march supplies the transient timescale of the
+corner-frame dynamics; the DNS supplies the viscous switch; they meet at
+s ~ 0.5. Viscosity does not wait for self-similarity -- it inverts the
+geometry during the approach, at the transient's turnaround.
+
+==============================================================================
+CAVEAT CLOSURE -- LARGE-DEVIATION MARCH (LD_MARCH.out, same night)
+==============================================================================
+The linear-vs-large-deviation caveat is CLOSED as far as the march can
+reach: s_peak = 0.5 EXACTLY at amp 3e-3, 1e-2, 3e-2 (240/240 valid steps
+each, true residual converged throughout) -- with M2, the transient
+turnaround is amplitude-invariant across 4.5 DECADES (1e-6 to 3e-2,
+0.0001% to 3% relative deviation). The s=0.5 timescale is a property of
+the operator's nonlinear neighborhood, not merely its linearization.
+"Matching timescales" upgrades to: the same turnaround time governs the
+dynamics at every amplitude the march can hold.
+
+TWO BONUS MEASUREMENTS: (1) THE BASIN EDGE IS FOUND -- amp 1e-1 escapes
+at step 1 (nonlinear stall, raw 3.3x); M2's open "escape threshold not
+found" closes to 3e-2 < r_basin < 1e-1 (seed 0 direction). The campaign's
+first direct nonlinear-escape observation. (2) FIRST GENUINE NONLINEAR
+TIMESCALE DRIFT: s_transient stretches 13.5 -> 14.0 -> 14.75 (+9%) and
+the peak factor grows 2.389 -> 2.588 (+8.3%) while s_peak stays pinned:
+the transient's END is amplitude-dependent, its TURNAROUND is not.
+P-norm bonus: V(v) monotone to the floor even from V0 = 77 (13.7 decades,
+zero genuine violations) -- the Lyapunov contraction holds at 3%
+deviation, extending M2's no-nonlinear-growth result by 1.5 decades.
+
+Remaining honest daylight: the DNS IC deviation exceeds the basin (its
+approach ENTERS the basin during the transient); full closure would need
+DNS-state initialization of the march, out of scope for this instrument.

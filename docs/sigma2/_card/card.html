@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../styles.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caprasimo&family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; }
+  .card-1200 {
+    width:1200px; height:630px; background:var(--color-bg);
+    color:var(--color-text); font-family:var(--font-body);
+    padding:40px 60px 36px; display:flex; gap:44px; align-items:stretch;
+    box-sizing:border-box;
+  }
+  .left { flex:1.28; display:flex; flex-direction:column; }
+  .right { flex:1; background:var(--color-surface); border-radius:32px;
+           padding:34px 32px; display:flex; flex-direction:column;
+           justify-content:center; gap:18px; }
+  .kicker { font-size:14px; font-weight:700; letter-spacing:.14em;
+            text-transform:uppercase; color:var(--color-accent-700); }
+  h1 { font-family:var(--font-heading); font-weight:400; font-size:42px;
+       line-height:1.05; letter-spacing:-.015em; margin:20px 0 0; }
+  h1 .hl { color:var(--color-accent); }
+  .lede { font-size:16px; line-height:1.45; color:var(--color-neutral-700);
+          margin:14px 0 0; max-width:520px; }
+  .panel { background:var(--color-accent-100); border-radius:22px;
+           padding:16px 22px; margin-top:16px; }
+  .panel-t { font-family:var(--font-heading); font-size:17px;
+             color:var(--color-accent-800); }
+  .panel-b { font-size:14px; line-height:1.45; color:var(--color-accent-900);
+             margin-top:5px; }
+  .nums { display:flex; align-items:baseline; gap:16px; margin-top:auto;
+          padding-top:14px; }
+  .big { font-family:var(--font-heading); font-size:40px; line-height:1;
+         color:var(--color-accent-2-700); white-space:nowrap; }
+  .lbl { font-size:14px; color:var(--color-neutral-600); }
+  .rule { height:1px; background:var(--color-divider); margin:14px 0 0; }
+  .foot { display:flex; align-items:center; justify-content:space-between;
+          margin-top:10px; font-size:14px; color:var(--color-neutral-600); }
+  .pill { background:var(--color-accent); color:var(--color-bg);
+          font-family:var(--font-heading); font-size:15px;
+          padding:10px 20px; border-radius:999px; }
+  .row { display:flex; align-items:center; gap:14px; }
+  .dot { width:44px; height:44px; border-radius:999px; display:grid;
+         place-items:center; font-family:var(--font-heading); font-size:15px;
+         flex:none; }
+  .rname { font-weight:800; font-size:16px; }
+  .rsub { font-size:13.5px; line-height:1.4; color:var(--color-neutral-700); }
+</style>
+</head>
+<body>
+<div class="card-1200">
+  <div class="left">
+    <div class="kicker">Measurement study · paper two · 2 August 2026</div>
+    <h1>The inversion <span class="hl">fires</span> at the<br>transient's turnaround.</h1>
+    <p class="lede">How the viscous inversion of the corner-flow geometry depends
+    on viscosity, where it happens, and what sets the location. Five
+    viscosities, eighteen new runs, two instruments, one candidate
+    meeting point.</p>
+    <div class="panel">
+      <div class="panel-t">No resolved viscosity dependence</div>
+      <div class="panel-b">The chord exponent reads &minus;1.12 to &minus;1.29 at
+      every tested viscosity across two decades, every cross-grid spread under
+      the pre-registered bar. Any crossover in &nu; lies below 10&#8315;&#8309;.</div>
+    </div>
+    <div class="nums">
+      <span class="big">s* = 0.52 &plusmn; 0.05</span>
+      <span class="lbl">consistent with the march turnaround s = 0.5 · pre-registered clock</span>
+    </div>
+    <div class="rule"></div>
+    <div class="foot">
+      <span>Justin Hill · Independent Research</span>
+      <span class="pill">Read the paper →</span>
+    </div>
+  </div>
+
+  <div class="right">
+    <div class="row">
+      <span class="dot" style="background:var(--color-accent-2-700); color:var(--color-accent-2-100)">✓</span>
+      <span><span class="rname">Flat curve, replicated</span><br><span class="rsub">certified anchors reproduced 4/4</span></span>
+    </div>
+    <div class="row">
+      <span class="dot" style="background:var(--color-accent-2-700); color:var(--color-accent-2-100)">✓</span>
+      <span><span class="rname">A fixed 1.43&times; trigger</span><br><span class="rsub">A0-linear, +1.00 · this IC family and estimator</span></span>
+    </div>
+    <div class="row">
+      <span class="dot" style="background:var(--color-accent-2-700); color:var(--color-accent-2-100)">✓</span>
+      <span><span class="rname">Two instruments meet</span><br><span class="rsub">clock fit consistent with the march transient</span></span>
+    </div>
+    <div class="row">
+      <span class="dot" style="background:var(--color-accent-2-700); color:var(--color-accent-2-100)">✓</span>
+      <span><span class="rname">Robust at large deviation</span><br><span class="rsub">pinned at step resolution, 4.5 decades</span></span>
+    </div>
+    <div class="row" style="margin-top:6px">
+      <span class="dot" style="background:var(--color-accent); color:var(--color-accent-100)">✕</span>
+      <span><span class="rname" style="color:var(--color-accent-800)">Four of our results killed</span><br><span class="rsub">by our own instruments, corpses named</span></span>
+    </div>
+  </div>
+</div>
+</body>
+</html>

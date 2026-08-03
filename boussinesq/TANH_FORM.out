@@ -1,0 +1,36 @@
+==============================================================================
+TANH FORM -- sigma(A) through the crossover (#78b, pre-registered)
+==============================================================================
+tag            n  ctr/A0      w      s1      s2  zc/A0  A*/A0  resid  adequate
+B128_A50      79    20.0   0.19 +13925.08   -1.10   49.2   54.0  0.152       yes
+B256_A50      94    18.7   0.21 +13099.75   -1.06   50.1   53.6  0.127       yes
+C128_1e-4     72    21.0   0.18 +14937.28   -1.03   48.8   53.8  0.146       yes
+C256_1e-4     93    18.4   0.22 +11866.16   -1.09   50.5   54.2  0.138       yes
+B128_A200     71    20.6   0.18 +15433.42   -1.04   49.1   54.1  0.154       yes
+B256_A200     91    18.5   0.22 +11991.29   -1.08   50.5   54.2  0.139       yes
+
+across 6 adequate fits: center/A0 = 19.5 +- 1.1   width = 0.20 +- 0.02 e-folds   s2 = -1.07 +- 0.03
+consistency: fit-implied zero crossing vs measured A* per row above (zc/A0 vs A*/A0).
+total wall: 2.7s
+
+ADJUDICATION (same session): the model is residual-adequate on all six
+runs but its parameters are DEGENERATE -- s1 ~ +1.2e4 with w ~ 0.2 and
+center below the data window means the optimizer repurposed the tanh into
+"deep slope + exponentially decaying transient": slope(x) ~ s2 +
+s1 exp(-2(x-x0)/w). s1, x0, w are NOT individually physical; do not quote
+them as observables. Robust extracts, consistent across all six runs
+after A0 rescaling:
+  (1) deep asymptote s2 = -1.07 +- 0.03 (slightly shallower than the
+      top-half chord values -1.12..-1.29 -- the chords likely average
+      residual transient; both quoted, neither replaces the other);
+  (2) fit-implied slope zero crossing 48.8-50.5 x A0, systematically ~8%
+      below the direct estimator's 54 x A0 -- two estimators, one
+      invariant, small methodical offset, both A0-linear;
+  (3) SWITCH SHARPNESS: the transient decays with e-folding scale w/2 ~
+      0.1 in ln A -- the slope goes from 0 to ~-1 within ~0.2-0.3 e-folds
+      of amplitude. The viscous inversion is close to a STEP at the fixed
+      growth factor. [The "dynamical age trigger" gloss written here was
+subsequently RETRACTED; see B_BAND.out SELF-AUDIT CORRECTION: the trigger
+is 1.43x above the IC corner-gradient value.]
+The universal object is the whole rescaled curve sigma(A/A0), not any
+single fitted parameter.

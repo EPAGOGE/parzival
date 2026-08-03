@@ -535,7 +535,28 @@
   "tid": 76,
   "text": "'M4 SIDE-FINDINGS wanting follow-up: (1) crossover amplitude A_c(nu) where sigma(A) flips from inviscid-like to depleted is a NEW unmeasured observable -- its nu-scaling would pin WHERE viscosity restores direction regularity; (2) top-half windows are thin (n=11-14 snapshots, bootstrap CIs +-0.15-0.35) -- denser snapshot cadence at the existing grids/nu (laptop, ~1hr DNS) would tighten the certification for free; (3) nu in {3e-4,3e-5,1e-5} stream files exist but snapshots were never kept -- the sigma_Lambda(nu) CURVE between 1e-4 and the inviscid limit is open.'",
   "source": "m4-sigma-deep",
-  "status": "open",
-  "outcome": ""
+  "status": "confirmed",
+  "outcome": "'All three items landed: (1) nu-curve measured, 5 points + anchor, flat at -1.2, every point certified; (2) denser snapshots delivered (n 11-14 -> 20-27) with 4/4 replication of certified values; (3) A_c attacked: the pre-registered chord-intersection estimator FAILED its split-invariance test (15-42% drift) and is void, but the estimator-independent window-bracket shows the crossover pinned in a fixed amplitude band across two decades of nu. Successor question minted separately.'"
+ },
+ {
+  "tid": 77,
+  "text": "'A_c SUCCESSOR QUESTION: sigma(A) curves smoothly (no sharp break -- that is WHY chord-intersection A_c failed invariance). Two live questions: (a) what functional form does sigma(A) follow through the crossover (tanh in ln A? if so, its center+width are the honest A_c and crossover sharpness); (b) WHAT sets the nu-independent crossover band (~6e3-9e3 in A, fixed across two decades of nu)? Candidates: IC geometry (A0=100 quartic), the corner scale r0=0.4, or an intrinsic amplitude of the mechanism -- discriminating test: vary A0 or r0, watch whether the band moves. NOTE: band quoted in code units of this scenario family.'",
+  "source": "nu-curve",
+  "status": "confirmed",
+  "outcome": "'DISCRIMINATING TEST DECISIVE: A* ~ A0^{+1.00} (ratios 0.50/0.49/2.01/2.00 vs H_IC predictions 0.5/2.0, both grids both amplitudes). The band is IC-amplitude heritage carried by the exact Euler amplitude symmetry -- H_intrinsic dead. THE INVARIANT: A*/A0 = 54.0 +- 0.3 in all six measurements = crossover at a fixed growth factor (four e-folds), independent of A0 (x4 range) and of nu (two decades, NU_CURVE.out). Depletion onset is a dynamical AGE, not an amplitude or viscous scale. New split-free estimator (sliding local-slope zero crossing) passed invariance: k-drift 0.9-2.1% vs chord predecessor 15-42%. B_BAND.out'"
+ },
+ {
+  "tid": 78,
+  "text": "'GROWTH-FACTOR INVARIANT successors: (a) cross-term untested -- A0 sweep at a SECOND nu (e.g. A50/A200 at nu=1e-3, ~20 min) to certify crossover = fixed growth factor for ALL (nu,A0); (b) sigma(A) functional form through the crossover (tanh in ln A: center should reproduce A*=54*A0, width = new observable); (c) the four-e-folds number vs the corner-frame dynamics: does the crossover coincide with the collapse locking onto the self-similar profile (s-march transient geometry, s_transient=13.5, contraction 0.270)? -- a bridge between the DNS instrument and the certified march would be the campaign first.'",
+  "source": "b-test",
+  "status": "confirmed",
+  "outcome": "'Items (a)+(b) DONE, (c) split to successor. (a) CROSS-TERM CERTIFIED: A0 sweep at nu=1e-3 gives A*/A0 = 52.7-53.7, inside the pre-registered 54+-10% bar within 2.5%; twelve total measurements across the (nu,A0) plane all 52.7-54.2 -- crossover = fixed growth factor ~54x (four e-folds) plane-wide. (b) FORM: tanh model residual-adequate but parameter-degenerate (s1/x0/w collapse into an exponential transient -- adjudicated, not quoted); robust extracts: deep asymptote s2=-1.07+-0.03, switch width ~0.2-0.3 e-folds (near-step), universal rescaled curve sigma(A/A0). B_BAND.out + TANH_FORM.out.'"
+ },
+ {
+  "tid": 79,
+  "text": "'THE BRIDGE (ex-78c, now the frontier): the viscous inversion switches on, near-step, at 54x growth = 4.0 e-folds of sup|omega| -- a dynamical age. The corner-frame march owns the other clock: S6 transient, s_transient=13.5, contraction 0.270/s-unit. QUESTION: do the two clocks tick together -- does 4 e-folds of DNS amplitude growth correspond to the collapse locking onto the self-similar profile in rescaled time? Path: map DNS snapshot times through ln(A/A0) to s-units via the measured collapse rate, compare the switch location against the march transient geometry. A confirmed match = first cross-instrument link and a MECHANISM statement: viscosity inverts the geometry exactly when the collapse becomes self-similar.'",
+  "source": "b-test-crossterm",
+  "status": "confirmed",
+  "outcome": "'Clocks compared, decisively. The lock-on hypothesis is DEAD (s* = 0.52 vs lock-on 3.7-13.5); the sharper truth replaced it: the switch coincides with the march transient PEAK (s=0.5), i.e. viscosity owns the direction geometry from the approach turnaround onward. Deduction bridge_clock_sstar carries the numbers; BRIDGE_CLOCK.out the record; the four-e-folds gloss was already corrected by bridge0_growth_factor_corrected. The campaign two-instrument loop is closed: march timescales are now measurably present in the DNS observable program.'"
  }
 ]

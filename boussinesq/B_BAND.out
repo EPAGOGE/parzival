@@ -1,0 +1,98 @@
+==============================================================================
+B-TEST -- vary A0 at nu=1e-4, watch the crossover band (EJA #77)
+==============================================================================
+estimator: sliding-window local-slope zero crossing, k=11/15/19 (split-free; k-drift is the invariance check). H_IC: A* scales with A0. H_intrinsic: A* fixed.
+
+------------------------------------------------------------------------------
+A0 = 50   (B128_A50 / B256_A50)
+  B128_A50: rows=79  A-range [1884, 12133]  A* {k=11: 2713 k=15: 2701 k=19: 2688}
+  B256_A50: rows=94  A-range [1885, 19856]  A* {k=11: 2669 k=15: 2681 k=19: 2693}
+------------------------------------------------------------------------------
+A0 = 100   (C128_1e-4 / C256_1e-4)
+  C128_1e-4: rows=72  A-range [3769, 22403]  A* {k=11: 5470 k=15: 5385 k=19: 5408}
+  C256_1e-4: rows=93  A-range [3770, 44454]  A* {k=11: 5495 k=15: 5417 k=19: 5380}
+------------------------------------------------------------------------------
+A0 = 200   (B128_A200 / B256_A200)
+  B128_A200: rows=71  A-range [7538, 44358]  A* {k=11: 10962 k=15: 10814 k=19: 10768}
+  B256_A200: rows=91  A-range [7540, 85025]  A* {k=11: 10685 k=15: 10831 k=19: 10790}
+
+==============================================================================
+DISCRIMINATION TABLE (A* at k=15; k-spread as invariance check)
+==============================================================================
+   A0      grid  A*(k=15)  k-spread  ratio vs A0=100  H_IC predicts
+   50   128x384      2701     0.9%             0.50           0.50
+   50   256x768      2681     0.9%             0.49           0.50
+  100   128x384      5385     1.6%             1.00           1.00
+  100   256x768      5417     2.1%             1.00           1.00
+  200   128x384     10814     1.8%             2.01           2.00
+  200   256x768     10831     1.4%             2.00           2.00
+
+measured scaling power: A* ~ A0^+1.00   (H_IC predicts +1, H_intrinsic predicts 0)
+VERDICT: H_IC -- the band tracks the IC amplitude (Euler heritage; the amplitude symmetry carries it).
+
+data saved: b_band_data.npz
+total wall: 2.7s
+
+==============================================================================
+READING (same session)
+==============================================================================
+A* / A0 = 54.0, 53.6, 53.9, 54.2, 54.1, 54.2 across every run -- the
+crossover sits at a FIXED GROWTH FACTOR of ~54x the initial amplitude
+(ln 54 = 4.0: four e-folds), independent of A0 (factor 4 tested, power
++1.00) and, per NU_CURVE.out, independent of nu across two decades at
+A0=100. The invariant is not an amplitude and not a viscous scale: it is
+a dynamical AGE of the collapse. This retroactively explains the
+nu-independence of the band -- the depletion turns on when the collapse
+reaches a fixed stage of its growth, and any nu > 0 in the tested range
+then inverts the geometry with the same exponent.
+
+CAVEAT OWNED: the two sweeps are one-axis each (nu swept at A0=100; A0
+swept at nu=1e-4). The cross term -- an A0 sweep at a second nu -- is
+untested; the "fixed growth factor for all (nu, A0)" reading merges the
+sweeps and needs that one cheap test. Estimator health: k-drift 0.9-2.1%,
+cross-grid <1% -- the split-free zero-crossing A* passes the invariance
+test its chord predecessor failed.
+
+==============================================================================
+CROSS-TERM RESULT (pre-registered bar met; same session)
+==============================================================================
+A0 sweep repeated at nu=1e-3: A*/A0 = 52.9/52.7 (A0=50), 53.5/53.7
+(A0=200), baseline 53.7/54.1 (A0=100) -- all inside the 54 +- 10% bar,
+in fact within 2.5%. Combined with the nu=1e-4 sweep and the nu-curve:
+TWELVE measurements of A*/A0 at nu in {1e-4, 1e-3} x A0 in {50..200}
+(plus the nu-curve bracket at 3e-4/3e-5/1e-5, A0=100 only), all
+52.7-54.2. THE CROSSOVER IS A FIXED GROWTH FACTOR (~54 x A0; the
+[RETRACTED four-e-folds gloss] is corrected in the SELF-AUDIT section
+below: 1.43x above the IC corner-gradient value) ACROSS THE TESTED
+CROSS OF THE PLANE. With the tanh
+adjudication (TANH_FORM.out): the switch is ~0.2-0.3 e-folds wide --
+close to a step -- at a dynamical age, not an amplitude, not a viscous
+scale. k-drift 0.7-1.0% on the new runs; estimator health excellent.
+
+==============================================================================
+SELF-AUDIT CORRECTION + CONFOUND KILL (bridge step 0, same session)
+==============================================================================
+CONFOUND TESTED AND KILLED: peak-identity diagnostic through the switch
+(C128_1e-4 viscous, OR_z128r384 inviscid): argmax fixed at the corner
+(z*=0, r*=1.000) at every gated snapshot; wt_frac = 0.000 throughout
+(omega_theta vanishes at the corner by symmetry; the |omega| max is the
+swirl-gradient structure the whole time). No structure handoff -- the
+sigma switch is a genuine direction-field change at ONE fixed structure.
+
+CORRECTION (the "four e-folds" reading is RETRACTED): the amplitude axis
+begins at 37.7 x A0 in every run because that IS the IC's corner
+swirl-gradient amplitude (fixed geometric factor of the quartic shape;
+early inviscid snapshots grow 37.7 -> 37.9, i.e. barely). The invariant,
+restated honestly: THE SWITCH SITS AT A GROWTH FACTOR OF
+54/37.7 = 1.43 (twelve-run spread 1.398-1.437, i.e. +-1.5%) ABOVE THE IC
+CORNER-GRADIENT AMPLITUDE -- 0.36
+e-folds, not 4. Everything plane-certified stands (A* proportional to
+A0, nu-independent, both grids); the gloss inverts: the viscous
+inversion switches on almost immediately in growth terms -- after less
+than half an e-fold of corner-gradient amplification -- and then holds
+at sigma ~ -1.2 for the entire observable collapse (a further ~1.5
+e-folds in the gated windows). "Fixed dynamical age, four e-folds deep"
+was wrong; "fixed 1.43x trigger, essentially at collapse onset" is what
+the data says. Prior wordings in this file's READING section, EJA
+#77/#78/#79 texts, and Token3 carry the old gloss; this entry corrects
+them all.

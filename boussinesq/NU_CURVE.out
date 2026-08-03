@@ -1,0 +1,103 @@
+==============================================================================
+NU-CURVE -- sigma_Lambda(nu) + A_c(nu), pre-registered analysis
+==============================================================================
+spec: NU_CURVE_SPEC.md  estimator: certified (unchanged)  bar: 0.15/point  bootstrap rng 271828
+
+------------------------------------------------------------------------------
+nu = 0.001   (C128_1e-3 / C256_1e-3)
+  rows 82/93  overlap lnA span 1.89  midpoint A=9701.5
+  sigma_deep 128x384: -1.2068  CI [-1.3924,-1.0359]  n=27
+  sigma_deep 256x768: -1.2308  CI [-1.3567,-1.1081]  n=25
+  SPREAD = 0.0240  < 0.15 OK
+  A_c C128_1e-3: 7181.8
+  A_c C256_1e-3: 7426.1
+------------------------------------------------------------------------------
+nu = 0.0003   (C128_3e-4 / C256_3e-4)
+  rows 76/92  overlap lnA span 1.87  midpoint A=9586.9
+  sigma_deep 128x384: -1.2857  CI [-1.5667,-1.0399]  n=24
+  sigma_deep 256x768: -1.2037  CI [-1.3289,-1.0772]  n=22
+  SPREAD = 0.0820  < 0.15 OK
+  A_c C128_3e-4: 7372.8
+  A_c C256_3e-4: 7301.5
+------------------------------------------------------------------------------
+nu = 0.0001   (C128_1e-4 / C256_1e-4)
+  rows 72/93  overlap lnA span 1.78  midpoint A=9190.2
+  sigma_deep 128x384: -1.1191  CI [-1.3125,-0.9719]  n=22
+  sigma_deep 256x768: -1.1870  CI [-1.2901,-1.0915]  n=21
+  SPREAD = 0.0679  < 0.15 OK
+  A_c C128_1e-4: 6901.7
+  A_c C256_1e-4: 7016.1
+------------------------------------------------------------------------------
+nu = 3e-05   (C128_3e-5 / C256_3e-5)
+  rows 70/91  overlap lnA span 1.75  midpoint A=9060.7
+  sigma_deep 128x384: -1.2712  CI [-1.4811,-1.1156]  n=22
+  sigma_deep 256x768: -1.1561  CI [-1.2544,-1.0485]  n=20
+  SPREAD = 0.1151  < 0.15 OK
+  A_c C128_3e-5: 7145.4
+  A_c C256_3e-5: 6951.6
+------------------------------------------------------------------------------
+nu = 1e-05   (C128_1e-5 / C256_1e-5)
+  rows 70/90  overlap lnA span 1.79  midpoint A=9209.5
+  sigma_deep 128x384: -1.1740  CI [-1.3910,-1.0118]  n=22
+  sigma_deep 256x768: -1.1903  CI [-1.3052,-1.0920]  n=20
+  SPREAD = 0.0164  < 0.15 OK
+  A_c C128_1e-5: 6996.8
+  A_c C256_1e-5: 7064
+
+==============================================================================
+CURVE TABLE (sigma_deep per grid; nu=0 anchor from M4_SIGMA_DEEP_NU0.out)
+==============================================================================
+      nu    128x384    256x768   spread    bar
+       0    +0.5894    +0.5848   0.0046       
+   0.001    -1.2068    -1.2308   0.0240     OK
+  0.0003    -1.2857    -1.2037   0.0820     OK
+  0.0001    -1.1191    -1.1870   0.0679     OK
+   3e-05    -1.2712    -1.1561   0.1151     OK
+   1e-05    -1.1740    -1.1903   0.0164     OK
+
+REPLICATION CHECK vs certified M4 (new cadence, independent runs):
+  nu=0.0001 128x384: new -1.1191 vs cert -1.1164  |delta|=0.0027  tol=0.304  REPLICATED
+  nu=0.0001 256x768: new -1.1870 vs cert -1.2371  |delta|=0.0501  tol=0.137  REPLICATED
+  nu=0.001 128x384: new -1.2068 vs cert -1.2538  |delta|=0.0470  tol=0.216  REPLICATED
+  nu=0.001 256x768: new -1.2308 vs cert -1.2854  |delta|=0.0546  tol=0.158  REPLICATED
+
+A_c(nu) (both grids answerable only):
+  nu=0.001: A_c = 7181.8 / 7426.1
+  nu=0.0003: A_c = 7372.8 / 7301.5
+  nu=0.0001: A_c = 6901.7 / 7016.1
+  nu=3e-05: A_c = 7145.4 / 6951.6
+  nu=1e-05: A_c = 6996.8 / 7064
+  ln A_c vs ln nu slope = +0.010  (5 points, pre-registered >= 4 met)
+
+data saved: nu_curve_data.npz
+total wall: 8.2s
+
+==============================================================================
+ADJUDICATION ADDENDUM (same session, split-invariance test)
+==============================================================================
+A_c AS PRE-REGISTERED IS VOID. Recomputing the chord-intersection A_c with
+the window split at 0.35/0.50/0.65 of the overlap ln-span moves A_c by
+15-42% per run, tracking the split (monotone in nine of ten runs) -- the two-chord
+intersection follows the split point when sigma(A) curves smoothly instead
+of breaking sharply. The A_c point values above, and the ln A_c vs ln nu
+slope (+0.010), are estimator geometry, not physics. Retracted as
+measurements; retained as the record of a pre-registered definition failing
+its invariance test.
+
+WHAT SURVIVES, AND WHY IT IS ESTIMATOR-INDEPENDENT:
+1. THE FLAT EXPONENT CURVE. sigma_deep(nu) = -1.12..-1.29 at every nu in
+   {1e-5..1e-3}, every point under the 0.15 cross-grid bar, anchors
+   replicated 4/4 against the certified M4 values at different snapshot
+   cadence. With the nu=0 matched anchor at +0.589, the inversion is a
+   nu -> 0+ DISCONTINUITY of the deep-collapse exponent over the
+   accessible range, not a gradual crossover in nu. (Consistent with the
+   Corollary-0 reading: the cap exists for every nu > 0, is absent at 0.)
+2. THE CROSSOVER BRACKET. Independently of any A_c estimator: at every nu,
+   the lower half of the fixed overlap window reads inviscid-like
+   (positive slope) and the upper half reads deeply depleted (~-1.2).
+   That brackets the crossover inside the same fixed amplitude band at
+   all five viscosities -- over two decades of nu it does NOT track the
+   viscous scale. Where the crossover lives is set by something
+   nu-independent; what that is remains open.
+3. DENSITY FIX CONFIRMED: top windows now n=20-27 (was 11-14), CIs
+   tighter, at 2x snapshot cadence.
