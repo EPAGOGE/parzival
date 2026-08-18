@@ -1,0 +1,162 @@
+\section{Scope and open problems}\label{sec:scope}
+
+\subsection{Pointwise T2}\label{sec:t2open}
+
+F3's frozen scope sentence is the boundary and I repeat it verbatim: F3
+measures the viscous enstrophy flux of the $\omega_1$ channel as an
+integrated functional over $\nu \in [10^{-8}, 10^{-5}]$ within the
+stored collapse window; it does not resolve the pointwise T2 question,
+which remains open
+(\texttt{ext\_inertia\_t2/out/flux3/F3\_RESULT.md}, section 6). Nothing
+in this paper constrains
+$\omega_{1,\nu} - \omega_{1,\mathrm{inv}} = \nu\,\delta_1 + o(\nu)$
+pointwise, least of all at the corner ring; nothing is in sup-norm;
+rearrangements preserving the gradient integral are invisible to $Z$;
+window-local violations can cancel inside a window, mitigated but not
+removed by the nine-window report. Section~4 explains why the pointwise
+question is hard here rather than merely unfinished: the sealed record
+has viscosity acting through the collapse frame itself, and a
+frame-quotiented statistic deleted 71.8 to 99\% of its own prediction
+(the root-cause table, Section~4). A pointwise instrument for this
+collapse therefore must not quotient the frame, and no such instrument
+with a theorem-backed null is in hand. The one concrete function-space
+lead comes from the corner treatment of Chen and Hou, who carry the
+corner with singular weights and explicit corrections rather than
+excision \cite{ChenHou}: a pointwise corner response coefficient would
+need that function-space change, not grid refinement.
+
+\subsection{The sub-leading exponent}\label{sec:subleading}
+
+The joint license's floor, corrections vanishing no slower than
+$\nu^{0.4}$, is a band edge, not a measurement. The F3 bulk correction
+fit returns $q = 0.438$ (Simpson, window $[200, 400)$) and $q = 0.425$
+(trapezoid, window $[1200, \Omega_*)$, jackknife spread $0.088$)
+against the frozen band $[0.4, 1.0]$: both sit at the edge, so the
+exponent is unresolved
+(\texttt{ext\_inertia\_t2/out/flux3/f3\_ladder.json},
+\texttt{family\_A}; \texttt{F3\_RESULT.md}, section 9). The F2 swirl
+correction exponent at fixed time is $0.7130$, drop-one jackknife
+spread $0.029$, profile $[0.710, 0.716]$, and it lives at
+$\nu \in [10^{-5}, 10^{-3}]$
+(\texttt{ext\_inertia\_t2/out/flux/FLUX\_RESULT.md}, section 4.2).
+Different channel, different pairing, different $\nu$ range: I do not
+reconcile the two numbers and this archive cannot. Resolving $q$ is a
+floor problem; see the archive limits below.
+
+\subsection{R2: azimuthal stability, parked, with the certified route}\label{sec:r2parked}
+
+Whether the corner ring survives azimuthal symmetry breaking is not
+addressed by any measurement in this paper. The question is parked with
+a certified route on disk. The Tier-0 pre-registration
+(\texttt{ext\_inertia\_t2/R2\_PLAN/TIER0\_SPEC.md}) froze the route: an
+m-mode operator about the certified profile, azimuthal coupling in a
+polynomial normal form
+$L_m = L_0 + \tilde{k} B_1 + \tilde{k}^2 B_2$ at
+$\tilde{k} = m\,\ell(t)$, with the certified margin
+$m_{\mathrm{cert}} = 1/(2\lambda_{\max}(P))$ from the Lyapunov
+certificate. The execution
+(\texttt{ext\_inertia\_t2/R2\_PLAN/TIER0\_RESULT.md}) returned T0c,
+VOID by the spec's own stop rule, and the void has content. Certified
+and re-derived from $P$:
+$m_{\mathrm{cert}} = 8.8232737664\times10^{-6}$, and
+$\mathrm{Re}\,\lambda \le -8.8233\times10^{-6}$ for every eigenvalue of
+the reduced generator, no eigensolve used. Measured obstructions: the
+2D certificate cannot host the azimuthal couplings, since $82.71\%$ of
+its nodes sit at cylindrical radius $R \le 0$ and those rows carry
+$91.27\%$ of $\mathrm{tr}(P)$, with the $1/R$ pole interior to the
+discretization; and my polynomial ansatz was wrong twice over, because
+the dominant azimuthal channel is the swirl advection entering at
+$\kappa = m\,(t_s - t)$, which exceeds $\tilde{k}$ by
+$\ell^{-0.658}$ at $c_l = 2.9206$, and because pressure slaving makes
+the $m$-dependence operator-rational rather than polynomial. The honest
+normal form is two-parameter, $(\kappa, \tilde{k})$, and the certified
+band depth for a fixed $m$ scales as $m^{-1}$ (swirl channel), not
+$m^{-0.342}$. The corner circle, the one locus where the azimuthal
+coefficients are unambiguous ($R = 1$ exactly at $\rho = 0$), is
+exactly the ring the certificate deletes. The closing route is
+itemized in the result file, first item a 3D corner similarity system;
+the fixed-$\tilde{k}$ ladder remains the right experiment. Two
+disciplines bind any future R2 run. First, perturbation growth is never
+a falsifier: blowup solutions of this type are hydrodynamically
+unstable by theorem \cite{VasseurVishik2020}, so discriminators must be
+structural. Second, no unconditional linear stability of the profile is
+claimed here or anywhere in this paper: the certificate is
+corner-clamped, in the P-norm, with measured transient growth
+$89.7 \le \sup_t \|e^{tL}\| \le 5807$ (Section~2), and that caveat
+travels with every mention of the certificate.
+
+\subsection{Archive limits, and what a purpose-built archive would buy}
+
+The deep end of this archive is a floor property, not an estimator
+property. In the swirl channel the fixed-time deviation falls to the
+inviscid instrument floor ($1.80\times10^{-10}$ on the D and T grids)
+below $\nu \approx 3\times10^{-6}$; the deepest rung that ever clears
+the deviation gate is $3\times10^{-6}$, on D2048 at
+$t \ge 2.85\times10^{-3}$, so the F2 exponent lives at
+$\nu \in [10^{-5}, 10^{-3}]$ and nothing below $10^{-6}$ is decidable
+there (\texttt{ext\_inertia\_t2/out/flux/FLUX\_RESULT.md}, sections 6.2
+and R1). In the $\omega_1$ channel the $10^{-8}$ rung's deepest window
+is floor-unrealized under the primary scheme (cross-realization ratio
+$12.7$ on roundoff-scale floors) and is decided by the trapezoid
+control in class agreement; the grid sigma term, $0.068$, forced by the
+absent \texttt{snap\_D2048\_1e-6} cell, is the largest single error
+term on every T rung; the floors are single-realization on two of the
+three grids (in the swirl lane the T and H floors inherit the D-grid
+replicate fraction, $1.20\%$,
+\texttt{ext\_inertia\_t2/out/flux/FLUX\_RESULT.md}, section 2.5; in the
+$\omega_1$ lane no inviscid field replicate exists at all and the
+floor-realization spread across independent executions is unmeasured,
+substituted by the 5 to 7\% cross-grid floor transfer,
+\texttt{F3\_RESULT.md}, exposure E-1); and the thin deep bin
+$[\Omega_*, 1900)$ holds five intervals at $10^{-8}$
+(\texttt{ext\_inertia\_t2/out/flux3/F3\_RESULT.md}, sections 5 and 9,
+exposures E-1..E-3). A purpose-built archive would need: an inviscid
+replicate pair on the T grid; snapshot storage, not streams, for every
+rung entering a fit; denser write cadence in the corner window
+$\Omega \in [1200, 1900)$; and the $\nu = 10^{-6}$ same-depth D/T cell.
+That list buys floors and cross-checks. It creates no new physics
+claims, and I make none from it.
+
+\subsection{What is not claimed}
+
+Stated explicitly, each with the reach that bounds it.
+
+\begin{enumerate}
+\item Nothing about generic Navier-Stokes blowup. Every result in this
+paper is about one certified profile
+($\alpha = -0.34240 \pm 3\times10^{-5}$, Section~2), one geometry, one
+boundary family.
+\item Nothing about no-slip walls beyond the wall-swap probe of
+Section~\ref{sec:wall}. The no-slip ladder was a boundary-condition
+experiment on the clamp hypothesis, thirteen completed short runs,
+formally W3;
+the no-slip half-space regularity theory is prior art
+\cite{GigaMiura2011, BarkerPrange2020} and this campaign adds nothing
+to it. A direct no-slip comparison of the direction-regularity exponent
+was attempted on the stored no-slip family (18 August 2026, pre-registered,
+census-gated) and refused itself: the impulsive-start Rayleigh sheet attains
+the vorticity supremum on every gated snapshot of all fourteen runs, at the
+quarter-period rings $z = L/4,\,3L/4$ rather than at the corner, so the
+certified observable reads a different object under no-slip walls and no
+cross-boundary-condition comparison is licensed from that data.
+\item Nothing pointwise, at any $\nu$. T2 is open
+(Section~\ref{sec:t2open}).
+\item No single scalar sub-leading exponent. The matching-convention
+fork fires in the swirl channel (VOID-5 / V-4, Section~5) and the
+bulk-channel $q$ sits at its band edge
+(Section~\ref{sec:subleading}).
+\item Nothing below $\nu = 10^{-8}$, and nothing deeper than the stored
+window ($t \le 2.985\times10^{-3}$, $\Omega \lesssim 1780$). No number
+in this paper is an extrapolation beyond its measured range.
+\item No corner-mechanism attribution. The corner share never reaches
+its gate (maximum $0.412$ against $0.5$, Section~\ref{sec:wall}), and
+corner language is licensed in neither flux lane.
+\item No unconditional linear stability of the profile, and no claim
+about azimuthal stability: R2 is parked
+(Section~\ref{sec:r2parked}), and the certificate's transient-growth
+caveat stands.
+\item No anomalous-dissipation statement outside this window and
+geometry. The zero-anomaly verdict of Section~3 concerns this collapse
+through $\Omega_*$; it says nothing about Onsager-class dissipation in
+turbulence \cite{Onsager1949, DuchonRobert2000}.
+\end{enumerate}
