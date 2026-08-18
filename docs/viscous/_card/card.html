@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../styles.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caprasimo&family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; }
+  .card-1200 {
+    width:1200px; height:630px; background:var(--color-bg);
+    color:var(--color-text); font-family:var(--font-body);
+    padding:40px 60px 36px; display:flex; gap:44px; align-items:stretch;
+    box-sizing:border-box;
+  }
+  .left { flex:1.28; display:flex; flex-direction:column; }
+  .right { flex:1; background:var(--color-surface); border-radius:32px;
+           padding:34px 32px; display:flex; flex-direction:column;
+           justify-content:center; gap:18px; }
+  .kicker { font-size:14px; font-weight:700; letter-spacing:.14em;
+            text-transform:uppercase; color:var(--color-accent-700); }
+  h1 { font-family:var(--font-heading); font-weight:400; font-size:42px;
+       line-height:1.05; letter-spacing:-.015em; margin:20px 0 0; }
+  h1 .hl { color:var(--color-accent); }
+  .lede { font-size:16px; line-height:1.45; color:var(--color-neutral-700);
+          margin:14px 0 0; max-width:520px; }
+  .panel { background:var(--color-accent-100); border-radius:22px;
+           padding:16px 22px; margin-top:16px; }
+  .panel-t { font-family:var(--font-heading); font-size:17px;
+             color:var(--color-accent-800); }
+  .panel-b { font-size:14px; line-height:1.45; color:var(--color-accent-900);
+             margin-top:5px; }
+  .nums { display:flex; align-items:baseline; gap:16px; margin-top:auto;
+          padding-top:14px; }
+  .big { font-family:var(--font-heading); font-size:40px; line-height:1;
+         color:var(--color-accent-2-700); white-space:nowrap; }
+  .lbl { font-size:14px; color:var(--color-neutral-600); }
+  .rule { height:1px; background:var(--color-divider); margin:14px 0 0; }
+  .foot { display:flex; align-items:center; justify-content:space-between;
+          margin-top:10px; font-size:14px; color:var(--color-neutral-600); }
+  .pill { background:var(--color-accent); color:var(--color-bg);
+          font-family:var(--font-heading); font-size:15px;
+          padding:10px 20px; border-radius:999px; }
+  .row { display:flex; align-items:center; gap:14px; }
+  .dot { width:44px; height:44px; border-radius:999px; display:grid;
+         place-items:center; font-family:var(--font-heading); font-size:15px;
+         flex:none; }
+  .rname { font-weight:800; font-size:16px; }
+  .rsub { font-size:13.5px; line-height:1.4; color:var(--color-neutral-700); }
+</style>
+</head>
+<body>
+<div class="card-1200">
+  <div class="left">
+    <div class="kicker">Measurement study · paper three · 13 August 2026</div>
+    <h1>The viscous response<br>is <span class="hl">linear</span> at leading order.</h1>
+    <p class="lede">Does viscosity select against or deform the certified
+    corner-collapse profile? Measured by flux observables of exactly
+    transported invariants, whose inviscid null is zero by theorem. Four
+    rungs, three decades, three wall laws, theorem-backed nulls.</p>
+    <div class="panel">
+      <div class="panel-t">The ladder marches to 1</div>
+      <div class="panel-b">rho_bulk reads 1.243, 1.095, 1.039, 1.029 as &nu;
+      falls from 10&#8315;&#8309; to 10&#8315;&#8312;, |rho &minus; 1| monotone
+      to 0.017, &nu; &rarr; 0 intercept 1.0035 &plusmn; 0.0099.</div>
+    </div>
+    <div class="nums">
+      <span class="big">&beta; = 0.521</span>
+      <span class="lbl">wall share rises 0.704 &rarr; 0.987 · the wall, not the corner, carries the viscous flux</span>
+    </div>
+    <div class="rule"></div>
+    <div class="foot">
+      <span>Justin Hill · Independent Research</span>
+      <span class="pill">Read the paper →</span>
+    </div>
+  </div>
+
+  <div class="right">
+    <div class="row">
+      <span class="dot" style="background:var(--color-accent-2-700); color:var(--color-accent-2-100)">✓</span>
+      <span><span class="rname">Linear at leading order</span><br><span class="rsub">integrated quadratic functionals, both channels</span></span>
+    </div>
+    <div class="row">
+      <span class="dot" style="background:var(--color-accent-2-700); color:var(--color-accent-2-100)">✓</span>
+      <span><span class="rname">Swirl coefficient confirmed</span><br><span class="rsub">inviscid quadrature to 4.1e-5..1.9e-4, two grids</span></span>
+    </div>
+    <div class="row">
+      <span class="dot" style="background:var(--color-accent-2-700); color:var(--color-accent-2-100)">✓</span>
+      <span><span class="rname">No finite viscous anomaly</span><br><span class="rsub">de-pedestalled E = 0 at &nu; = 1e-7 and 1e-8</span></span>
+    </div>
+    <div class="row">
+      <span class="dot" style="background:var(--color-accent-2-700); color:var(--color-accent-2-100)">✓</span>
+      <span><span class="rname">The null is zero by theorem</span><br><span class="rsub">gauge share 2.0e-4%..0.21% against 71.8&ndash;99%</span></span>
+    </div>
+    <div class="row" style="margin-top:6px">
+      <span class="dot" style="background:var(--color-accent); color:var(--color-accent-100)">✕</span>
+      <span><span class="rname" style="color:var(--color-accent-800)">Three of our results killed</span><br><span class="rsub">the F2d crossing, the sealed T2b, the reach label</span></span>
+    </div>
+  </div>
+</div>
+</body>
+</html>

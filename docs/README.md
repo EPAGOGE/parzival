@@ -2,7 +2,7 @@
 
 Serves the parzival numerics note. Uses the **Organic** design system, shared with
 the `papers` site: same `styles.css`, same Caprasimo/Figtree pairing, same tokens.
-Separate project, separate content, one house style. Nothing cross-links.
+Separate project, separate content, one house style. The three study pages here cross-link in sequence; the papers site remains separate.
 
 **To turn it on:** Settings → Pages → Deploy from a branch → `main`, folder `/docs`.
 

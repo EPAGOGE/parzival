@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Viscous Response Is Linear at Leading Order · Justin Hill</title>
+<meta name="description" content="Paper three: rho_bulk marches 1.243, 1.095, 1.039, 1.029 to a nu->0 intercept of 1.0035 +/- 0.0099, no finite viscous anomaly, three free-slip wall laws, and flux observables whose inviscid null is zero by theorem. Three of our own results killed en route.">
+<link rel="canonical" href="https://epagoge.github.io/parzival/viscous/">
+
+<!-- Open Graph (LinkedIn, Facebook, Slack, Discord) -->
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="epagoge.io">
+<meta property="og:url" content="https://epagoge.github.io/parzival/viscous/">
+<meta property="og:title" content="The Viscous Response Is Linear at Leading Order">
+<meta property="og:description" content="Paper three: rho_bulk marches 1.243, 1.095, 1.039, 1.029 to a nu->0 intercept of 1.0035 +/- 0.0099, no finite viscous anomaly, three free-slip wall laws, and flux observables whose inviscid null is zero by theorem. Three of our own results killed en route.">
+<meta property="og:image" content="https://epagoge.github.io/parzival/viscous/og-card-1200x630.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="rho_bulk marches 1.243 / 1.095 / 1.039 / 1.029 toward 1 as nu falls from 1e-5 to 1e-8; three wall laws near nu^1/2; the wall, not the corner, carries the viscous flux.">
+<meta property="article:published_time" content="2026-08-13">
+<meta property="article:author" content="Justin Hill">
+
+<!-- X / Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Viscous Response Is Linear at Leading Order">
+<meta name="twitter:description" content="Paper three: rho_bulk marches 1.243, 1.095, 1.039, 1.029 to a nu->0 intercept of 1.0035 +/- 0.0099, no finite viscous anomaly, three free-slip wall laws, and flux observables whose inviscid null is zero by theorem. Three of our own results killed en route.">
+<meta name="twitter:image" content="https://epagoge.github.io/parzival/viscous/og-card-1200x630.png">
+<meta name="twitter:image:alt" content="rho_bulk marches 1.243 / 1.095 / 1.039 / 1.029 toward 1 as nu falls from 1e-5 to 1e-8; three wall laws near nu^1/2; the wall, not the corner, carries the viscous flux.">
+
+<link rel="stylesheet" href="../styles.css">
+<link rel="icon" type="image/png" href="../favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caprasimo&family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  body { margin: 0; background: #f5ead8; }
+  a { color: #8c491a; }
+  a:hover { color: #b2622d; }
+  img { max-width: 100%; }
+  .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .92em; }
+  @media (max-width: 760px) {
+    h1 { font-size: 40px !important; }
+    .table { font-size: 14px; }
+  }
+</style>
+</head>
+<body>
+  <div style="min-height:100vh; background:var(--color-bg); color:var(--color-text); font-family:var(--font-body)">
+
+    <header style="max-width:1080px; margin:0 auto; padding:32px 40px 0; display:flex; align-items:center; justify-content:space-between; gap:20px">
+      <div style="display:flex; align-items:center; gap:12px">
+        <span style="width:26px; height:26px; border-radius:999px; background:var(--color-accent)"></span>
+        <span style="font-family:var(--font-heading); font-size:20px">epagoge</span>
+      </div>
+      <nav style="display:flex; gap:26px; font-size:15px; font-weight:600; color:var(--color-neutral-700)">
+        <a href="#ladder" style="text-decoration:none">Ladder</a>
+        <a href="#walls" style="text-decoration:none">Walls</a>
+        <a href="#corpses" style="text-decoration:none">Corpses</a>
+        <a href="viscous.pdf" style="text-decoration:none">PDF</a>
+      </nav>
+    </header>
+
+    <main style="max-width:1080px; margin:0 auto; padding:0 40px 80px">
+
+      <section style="padding:72px 0 0">
+        <div style="display:flex; align-items:center; gap:10px; font-size:13px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--color-accent-700)">
+          <span style="width:12px; height:12px; border-radius:999px; background:var(--color-accent)"></span>
+          Measurement study &middot; paper three <span style="color:var(--color-neutral-500)">/</span> <span style="color:var(--color-neutral-600)">13 August 2026</span>
+        </div>
+        <h1 style="font-family:var(--font-heading); font-weight:400; font-size:60px; line-height:1.03; letter-spacing:-.015em; margin:24px 0 0; max-width:940px; text-wrap:pretty">The viscous response is linear at leading order</h1>
+        <p style="font-family:var(--font-heading); font-size:28px; line-height:1.2; color:var(--color-accent-700); margin:18px 0 0; max-width:820px; text-wrap:pretty">A rho ladder marching to 1. Three wall laws. A null that is zero by theorem.</p>
+        <p style="font-size:20px; line-height:1.55; color:var(--color-neutral-700); margin:26px 0 0; max-width:680px; text-wrap:pretty">Justin Hill, Independent Research. Paper three, following <a href="../sigma2/">the timing study</a>: does viscosity select against or deform the certified corner-collapse profile (&alpha; = &minus;0.34240 &plusmn; 3&times;10<sup>&minus;5</sup>), and is the vanishing remainder linear response? Measured by flux observables of exactly transported invariants, adopted after the campaign's own gauge-deflated statistic was caught deleting its own prediction. Every spec frozen before the data it judges existed; the final ladder survived three adversarial review lenses with 63.93 GB of run data re-hashed clean.</p>
+        <div style="display:flex; gap:14px; flex-wrap:wrap; margin-top:32px">
+          <a href="viscous.pdf" class="btn btn-primary" style="text-decoration:none">Read the paper (PDF)</a>
+          <a href="https://github.com/EPAGOGE/parzival" class="btn btn-secondary" style="text-decoration:none">Code, data, ledger</a>
+        </div>
+      </section>
+
+      <section id="ladder" style="margin-top:64px; background:var(--color-surface); border-radius:28px; padding:40px 44px">
+        <div style="font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--color-neutral-700)">The ladder &middot; four rungs &middot; three decades &middot; scheme and cadence controlled</div>
+        <p style="font-size:18px; line-height:1.55; color:var(--color-neutral-800); margin:22px 0 0; max-width:800px; text-wrap:pretty">The verdict statistic is rho_bulk, the measured bulk enstrophy flux against the linear-response prediction, at matched collapse depth. If the response is linear at leading order, the ratio must march to 1 as &nu; falls. It does:</p>
+
+        <table class="table" style="margin-top:28px; width:100%">
+          <thead>
+            <tr><th>&nu;</th><th>rho_bulk (Simpson)</th><th>trapezoid control</th><th>wall share s<sub>wall</sub></th></tr>
+          </thead>
+          <tbody>
+            <tr><td>10<sup>&minus;5</sup></td><td>1.243</td><td>1.242 &plusmn; 0.005</td><td>0.704</td></tr>
+            <tr><td>10<sup>&minus;6</sup></td><td>1.095</td><td>1.094 &plusmn; 0.087</td><td>0.882</td></tr>
+            <tr><td>10<sup>&minus;7</sup></td><td>1.039</td><td>1.036 &plusmn; 0.11</td><td>0.959</td></tr>
+            <tr><td>10<sup>&minus;8</sup></td><td>1.029</td><td>1.017 &plusmn; 0.2</td><td>0.987</td></tr>
+          </tbody>
+        </table>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:14px; margin-top:28px">
+          <div style="background:var(--color-neutral-100); border-radius:22px; padding:20px 22px">
+            <span style="font-family:var(--font-heading); font-size:20px; color:var(--color-accent-2-700)">1.243 &rarr; 1.029</span>
+            <div style="font-weight:800; font-size:15px; margin-top:6px">The ladder marches to 1</div>
+            <div style="font-size:14px; line-height:1.45; color:var(--color-neutral-700); margin-top:3px">|rho &minus; 1| monotone to 0.017 at the trapezoid endpoint, four rungs, three decades of viscosity.</div>
+          </div>
+          <div style="background:var(--color-neutral-100); border-radius:22px; padding:20px 22px">
+            <span style="font-family:var(--font-heading); font-size:20px; color:var(--color-accent-2-700)">1.0035 &plusmn; 0.0099</span>
+            <div style="font-weight:800; font-size:15px; margin-top:6px">The &nu; &rarr; 0 intercept</div>
+            <div style="font-size:14px; line-height:1.45; color:var(--color-neutral-700); margin-top:3px">Trapezoid, four rungs; the Simpson three-rung fit lands at 0.9999.</div>
+          </div>
+          <div style="background:var(--color-neutral-100); border-radius:22px; padding:20px 22px">
+            <span style="font-family:var(--font-heading); font-size:20px; color:var(--color-accent-2-700)">E = 0</span>
+            <div style="font-weight:800; font-size:15px; margin-top:6px">No finite viscous anomaly</div>
+            <div style="font-size:14px; line-height:1.45; color:var(--color-neutral-700); margin-top:3px">The registered d<sub>&infin;</sub> &asymp; 0.19 deformation was ~85% free-slip pedestal; the de-pedestalled excess is zero at &nu; = 10<sup>&minus;7</sup> and 10<sup>&minus;8</sup>.</div>
+          </div>
+          <div style="background:var(--color-neutral-100); border-radius:22px; padding:20px 22px">
+            <span style="font-family:var(--font-heading); font-size:20px; color:var(--color-accent-2-700)">&beta; = 0.521</span>
+            <div style="font-weight:800; font-size:15px; margin-top:6px">The enstrophy flux law</div>
+            <div style="font-size:14px; line-height:1.45; color:var(--color-neutral-700); margin-top:3px">Jackknife CI [0.511, 0.532], with the wall share rising 0.704 to 0.987 as &nu; falls.</div>
+          </div>
+          <div style="background:var(--color-accent-100); border-radius:22px; padding:20px 22px">
+            <span style="font-family:var(--font-heading); font-size:20px; color:var(--color-accent-800)">2.0&times;10<sup>&minus;4</sup>% .. 0.21%</span>
+            <div style="font-weight:800; font-size:15px; margin-top:6px; color:var(--color-accent-800)">The gauge share</div>
+            <div style="font-size:14px; line-height:1.45; color:var(--color-accent-900); margin-top:3px">Against 71.8 to 99% for the deflated statistic these observables replace. The flux observables' inviscid null is zero by theorem: there is nothing left to deflate.</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="license" style="margin-top:64px">
+        <h2 style="font-family:var(--font-heading); font-weight:400; font-size:40px; line-height:1.1; margin:0">The joint license</h2>
+        <p style="font-size:18px; line-height:1.55; color:var(--color-neutral-700); margin:16px 0 0; max-width:760px; text-wrap:pretty">Two channels, two independent instruments. In the swirl channel, the explicit inviscid quadrature reproduces the measured &nu; &rarr; 0 leading coefficient to between 4.1&times;10<sup>&minus;5</sup> and 1.9&times;10<sup>&minus;4</sup> relative, on two grids. In the enstrophy channel, the ladder above marches to 1. The licensed sentence was pre-committed in the frozen spec before either verdict existed:</p>
+
+        <div style="margin-top:30px; background:var(--color-surface); border-radius:28px; padding:36px 44px">
+          <div style="font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--color-neutral-700)">The intercept &middot; frozen one-correction fit &middot; leave-one-rung-out jackknife</div>
+          <div style="display:flex; align-items:baseline; gap:24px; flex-wrap:wrap; margin-top:20px">
+            <span style="font-family:var(--font-heading); font-size:64px; line-height:1; color:var(--color-accent-2-700)">1.0035 &plusmn; 0.0099</span>
+            <span style="font-family:var(--font-heading); font-size:34px; color:var(--color-accent)">Simpson: 0.9999</span>
+            <span style="margin-left:auto; text-align:right; font-size:13px; letter-spacing:.1em; text-transform:uppercase; color:var(--color-neutral-600)">primary reach [10<sup>&minus;7</sup>, 10<sup>&minus;5</sup>]</span>
+          </div>
+          <p style="font-size:17px; line-height:1.55; color:var(--color-neutral-800); margin:20px 0 0; max-width:780px; text-wrap:pretty">The license, quoted tightly and no wider: linear response at the level of integrated quadratic functionals, leading coefficient only, with sub-leading corrections vanishing no slower than &nu;<sup>0.4</sup>. The pointwise question remains open. The reach, stated honestly: primary [10<sup>&minus;7</sup>, 10<sup>&minus;5</sup>], with the 10<sup>&minus;8</sup> rung decided by the trapezoid control in class agreement.</p>
+        </div>
+      </section>
+
+      <section id="walls" style="margin-top:64px">
+        <h2 style="font-family:var(--font-heading); font-weight:400; font-size:40px; line-height:1.1; margin:0">Three wall laws</h2>
+        <p style="font-size:18px; line-height:1.55; color:var(--color-neutral-700); margin:16px 0 0; max-width:760px; text-wrap:pretty">Every apparent viscous anomaly in this collapse resolved into the same object: a free-slip wall layer, measured three independent ways. Before reading any viscous magnitude on this geometry, check the wall share first.</p>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:16px; margin-top:26px">
+          <div style="background:var(--color-neutral-100); border-radius:22px; padding:22px 24px">
+            <span style="font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--color-accent-700)">Law 1</span>
+            <div style="font-weight:800; font-size:16px; margin-top:8px">The pedestal</div>
+            <div style="font-size:14.5px; line-height:1.45; color:var(--color-neutral-700); margin-top:5px">The registered d<sub>&infin;</sub> &asymp; 0.19 deformation decomposed into ~85% boundary pedestal. De-pedestalled, the viscous excess E is zero at &nu; = 10<sup>&minus;7</sup> and 10<sup>&minus;8</sup>.</div>
+          </div>
+          <div style="background:var(--color-neutral-100); border-radius:22px; padding:22px 24px">
+            <span style="font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--color-accent-700)">Law 2</span>
+            <div style="font-weight:800; font-size:16px; margin-top:8px">Circulation depletion, &nu;<sup>0.51</sup></div>
+            <div style="font-size:14.5px; line-height:1.45; color:var(--color-neutral-700); margin-top:5px">sup|&Gamma;| depletes as &nu;<sup>0.51</sup> over 4.5 decades of viscosity, a margin better than 270:1 of law over grid effects.</div>
+          </div>
+          <div style="background:var(--color-neutral-100); border-radius:22px; padding:22px 24px">
+            <span style="font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--color-accent-700)">Law 3</span>
+            <div style="font-weight:800; font-size:16px; margin-top:8px">Enstrophy flux, &beta; = 0.521</div>
+            <div style="font-size:14.5px; line-height:1.45; color:var(--color-neutral-700); margin-top:5px">Jackknife CI [0.511, 0.532], with the wall share of the total flux rising 0.704 to 0.987 as &nu; falls.</div>
+          </div>
+          <div style="background:var(--color-accent-100); border-radius:22px; padding:22px 24px">
+            <span style="font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--color-accent-700)">Non-license</span>
+            <div style="font-weight:800; font-size:16px; margin-top:8px; color:var(--color-accent-800)">The corner is not licensed</div>
+            <div style="font-size:14.5px; line-height:1.45; color:var(--color-accent-900); margin-top:5px">The corner-box share never exceeds 0.412 against the pre-registered 0.5 gate. The wall, not the corner, carries the viscous flux. Stated as a result, not an apology.</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="method" style="margin-top:64px; background:var(--color-surface); border-radius:28px; padding:40px 44px">
+        <div style="font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--color-neutral-700)">The methods result &middot; why the old instrument had to die</div>
+        <p style="font-size:18px; line-height:1.55; color:var(--color-neutral-800); margin:22px 0 0; max-width:800px; text-wrap:pretty">In a self-similar collapse, any statistic that quotients out the collapse frame can delete its own prediction, because the frame is the mechanism. The campaign's gauge-deflated statistic retained only 0.96 to 28.2% of the very response it predicted, with variance inflation factors of 10 to 170, and that deletion manufactured every downstream symptom the campaign had been chasing.</p>
+        <p style="font-size:18px; line-height:1.55; color:var(--color-neutral-800); margin:22px 0 0; max-width:800px; text-wrap:pretty">The repair is ontological, not statistical: measure fluxes of material invariants, whose inviscid null is zero by theorem, leaving nothing to deflate. Measured gauge share of the flux observables: 2.0&times;10<sup>&minus;4</sup>% to 0.21%, against 71.8 to 99% deleted by the statistic they replace. That contrast, not any single physics number, is the paper's deepest contribution.</p>
+      </section>
+
+      <section id="corpses" style="margin-top:64px">
+        <h2 style="font-family:var(--font-heading); font-weight:400; font-size:40px; line-height:1.1; margin:0">What died on the way</h2>
+        <p style="font-size:18px; line-height:1.55; color:var(--color-neutral-700); margin:16px 0 0; max-width:760px; text-wrap:pretty">Three of our own results were retracted en route, in the main text, named. Seven instrument artifacts were caught and catalogued during the campaign, each an instrument reporting itself, and a seven-item corrections ledger sits in the body of the paper, not an appendix.</p>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:16px; margin-top:26px">
+          <div style="background:var(--color-neutral-100); border-radius:22px; padding:22px 24px">
+            <span style="font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--color-accent-700)">Retracted</span>
+            <div style="font-weight:800; font-size:16px; margin-top:8px">The F2d crossing</div>
+            <div style="font-size:14.5px; line-height:1.45; color:var(--color-neutral-700); margin-top:5px">Four apparent routes to the crossing were one route, two of them bitwise identical. The claim is retracted; the record keeps the corpse.</div>
+          </div>
+          <div style="background:var(--color-neutral-100); border-radius:22px; padding:22px 24px">
+            <span style="font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--color-accent-700)">Withdrawn</span>
+            <div style="font-weight:800; font-size:16px; margin-top:8px">The sealed A-channel T2b</div>
+            <div style="font-size:14.5px; line-height:1.45; color:var(--color-neutral-700); margin-top:5px">The sealed verdict that the remainder is not linear response. Under the repaired instrument the deflation retains 13.3 to 28.2% of its own prediction, and the verdict does not survive.</div>
+          </div>
+          <div style="background:var(--color-neutral-100); border-radius:22px; padding:22px 24px">
+            <span style="font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--color-accent-700)">Retracted</span>
+            <div style="font-weight:800; font-size:16px; margin-top:8px">The F3 reach label</div>
+            <div style="font-size:14.5px; line-height:1.45; color:var(--color-neutral-700); margin-top:5px">The sealed record's outcome label overstated the primary reach. The measurement stands; the label does not. The reach is quoted as measured, every time.</div>
+          </div>
+        </div>
+        <p style="font-size:15.5px; line-height:1.55; color:var(--color-neutral-600); margin:22px 0 0; max-width:800px; text-wrap:pretty">The discipline behind the page: every spec frozen with numeric bars before its data existed, VOID beats shaky, rules applied once. Zero of three adversarial reviewers refuted the final ladder, every headline number was independently reproduced, and 63.93 GB of run data re-hashed with zero mismatches. The series opened the same way: <a href="../">the July note</a>'s converged profile was an artifact, and one free residual caught it.</p>
+      </section>
+
+      <section style="margin-top:64px">
+        <h2 style="font-family:var(--font-heading); font-weight:400; font-size:40px; line-height:1.1; margin:0">Still open</h2>
+        <div style="display:flex; gap:36px; flex-wrap:wrap; margin-top:20px">
+          <p style="flex:1 1 320px; font-size:17px; line-height:1.55; color:var(--color-neutral-700); margin:0; text-wrap:pretty">The pointwise question. Everything here is an integrated statement; T2, the pointwise mechanism question, remains open at every viscosity, and the paper explains why a frame-quotiented pointwise instrument is structurally blind on this collapse. The sub-leading exponent is fitted, not resolved: q = 0.425 to 0.438 against a frozen band edge at 0.4, a band edge, not a measurement.</p>
+          <p style="flex:1 1 320px; font-size:17px; line-height:1.55; color:var(--color-neutral-700); margin:0; text-wrap:pretty">The no-slip comparison is now in progress; the paper touched no-slip walls only through the wall-swap probe, as a boundary-condition control. R2, azimuthal stability, is parked, with the certified Tier-0 route sketched in the paper. Nothing here claims anything about generic Navier-Stokes blowup, and nothing is claimed pointwise, at any viscosity.</p>
+        </div>
+      </section>
+
+        <p style="font-size:15.5px; line-height:1.55; color:var(--color-neutral-600); margin:22px 0 0; max-width:800px; text-wrap:pretty"><strong>Tool disclosure:</strong> this work is AI-assisted, and the paper says exactly how: which parts the author can defend at expert level, which are machine-derived and awaiting expert review, and where responsibility lies. See the disclosure section in the PDF, written to the <a href="https://leidendeclaration.ai">Leiden Declaration</a>'s recommendations.</p>
+
+      <section style="margin-top:64px; display:flex; flex-wrap:wrap; gap:28px; align-items:center; justify-content:space-between; border-top:1px solid var(--color-divider); padding-top:34px">
+        <div style="max-width:520px">
+          <div style="font-family:var(--font-heading); font-size:24px">Share card</div>
+          <p style="font-size:16px; line-height:1.5; color:var(--color-neutral-700); margin:10px 0 0">The image social platforms show for this page. <a href="og-card-1200x630.png">1200&times;630</a>.</p>
+        </div>
+        <img src="og-card-1200x630.png" alt="rho_bulk marches 1.243 / 1.095 / 1.039 / 1.029 toward 1 as nu falls from 1e-5 to 1e-8; the wall, not the corner, carries the viscous flux" style="width:420px; border-radius:20px; box-shadow:var(--shadow-md)">
+      </section>
+
+    </main>
+
+    <footer style="border-top:1px solid var(--color-divider)">
+      <div style="max-width:1080px; margin:0 auto; padding:28px 40px 44px; display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap; font-size:15px; color:var(--color-neutral-600)">
+        <span>Justin Hill · Independent Research · justin@epagoge.io</span>
+        <span style="font-weight:700; color:var(--color-neutral-800)">epagoge.io</span>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
